@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diploma in Computer Science & Technology – EIEM</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b3e;
+    --blue: #1a3a8f;
+    --mid-blue: #2756c5;
+    --accent-orange: #f5a623;
+    --accent-amber: #e8830a;
+    --light-blue: #dce8ff;
+    --white: #ffffff;
+    --off-white: #f4f7ff;
+    --gray: #6b7a99;
+    --light-gray: #eef1f8;
+    --red-accent: #d93025;
+    --green: #1a7a4a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--white);
+    color: var(--navy);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 60%, #1e4db7 100%);
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 60px 48px;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 680px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(245,166,35,.15); border: 1px solid var(--accent-orange);
+    color: var(--accent-orange); border-radius: 20px; padding: 6px 16px;
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  .hero h2 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 3.2rem; font-weight: 700;
+    color: white; line-height: 1.1; margin-bottom: 16px;
+  }
+  .hero h2 em { color: var(--accent-orange); font-style: normal; }
+  .hero p { color: #b0c4ef; font-size: 1rem; line-height: 1.7; margin-bottom: 28px; }
+  .hero-stats { display: flex; gap: 32px; margin-bottom: 32px; }
+  .hero-stat { text-align: center; }
+  .hero-stat .num { font-family: 'Rajdhani', sans-serif; font-size: 2rem; font-weight: 700; color: var(--accent-orange); }
+  .hero-stat .lbl { font-size: 0.72rem; color: #8ba3d4; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+  .hero-btn-primary {
+    background: var(--accent-orange); color: var(--navy);
+    padding: 14px 32px; border-radius: 8px; font-weight: 800;
+    font-size: 0.95rem; border: none; cursor: pointer; font-family: 'Nunito', sans-serif;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .hero-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,166,35,.4); }
+  .hero-btn-secondary {
+    background: transparent; color: white;
+    padding: 14px 32px; border-radius: 8px; font-weight: 700;
+    font-size: 0.95rem; border: 2px solid rgba(255,255,255,.4); cursor: pointer; font-family: 'Nunito', sans-serif;
+    transition: border-color .2s;
+  }
+  .hero-btn-secondary:hover { border-color: white; }
+  .hero-visual {
+    position: absolute; right: 48px; top: 50%; transform: translateY(-50%);
+    z-index: 2;
+  }
+  .code-card {
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 14px;
+    padding: 24px 28px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    color: #a8c4ff;
+    min-width: 300px;
+    backdrop-filter: blur(10px);
+  }
+  .code-card .cc-head {
+    display: flex; gap: 6px; margin-bottom: 16px;
+  }
+  .cc-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .cc-r { background: #ff5f57; }
+  .cc-y { background: #ffbd2e; }
+  .cc-g { background: #28c840; }
+  .code-line { margin: 4px 0; }
+  .kw { color: #ff79c6; }
+  .fn { color: #8be9fd; }
+  .str { color: #f1fa8c; }
+  .cm { color: #6272a4; }
+  .num-c { color: var(--accent-orange); }
+
+  footer{background:var(--grad-foot);color:rgba(255,255,255,.72);padding:4.5rem 2rem 2rem}
+.foot-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:3rem;margin-bottom:3rem}
+.foot-logo{width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:.9rem}
+.foot-logo .flt{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:900;color:#fff;line-height:1}
+.foot-logo .fls{font-size:.37rem;color:rgba(255,255,255,.52);letter-spacing:.08em}
+.foot-brand p{font-size:.76rem;line-height:1.76;margin-bottom:1.15rem}
+.socials{display:flex;gap:.5rem}
+.socials a{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:.8rem;transition:background .2s,color .2s,transform .2s}
+.socials a:hover{background:var(--blue);color:#fff;transform:translateY(-3px)}
+.foot-col h4{color:#fff;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.15rem;padding-bottom:.55rem;position:relative}
+.foot-col h4::after{content:'';position:absolute;bottom:0;left:0;width:28px;height:2px;background:var(--grad-btn)}
+.foot-col a{display:block;color:rgba(255,255,255,.58);font-size:.75rem;margin-bottom:.5rem;transition:color .18s,padding-left .18s}
+.foot-col a:hover{color:var(--gold);padding-left:5px}
+.fci{display:flex;align-items:flex-start;gap:.55rem;margin-bottom:.74rem;font-size:.75rem}
+.fci-i{font-size:.88rem;margin-top:.1rem;flex-shrink:0}
+.foot-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.7rem;color:rgba(255,255,255,.35)}
+
+
+  /* ── SECTIONS ── */
+  section { padding: 72px 48px; }
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--mid-blue); margin-bottom: 12px;
+  }
+  .section-tag::before { content: ''; display: block; width: 24px; height: 2px; background: var(--accent-orange); }
+  h2.section-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2.4rem; font-weight: 700; color: var(--navy); margin-bottom: 16px;
+  }
+  h2.section-title em { color: var(--mid-blue); font-style: normal; }
+  .section-sub { color: var(--gray); font-size: 1rem; line-height: 1.7; max-width: 600px; margin-bottom: 48px; }
+
+  /* ── ABOUT STRIP ── */
+  .about-strip {
+    background: var(--off-white);
+    border-left: 5px solid var(--accent-orange);
+    padding: 28px 36px;
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 48px;
+    display: flex; align-items: flex-start; gap: 20px;
+  }
+  .about-strip .icon { font-size: 2rem; }
+  .about-strip h3 { font-size: 1.1rem; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+  .about-strip p { color: var(--gray); font-size: 0.9rem; line-height: 1.7; }
+
+  /* ── YEAR GRID ── */
+  .year-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 64px; }
+  .year-card {
+    border: 2px solid var(--light-gray);
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform .25s, box-shadow .25s;
+  }
+  .year-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(26,58,143,.12); }
+  .year-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  }
+  .year-card.y1::before { background: linear-gradient(90deg, var(--mid-blue), #5b9bd5); }
+  .year-card.y2::before { background: linear-gradient(90deg, var(--accent-amber), #f5a623); }
+  .year-card.y3::before { background: linear-gradient(90deg, #27ae60, #2ecc71); }
+  .year-badge {
+    display: inline-block; padding: 4px 14px; border-radius: 20px;
+    font-size: 0.72rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px;
+  }
+  .y1 .year-badge { background: #dce8ff; color: var(--mid-blue); }
+  .y2 .year-badge { background: #fff3dc; color: var(--accent-amber); }
+  .y3 .year-badge { background: #d6f5e5; color: var(--green); }
+  .year-card h3 { font-size: 1.05rem; font-weight: 800; color: var(--navy); margin-bottom: 16px; }
+  .year-card ul { list-style: none; }
+  .year-card ul li {
+    padding: 7px 0; border-bottom: 1px solid var(--light-gray);
+    font-size: 0.85rem; color: var(--navy); display: flex; align-items: center; gap: 10px;
+  }
+  .year-card ul li:last-child { border-bottom: none; }
+  .year-card ul li::before { content: '▸'; color: var(--accent-orange); font-size: 0.7rem; flex-shrink: 0; }
+
+  /* ── WHY CHOOSE ── */
+  .why-section { background: linear-gradient(135deg, var(--navy) 0%, #1a3a8f 100%); color: white; }
+  .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .why-card {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 16px;
+    padding: 28px;
+    text-align: center;
+    transition: background .25s, transform .25s;
+  }
+  .why-card:hover { background: rgba(255,255,255,.12); transform: translateY(-4px); }
+  .why-icon {
+    width: 64px; height: 64px; border-radius: 16px;
+    background: rgba(245,166,35,.15); border: 1px solid rgba(245,166,35,.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; margin: 0 auto 16px;
+  }
+  .why-card h3 { font-size: 1rem; font-weight: 700; color: white; margin-bottom: 10px; }
+  .why-card p { font-size: 0.82rem; color: #8ba3d4; line-height: 1.6; }
+
+  /* ── SUBJECTS TABLE ── */
+  .subjects-section { background: var(--off-white); }
+  .subject-tabs { display: flex; gap: 0; margin-bottom: 32px; border-radius: 10px; overflow: hidden; border: 2px solid var(--light-blue); display: inline-flex; }
+  .s-tab {
+    padding: 11px 28px; font-size: 0.85rem; font-weight: 700;
+    cursor: pointer; border: none; font-family: 'Nunito', sans-serif;
+    background: white; color: var(--gray); transition: all .2s;
+  }
+  .s-tab.active { background: var(--mid-blue); color: white; }
+  .subjects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .sub-chip {
+    background: white;
+    border: 1.5px solid var(--light-blue);
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex; align-items: center; gap: 14px;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .sub-chip:hover { border-color: var(--mid-blue); box-shadow: 0 4px 16px rgba(39,86,197,.1); }
+  .sub-chip .sub-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--light-blue); display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .sub-chip .sub-info h4 { font-size: 0.88rem; font-weight: 700; color: var(--navy); }
+  .sub-chip .sub-info p { font-size: 0.74rem; color: var(--gray); margin-top: 2px; }
+  .sub-chip .sub-credits {
+    margin-left: auto; font-family: 'Fira Code', monospace;
+    font-size: 0.72rem; color: var(--mid-blue); font-weight: 500;
+    white-space: nowrap;
+  }
+
+  /* ── CAREER ── */
+  .career-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .career-card {
+    background: white; border-radius: 16px;
+    border: 2px solid var(--light-gray);
+    padding: 28px; display: flex; gap: 18px;
+    transition: box-shadow .25s, border-color .25s;
+  }
+  .career-card:hover { border-color: var(--mid-blue); box-shadow: 0 8px 32px rgba(26,58,143,.1); }
+  .career-icon {
+    width: 56px; height: 56px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; flex-shrink: 0;
+  }
+  .ci-blue { background: var(--light-blue); }
+  .ci-amber { background: #fff3dc; }
+  .ci-green { background: #d6f5e5; }
+  .ci-red { background: #ffe0de; }
+  .career-card h3 { font-size: 1rem; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+  .career-card p { font-size: 0.82rem; color: var(--gray); line-height: 1.6; }
+  .salary-tag {
+    display: inline-block; margin-top: 10px;
+    background: var(--light-blue); color: var(--mid-blue);
+    border-radius: 6px; padding: 4px 12px; font-size: 0.74rem; font-weight: 700;
+  }
+
+  /* ── COMPANIES ── */
+  .companies-section { background: var(--navy); padding: 48px; text-align: center; }
+  .companies-section h3 { color: #8ba3d4; font-size: 0.78rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 28px; }
+  .companies-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
+  .co-badge {
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.1);
+    color: white; padding: 10px 22px; border-radius: 8px;
+    font-size: 0.85rem; font-weight: 700;
+  }
+
+  /* ── ELIGIBILITY ── */
+  .elig-section { background: var(--off-white); }
+  .elig-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .elig-card {
+    background: white; border-radius: 16px; padding: 28px;
+    border: 2px solid var(--light-gray);
+  }
+  .elig-card .e-num {
+    font-family: 'Rajdhani', sans-serif; font-size: 2.8rem; font-weight: 700;
+    color: var(--light-blue); line-height: 1; margin-bottom: 4px;
+  }
+  .elig-card h3 { font-size: 1rem; font-weight: 800; color: var(--navy); margin-bottom: 10px; }
+  .elig-card p { font-size: 0.85rem; color: var(--gray); line-height: 1.7; }
+
+  /* ── SKILLS SECTION ── */
+  .skills-you-gain { padding: 72px 48px; }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+  .skill-pill {
+    padding: 10px 20px; border-radius: 24px;
+    font-size: 0.82rem; font-weight: 700;
+    border: 1.5px solid;
+    transition: all .2s;
+    cursor: default;
+  }
+  .skill-pill:hover { transform: translateY(-2px); }
+  .sp-blue { background: var(--light-blue); color: var(--mid-blue); border-color: #b0c9f5; }
+  .sp-orange { background: #fff3dc; color: var(--accent-amber); border-color: #ffd888; }
+  .sp-green { background: #d6f5e5; color: var(--green); border-color: #a0dfc0; }
+  .sp-red { background: #ffe0de; color: #c0392b; border-color: #f5b8b5; }
+
+  /* ── TESTIMONIALS ── */
+  .test-section { background: linear-gradient(135deg, #f4f7ff, #e8eeff); padding: 72px 48px; }
+  .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .test-card {
+    background: white; border-radius: 16px; padding: 28px;
+    border: 1px solid #dce4f5;
+    box-shadow: 0 4px 20px rgba(0,0,0,.05);
+  }
+  .test-stars { color: var(--accent-orange); font-size: 0.9rem; margin-bottom: 12px; }
+  .test-card p { font-size: 0.88rem; color: var(--gray); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+  .test-author { display: flex; align-items: center; gap: 12px; }
+  .test-av {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--mid-blue); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 0.95rem;
+  }
+  .test-author h4 { font-size: 0.88rem; font-weight: 800; color: var(--navy); }
+  .test-author span { font-size: 0.75rem; color: var(--gray); }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: linear-gradient(135deg, var(--accent-amber), var(--accent-orange));
+    padding: 72px 48px; text-align: center;
+  }
+  .cta-section h2 { font-family: 'Rajdhani', sans-serif; font-size: 2.8rem; font-weight: 700; color: var(--navy); margin-bottom: 16px; }
+  .cta-section p { color: rgba(13,27,62,.7); font-size: 1rem; margin-bottom: 36px; max-width: 560px; margin-left: auto; margin-right: auto; }
+  .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .cta-btn-main {
+    background: var(--navy); color: white;
+    padding: 16px 40px; border-radius: 10px; font-size: 1rem; font-weight: 800;
+    border: none; cursor: pointer; font-family: 'Nunito', sans-serif;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .cta-btn-main:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,.25); }
+  .cta-btn-sec {
+    background: transparent; color: var(--navy);
+    padding: 16px 40px; border-radius: 10px; font-size: 1rem; font-weight: 800;
+    border: 2px solid var(--navy); cursor: pointer; font-family: 'Nunito', sans-serif;
+  }
+
+  /* ── FOOTER ── */
+  footer { background: var(--navy); color: #8ba3d4; padding: 48px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 32px; }
+  footer h4 { color: white; font-size: 0.9rem; font-weight: 800; margin-bottom: 16px; letter-spacing: .5px; }
+  footer p, footer a { font-size: 0.82rem; color: #8ba3d4; text-decoration: none; line-height: 1.8; }
+  footer a:hover { color: var(--accent-orange); }
+  footer ul { list-style: none; }
+  footer ul li a { display: block; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 0.76rem; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .year-grid, .why-grid, .subjects-grid, .career-grid, .elig-grid, .test-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .hero-visual { display: none; }
+    .hero h2 { font-size: 2rem; }
+    section { padding: 48px 24px; }
+    header { flex-direction: column; gap: 16px; padding: 16px; }
+    .header-btns { flex-wrap: wrap; justify-content: center; }
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-in { animation: fadeInUp .6s ease both; }
+  .delay-1 { animation-delay: .1s; }
+  .delay-2 { animation-delay: .2s; }
+  .delay-3 { animation-delay: .3s; }
+
+  /* Sticky notice bar */
+  .notice-bar {
+    background: var(--mid-blue); color: white;
+    text-align: center; padding: 10px; font-size: 0.8rem; font-weight: 700;
+  }
+  .notice-bar span { color: var(--accent-orange); }
+</style>
+</head>
+<body>
+
+
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content fade-in">
+    <div class="hero-badge">🖥 Diploma Programme · 3 Years</div>
+    <h2>Diploma in <em>Computer Science</em> &amp; Technology</h2>
+    <p>Build a future-ready career in technology with EIEM's industry-aligned 3-year Diploma programme. From coding fundamentals to cloud computing — master the skills that power the digital world.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">3</div><div class="lbl">Year Duration</div></div>
+      <div class="hero-stat"><div class="num">6</div><div class="lbl">Semesters</div></div>
+      <div class="hero-stat"><div class="num">95%</div><div class="lbl">Placement Rate</div></div>
+      <div class="hero-stat"><div class="num">200+</div><div class="lbl">Hiring Partners</div></div>
+    </div>
+    
+  </div>
+  <div class="hero-visual">
+    <div class="code-card">
+      <div class="cc-head"><div class="cc-dot cc-r"></div><div class="cc-dot cc-y"></div><div class="cc-dot cc-g"></div></div>
+      <div class="code-line"><span class="cm">// EIEM · Diploma CST</span></div>
+      <div class="code-line"><span class="kw">class</span> <span class="fn">FutureEngineer</span> {</div>
+      <div class="code-line">&nbsp;&nbsp;<span class="fn">skills</span> = [</div>
+      <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Python"</span>, <span class="str">"C++"</span>,</div>
+      <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Web Dev"</span>, <span class="str">"DSA"</span>,</div>
+      <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="str">"Databases"</span>, <span class="str">"AI"</span></div>
+      <div class="code-line">&nbsp;&nbsp;];</div>
+      <div class="code-line">&nbsp;&nbsp;<span class="fn">duration</span> = <span class="num-c">3</span> <span class="cm">// years</span></div>
+      <div class="code-line">&nbsp;&nbsp;<span class="fn">salary</span> = <span class="str">"₹3–8 LPA"</span></div>
+      <div class="code-line">}</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section style="padding: 72px 48px;">
+  <div class="section-tag">About the Programme</div>
+  <h2 class="section-title">What is the <em>Diploma in CST</em>?</h2>
+  <p class="section-sub">A structured, hands-on technical programme designed for Class 10 pass students who want to enter the IT industry faster with practical skills.</p>
+  <div class="about-strip">
+    <div class="icon">🎯</div>
+    <div>
+      <h3>Programme Overview</h3>
+      <p>The 3-year Diploma in Computer Science &amp; Technology (CST) is a WBSCTVESD-approved programme offered by EIEM. It is structured into 6 semesters, combining theoretical foundations with practical lab sessions, live projects, and industry internships. Students graduate with real-world skills in programming, networking, database management, and modern web technologies — making them job-ready from Day 1.</p>
+    </div>
+  </div>
+  <div class="about-strip">
+    <div class="icon">📋</div>
+    <div>
+      <h3>Affiliation &amp; Approval</h3>
+      <p>Approved by AICTE, affiliated to West Bengal State Council of Technical &amp; Vocational Education and Skill Development (WBSCTVESD). The programme follows a curriculum benchmarked against industry requirements and is regularly updated in collaboration with our 200+ industry partners including TCS, Infosys, Wipro, Cognizant and HCL.</p>
+    </div>
+  </div>
+</section>
+
+<!-- YEAR-WISE CURRICULUM -->
+<section style="background: var(--off-white); padding: 72px 48px;">
+  <div class="section-tag">Curriculum</div>
+  <h2 class="section-title">Year-wise <em>Course Structure</em></h2>
+  <p class="section-sub">Six progressive semesters taking you from fundamentals to advanced specialisations, with hands-on labs and a final-year project.</p>
+  <div class="year-grid">
+    <div class="year-card y1">
+      <div class="year-badge">Year 1 · Sem 1 &amp; 2</div>
+      <h3>🌱 Foundations &amp; Basics</h3>
+      <ul>
+        <li>Fundamentals of Computer Science</li>
+        <li>Programming in C Language</li>
+        <li>Mathematics I &amp; II</li>
+        <li>Digital Electronics</li>
+        <li>English Communication Skills</li>
+        <li>Introduction to IT Systems</li>
+        <li>Computer Lab Practice</li>
+      </ul>
+    </div>
+    <div class="year-card y2">
+      <div class="year-badge">Year 2 · Sem 3 &amp; 4</div>
+      <h3>⚙️ Core Technical Skills</h3>
+      <ul>
+        <li>Data Structures &amp; Algorithms</li>
+        <li>Object-Oriented Programming (C++/Java)</li>
+        <li>Database Management Systems (SQL)</li>
+        <li>Operating Systems</li>
+        <li>Computer Networks</li>
+        <li>Web Technologies (HTML/CSS/JS)</li>
+        <li>Software Engineering</li>
+      </ul>
+    </div>
+    <div class="year-card y3">
+      <div class="year-badge">Year 3 · Sem 5 &amp; 6</div>
+      <h3>🚀 Advanced &amp; Project Work</h3>
+      <ul>
+        <li>Python Programming &amp; Scripting</li>
+        <li>Advanced Web Development</li>
+        <li>Cloud Computing Basics</li>
+        <li>Cybersecurity Fundamentals</li>
+        <li>Artificial Intelligence Intro</li>
+        <li>Industrial Training / Internship</li>
+        <li>Final Year Project</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- KEY SUBJECTS -->
+<section style="padding: 72px 48px;">
+  <div class="section-tag">Key Subjects</div>
+  <h2 class="section-title">Core <em>Subjects</em> at a Glance</h2>
+  <p class="section-sub">Each subject is designed to build both conceptual understanding and practical application.</p>
+  <div class="subjects-grid">
+    <div class="sub-chip"><div class="sub-icon">🐍</div><div class="sub-info"><h4>Python Programming</h4><p>Scripting, automation &amp; data work</p></div><span class="sub-credits">6 Credits</span></div>
+    <div class="sub-chip"><div class="sub-icon">🌐</div><div class="sub-info"><h4>Web Development</h4><p>HTML, CSS, JavaScript, Bootstrap</p></div><span class="sub-credits">6 Credits</span></div>
+    <div class="sub-chip"><div class="sub-icon">🗄️</div><div class="sub-info"><h4>DBMS &amp; SQL</h4><p>MySQL, PostgreSQL, queries &amp; design</p></div><span class="sub-credits">5 Credits</span></div>
+    <div class="sub-chip"><div class="sub-icon">🔗</div><div class="sub-info"><h4>Computer Networks</h4><p>TCP/IP, LAN, WAN, protocols</p></div><span class="sub-credits">5 Credits</span></div>
+    <div class="sub-chip"><div class="sub-icon">⚙️</div><div class="sub-info"><h4>Data Structures</h4><p>Arrays, trees, graphs, sorting</p></div><span class="sub-credits">6 Credits</span></div>
+    <div class="sub-chip"><div class="sub-icon">☁️</div><div class="sub-info"><h4>Cloud Computing</h4><p>AWS basics, Azure, deployment</p></div><span class="sub-credits">4 Credits</span></div>
+    <div class="sub-chip"><div class="sub-icon">🛡️</div><div class="sub-info"><h4>Cybersecurity</h4><p>Threats, encryption, ethical hacking intro</p></div><span class="sub-credits">4 Credits</span></div>
+    <div class="sub-chip"><div class="sub-icon">🤖</div><div class="sub-info"><h4>Intro to AI &amp; ML</h4><p>Concepts, tools, real-world use cases</p></div><span class="sub-credits">4 Credits</span></div>
+    <div class="sub-chip"><div class="sub-icon">💻</div><div class="sub-info"><h4>Operating Systems</h4><p>Linux, Windows, process management</p></div><span class="sub-credits">5 Credits</span></div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE -->
+<section class="why-section" style="padding: 72px 48px;">
+  <div style="text-align: center; margin-bottom: 48px;">
+    <div class="section-tag" style="color: var(--accent-orange); justify-content: center;">Why Choose EIEM CST</div>
+    <h2 class="section-title" style="color: white;">Why Choose This <em style="color: var(--accent-orange);">Programme</em>?</h2>
+    <p class="section-sub" style="color: #8ba3d4; margin: 0 auto;">EIEM's Diploma in CST stands apart through industry linkage, modern labs, and career-first approach.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🏭</div>
+      <h3>Industry-Aligned Curriculum</h3>
+      <p>Updated every year with inputs from 200+ hiring companies. Learn what the industry actually needs.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🧪</div>
+      <h3>State-of-the-Art Labs</h3>
+      <p>24×7 access to computer labs with licensed software, high-speed internet, and modern hardware.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">👨‍🏫</div>
+      <h3>Experienced Faculty</h3>
+      <p>Teachers with both academic credentials and industry experience. Mentorship beyond the classroom.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">💼</div>
+      <h3>Dedicated Placement Cell</h3>
+      <p>On-campus drives, mock interviews, resume workshops, and direct company tie-ups for every student.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">⏱️</div>
+      <h3>Faster Career Entry</h3>
+      <p>Graduate in 3 years vs 4-year B.Tech. Start earning earlier while still being eligible for lateral entry to degree programmes.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🎓</div>
+      <h3>Lateral Entry Option</h3>
+      <p>Top performers can join 2nd year of B.Tech/B.Sc programmes, giving you a path to higher degrees.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🌍</div>
+      <h3>Project-Based Learning</h3>
+      <p>Real mini-projects every semester, culminating in a major 6th-semester project that builds your portfolio.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">💰</div>
+      <h3>Affordable Fees</h3>
+      <p>Competitive fee structure with scholarship options, EMI plans, and state government fee waivers for eligible students.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS YOU GAIN -->
+<section class="skills-you-gain" style="background: white;">
+  <div class="section-tag">Skills</div>
+  <h2 class="section-title">Skills You <em>Graduate With</em></h2>
+  <p class="section-sub">Hands-on, verifiable skills that employers look for in their first-day hires.</p>
+  <div class="skill-pills">
+    <span class="skill-pill sp-blue">Python</span>
+    <span class="skill-pill sp-blue">C / C++</span>
+    <span class="skill-pill sp-blue">Java Basics</span>
+    <span class="skill-pill sp-orange">HTML / CSS</span>
+    <span class="skill-pill sp-orange">JavaScript</span>
+    <span class="skill-pill sp-orange">React.js Intro</span>
+    <span class="skill-pill sp-green">MySQL</span>
+    <span class="skill-pill sp-green">MongoDB Basics</span>
+    <span class="skill-pill sp-blue">Linux CLI</span>
+    <span class="skill-pill sp-blue">Git &amp; GitHub</span>
+    <span class="skill-pill sp-red">Cybersecurity Basics</span>
+    <span class="skill-pill sp-red">Networking Concepts</span>
+    <span class="skill-pill sp-orange">AWS Cloud Basics</span>
+    <span class="skill-pill sp-green">Data Structures</span>
+    <span class="skill-pill sp-blue">Problem Solving</span>
+    <span class="skill-pill sp-green">Team Projects</span>
+    <span class="skill-pill sp-orange">Technical Writing</span>
+    <span class="skill-pill sp-red">AI / ML Concepts</span>
+  </div>
+</section>
+
+<!-- CAREER / JOB BENEFITS -->
+<section style="padding: 72px 48px;">
+  <div class="section-tag">Career Opportunities</div>
+  <h2 class="section-title">Job <em>Opportunities</em> &amp; Benefits</h2>
+  <p class="section-sub">A Diploma in CST opens doors across the entire IT spectrum — from software development to networking and cloud infrastructure.</p>
+  <div class="career-grid">
+    <div class="career-card">
+      <div class="career-icon ci-blue">💻</div>
+      <div>
+        <h3>Junior Software Developer</h3>
+        <p>Build web and desktop applications using Python, Java, or JavaScript frameworks. Entry point to product companies and IT services firms.</p>
+        <span class="salary-tag">₹2.5 – 5.5 LPA</span>
+      </div>
+    </div>
+    <div class="career-card">
+      <div class="career-icon ci-amber">🌐</div>
+      <div>
+        <h3>Web Developer / Designer</h3>
+        <p>Create responsive websites and web apps. Freelancing also viable from day one with a strong portfolio of projects.</p>
+        <span class="salary-tag">₹2 – 6 LPA</span>
+      </div>
+    </div>
+    <div class="career-card">
+      <div class="career-icon ci-green">🗄️</div>
+      <div>
+        <h3>Database Administrator</h3>
+        <p>Manage and maintain relational databases. High demand in banks, healthcare, government IT, and ERP companies.</p>
+        <span class="salary-tag">₹2.5 – 5 LPA</span>
+      </div>
+    </div>
+    <div class="career-card">
+      <div class="career-icon ci-red">🔗</div>
+      <div>
+        <h3>Network Support Engineer</h3>
+        <p>Install, configure, and maintain LAN/WAN infrastructure. ISPs, corporates, and government organisations hire heavily.</p>
+        <span class="salary-tag">₹2 – 4.5 LPA</span>
+      </div>
+    </div>
+    <div class="career-card">
+      <div class="career-icon ci-blue">☁️</div>
+      <div>
+        <h3>Cloud / IT Support Technician</h3>
+        <p>Work with AWS, Azure, or Google Cloud environments. Manage deployments, monitoring, and basic DevOps tasks.</p>
+        <span class="salary-tag">₹2.5 – 5 LPA</span>
+      </div>
+    </div>
+    <div class="career-card">
+      <div class="career-icon ci-amber">🛡️</div>
+      <div>
+        <h3>Cybersecurity Analyst (Junior)</h3>
+        <p>Monitor systems, respond to threats, and implement security policies. One of the fastest-growing IT roles in India.</p>
+        <span class="salary-tag">₹3 – 6 LPA</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ELIGIBILITY -->
+<section class="elig-section" style="padding: 72px 48px;">
+  <div class="section-tag">Admission</div>
+  <h2 class="section-title">Eligibility &amp; <em>Admission Process</em></h2>
+  <p class="section-sub">Simple, transparent, and merit-based. Here's what you need to apply.</p>
+  <div class="elig-grid">
+    <div class="elig-card">
+      <div class="e-num">01</div>
+      <h3>Educational Qualification</h3>
+      <p>Passed Class 10 (Madhyamik or equivalent) with Mathematics and Science. Minimum 35% aggregate marks required. Science background preferred but not mandatory.</p>
+    </div>
+    <div class="elig-card">
+      <div class="e-num">02</div>
+      <h3>Age Limit</h3>
+      <p>Minimum age: 14 years. No upper age limit for regular students. SC/ST candidates get additional relaxation as per WBSCTVESD norms.</p>
+    </div>
+    <div class="elig-card">
+      <div class="e-num">03</div>
+      <h3>Documents Required</h3>
+      <p>Class 10 Marksheet &amp; Certificate, Aadhaar Card, Passport-size Photos (4), Caste Certificate (if applicable), Migration Certificate (if from other board).</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="foot-logo"><span class="flt">EIEM</span><span class="fls">Est. 2001</span></div>
+      <p>Elitte Institute of Engineering &amp; Management is committed to producing world-class engineers and managers who lead innovation and drive growth across industries.</p>
+      <div class="socials">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Twitter">&#x1D54F;</a>
+        <a href="#" title="Instagram">&#x1F4F8;</a>
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="YouTube">&#x25B6;</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Quick Links</h4>
+      <a href="#">Home</a><a href="#">About EIEM</a><a href="#">Admissions</a>
+      <a href="#">Academics</a><a href="#">Departments</a><a href="#">Events</a>
+      <a href="#">Notice Board</a>
+    </div>
+    <div class="foot-col">
+      <h4>Resources</h4>
+      <a href="#">E-Prospectus 2026&ndash;27</a><a href="#">NDLI Library</a>
+      <a href="#">Online Fee Payment</a><a href="#">Grievance Cell</a>
+      <a href="#">Student Login</a><a href="#">Result Portal</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact Us</h4>
+      <div class="fci"><span class="fci-i">&#x1F4CD;</span><span>PO: Karnamadhabpur, PS: Ghola, Sodepur, Kolkata &ndash; 700113</span></div>
+      <div class="fci"><span class="fci-i">&#x1F4DE;</span><span>+91 9163316560 / +91 9831500840</span></div>
+      <div class="fci"><span class="fci-i">&#x2709;</span><span>info@elitte.edu.in</span></div>
+      <div class="fci"><span class="fci-i">&#x1F550;</span><span>Mon&ndash;Sat: 9:00 AM &ndash; 5:00 PM</span></div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Elitte Institute of Engineering &amp; Management. All rights reserved.</span>
+    <span>Approved by AICTE &middot; Affiliated to WBSCT &amp; VE &amp; SD</span>
+  </div>
+</footer>
+
+</body>
+</html>

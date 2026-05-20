@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grievance Form – EIEM Diploma CST</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Nunito:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b3e;
+    --blue: #1a3a8f;
+    --mid-blue: #2756c5;
+    --accent-orange: #f5a623;
+    --accent-amber: #e8830a;
+    --light-blue: #dce8ff;
+    --white: #ffffff;
+    --off-white: #f4f7ff;
+    --gray: #6b7a99;
+    --light-gray: #eef1f8;
+    --red: #d93025;
+    --green: #1a7a4a;
+    --success-bg: #d6f5e5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--off-white);
+    color: var(--navy);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .page-header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+    padding: 32px 48px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .header-icon {
+    width: 52px; height: 52px;
+    background: rgba(245,166,35,.15);
+    border: 1px solid rgba(245,166,35,.35);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; flex-shrink: 0;
+  }
+  .header-text h1 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.8rem; font-weight: 700;
+    color: #fff; line-height: 1.1;
+  }
+  .header-text p {
+    font-size: 0.82rem; color: #8ba3d4; margin-top: 4px;
+  }
+  .header-badge {
+    margin-left: auto;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 0.75rem; font-weight: 700;
+    color: var(--accent-orange);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* ── LAYOUT ── */
+  .page-body {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+  }
+
+  .info-bar {
+    background: #fff8ec;
+    border: 1.5px solid #ffd888;
+    border-radius: 12px;
+    padding: 14px 20px;
+    display: flex; align-items: flex-start; gap: 12px;
+    margin-bottom: 28px;
+    font-size: 0.84rem; color: var(--accent-amber); line-height: 1.6;
+  }
+  .info-bar .ib-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+
+  /* ── CARDS ── */
+  .form-card {
+    background: var(--white);
+    border: 1.5px solid var(--light-gray);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+  }
+  .card-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 22px;
+    padding-bottom: 16px;
+    border-bottom: 1.5px solid var(--light-gray);
+  }
+  .card-num {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: var(--light-blue);
+    color: var(--mid-blue);
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem; font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .card-header h2 {
+    font-size: 1rem; font-weight: 800; color: var(--navy);
+  }
+  .card-header span {
+    font-size: 0.76rem; color: var(--gray); margin-top: 2px;
+  }
+
+  /* ── FORM FIELDS ── */
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .field-row.trio { grid-template-columns: 1fr 1fr 1fr; }
+  .field { margin-bottom: 16px; }
+  .field:last-child { margin-bottom: 0; }
+  .field label {
+    display: block;
+    font-size: 0.8rem; font-weight: 700;
+    color: var(--navy); margin-bottom: 7px;
+    letter-spacing: 0.2px;
+  }
+  .field label .req { color: var(--red); margin-left: 2px; }
+  .field input, .field select, .field textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--light-gray);
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.88rem;
+    color: var(--navy);
+    background: var(--white);
+    transition: border-color .2s, box-shadow .2s;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    border-color: var(--mid-blue);
+    box-shadow: 0 0 0 3px rgba(39,86,197,.1);
+  }
+  .field input::placeholder, .field textarea::placeholder { color: #b0bdd4; }
+  .field textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+  .field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7a99' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer; }
+
+  /* ── CATEGORY CHIPS ── */
+  .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+  .cat-chip {
+    border: 1.5px solid var(--light-gray);
+    border-radius: 12px;
+    padding: 13px 12px;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 10px;
+    font-size: 0.84rem; font-weight: 700;
+    color: var(--navy);
+    background: var(--off-white);
+    transition: all .18s;
+    user-select: none;
+  }
+  .cat-chip:hover { border-color: #b0c9f5; background: var(--light-blue); }
+  .cat-chip.active {
+    border-color: var(--mid-blue);
+    background: var(--light-blue);
+    color: var(--mid-blue);
+  }
+  .cat-chip .chip-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: var(--light-gray);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0; transition: background .18s;
+  }
+  .cat-chip.active .chip-icon { background: rgba(39,86,197,.15); }
+  input[type="hidden"] { display: none; }
+
+  /* ── PRIORITY ── */
+  .priority-row { display: flex; gap: 10px; }
+  .pri-btn {
+    flex: 1; padding: 13px 8px; border-radius: 12px;
+    border: 1.5px solid var(--light-gray);
+    background: var(--off-white);
+    cursor: pointer; font-family: 'Nunito', sans-serif;
+    font-size: 0.84rem; font-weight: 700;
+    color: var(--gray);
+    text-align: center; transition: all .18s;
+    user-select: none;
+  }
+  .pri-btn .pri-icon { font-size: 1.2rem; display: block; margin-bottom: 4px; }
+  .pri-btn:hover { border-color: #b0c9f5; }
+  .pri-btn.p-low.active  { background: var(--success-bg); border-color: #a0dfc0; color: var(--green); }
+  .pri-btn.p-med.active  { background: #fff3dc; border-color: #ffd888; color: var(--accent-amber); }
+  .pri-btn.p-high.active { background: #ffe0de; border-color: #f5b8b5; color: var(--red); }
+
+  /* ── FILE UPLOAD ── */
+  .file-drop {
+    border: 2px dashed var(--light-gray);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color .2s, background .2s;
+    position: relative;
+  }
+  .file-drop:hover { border-color: var(--mid-blue); background: var(--light-blue); }
+  .file-drop input[type="file"] {
+    position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+  }
+  .file-drop .fd-icon { font-size: 1.6rem; margin-bottom: 8px; }
+  .file-drop p { font-size: 0.82rem; color: var(--gray); line-height: 1.6; }
+  .file-drop span { color: var(--mid-blue); font-weight: 700; }
+
+  /* ── SUBMIT ── */
+  .submit-row {
+    display: flex; gap: 14px; align-items: center; margin-top: 8px;
+  }
+  .btn-submit {
+    flex: 1;
+    background: var(--mid-blue);
+    color: white;
+    padding: 16px 32px;
+    border: none; border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem; font-weight: 800;
+    cursor: pointer;
+    transition: background .2s, transform .2s, box-shadow .2s;
+  }
+  .btn-submit:hover { background: var(--blue); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,58,143,.25); }
+  .btn-submit:active { transform: translateY(0); }
+  .btn-reset {
+    padding: 16px 24px;
+    background: transparent; color: var(--gray);
+    border: 1.5px solid var(--light-gray); border-radius: 12px;
+    font-family: 'Nunito', sans-serif; font-size: 0.9rem; font-weight: 700;
+    cursor: pointer; transition: border-color .2s, color .2s;
+  }
+  .btn-reset:hover { border-color: var(--gray); color: var(--navy); }
+
+  /* ── SUCCESS ── */
+  #success-state {
+    display: none;
+    background: var(--white);
+    border: 1.5px solid var(--light-gray);
+    border-radius: 16px;
+    padding: 56px 32px;
+    text-align: center;
+  }
+  .success-ring {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: var(--success-bg);
+    border: 3px solid #a0dfc0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.2rem; margin: 0 auto 24px;
+    animation: pop .4s cubic-bezier(.36,.07,.19,.97) both;
+  }
+  @keyframes pop { 0%{transform:scale(.5);opacity:0} 70%{transform:scale(1.1)} 100%{transform:scale(1);opacity:1} }
+  #success-state h2 { font-family: 'Rajdhani', sans-serif; font-size: 1.8rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+  #success-state p { color: var(--gray); font-size: 0.9rem; line-height: 1.7; max-width: 420px; margin: 0 auto 24px; }
+  .ref-code {
+    display: inline-block;
+    background: var(--light-blue); color: var(--mid-blue);
+    border-radius: 8px; padding: 10px 24px;
+    font-family: 'Fira Code', monospace;
+    font-size: 1rem; font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 32px;
+  }
+  .success-detail {
+    background: var(--off-white); border-radius: 12px;
+    padding: 20px 24px; text-align: left;
+    display: inline-block; min-width: 320px;
+    font-size: 0.82rem; color: var(--gray);
+    line-height: 1.9;
+  }
+  .success-detail strong { color: var(--navy); }
+
+  .btn-new {
+    display: inline-block; margin-top: 28px;
+    background: var(--mid-blue); color: white;
+    padding: 12px 32px; border-radius: 10px;
+    font-family: 'Nunito', sans-serif; font-size: 0.9rem; font-weight: 800;
+    border: none; cursor: pointer;
+    transition: background .2s;
+  }
+  .btn-new:hover { background: var(--blue); }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    background: var(--navy);
+    padding: 20px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.76rem; color: #8ba3d4;
+    flex-wrap: wrap; gap: 8px;
+  }
+  .page-footer a { color: var(--accent-orange); text-decoration: none; }
+
+  /* ── ERROR ── */
+  .err-msg { font-size: 0.76rem; color: var(--red); margin-top: 5px; display: none; }
+  .field.has-error input, .field.has-error select, .field.has-error textarea { border-color: var(--red); }
+  .field.has-error .err-msg { display: block; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .page-header { padding: 24px 20px; flex-wrap: wrap; }
+    .header-badge { margin-left: 0; }
+    .page-body { padding: 24px 16px 48px; }
+    .form-card { padding: 20px 18px; }
+    .field-row, .field-row.trio { grid-template-columns: 1fr; }
+    .cat-grid { grid-template-columns: 1fr 1fr; }
+    .priority-row { flex-direction: column; }
+    .submit-row { flex-direction: column; }
+    .btn-submit, .btn-reset { width: 100%; }
+    .page-footer { padding: 16px 20px; }
+  }
+
+  @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+  .form-card { animation: fadeIn .4s ease both; }
+  .form-card:nth-child(1){animation-delay:.05s}
+  .form-card:nth-child(2){animation-delay:.1s}
+  .form-card:nth-child(3){animation-delay:.15s}
+  .form-card:nth-child(4){animation-delay:.2s}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div class="header-icon">📋</div>
+  <div class="header-text">
+    <h1>Student Grievance Form</h1>
+    <p>Elitte Institute of Engineering &amp; Management &mdash; Diploma in CST</p>
+  </div>
+  <div class="header-badge">Grievance Cell</div>
+</div>
+
+<div class="page-body">
+
+  <!-- INFO BAR -->
+  <div class="info-bar">
+    <span class="ib-icon">ℹ️</span>
+    <span>All grievances are treated with strict confidentiality. The Grievance Cell will respond within <strong>3 working days</strong> to your registered email. For urgent matters, contact <strong>info@elitte.edu.in</strong> or call <strong>+91 9163316560</strong>.</span>
+  </div>
+
+  <!-- FORM -->
+  <form id="grievance-form" novalidate>
+
+    <!-- CARD 1: Student Details -->
+    <div class="form-card">
+      <div class="card-header">
+        <div class="card-num">01</div>
+        <div>
+          <h2>Student Details</h2>
+          <span>Your personal and academic information</span>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field" id="f-fname">
+          <label>Full Name <span class="req">*</span></label>
+          <input type="text" id="fname" placeholder="Your full name" />
+          <div class="err-msg">Please enter your full name.</div>
+        </div>
+        <div class="field" id="f-roll">
+          <label>Roll Number <span class="req">*</span></label>
+          <input type="text" id="roll" placeholder="e.g. CST/2024/001" />
+          <div class="err-msg">Please enter your roll number.</div>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field" id="f-email">
+          <label>Email Address <span class="req">*</span></label>
+          <input type="email" id="email" placeholder="student@example.com" />
+          <div class="err-msg">Please enter a valid email address.</div>
+        </div>
+        <div class="field" id="f-phone">
+          <label>Phone Number <span class="req">*</span></label>
+          <input type="tel" id="phone" placeholder="+91 XXXXXXXXXX" />
+          <div class="err-msg">Please enter your phone number.</div>
+        </div>
+      </div>
+
+      <div class="field-row trio">
+        <div class="field" id="f-year">
+          <label>Semester <span class="req">*</span></label>
+          <select id="year">
+            <option value="">Select semester</option>
+            <option>Year 1 – Semester 1</option>
+            <option>Year 1 – Semester 2</option>
+            <option>Year 2 – Semester 3</option>
+            <option>Year 2 – Semester 4</option>
+            <option>Year 3 – Semester 5</option>
+            <option>Year 3 – Semester 6</option>
+          </select>
+          <div class="err-msg">Please select your semester.</div>
+        </div>
+        <div class="field" id="f-dept">
+          <label>Department / Cell <span class="req">*</span></label>
+          <select id="dept">
+            <option value="">Select department</option>
+            <option>Computer Science &amp; Technology</option>
+            <option>Administration</option>
+            <option>Finance &amp; Fees</option>
+            <option>Hostel &amp; Facilities</option>
+            <option>Placement Cell</option>
+            <option>Library</option>
+          </select>
+          <div class="err-msg">Please select a department.</div>
+        </div>
+        <div class="field">
+          <label>Date of Incident</label>
+          <input type="date" id="incident-date" />
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 2: Grievance Details -->
+    <div class="form-card">
+      <div class="card-header">
+        <div class="card-num">02</div>
+        <div>
+          <h2>Grievance Category &amp; Details</h2>
+          <span>Describe your complaint clearly</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 8px; font-size: 0.8rem; font-weight: 700; color: var(--navy);">Category <span class="req" style="color:var(--red)">*</span></div>
+      <div class="cat-grid" id="cat-grid">
+        <div class="cat-chip" onclick="selectCat(this, 'Academic')">
+          <div class="chip-icon">🎓</div><span>Academic</span>
+        </div>
+        <div class="cat-chip" onclick="selectCat(this, 'Fee / Finance')">
+          <div class="chip-icon">💳</div><span>Fee / Finance</span>
+        </div>
+        <div class="cat-chip" onclick="selectCat(this, 'Facilities')">
+          <div class="chip-icon">🏛️</div><span>Facilities</span>
+        </div>
+        <div class="cat-chip" onclick="selectCat(this, 'Faculty / Staff')">
+          <div class="chip-icon">👨‍🏫</div><span>Faculty / Staff</span>
+        </div>
+        <div class="cat-chip" onclick="selectCat(this, 'Placement')">
+          <div class="chip-icon">💼</div><span>Placement</span>
+        </div>
+        <div class="cat-chip" onclick="selectCat(this, 'Other')">
+          <div class="chip-icon">📌</div><span>Other</span>
+        </div>
+      </div>
+      <input type="hidden" id="category" />
+      <div id="cat-error" class="err-msg" style="margin-bottom:14px;">Please select a grievance category.</div>
+
+      <div class="field" id="f-subject">
+        <label>Subject / Title <span class="req">*</span></label>
+        <input type="text" id="subject" placeholder="Brief title of your grievance (e.g. Issue with lab access)" />
+        <div class="err-msg">Please provide a subject for your grievance.</div>
+      </div>
+
+      <div class="field" id="f-desc">
+        <label>Detailed Description <span class="req">*</span></label>
+        <textarea id="desc" placeholder="Describe the issue in detail. Include relevant dates, names, locations, and any other information that may help resolve the grievance..." style="min-height:130px;"></textarea>
+        <div class="err-msg">Please describe your grievance in detail.</div>
+      </div>
+
+      <div class="field">
+        <label>Expected Resolution</label>
+        <textarea id="resolution" placeholder="What outcome are you expecting? (Optional)" style="min-height:70px;"></textarea>
+      </div>
+    </div>
+
+    <!-- CARD 3: Priority & Supporting Info -->
+    <div class="form-card">
+      <div class="card-header">
+        <div class="card-num">03</div>
+        <div>
+          <h2>Priority &amp; Supporting Information</h2>
+          <span>Help us understand the urgency</span>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 10px; font-size: 0.8rem; font-weight: 700; color: var(--navy);">Priority Level <span class="req" style="color:var(--red)">*</span></div>
+      <div class="priority-row" id="pri-row">
+        <div class="pri-btn p-low" onclick="selectPri(this, 'Low')">
+          <span class="pri-icon">🟢</span> Low<br>
+          <span style="font-size:0.72rem;font-weight:600;opacity:.75">Can wait a few days</span>
+        </div>
+        <div class="pri-btn p-med" onclick="selectPri(this, 'Medium')">
+          <span class="pri-icon">🟡</span> Medium<br>
+          <span style="font-size:0.72rem;font-weight:600;opacity:.75">Needs attention soon</span>
+        </div>
+        <div class="pri-btn p-high" onclick="selectPri(this, 'High / Urgent')">
+          <span class="pri-icon">🔴</span> High / Urgent<br>
+          <span style="font-size:0.72rem;font-weight:600;opacity:.75">Requires immediate action</span>
+        </div>
+      </div>
+      <input type="hidden" id="priority" />
+      <div id="pri-error" class="err-msg" style="margin:8px 0 16px;">Please select a priority level.</div>
+
+      <div class="field-row" style="margin-top:16px;">
+        <div class="field">
+          <label>Previous Complaint Reference (if any)</label>
+          <input type="text" id="prev-ref" placeholder="e.g. EIEM-0042 or None" />
+        </div>
+        <div class="field">
+          <label>Witness / Persons Involved (optional)</label>
+          <input type="text" id="witness" placeholder="Names of any witnesses or staff involved" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Supporting Documents (optional)</label>
+        <div class="file-drop">
+          <input type="file" id="attachment" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" />
+          <div class="fd-icon">📎</div>
+          <p><span>Click to upload</span> or drag files here<br>PDF, JPG, PNG, DOC · Max 5 MB each</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DECLARATION -->
+    <div class="form-card" style="padding: 20px 32px;">
+      <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;font-size:0.85rem;color:var(--gray);line-height:1.6;">
+        <input type="checkbox" id="declaration" style="margin-top:3px;flex-shrink:0;width:16px;height:16px;cursor:pointer;" />
+        <span>I hereby declare that the information provided above is true and accurate to the best of my knowledge. I understand that filing a false grievance may result in disciplinary action as per EIEM's Student Code of Conduct.</span>
+      </label>
+      <div id="decl-error" class="err-msg" style="margin-top:8px;">You must accept the declaration before submitting.</div>
+    </div>
+
+    <!-- SUBMIT ROW -->
+    <div class="submit-row">
+      <button type="submit" class="btn-submit" id="submit-btn">📨 &nbsp; Submit Grievance</button>
+      <button type="button" class="btn-reset" onclick="resetForm()">Reset</button>
+    </div>
+
+  </form>
+
+  <!-- SUCCESS STATE -->
+  <div id="success-state">
+    <div class="success-ring">✅</div>
+    <h2>Grievance Submitted Successfully</h2>
+    <p>Your complaint has been registered with EIEM's Grievance Cell. You will receive an acknowledgment email within 24 hours and a resolution within <strong>3 working days</strong>.</p>
+    <div class="ref-code" id="ref-display">REF: EIEM-0000</div>
+    <div class="success-detail" id="summary-box"></div>
+    <br>
+    <button class="btn-new" onclick="resetForm()">+ Submit Another Grievance</button>
+  </div>
+
+</div><!-- /page-body -->
+
+<!-- FOOTER -->
+<div class="page-footer">
+  <span>&copy; 2026 Elitte Institute of Engineering &amp; Management. All rights reserved.</span>
+  <span>Approved by AICTE &middot; Affiliated to WBSCT &amp; VE &amp; SD &middot; <a href="mailto:info@elitte.edu.in">info@elitte.edu.in</a></span>
+</div>
+
+<script>
+  let selectedCat = '';
+  let selectedPri = '';
+
+  function selectCat(el, val) {
+    document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+    selectedCat = val;
+    document.getElementById('category').value = val;
+    document.getElementById('cat-error').style.display = 'none';
+  }
+
+  function selectPri(el, val) {
+    document.querySelectorAll('.pri-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    selectedPri = val;
+    document.getElementById('priority').value = val;
+    document.getElementById('pri-error').style.display = 'none';
+  }
+
+  function validate() {
+    let valid = true;
+
+    const required = [
+      { id: 'fname',   fid: 'f-fname' },
+      { id: 'roll',    fid: 'f-roll' },
+      { id: 'email',   fid: 'f-email' },
+      { id: 'phone',   fid: 'f-phone' },
+      { id: 'year',    fid: 'f-year' },
+      { id: 'dept',    fid: 'f-dept' },
+      { id: 'subject', fid: 'f-subject' },
+      { id: 'desc',    fid: 'f-desc' },
+    ];
+
+    required.forEach(r => {
+      const el = document.getElementById(r.id);
+      const wrapper = document.getElementById(r.fid);
+      if (!el.value.trim()) {
+        wrapper.classList.add('has-error');
+        valid = false;
+      } else {
+        wrapper.classList.remove('has-error');
+      }
+    });
+
+    // email format
+    const emailEl = document.getElementById('email');
+    if (emailEl.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
+      document.getElementById('f-email').classList.add('has-error');
+      valid = false;
+    }
+
+    if (!selectedCat) {
+      document.getElementById('cat-error').style.display = 'block';
+      valid = false;
+    }
+
+    if (!selectedPri) {
+      document.getElementById('pri-error').style.display = 'block';
+      valid = false;
+    }
+
+    if (!document.getElementById('declaration').checked) {
+      document.getElementById('decl-error').style.display = 'block';
+      valid = false;
+    } else {
+      document.getElementById('decl-error').style.display = 'none';
+    }
+
+    return valid;
+  }
+
+  document.getElementById('grievance-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (!validate()) return;
+
+    const ref = 'EIEM-' + Math.floor(1000 + Math.random() * 9000);
+    document.getElementById('ref-display').textContent = 'REF: ' + ref;
+
+    const name = document.getElementById('fname').value.trim();
+    const roll = document.getElementById('roll').value.trim();
+    const cat  = selectedCat;
+    const pri  = selectedPri;
+    const sub  = document.getElementById('subject').value.trim();
+    const date = new Date().toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
+
+    document.getElementById('summary-box').innerHTML =
+      '<strong>Name:</strong> ' + name + '<br>' +
+      '<strong>Roll No:</strong> ' + roll + '<br>' +
+      '<strong>Category:</strong> ' + cat + '<br>' +
+      '<strong>Priority:</strong> ' + pri + '<br>' +
+      '<strong>Subject:</strong> ' + sub + '<br>' +
+      '<strong>Filed on:</strong> ' + date;
+
+    document.getElementById('grievance-form').style.display = 'none';
+    document.querySelector('.info-bar').style.display = 'none';
+    document.getElementById('success-state').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  function resetForm() {
+    document.getElementById('grievance-form').reset();
+    document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.pri-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.has-error').forEach(el => el.classList.remove('has-error'));
+    document.getElementById('cat-error').style.display = 'none';
+    document.getElementById('pri-error').style.display = 'none';
+    document.getElementById('decl-error').style.display = 'none';
+    selectedCat = '';
+    selectedPri = '';
+    document.getElementById('grievance-form').style.display = 'block';
+    document.querySelector('.info-bar').style.display = 'flex';
+    document.getElementById('success-state').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mission – EIEM</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:wght@700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#071a3e;--blue:#1649cc;--sky:#3b82f6;
+  --accent:#f97316;--gold:#f59e0b;--light:#e8f0fe;
+  --gray:#64748b;--text:#0f172a;--white:#fff;
+  --grad-nav:linear-gradient(90deg,#071a3e 0%,#1649cc 60%,#2563eb 100%);
+  --grad-btn:linear-gradient(135deg,#f97316,#f59e0b);
+  --grad-hero:linear-gradient(135deg,rgba(7,26,62,.93) 0%,rgba(22,73,204,.78) 55%,rgba(59,130,246,.55) 100%);
+  --grad-foot:linear-gradient(160deg,#040d1f 0%,#071a3e 60%,#0d2760 100%);
+  --shadow-xl:0 24px 64px rgba(7,26,62,.22);
+  --shadow-lg:0 12px 36px rgba(7,26,62,.14);
+  --shadow-sm:0 4px 16px rgba(7,26,62,.08);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#f0f5ff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+section{padding:5rem 2rem}
+.sec-inner{max-width:1200px;margin:0 auto}
+.sec-badge{display:inline-block;background:var(--light);color:var(--blue);font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .9rem;border-radius:999px;margin-bottom:.85rem}
+.sec-title{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3.2vw,2.4rem);font-weight:900;color:var(--navy);line-height:1.18;margin-bottom:.55rem}
+.sec-sub{color:var(--gray);font-size:.9rem;line-height:1.7;max-width:620px}
+
+
+/* PAGE HERO BANNER */
+.page-hero{
+  background:var(--grad-nav);
+  padding:4rem 2rem 3rem;
+  position:relative;
+  overflow:hidden;
+}
+.page-hero::before{
+  content:'';position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1562774053-701939374585?w=1400&q=80') center/cover;
+  opacity:.13;
+}
+.page-hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:rgba(255,255,255,.6);margin-bottom:1rem}
+.breadcrumb a{color:rgba(255,255,255,.6);transition:color .2s}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb .bc-sep{opacity:.4}
+.breadcrumb .bc-cur{color:var(--gold);font-weight:600}
+.page-hero h2{font-family:'Fraunces',serif;font-size:clamp(1.9rem,4vw,3rem);font-weight:900;color:#fff;line-height:1.15;margin-bottom:.6rem}
+.page-hero h2 span{color:var(--gold)}
+.page-hero p{color:rgba(255,255,255,.78);font-size:.95rem;max-width:560px;line-height:1.7}
+.hero-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:2rem}
+.hero-tab{
+  padding:.46rem 1.15rem;border-radius:8px;
+  font-size:.72rem;font-weight:600;cursor:pointer;
+  border:1.5px solid rgba(255,255,255,.28);
+  color:rgba(255,255,255,.72);background:rgba(255,255,255,.07);
+  backdrop-filter:blur(8px);transition:all .22s;white-space:nowrap;
+}
+.hero-tab:hover,.hero-tab.active{
+  background:rgba(255,255,255,.18);border-color:var(--gold);color:var(--gold);
+}
+
+/* PAGE CONTENT SECTIONS */
+.page-section{display:block;animation:pgFade .35s ease}
+
+@keyframes pgFade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* ═══ RECTANGLE LABEL CARDS (cursor-glow) ═══ */
+.rl-grid{display:grid;gap:1.1rem;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));margin-top:2.5rem}
+.rl-card{
+  position:relative;
+  display:flex;align-items:center;gap:1.2rem;
+  background:#fff;border-radius:14px;
+  padding:1.25rem 1.5rem;
+  border:1.5px solid #dde5f5;
+  cursor:pointer;overflow:hidden;
+  transition:border-color .25s,transform .25s,box-shadow .25s;
+}
+.rl-card::before{
+  content:'';
+  position:absolute;inset:0;border-radius:14px;
+  background:radial-gradient(circle 120px at var(--mx,50%) var(--my,50%),rgba(22,73,204,.18) 0%,transparent 70%);
+  opacity:0;transition:opacity .3s;pointer-events:none;
+}
+.rl-card:hover{
+  border-color:var(--blue);
+  transform:translateY(-5px);
+  box-shadow:0 0 0 2px rgba(22,73,204,.15),0 0 32px 6px rgba(22,73,204,.12),var(--shadow-lg);
+}
+.rl-card:hover::before{opacity:1}
+.rl-icon{
+  width:46px;height:46px;border-radius:10px;flex-shrink:0;
+  background:var(--light);display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;transition:background .3s,transform .3s;
+}
+.rl-card:hover .rl-icon{background:var(--blue);transform:rotate(-6deg) scale(1.1)}
+.rl-body{flex:1}
+.rl-label{
+  display:inline-block;
+  font-size:.58rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--blue);background:var(--light);
+  padding:.15rem .6rem;border-radius:4px;margin-bottom:.35rem;
+}
+.rl-body h4{font-size:.88rem;font-weight:700;color:var(--navy);line-height:1.35;margin-bottom:.28rem}
+.rl-body p{font-size:.74rem;color:var(--gray);line-height:1.6}
+.rl-arr{font-size:.9rem;color:var(--blue);opacity:0;transform:translateX(-6px);transition:opacity .22s,transform .22s}
+.rl-card:hover .rl-arr{opacity:1;transform:translateX(0)}
+
+/* Wide label style for single-column entries */
+.rl-wide{grid-column:1/-1}
+
+/* CONTENT PROSE */
+.prose-block{background:#fff;border-radius:18px;padding:2.5rem;box-shadow:var(--shadow-sm);border:1px solid rgba(22,73,204,.06);margin-bottom:2rem}
+.prose-block h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:800;color:var(--navy);margin-bottom:.9rem;padding-bottom:.6rem;border-bottom:2px solid var(--light)}
+.prose-block p{font-size:.84rem;color:var(--gray);line-height:1.82;margin-bottom:.9rem}
+.prose-block p:last-child{margin-bottom:0}
+
+/* STAT ROW */
+.stat-row{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem}
+.stat-pill{
+  flex:1;min-width:130px;background:#fff;border-radius:12px;
+  padding:1.1rem 1.3rem;border:1.5px solid #dde5f5;
+  text-align:center;transition:all .25s;cursor:default;
+  position:relative;overflow:hidden;
+}
+.stat-pill::before{
+  content:'';position:absolute;inset:0;border-radius:12px;
+  background:radial-gradient(circle 80px at var(--mx,50%) var(--my,50%),rgba(22,73,204,.14) 0%,transparent 70%);
+  opacity:0;transition:opacity .3s;pointer-events:none;
+}
+.stat-pill:hover{border-color:var(--blue);transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.stat-pill:hover::before{opacity:1}
+.stat-pill .sp-num{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:900;color:var(--blue)}
+.stat-pill .sp-lbl{font-size:.67rem;color:var(--gray);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-top:.2rem}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:2rem;margin-top:2rem}
+.timeline::before{content:'';position:absolute;left:.75rem;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--blue),var(--sky),rgba(22,73,204,.1))}
+.tl-item{position:relative;margin-bottom:2rem}
+.tl-dot{position:absolute;left:-1.75rem;top:.3rem;width:14px;height:14px;border-radius:50%;background:var(--grad-nav);border:2px solid #fff;box-shadow:0 0 0 3px rgba(22,73,204,.2)}
+.tl-card{
+  background:#fff;border-radius:14px;padding:1.2rem 1.5rem;
+  border:1.5px solid #dde5f5;
+  position:relative;overflow:hidden;
+  transition:border-color .25s,transform .25s,box-shadow .25s;cursor:default;
+}
+.tl-card::before{
+  content:'';position:absolute;inset:0;border-radius:14px;
+  background:radial-gradient(circle 120px at var(--mx,50%) var(--my,50%),rgba(22,73,204,.14) 0%,transparent 70%);
+  opacity:0;transition:opacity .3s;pointer-events:none;
+}
+.tl-card:hover{border-color:var(--blue);transform:translateX(6px);box-shadow:0 0 0 2px rgba(22,73,204,.12),var(--shadow-sm)}
+.tl-card:hover::before{opacity:1}
+.tl-year{font-size:.66rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.25rem}
+.tl-card h4{font-size:.88rem;font-weight:700;color:var(--navy);margin-bottom:.22rem}
+.tl-card p{font-size:.76rem;color:var(--gray);line-height:1.6}
+
+/* POLICY TABLE */
+.policy-table{width:100%;border-collapse:collapse;margin-top:1.5rem;background:#fff;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-sm)}
+.policy-table th{background:var(--grad-nav);color:#fff;padding:.85rem 1.2rem;font-size:.72rem;font-weight:700;text-align:left;letter-spacing:.05em;text-transform:uppercase}
+.policy-table td{padding:.8rem 1.2rem;font-size:.78rem;color:var(--text);border-bottom:1px solid #eef2ff;line-height:1.55}
+.policy-table tr:last-child td{border-bottom:none}
+.policy-table tr:hover td{background:var(--light)}
+.tag-pill{display:inline-block;padding:.18rem .6rem;border-radius:5px;font-size:.62rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.tag-pill.active{background:#dcfce7;color:#16a34a}
+.tag-pill.policy{background:var(--light);color:var(--blue)}
+.tag-pill.mandatory{background:#fef3c7;color:#b45309}
+
+/* AWARD CARD */
+.award-grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:2rem}
+.award-card{
+  background:#fff;border-radius:14px;padding:1.4rem;
+  border:1.5px solid #dde5f5;position:relative;overflow:hidden;
+  transition:all .28s;cursor:default;
+}
+.award-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad-btn);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.award-card::before{
+  content:'';position:absolute;inset:0;border-radius:14px;
+  background:radial-gradient(circle 120px at var(--mx,50%) var(--my,50%),rgba(249,115,22,.13) 0%,transparent 70%);
+  opacity:0;transition:opacity .3s;pointer-events:none;
+}
+.award-card:hover{transform:translateY(-6px);box-shadow:0 0 0 2px rgba(249,115,22,.18),var(--shadow-lg);border-color:var(--accent)}
+.award-card:hover::after{transform:scaleX(1)}
+.award-card:hover::before{opacity:1}
+.award-badge{font-size:2rem;margin-bottom:.7rem}
+.award-year{font-size:.62rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.35rem}
+.award-card h4{font-size:.86rem;font-weight:700;color:var(--navy);margin-bottom:.3rem;line-height:1.4}
+.award-card p{font-size:.73rem;color:var(--gray);line-height:1.6}
+
+/* FOOTER */
+footer{background:var(--grad-foot);color:rgba(255,255,255,.72);padding:4.5rem 2rem 2rem}
+.foot-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:3rem;margin-bottom:3rem}
+.foot-logo{width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:.9rem}
+.foot-logo .flt{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:900;color:#fff;line-height:1}
+.foot-logo .fls{font-size:.37rem;color:rgba(255,255,255,.52);letter-spacing:.08em}
+.foot-brand p{font-size:.76rem;line-height:1.76;margin-bottom:1.15rem}
+.socials{display:flex;gap:.5rem}
+.socials a{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:.8rem;transition:background .2s,color .2s,transform .2s}
+.socials a:hover{background:var(--blue);color:#fff;transform:translateY(-3px)}
+.foot-col h4{color:#fff;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.15rem;padding-bottom:.55rem;position:relative}
+.foot-col h4::after{content:'';position:absolute;bottom:0;left:0;width:28px;height:2px;background:var(--grad-btn)}
+.foot-col a{display:block;color:rgba(255,255,255,.58);font-size:.75rem;margin-bottom:.5rem;transition:color .18s,padding-left .18s}
+.foot-col a:hover{color:var(--gold);padding-left:5px}
+.fci{display:flex;align-items:flex-start;gap:.55rem;margin-bottom:.74rem;font-size:.75rem}
+.fci-i{font-size:.88rem;margin-top:.1rem;flex-shrink:0}
+.foot-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.7rem;color:rgba(255,255,255,.35)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hamburger{display:flex}
+  .nav-menu{display:none;flex-direction:column;align-items:flex-start;position:absolute;top:100%;left:0;right:0;background:var(--navy);padding:1rem 0;box-shadow:0 8px 24px rgba(7,26,62,.4);max-height:72vh;overflow-y:auto;z-index:1000;width:100%}
+  .nav-menu.open{display:flex}
+  .nav-menu>li{width:100%;position:static}
+  .nav-menu>li>a{width:100%;padding:.75rem 1.5rem;font-size:.8rem}
+  .mega-inner{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:700px){
+  .top-bar{flex-direction:column;gap:.3rem;font-size:.68rem;padding:.38rem 1rem}
+  .main-header{flex-direction:column;align-items:flex-start;padding:.8rem 1rem}
+  .hdr-actions{width:100%}
+  section{padding:3.5rem 1rem}
+  .foot-grid{grid-template-columns:1fr;gap:2rem}
+  .foot-bottom{flex-direction:column;text-align:center}
+  .rl-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      
+    </div>
+    <h2>Our <span>Mission</span></h2>
+    <p>A clear and purposeful mission to deliver transformative education that equips graduates for professional excellence.</p>
+  </div>
+</div>
+
+<section id="pg-mission">
+  <div class="sec-inner">
+    <span class="sec-badge">Our Mission</span>
+    <h2 class="sec-title">Our Core Mission</h2>
+    <p class="sec-sub">EIEM is guided by a clear and purposeful mission to deliver transformative education that equips graduates with the knowledge, skills and values essential for professional excellence.</p>
+
+    <div class="prose-block" style="margin-top:2rem">
+      <h3>Mission Statement</h3>
+      <p style="font-size:.95rem;font-weight:600;color:var(--navy);font-style:italic;border-left:4px solid var(--accent);padding-left:1.2rem;line-height:1.7">"To impart quality technical and management education through innovative pedagogy, industry integration and holistic development — empowering graduates to serve society and lead with purpose."</p>
+    </div>
+
+    <div class="rl-grid" style="grid-template-columns:1fr">
+      <div class="rl-card" data-glow>
+        <div class="rl-icon">📘</div>
+        <div class="rl-body">
+          <div class="rl-label">Mission 01 — Quality Education</div>
+          <h4>Deliver industry-relevant, outcome-based technical and management education</h4>
+          <p>Continuously update curricula to reflect emerging technologies, industry needs and professional standards — ensuring every graduate is job-ready from day one.</p>
+        </div>
+        <span class="rl-arr">→</span>
+      </div>
+      <div class="rl-card" data-glow>
+        <div class="rl-icon">🔭</div>
+        <div class="rl-body">
+          <div class="rl-label">Mission 02 — Research &amp; Innovation</div>
+          <h4>Promote research culture, innovation and entrepreneurship on campus</h4>
+          <p>Provide dedicated research facilities, funding support and mentoring to cultivate a new generation of engineers who innovate and create solutions for real-world challenges.</p>
+        </div>
+        <span class="rl-arr">→</span>
+      </div>
+      <div class="rl-card" data-glow>
+        <div class="rl-icon">🤲</div>
+        <div class="rl-body">
+          <div class="rl-label">Mission 03 — Holistic Development</div>
+          <h4>Nurture well-rounded graduates with leadership, communication and ethical values</h4>
+          <p>Beyond academics, invest in personality development, soft skills, sports, arts and social responsibility to produce complete human beings ready for every challenge.</p>
+        </div>
+        <span class="rl-arr">→</span>
+      </div>
+      <div class="rl-card" data-glow>
+        <div class="rl-icon">🏭</div>
+        <div class="rl-body">
+          <div class="rl-label">Mission 04 — Industry Integration</div>
+          <h4>Build strong industry partnerships for placements, internships and live projects</h4>
+          <p>Collaborate with 200+ companies to ensure students gain real workplace exposure, participate in funded projects and secure career opportunities before graduation.</p>
+        </div>
+        <span class="rl-arr">→</span>
+      </div>
+      <div class="rl-card" data-glow>
+        <div class="rl-icon">🌿</div>
+        <div class="rl-body">
+          <div class="rl-label">Mission 05 — Social Responsibility</div>
+          <h4>Serve the community and promote sustainable, inclusive development</h4>
+          <p>Engage students and staff in community outreach, environmental initiatives and inclusive policies to contribute meaningfully to society beyond the campus boundary.</p>
+        </div>
+        <span class="rl-arr">→</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="foot-logo"><span class="flt">EIEM</span><span class="fls">Est. 2001</span></div>
+      <p>Elitte Institute of Engineering &amp; Management is committed to producing world-class engineers and managers who lead innovation and drive growth across industries.</p>
+      <div class="socials">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Twitter">&#x1D54F;</a>
+        <a href="#" title="Instagram">&#x1F4F8;</a>
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="YouTube">&#x25B6;</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Quick Links</h4>
+      <a href="#">Home</a><a href="#">About EIEM</a><a href="#">Admissions</a>
+      <a href="#">Academics</a><a href="#">Departments</a><a href="#">Events</a>
+      <a href="#">Notice Board</a>
+    </div>
+    <div class="foot-col">
+      <h4>Resources</h4>
+      <a href="#">E-Prospectus 2026&ndash;27</a><a href="#">NDLI Library</a>
+      <a href="#">Online Fee Payment</a><a href="#">Grievance Cell</a>
+      <a href="#">Student Login</a><a href="#">Result Portal</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact Us</h4>
+      <div class="fci"><span class="fci-i">&#x1F4CD;</span><span>PO: Karnamadhabpur, PS: Ghola, Sodepur, Kolkata &ndash; 700113</span></div>
+      <div class="fci"><span class="fci-i">&#x1F4DE;</span><span>+91 9163316560 / +91 9831500840</span></div>
+      <div class="fci"><span class="fci-i">&#x2709;</span><span>info@elitte.edu.in</span></div>
+      <div class="fci"><span class="fci-i">&#x1F550;</span><span>Mon&ndash;Sat: 9:00 AM &ndash; 5:00 PM</span></div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Elitte Institute of Engineering &amp; Management. All rights reserved.</span>
+    <span>Approved by AICTE &middot; Affiliated to WBSCT &amp; VE &amp; SD</span>
+  </div>
+</footer>
+
+<script>
+/* HAMBURGER */
+(function(){
+  const btn = document.getElementById('ham');
+  const menu = document.getElementById('navMenu');
+  if(btn && menu){
+    btn.onclick = () => { btn.classList.toggle('open'); menu.classList.toggle('open'); };
+  }
+  /* cursor-glow */
+  document.querySelectorAll('[data-glow]').forEach(el => {
+    el.addEventListener('mousemove', e => {
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', ((e.clientX-r.left)/r.width*100).toFixed(1)+'%');
+      el.style.setProperty('--my', ((e.clientY-r.top)/r.height*100).toFixed(1)+'%');
+    });
+  });
+})();
+</script>
+</body>
+</html>

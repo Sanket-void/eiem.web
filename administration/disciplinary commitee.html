@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Disciplinary Committee – EIEM</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:wght@700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#071a3e;--blue:#1649cc;--sky:#3b82f6;
+  --accent:#f97316;--gold:#f59e0b;--light:#e8f0fe;
+  --gray:#64748b;--text:#0f172a;--white:#fff;
+  --grad-nav:linear-gradient(90deg,#071a3e 0%,#1649cc 60%,#2563eb 100%);
+  --grad-btn:linear-gradient(135deg,#f97316,#f59e0b);
+  --grad-hero:linear-gradient(135deg,rgba(7,26,62,.93) 0%,rgba(22,73,204,.78) 55%,rgba(59,130,246,.55) 100%);
+  --grad-foot:linear-gradient(160deg,#040d1f 0%,#071a3e 60%,#0d2760 100%);
+  --shadow-xl:0 24px 64px rgba(7,26,62,.22);
+  --shadow-lg:0 12px 36px rgba(7,26,62,.14);
+  --shadow-sm:0 4px 16px rgba(7,26,62,.08);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#f0f5ff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+.page-hero{background:var(--grad-nav);padding:3.5rem 2rem 3rem;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1400&q=80') center/cover no-repeat;opacity:.1}
+.page-hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.breadcrumb{display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.breadcrumb span{font-size:.7rem;color:rgba(255,255,255,.6)}
+.breadcrumb .sep{color:rgba(255,255,255,.3)}
+.breadcrumb .cur{color:var(--gold);font-weight:600}
+.page-hero h1{font-family:'Fraunces',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);color:#fff;font-weight:900;line-height:1.2;margin-bottom:.5rem}
+.page-hero p{color:rgba(255,255,255,.75);font-size:.9rem;max-width:620px}
+.hero-accent-bar{width:60px;height:4px;background:var(--grad-btn);border-radius:2px;margin:1rem 0}
+
+.main-content{max-width:1200px;margin:0 auto;padding:3.5rem 2rem}
+
+.section-badge{display:inline-block;background:var(--light);color:var(--blue);font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.26rem .78rem;border-radius:999px;margin-bottom:.7rem}
+.section-title{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:800;color:var(--navy);margin-bottom:.4rem}
+.section-sub{color:var(--gray);font-size:.82rem;margin-bottom:1.8rem;line-height:1.6}
+
+.intro-block{background:#fff;border-radius:20px;padding:2rem 2.2rem;box-shadow:var(--shadow-sm);border-left:5px solid var(--blue);margin-bottom:2.5rem;transition:box-shadow .3s, transform .3s}
+.intro-block:hover{transform:translateY(-4px);box-shadow:0 0 0 2px var(--blue),0 0 28px 4px rgba(22,73,204,.12),var(--shadow-lg)}
+.intro-block p{font-size:.88rem;line-height:1.8;color:#334155}
+
+/* PRINCIPLE BLOCKS */
+.principle-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2.5rem}
+.principle-card{background:#fff;border-radius:16px;padding:1.5rem;border:1.5px solid #dde5f5;text-align:center;transition:all .28s;cursor:default;position:relative;overflow:hidden}
+.principle-card::before{content:'';position:absolute;inset:0;background:var(--grad-nav);opacity:0;transition:opacity .3s}
+.principle-card:hover{transform:translateY(-6px);box-shadow:0 0 0 2px var(--blue),0 0 30px 5px rgba(22,73,204,.18),var(--shadow-lg)}
+.principle-card:hover::before{opacity:.04}
+.pc-icon{font-size:2rem;margin-bottom:.6rem}
+.pc-label{font-size:.84rem;font-weight:700;color:var(--navy)}
+
+/* MEMBER TABLE */
+.member-table{width:100%;border-collapse:separate;border-spacing:0;border-radius:16px;overflow:hidden;box-shadow:var(--shadow-sm);margin-bottom:2.5rem}
+.member-table thead{background:var(--grad-nav)}
+.member-table thead th{color:#fff;font-size:.75rem;font-weight:700;padding:.9rem 1.1rem;text-align:left;letter-spacing:.04em}
+.member-table tbody tr{background:#fff;transition:all .22s;cursor:default}
+.member-table tbody tr:nth-child(even){background:#f8faff}
+.member-table tbody tr:hover{background:var(--light);transform:scale(1.005);box-shadow:0 0 0 2px rgba(22,73,204,.15)}
+.member-table tbody td{padding:.85rem 1.1rem;font-size:.78rem;color:var(--navy);border-bottom:1px solid #eef2ff}
+.member-table tbody tr:last-child td{border-bottom:none}
+.role-badge{display:inline-block;font-size:.6rem;font-weight:700;padding:.18rem .55rem;border-radius:5px;text-transform:uppercase;letter-spacing:.05em}
+.role-chair{background:linear-gradient(135deg,#fef3c7,#fde68a);color:#92400e}
+.role-member{background:var(--light);color:var(--blue)}
+.role-ext{background:#f0fdf4;color:#16a34a}
+.role-stu{background:#fff7ed;color:#c2410c}
+/* PROCESS FLOW */
+.process-flow{display:flex;flex-direction:column;gap:0;margin-bottom:2.5rem;position:relative}
+.process-flow::before{content:'';position:absolute;left:24px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--blue),var(--sky));border-radius:1px}
+.pf-step{display:flex;gap:1.5rem;padding:1rem 0;padding-left:64px;position:relative;cursor:default}
+.pf-step::before{
+  content:attr(data-step);position:absolute;left:0;top:1rem;
+  width:48px;height:48px;border-radius:50%;background:var(--grad-nav);
+  color:#fff;font-size:.8rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 14px rgba(22,73,204,.3);z-index:1;
+  transition:transform .25s, box-shadow .25s;
+}
+.pf-step:hover::before{transform:scale(1.15);box-shadow:0 0 0 3px rgba(22,73,204,.2),0 8px 24px rgba(22,73,204,.4)}
+.pf-inner{background:#fff;border-radius:14px;padding:1.1rem 1.4rem;border:1.5px solid #eef2ff;flex:1;transition:all .25s}
+.pf-step:hover .pf-inner{background:var(--light);border-color:var(--blue);box-shadow:0 0 0 1.5px var(--blue)}
+.pf-inner h4{font-size:.84rem;font-weight:700;color:var(--navy);margin-bottom:.25rem}
+.pf-inner p{font-size:.76rem;color:var(--gray);line-height:1.6}
+.pf-tag{display:inline-block;font-size:.58rem;font-weight:700;padding:.14rem .5rem;border-radius:4px;background:var(--light);color:var(--blue);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.05em}
+
+/* OFFENCES TABLE */
+.off-table{width:100%;border-collapse:separate;border-spacing:0;border-radius:16px;overflow:hidden;box-shadow:var(--shadow-sm);margin-bottom:2.5rem}
+.off-table thead{background:var(--grad-purple)}
+.off-table thead th{color:#fff;font-size:.75rem;font-weight:700;padding:.9rem 1.1rem;text-align:left}
+.off-table tbody tr{background:#fff;transition:all .22s;cursor:default}
+.off-table tbody tr:nth-child(even){background:#faf5ff}
+.off-table tbody tr:hover{background:#ede9fe;box-shadow:0 0 0 2px rgba(109,40,217,.2)}
+.off-table tbody td{padding:.85rem 1.1rem;font-size:.78rem;color:var(--navy);border-bottom:1px solid #ede9fe}
+.off-table tbody tr:last-child td{border-bottom:none}
+
+footer{background:var(--grad-foot);color:rgba(255,255,255,.72);padding:4.5rem 2rem 2rem}
+.foot-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:3rem;margin-bottom:3rem}
+.foot-logo{width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:.9rem}
+.foot-logo .flt{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:900;color:#fff;line-height:1}
+.foot-logo .fls{font-size:.37rem;color:rgba(255,255,255,.52);letter-spacing:.08em}
+.foot-brand p{font-size:.76rem;line-height:1.76;margin-bottom:1.15rem}
+.socials{display:flex;gap:.5rem}
+.socials a{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:.8rem;transition:background .2s,color .2s,transform .2s}
+.socials a:hover{background:var(--blue);color:#fff;transform:translateY(-3px)}
+.foot-col h4{color:#fff;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.15rem;padding-bottom:.55rem;position:relative}
+.foot-col h4::after{content:'';position:absolute;bottom:0;left:0;width:28px;height:2px;background:var(--grad-btn)}
+.foot-col a{display:block;color:rgba(255,255,255,.58);font-size:.75rem;margin-bottom:.5rem;transition:color .18s,padding-left .18s}
+.foot-col a:hover{color:var(--gold);padding-left:5px}
+.fci{display:flex;align-items:flex-start;gap:.55rem;margin-bottom:.74rem;font-size:.75rem}
+.fci-i{font-size:.88rem;margin-top:.1rem;flex-shrink:0}
+.foot-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.7rem;color:rgba(255,255,255,.35)}
+
+/* APPEAL */
+.appeal-block{background:linear-gradient(135deg,#eff6ff,#fff);border-radius:18px;padding:2rem;border:1.5px solid #bfdbfe;margin-bottom:2rem;transition:all .3s;cursor:default}
+.appeal-block:hover{transform:translateY(-4px);box-shadow:0 0 0 2px var(--sky),0 0 24px 4px rgba(59,130,246,.12),var(--shadow-sm)}
+.appeal-block h4{font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
+.appeal-block p{font-size:.8rem;color:#334155;line-height:1.7}
+
+@media(max-width:700px){.main-content{padding:2rem 1rem}}
+</style>
+</head>
+<body>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <span>Home</span><span class="sep">›</span>
+      <span>Administration</span><span class="sep">›</span>
+      <span class="cur">Disciplinary Committee</span>
+    </div>
+    <h1>Disciplinary Committee</h1>
+    <div class="hero-accent-bar"></div>
+    <p>Upholding academic integrity, student conduct standards and institutional values with fairness, transparency and due process</p>
+  </div>
+</div>
+
+<div class="main-content">
+
+  <div class="intro-block">
+    <p>The Disciplinary Committee of EIEM is constituted by the Principal to investigate complaints of misconduct, academic dishonesty and breaches of institutional rules. The committee operates on principles of natural justice — every accused student has the right to be heard. All proceedings are confidential. The committee's decisions are subject to appeal to the Governing Body.</p>
+  </div>
+
+  <!-- Guiding Principles -->
+  <span class="section-badge">Core Principles</span>
+  <div class="section-title">Guiding Principles</div>
+  <div class="principle-grid">
+    <div class="principle-card"><div class="pc-icon">⚖️</div><div class="pc-label">Fairness</div></div>
+    <div class="principle-card"><div class="pc-icon">🔍</div><div class="pc-label">Transparency</div></div>
+    <div class="principle-card"><div class="pc-icon">🤐</div><div class="pc-label">Confidentiality</div></div>
+    <div class="principle-card"><div class="pc-icon">🎙️</div><div class="pc-label">Right to Hearing</div></div>
+    <div class="principle-card"><div class="pc-icon">⏱️</div><div class="pc-label">Timeliness</div></div>
+  </div>
+
+  <!-- Committee Members -->
+  <span class="section-badge">Composition</span>
+  <div class="section-title">Committee Members</div>
+  <p class="section-sub">Reconstituted every academic year by the Principal as per institutional charter.</p>
+  <table class="member-table">
+    <thead>
+      <tr><th>Name</th><th>Designation</th><th>Department / Role</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Prof. Mr. Chandan Chowdhury</strong></td><td>Principal</td><td>Academic Administration</td><td><span class="role-badge role-chair">Chairman</span></td></tr>
+      <tr><td><strong>Ms. Srabanti Chakraborty</strong></td><td>Associate Professor</td><td>Computer Science &amp; Technology</td><td><span class="role-badge role-member">Administrative Member</span></td></tr>
+      <tr><td><strong>Ms. Banani Ghosh</strong></td><td>Associate Professor</td><td>Electronics &amp; Telecommunication Engineering</td><td><span class="role-badge role-member">Administrative Member</span></td></tr>
+      <tr><td><strong>Mr. Swapan Santra</strong></td><td>AAssociate Professor</td><td>Electrical Engineering</td><td><span class="role-badge role-member">Administrative Member</span></td></tr>
+      <tr><td><strong>Mr. Arindam Kar</strong></td><td>Associate Professor</td><td>Civil Engineering</td><td><span class="role-badge role-ext">Convener</span></td></tr>
+      <tr><td><strong>Mr. Rajdeep Das</strong></td><td>Associate Professor</td><td>Science</td><td><span class="role-badge role-stu">Member</span></td></tr>
+    </tbody>
+  </table>
+
+  <!-- Disciplinary Process -->
+  <span class="section-badge">Process</span>
+  <div class="section-title">Disciplinary Process</div>
+  <div class="process-flow">
+    <div class="pf-step" data-step="01">
+      <div class="pf-inner">
+        <div class="pf-tag">Initiation</div>
+        <h4>Complaint Received</h4>
+        <p>A complaint is submitted in writing to the Principal's office or the Disciplinary Committee by any faculty member, student or staff. Anonymous complaints may also be considered if prima facie credible.</p>
+      </div>
+    </div>
+    <div class="pf-step" data-step="02">
+      <div class="pf-inner">
+        <div class="pf-tag">Scrutiny</div>
+        <h4>Preliminary Assessment</h4>
+        <p>The committee reviews the complaint within 3 working days and decides whether a formal inquiry is warranted. Frivolous complaints are dismissed at this stage with reasons recorded.</p>
+      </div>
+    </div>
+    <div class="pf-step" data-step="03">
+      <div class="pf-inner">
+        <div class="pf-tag">Notice</div>
+        <h4>Notice to Accused</h4>
+        <p>A formal show-cause notice is served to the accused student/staff. They are given a minimum of 5 working days to respond in writing and present their side of the matter.</p>
+      </div>
+    </div>
+    <div class="pf-step" data-step="04">
+      <div class="pf-inner">
+        <div class="pf-tag">Inquiry</div>
+        <h4>Formal Inquiry</h4>
+        <p>A committee meeting is convened. Both parties may present evidence, call witnesses and submit documents. All proceedings are recorded and kept confidential.</p>
+      </div>
+    </div>
+    <div class="pf-step" data-step="05">
+      <div class="pf-inner">
+        <div class="pf-tag">Decision</div>
+        <h4>Recommendation &amp; Action</h4>
+        <p>The committee passes its recommendation by majority vote. The Principal issues the final order. The decision is communicated to the accused in writing within 2 working days.</p>
+      </div>
+    </div>
+    <div class="pf-step" data-step="06">
+      <div class="pf-inner">
+        <div class="pf-tag">Appeal</div>
+        <h4>Right of Appeal</h4>
+        <p>The accused may appeal to the Governing Body within 15 days of receiving the order. The Governing Body's decision is final and binding.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Offences & Penalties -->
+  <span class="section-badge">Penalties</span>
+  <div class="section-title">Offences &amp; Penalties</div>
+  <table class="off-table">
+    <thead>
+      <tr><th>Category of Offence</th><th>Examples</th><th>Possible Penalty</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Academic Dishonesty</td><td>Plagiarism, copying in exams, impersonation</td><td>Zero grade, suspension, mark withholding</td></tr>
+      <tr><td>Misconduct — Minor</td><td>Insubordination, dress code violations, phone use in restricted areas</td><td>Written warning, community service</td></tr>
+      <tr><td>Misconduct — Major</td><td>Damage to property, brawling, harassment</td><td>Suspension, financial penalty, FIR</td></tr>
+      <tr><td>Substance Abuse</td><td>Alcohol/drug use on campus</td><td>Suspension + counselling referral + parents notified</td></tr>
+      <tr><td>Ragging</td><td>All forms of ragging (refer Anti-Ragging Policy)</td><td>Expulsion + criminal prosecution</td></tr>
+      <tr><td>Sexual Harassment</td><td>Any form — refer ICC / POSH Act</td><td>Expulsion + criminal prosecution</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Appeal Rights -->
+  <div class="appeal-block">
+    <h4>📋 Right of Appeal</h4>
+    <p>Any student or staff member who disagrees with a disciplinary decision has the right to appeal to the Governing Body of EIEM within 15 working days of receiving the written order. The appeal must be submitted in writing with supporting documents to the Registrar's office. A nominal appeal fee of ₹500 (refundable if appeal is upheld) is applicable. The Governing Body shall constitute a review panel within 21 days and deliver its decision. This decision is final and binding on all parties.</p>
+  </div>
+
+</div>
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="foot-logo"><span class="flt">EIEM</span><span class="fls">Est. 2001</span></div>
+      <p>Elitte Institute of Engineering &amp; Management is committed to producing world-class engineers and managers who lead innovation and drive growth across industries.</p>
+      <div class="socials">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Twitter">&#x1D54F;</a>
+        <a href="#" title="Instagram">&#x1F4F8;</a>
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="YouTube">&#x25B6;</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Quick Links</h4>
+      <a href="#">Home</a><a href="#">About EIEM</a><a href="#">Admissions</a>
+      <a href="#">Academics</a><a href="#">Departments</a><a href="#">Events</a>
+      <a href="#">Notice Board</a>
+    </div>
+    <div class="foot-col">
+      <h4>Resources</h4>
+      <a href="#">E-Prospectus 2026&ndash;27</a><a href="#">NDLI Library</a>
+      <a href="#">Online Fee Payment</a><a href="#">Grievance Cell</a>
+      <a href="#">Student Login</a><a href="#">Result Portal</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact Us</h4>
+      <div class="fci"><span class="fci-i">&#x1F4CD;</span><span>PO: Karnamadhabpur, PS: Ghola, Sodepur, Kolkata &ndash; 700113</span></div>
+      <div class="fci"><span class="fci-i">&#x1F4DE;</span><span>+91 9163316560 / +91 9831500840</span></div>
+      <div class="fci"><span class="fci-i">&#x2709;</span><span>info@elitte.edu.in</span></div>
+      <div class="fci"><span class="fci-i">&#x1F550;</span><span>Mon&ndash;Sat: 9:00 AM &ndash; 5:00 PM</span></div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Elitte Institute of Engineering &amp; Management. All rights reserved.</span>
+    <span>Approved by AICTE &middot; Affiliated to WBSCT &amp; VE &amp; SD</span>
+  </div>
+  </footer>
+</body>
+</html>

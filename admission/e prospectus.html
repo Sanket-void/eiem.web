@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>E-Prospectus – EIEM</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:wght@700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#071a3e;--blue:#1649cc;--sky:#3b82f6;
+  --accent:#f97316;--gold:#f59e0b;--light:#e8f0fe;
+  --gray:#64748b;--text:#0f172a;--white:#fff;
+  --grad-nav:linear-gradient(90deg,#071a3e 0%,#1649cc 60%,#2563eb 100%);
+  --grad-btn:linear-gradient(135deg,#f97316,#f59e0b);
+  --grad-hero:linear-gradient(135deg,rgba(7,26,62,.93) 0%,rgba(22,73,204,.78) 55%,rgba(59,130,246,.55) 100%);
+  --grad-foot:linear-gradient(160deg,#040d1f 0%,#071a3e 60%,#0d2760 100%);
+  --shadow-xl:0 24px 64px rgba(7,26,62,.22);
+  --shadow-lg:0 12px 36px rgba(7,26,62,.14);
+  --shadow-sm:0 4px 16px rgba(7,26,62,.08);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#f0f5ff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+
+
+/* NAVBAR */
+.navbar{background:var(--grad-nav);position:sticky;top:0;z-index:1000;box-shadow:0 4px 24px rgba(7,26,62,.32)}
+.nav-inner{display:flex;align-items:center;padding:0 1.5rem;max-width:100%;position:relative}
+.nav-menu{display:flex;align-items:center;list-style:none;flex:1;flex-wrap:nowrap}
+.nav-menu>li{position:relative;flex-shrink:0}
+.nav-menu>li>a{display:inline-flex;align-items:center;gap:.22rem;color:rgba(255,255,255,.88);font-size:.71rem;font-weight:500;padding:.84rem .72rem;letter-spacing:.02em;white-space:nowrap;transition:color .18s,background .18s}
+.nav-menu>li>a:hover,.nav-menu>li>a.active{color:#fff;background:rgba(255,255,255,.13);border-radius:5px}
+.nav-menu>li>a.active{color:var(--gold);font-weight:700}
+.caret{font-size:.58rem;opacity:.72;transition:transform .22s;display:inline-block}
+.nav-menu>li:hover>a .caret{transform:rotate(180deg)}
+.drop1{display:none;position:absolute;top:100%;left:0;background:#fff;min-width:222px;border-top:3px solid var(--blue);border-radius:0 0 12px 12px;box-shadow:var(--shadow-xl);z-index:2000;animation:fadeDown .2s ease}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.nav-menu>li:hover>.drop1{display:block}
+.drop1>li>a{display:flex;padding:.62rem 1.15rem;font-size:.72rem;color:var(--navy);font-weight:500;border-bottom:1px solid #eef2ff;transition:background .15s,padding-left .15s,color .15s}
+.drop1>li:last-child>a{border-bottom:none}
+.drop1>li>a:hover{background:var(--light);padding-left:1.5rem;color:var(--blue)}
+.nav-notice>a{color:var(--gold)!important;font-weight:700!important}
+.nav-apply>a{background:var(--grad-btn)!important;color:#fff!important;font-weight:700!important;border-radius:6px;margin:.28rem .3rem;padding:.5rem .9rem!important;box-shadow:0 3px 12px rgba(249,115,22,.32)}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:.4rem;margin-left:auto}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
+
+/* ANNOUNCE BAR */
+.announce-bar{background:linear-gradient(90deg,#b91c1c,#dc2626,#ea580c,#f97316,#ea580c,#dc2626,#b91c1c);background-size:300% 100%;animation:gradShift 5s ease infinite;padding:.38rem 0;overflow:hidden;position:sticky;top:44px;z-index:900}
+@keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.announce-bar marquee{font-size:.76rem;font-weight:700;color:#fff;letter-spacing:.05em;text-transform:uppercase}
+.announce-bar marquee span{margin:0 2.5rem}
+
+/* PAGE HERO */
+.page-hero{background:var(--grad-nav);padding:4rem 2rem;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1400&q=80') center/cover;opacity:.12}
+.page-hero-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1;text-align:center}
+.page-hero-label{display:inline-block;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:var(--gold);font-size:.64rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.28rem .9rem;border-radius:999px;backdrop-filter:blur(8px);margin-bottom:1rem}
+.page-hero h2{font-family:'Fraunces',serif;font-size:clamp(1.8rem,4vw,3rem);color:#fff;font-weight:900;line-height:1.2;margin-bottom:.6rem}
+.page-hero h2 span{color:var(--gold)}
+.page-hero p{color:rgba(255,255,255,.78);font-size:.92rem;max-width:580px;line-height:1.72;margin:0 auto}
+.breadcrumb{display:flex;align-items:center;justify-content:center;gap:.5rem;font-size:.68rem;color:rgba(255,255,255,.5);margin-top:1.2rem;flex-wrap:wrap}
+.breadcrumb a{color:rgba(255,255,255,.6);transition:color .2s}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb span{color:rgba(255,255,255,.3)}
+
+/* PAGE BODY */
+.page-body{max-width:900px;margin:0 auto;padding:5rem 2rem;text-align:center}
+
+/* SECTION LABEL */
+.section-label{display:inline-flex;align-items:center;gap:.5rem;font-size:.63rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);background:var(--light);padding:.26rem .78rem;border-radius:999px;margin-bottom:1.5rem}
+
+/* PROSPECTUS CARD */
+.prospectus-card{
+  background:#fff;border-radius:28px;
+  box-shadow:var(--shadow-xl);
+  border:1px solid rgba(22,73,204,.08);
+  padding:4rem 3rem;
+  margin-bottom:3rem;
+  position:relative;
+  overflow:hidden;
+  transition:transform .3s,box-shadow .3s;
+}
+.prospectus-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 60% 0%,rgba(22,73,204,.06) 0%,transparent 65%),
+             radial-gradient(ellipse at 10% 80%,rgba(249,115,22,.05) 0%,transparent 55%);
+  pointer-events:none;
+}
+.prospectus-card:hover{transform:translateY(-6px);box-shadow:0 32px 80px rgba(7,26,62,.28)}
+
+.pc-icon{
+  width:90px;height:90px;border-radius:22px;
+  background:var(--grad-nav);
+  display:flex;align-items:center;justify-content:center;
+  font-size:2.4rem;margin:0 auto 1.6rem;
+  box-shadow:0 12px 36px rgba(22,73,204,.38);
+  transition:transform .3s;
+}
+.prospectus-card:hover .pc-icon{transform:scale(1.08) rotate(-4deg)}
+
+.pc-title{
+  font-family:'Fraunces',serif;font-size:clamp(1.5rem,3vw,2.2rem);
+  font-weight:900;color:var(--navy);margin-bottom:.6rem;
+}
+.pc-title span{color:var(--blue)}
+.pc-sub{font-size:.88rem;color:var(--gray);line-height:1.72;max-width:480px;margin:0 auto 2.5rem}
+
+/* THE GLOWING BUTTON */
+.glow-btn-wrap{position:relative;display:inline-block;margin:0 auto}
+
+.glow-btn{
+  position:relative;display:inline-flex;align-items:center;gap:.75rem;
+  background:var(--grad-btn);
+  color:#fff;font-family:'DM Sans',sans-serif;
+  font-size:1.05rem;font-weight:800;letter-spacing:.04em;
+  padding:1.1rem 3rem;border-radius:14px;
+  border:none;cursor:pointer;
+  box-shadow:
+    0 0 20px rgba(249,115,22,.5),
+    0 0 40px rgba(249,115,22,.3),
+    0 8px 30px rgba(249,115,22,.45);
+  animation:pulseGlow 2.4s ease-in-out infinite;
+  transition:transform .2s,box-shadow .2s;
+  text-decoration:none;
+}
+@keyframes pulseGlow{
+  0%,100%{box-shadow:0 0 20px rgba(249,115,22,.5),0 0 40px rgba(249,115,22,.3),0 8px 30px rgba(249,115,22,.45)}
+  50%{box-shadow:0 0 35px rgba(249,115,22,.8),0 0 70px rgba(249,115,22,.5),0 8px 40px rgba(249,115,22,.6)}
+}
+.glow-btn:hover{
+  transform:translateY(-4px) scale(1.03);
+  animation:none;
+  box-shadow:0 0 45px rgba(249,115,22,.9),0 0 90px rgba(249,115,22,.6),0 12px 48px rgba(249,115,22,.7);
+}
+.glow-btn .btn-icon{font-size:1.4rem;transition:transform .3s}
+.glow-btn:hover .btn-icon{transform:translateY(-3px) rotate(-5deg)}
+
+/* Ripple effect */
+.glow-btn::after{
+  content:'';position:absolute;inset:-3px;
+  border-radius:17px;
+  background:transparent;
+  border:2px solid rgba(249,115,22,.4);
+  animation:rippleRing 2.4s ease-in-out infinite;
+}
+@keyframes rippleRing{
+  0%,100%{opacity:.7;transform:scale(1)}
+  50%{opacity:0.2;transform:scale(1.04)}
+}
+.glow-btn:hover::after{animation:none;opacity:0}
+
+.btn-label-below{
+  display:block;font-size:.7rem;color:var(--gray);margin-top:.75rem;
+  letter-spacing:.04em;
+}
+
+/* INFO CHIPS ROW */
+.info-row{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:3rem}
+.info-chip{
+  display:flex;align-items:center;gap:.6rem;
+  padding:.65rem 1.1rem;border-radius:10px;
+  background:#f8faff;border:1px solid #dde5f5;
+  font-size:.76rem;color:var(--navy);font-weight:500;
+  transition:all .22s;cursor:default;
+}
+.info-chip:hover{border-color:var(--blue);background:var(--light);transform:translateY(-3px);box-shadow:0 6px 20px rgba(22,73,204,.12)}
+.info-chip .ic{font-size:1.1rem}
+
+footer{background:var(--grad-foot);color:rgba(255,255,255,.72);padding:4.5rem 2rem 2rem}
+.foot-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:3rem;margin-bottom:3rem}
+.foot-logo{width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:.9rem}
+.foot-logo .flt{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:900;color:#fff;line-height:1}
+.foot-logo .fls{font-size:.37rem;color:rgba(255,255,255,.52);letter-spacing:.08em}
+.foot-brand p{font-size:.76rem;line-height:1.76;margin-bottom:1.15rem}
+.socials{display:flex;gap:.5rem}
+.socials a{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:.8rem;transition:background .2s,color .2s,transform .2s}
+.socials a:hover{background:var(--blue);color:#fff;transform:translateY(-3px)}
+.foot-col h4{color:#fff;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.15rem;padding-bottom:.55rem;position:relative}
+.foot-col h4::after{content:'';position:absolute;bottom:0;left:0;width:28px;height:2px;background:var(--grad-btn)}
+.foot-col a{display:block;color:rgba(255,255,255,.58);font-size:.75rem;margin-bottom:.5rem;transition:color .18s,padding-left .18s}
+.foot-col a:hover{color:var(--gold);padding-left:5px}
+.fci{display:flex;align-items:flex-start;gap:.55rem;margin-bottom:.74rem;font-size:.75rem}
+.fci-i{font-size:.88rem;margin-top:.1rem;flex-shrink:0}
+.foot-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.7rem;color:rgba(255,255,255,.35)}
+
+
+/* FEATURES GRID */
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem;margin-top:3rem;text-align:left}
+.feat-card{
+  background:#fff;border-radius:16px;padding:1.4rem 1.5rem;
+  border:1px solid rgba(22,73,204,.07);
+  box-shadow:var(--shadow-sm);
+  transition:transform .28s,box-shadow .28s;
+  position:relative;overflow:hidden;cursor:default;
+}
+.feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad-nav);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.feat-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-xl)}
+.feat-card:hover::before{transform:scaleX(1)}
+.feat-icon{font-size:1.6rem;margin-bottom:.8rem}
+.feat-card h4{font-size:.82rem;font-weight:700;color:var(--navy);margin-bottom:.3rem}
+.feat-card p{font-size:.72rem;color:var(--gray);line-height:1.6}
+
+
+@media(max-width:900px){
+  .hamburger{display:flex}
+  .nav-menu{display:none;flex-direction:column;align-items:flex-start;position:absolute;top:100%;left:0;right:0;background:var(--navy);padding:1rem 0;box-shadow:0 8px 24px rgba(7,26,62,.4);max-height:72vh;overflow-y:auto;z-index:1000;width:100%}
+  .nav-menu.open{display:flex}
+  .nav-menu>li{width:100%}
+  .nav-menu>li>a{width:100%;padding:.75rem 1.5rem;font-size:.8rem}
+  .prospectus-card{padding:2.5rem 1.5rem}
+}
+@media(max-width:700px){
+  .page-body{padding:3rem 1rem}
+  .glow-btn{padding:.9rem 2rem;font-size:.92rem}
+}
+</style>
+</head>
+<body>  
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-hero-label">Admission</div>
+    <h2>E-<span>Prospectus</span></h2>
+    <p>Your complete guide to EIEM — courses, facilities, fees, faculty, and everything you need to make an informed decision about your engineering future.</p>
+    <div class="breadcrumb">
+      <a href="#">Home</a><span>›</span>
+      <a href="#">Admission</a><span>›</span>
+      <span style="color:var(--gold)">E-Prospectus</span>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+  <div class="section-label">📖 Academic Year 2026–27</div>
+
+  <!-- PROSPECTUS DOWNLOAD CARD -->
+  <div class="prospectus-card">
+    <div class="pc-icon">📘</div>
+    <div class="pc-title">EIEM <span>E-Prospectus</span> 2026–27</div>
+    <p class="pc-sub">Download the complete prospectus to explore all programmes, admission criteria, fee structures, campus facilities, faculty profiles, and placement records.</p>
+
+    <!-- GLOWING DOWNLOAD BUTTON -->
+    <div class="glow-btn-wrap">
+      <a href="https://cdn-elitte-nst.sgp1.digitaloceanspaces.com/elitte-institue-of-engineering-and-management-orka/orka/uploads/2026/03/09/e-prospectus-2026.pdf" class="glow-btn" target="_blank" rel="noopener">
+        <span class="btn-icon">📥</span>
+        Download E-Prospectus
+      </a>
+      <span class="btn-label-below">PDF Format · Free Download · Academic Year 2026–27</span>
+    </div>
+
+    <!-- INFO CHIPS -->
+    <div class="info-row">
+      <div class="info-chip"><span class="ic">🎓</span> 6 Diploma Programmes</div>
+      <div class="info-chip"><span class="ic">📅</span> Updated for 2026–27</div>
+      <div class="info-chip"><span class="ic">🏛️</span> AICTE Approved</div>
+      <div class="info-chip"><span class="ic">🏆</span> 95% Placement Rate</div>
+    </div>
+  </div>
+
+  <!-- WHAT'S INSIDE -->
+  <div class="section-label">📑 What's Inside the Prospectus</div>
+  <div class="features-grid">
+    <div class="feat-card">
+      <div class="feat-icon">🎓</div>
+      <h4>Courses &amp; Programmes</h4>
+      <p>Detailed information on all Diploma Engineering programmes offered at EIEM.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">💰</div>
+      <h4>Fee Structure</h4>
+      <p>Semester-wise fee breakdown for 1st year and lateral entry diploma students.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📋</div>
+      <h4>Admission Criteria</h4>
+      <p>Eligibility requirements, reservation policies, and the admission process.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🏫</div>
+      <h4>Campus &amp; Facilities</h4>
+      <p>Labs, library, hostel, sports facilities, and everything campus life offers.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">👩‍🏫</div>
+      <h4>Faculty Profiles</h4>
+      <p>Meet our experienced faculty and explore their academic achievements.</p>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🤝</div>
+      <h4>Placement Records</h4>
+      <p>200+ recruiting partners, industry tie-ups, and placement achievements.</p>
+    </div>
+  </div>
+
+</div><!-- end .page-body -->
+<script>
+(function(){
+  const btn=document.getElementById('ham');
+  const menu=document.getElementById('navMenu');
+  btn.onclick=()=>{btn.classList.toggle('open');menu.classList.toggle('open')};
+})();
+</script>
+</body>
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="foot-logo"><span class="flt">EIEM</span><span class="fls">Est. 2001</span></div>
+      <p>Elitte Institute of Engineering &amp; Management is committed to producing world-class engineers and managers who lead innovation and drive growth across industries.</p>
+      <div class="socials">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Twitter">&#x1D54F;</a>
+        <a href="#" title="Instagram">&#x1F4F8;</a>
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="YouTube">&#x25B6;</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Quick Links</h4>
+      <a href="#">Home</a><a href="#">About EIEM</a><a href="#">Admissions</a>
+      <a href="#">Academics</a><a href="#">Departments</a><a href="#">Events</a>
+      <a href="#">Notice Board</a>
+    </div>
+    <div class="foot-col">
+      <h4>Resources</h4>
+      <a href="#">E-Prospectus 2026&ndash;27</a><a href="#">NDLI Library</a>
+      <a href="#">Online Fee Payment</a><a href="#">Grievance Cell</a>
+      <a href="#">Student Login</a><a href="#">Result Portal</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact Us</h4>
+      <div class="fci"><span class="fci-i">&#x1F4CD;</span><span>PO: Karnamadhabpur, PS: Ghola, Sodepur, Kolkata &ndash; 700113</span></div>
+      <div class="fci"><span class="fci-i">&#x1F4DE;</span><span>+91 9163316560 / +91 9831500840</span></div>
+      <div class="fci"><span class="fci-i">&#x2709;</span><span>info@elitte.edu.in</span></div>
+      <div class="fci"><span class="fci-i">&#x1F550;</span><span>Mon&ndash;Sat: 9:00 AM &ndash; 5:00 PM</span></div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Elitte Institute of Engineering &amp; Management. All rights reserved.</span>
+    <span>Approved by AICTE &middot; Affiliated to WBSCT &amp; VE &amp; SD</span>
+  </div>
+  </footer>
+</html>

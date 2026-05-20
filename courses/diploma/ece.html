@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diploma in Electronics & Communication Engineering – EIEM</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b3e;
+    --blue: #1a3a8f;
+    --mid-blue: #2756c5;
+    --accent-orange: #f5a623;
+    --accent-amber: #e8830a;
+    --light-blue: #dce8ff;
+    --white: #ffffff;
+    --off-white: #f4f7ff;
+    --gray: #6b7a99;
+    --light-gray: #eef1f8;
+    --red-accent: #d93025;
+    --green: #1a7a4a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--white);
+    color: var(--navy);
+    overflow-x: hidden;
+  }
+
+  /* All the CSS remains exactly the same as your Civil page */
+  /* (I've kept it identical for consistency) */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 60%, #1e4db7 100%);
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 60px 48px;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 680px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(245,166,35,.15); border: 1px solid var(--accent-orange);
+    color: var(--accent-orange); border-radius: 20px; padding: 6px 16px;
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  .hero h2 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 3.2rem; font-weight: 700;
+    color: white; line-height: 1.1; margin-bottom: 16px;
+  }
+  .hero h2 em { color: var(--accent-orange); font-style: normal; }
+  .hero p { color: #b0c4ef; font-size: 1rem; line-height: 1.7; margin-bottom: 28px; }
+  .hero-stats { display: flex; gap: 32px; margin-bottom: 32px; }
+  .hero-stat { text-align: center; }
+  .hero-stat .num { font-family: 'Rajdhani', sans-serif; font-size: 2rem; font-weight: 700; color: var(--accent-orange); }
+  .hero-stat .lbl { font-size: 0.72rem; color: #8ba3d4; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+  .hero-visual {
+    position: absolute; right: 48px; top: 50%; transform: translateY(-50%);
+    z-index: 2;
+  }
+  .auto-visual {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 20px;
+    padding: 24px;
+    width: 320px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+  }
+  .auto-visual .car-icon {
+    font-size: 6.5rem;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,.3));
+   }
+
+  section { padding: 72px 48px; }
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--mid-blue); margin-bottom: 12px;
+  }
+  .section-tag::before { content: ''; display: block; width: 24px; height: 2px; background: var(--accent-orange); }
+  h2.section-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2.4rem; font-weight: 700; color: var(--navy); margin-bottom: 16px;
+  }
+  h2.section-title em { color: var(--mid-blue); font-style: normal; }
+  .section-sub { color: var(--gray); font-size: 1rem; line-height: 1.7; max-width: 600px; margin-bottom: 48px; }
+
+  .about-strip {
+    background: var(--off-white);
+    border-left: 5px solid var(--accent-orange);
+    padding: 28px 36px;
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 48px;
+    display: flex; align-items: flex-start; gap: 20px;
+  }
+  .about-strip .icon { font-size: 2rem; }
+  .about-strip h3 { font-size: 1.1rem; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+  .about-strip p { color: var(--gray); font-size: 0.9rem; line-height: 1.7; }
+
+  .year-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 64px; }
+  .year-card {
+    border: 2px solid var(--light-gray);
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform .25s, box-shadow .25s;
+  }
+  .year-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(26,58,143,.12); }
+  .year-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  }
+  .year-card.y1::before { background: linear-gradient(90deg, var(--mid-blue), #5b9bd5); }
+  .year-card.y2::before { background: linear-gradient(90deg, var(--accent-amber), #f5a623); }
+  .year-card.y3::before { background: linear-gradient(90deg, #27ae60, #2ecc71); }
+  .year-badge {
+    display: inline-block; padding: 4px 14px; border-radius: 20px;
+    font-size: 0.72rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px;
+  }
+  .y1 .year-badge { background: #dce8ff; color: var(--mid-blue); }
+  .y2 .year-badge { background: #fff3dc; color: var(--accent-amber); }
+  .y3 .year-badge { background: #d6f5e5; color: var(--green); }
+  .year-card h3 { font-size: 1.05rem; font-weight: 800; color: var(--navy); margin-bottom: 16px; }
+  .year-card ul { list-style: none; }
+  .year-card ul li {
+    padding: 7px 0; border-bottom: 1px solid var(--light-gray);
+    font-size: 0.85rem; color: var(--navy); display: flex; align-items: center; gap: 10px;
+  }
+  .year-card ul li:last-child { border-bottom: none; }
+  .year-card ul li::before { content: '▸'; color: var(--accent-orange); font-size: 0.7rem; flex-shrink: 0; }
+
+  .why-section { background: linear-gradient(135deg, var(--navy) 0%, #1a3a8f 100%); color: white; }
+  .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .why-card {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 16px;
+    padding: 28px;
+    text-align: center;
+    transition: background .25s, transform .25s;
+  }
+  .why-card:hover { background: rgba(255,255,255,.12); transform: translateY(-4px); }
+  .why-icon {
+    width: 64px; height: 64px; border-radius: 16px;
+    background: rgba(245,166,35,.15); border: 1px solid rgba(245,166,35,.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem; margin: 0 auto 16px;
+  }
+  .why-card h3 { font-size: 1rem; font-weight: 700; color: white; margin-bottom: 10px; }
+  .why-card p { font-size: 0.82rem; color: #8ba3d4; line-height: 1.6; }
+
+  .subjects-section { background: var(--off-white); }
+  .subjects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .sub-chip {
+    background: white;
+    border: 1.5px solid var(--light-blue);
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex; align-items: center; gap: 14px;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .sub-chip:hover { border-color: var(--mid-blue); box-shadow: 0 4px 16px rgba(39,86,197,.1); }
+  .sub-chip .sub-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--light-blue); display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .sub-chip .sub-info h4 { font-size: 0.88rem; font-weight: 700; color: var(--navy); }
+  .sub-chip .sub-info p { font-size: 0.74rem; color: var(--gray); margin-top: 2px; }
+  .sub-chip .sub-credits {
+    margin-left: auto; font-family: 'Fira Code', monospace;
+    font-size: 0.72rem; color: var(--mid-blue); font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .career-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .career-card {
+    background: white; border-radius: 16px;
+    border: 2px solid var(--light-gray);
+    padding: 28px; display: flex; gap: 18px;
+    transition: box-shadow .25s, border-color .25s;
+  }
+  .career-card:hover { border-color: var(--mid-blue); box-shadow: 0 8px 32px rgba(26,58,143,.1); }
+  .career-icon {
+    width: 56px; height: 56px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; flex-shrink: 0;
+  }
+  .ci-blue { background: var(--light-blue); }
+  .ci-amber { background: #fff3dc; }
+  .ci-green { background: #d6f5e5; }
+  .ci-red { background: #ffe0de; }
+  .career-card h3 { font-size: 1rem; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+  .career-card p { font-size: 0.82rem; color: var(--gray); line-height: 1.6; }
+  .salary-tag {
+    display: inline-block; margin-top: 10px;
+    background: var(--light-blue); color: var(--mid-blue);
+    border-radius: 6px; padding: 4px 12px; font-size: 0.74rem; font-weight: 700;
+  }
+
+  .skills-you-gain { padding: 72px 48px; }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+  .skill-pill {
+    padding: 10px 20px; border-radius: 24px;
+    font-size: 0.82rem; font-weight: 700;
+    border: 1.5px solid;
+    transition: all .2s;
+    cursor: default;
+  }
+  .skill-pill:hover { transform: translateY(-2px); }
+  .sp-blue { background: var(--light-blue); color: var(--mid-blue); border-color: #b0c9f5; }
+  .sp-orange { background: #fff3dc; color: var(--accent-amber); border-color: #ffd888; }
+  .sp-green { background: #d6f5e5; color: var(--green); border-color: #a0dfc0; }
+  .sp-red { background: #ffe0de; color: #c0392b; border-color: #f5b8b5; }
+
+  .elig-section { background: var(--off-white); }
+  .elig-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .elig-card {
+    background: white; border-radius: 16px; padding: 28px;
+    border: 2px solid var(--light-gray);
+  }
+  .elig-card .e-num {
+    font-family: 'Rajdhani', sans-serif; font-size: 2.8rem; font-weight: 700;
+    color: var(--light-blue); line-height: 1; margin-bottom: 4px;
+  }
+  .elig-card h3 { font-size: 1rem; font-weight: 800; color: var(--navy); margin-bottom: 10px; }
+  .elig-card p { font-size: 0.85rem; color: var(--gray); line-height: 1.7; }
+
+  footer { background: var(--navy); color: #8ba3d4; padding: 48px; }
+  .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 3rem; margin-bottom: 3rem; }
+  .foot-logo{width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:.9rem}
+  .foot-logo .flt{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:900;color:#fff;line-height:1}
+  .foot-logo .fls{font-size:.37rem;color:rgba(255,255,255,.52);letter-spacing:.08em}
+  .foot-brand p{font-size:.76rem;line-height:1.76;margin-bottom:1.15rem}
+  .socials{display:flex;gap:.5rem}
+  .socials a{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:.8rem;transition:background .2s,color .2s,transform .2s}
+  .socials a:hover{background:var(--blue);color:#fff;transform:translateY(-3px)}
+  .foot-col h4{color:#fff;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.15rem;padding-bottom:.55rem;position:relative}
+  .foot-col h4::after{content:'';position:absolute;bottom:0;left:0;width:28px;height:2px;background:var(--accent-orange)}
+  .foot-col a{display:block;color:rgba(255,255,255,.58);font-size:.75rem;margin-bottom:.5rem;transition:color .18s,padding-left .18s}
+  .foot-col a:hover{color:var(--accent-orange);padding-left:5px}
+  .fci{display:flex;align-items:flex-start;gap:.55rem;margin-bottom:.74rem;font-size:.75rem}
+  .fci-i{font-size:.88rem;margin-top:.1rem;flex-shrink:0}
+  .foot-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.7rem;color:rgba(255,255,255,.35)}
+
+  @media (max-width: 900px) {
+    .year-grid, .why-grid, .subjects-grid, .career-grid, .elig-grid { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .hero h2 { font-size: 2rem; }
+    section { padding: 48px 24px; }
+  }
+
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-in { animation: fadeInUp .6s ease both; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content fade-in">
+    <div class="hero-badge">📡 Diploma Programme · 3 Years</div>
+    <h2>Diploma in <em>Electronics & Communication Engineering</em></h2>
+    <p>Build a future-proof career in electronics, communication, embedded systems, and IoT with EIEM's practical 3-year Diploma. Master modern circuits, wireless technology, and smart devices.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">3</div><div class="lbl">Year Duration</div></div>
+      <div class="hero-stat"><div class="num">6</div><div class="lbl">Semesters</div></div>
+      <div class="hero-stat"><div class="num">94%</div><div class="lbl">Placement Rate</div></div>
+      <div class="hero-stat"><div class="num">160+</div><div class="lbl">Industry Partners</div></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="auto-visual">
+      <div class="car-icon">📡</div>
+      <h3 style="color:white; margin-bottom:8px;">Connect the Future</h3>
+      <p style="color:#b0c4ef; font-size:0.9rem;">Circuits • Embedded Systems • IoT • 5G Communication</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section style="padding: 72px 48px;">
+  <div class="section-tag">About the Programme</div>
+  <h2 class="section-title">What is the <em>Diploma in ECE</em>?</h2>
+  <p class="section-sub">A hands-on technical programme designed for Class 10 pass students who want to build a successful career in the fast-growing electronics, communication, and semiconductor industry.</p>
+  <div class="about-strip">
+    <div class="icon">📡</div>
+    <div>
+      <h3>Programme Overview</h3>
+      <p>The 3-year Diploma in Electronics & Communication Engineering is a WBSCTVESD-approved programme offered by EIEM. It combines strong theoretical knowledge with extensive laboratory practice, circuit design, embedded programming, communication systems, and live industry projects.</p>
+    </div>
+  </div>
+  <div class="about-strip">
+    <div class="icon">📋</div>
+    <div>
+      <h3>Affiliation &amp; Approval</h3>
+      <p>Approved by AICTE, affiliated to West Bengal State Council of Technical &amp; Vocational Education and Skill Development (WBSCTVESD). Curriculum is regularly updated with inputs from leading companies like TCS, Infosys, Bosch, Qualcomm, Intel, and Samsung.</p>
+    </div>
+  </div>
+</section>
+
+<!-- YEAR-WISE CURRICULUM -->
+<section style="background: var(--off-white); padding: 72px 48px;">
+  <div class="section-tag">Curriculum</div>
+  <h2 class="section-title">Year-wise <em>Course Structure</em></h2>
+  <p class="section-sub">Progressive learning from basic electronics to advanced communication systems and embedded technology.</p>
+  <div class="year-grid">
+    <div class="year-card y1">
+      <div class="year-badge">Year 1 · Sem 1 &amp; 2</div>
+      <h3>🌱 Foundations</h3>
+      <ul>
+        <li>Fundamentals of Electronics</li>
+        <li>Engineering Drawing &amp; Graphics</li>
+        <li>Applied Physics &amp; Chemistry</li>
+        <li>Basic Electrical Engineering</li>
+        <li>Digital Electronics</li>
+        <li>Computer Applications</li>
+        <li>English &amp; Communication</li>
+      </ul>
+    </div>
+    <div class="year-card y2">
+      <div class="year-badge">Year 2 · Sem 3 &amp; 4</div>
+      <h3>⚡ Core Electronics</h3>
+      <ul>
+        <li>Analog Electronic Circuits</li>
+        <li>Digital Circuits &amp; Systems</li>
+        <li>Electronic Devices &amp; Circuits</li>
+        <li>Microprocessors &amp; Microcontrollers</li>
+        <li>Electronic Measurements &amp; Instruments</li>
+        <li>Communication Principles</li>
+        <li>C Programming</li>
+      </ul>
+    </div>
+    <div class="year-card y3">
+      <div class="year-badge">Year 3 · Sem 5 &amp; 6</div>
+      <h3>🚀 Advanced &amp; Specialization</h3>
+      <ul>
+        <li>Embedded Systems &amp; IoT</li>
+        <li>Wireless &amp; Mobile Communication</li>
+        <li>VLSI Design &amp; Technology</li>
+        <li>Industrial Electronics</li>
+        <li>Industrial Training / Internship</li>
+        <li>Final Year Major Project</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- KEY SUBJECTS -->
+<section class="subjects-section" style="padding: 72px 48px;">
+  <div class="section-tag">Key Subjects</div>
+  <h2 class="section-title">Core <em>Subjects</em> at a Glance</h2>
+  <p class="section-sub">Practical, industry-relevant subjects with heavy focus on lab work and projects.</p>
+  <div class="subjects-grid">
+    <div class="sub-chip"><div class="sub-icon">🔌</div><div class="sub-info"><h4>Analog Circuits</h4><p>Amplifiers, oscillators &amp; filters</p></div><span class="sub-credits">6 Credits</span></div>
+    <div class="sub-chip"><div class="sub-icon">📡</div><div class="sub-info"><h4>Communication Systems</h4><p>Analog &amp; digital modulation</p></div><span class="sub-credits">6 Credits</span></div>
+    <div class="sub-chip"><div class="sub-icon">🧠</div><div class="sub-info"><h4>Microcontrollers</h4><p>8051, Arduino &amp; PIC</p></div><span class="sub-credits">6 Credits</span></div>
+    <div class="sub-chip"><div class="sub-icon">📟</div><div class="sub-info"><h4>Embedded Systems</h4><p>RTOS &amp; IoT applications</p></div><span class="sub-credits">5 Credits</span></div>
+    <div class="sub-chip"><div class="sub-icon">🔬</div><div class="sub-info"><h4>Digital Signal Processing</h4><p>Filtering &amp; signal analysis</p></div><span class="sub-credits">5 Credits</span></div>
+    <div class="sub-chip"><div class="sub-icon">🖥️</div><div class="sub-info"><h4>VLSI Design</h4><p>FPGA &amp; chip design basics</p></div><span class="sub-credits">5 Credits</span></div>
+    <div class="sub-chip"><div class="sub-icon">📶</div><div class="sub-info"><h4>Wireless Communication</h4><p>5G, Wi-Fi &amp; Bluetooth</p></div><span class="sub-credits">5 Credits</span></div>
+    <div class="sub-chip"><div class="sub-icon">🛠️</div><div class="sub-info"><h4>PCB Design</h4><p>Circuit fabrication &amp; testing</p></div><span class="sub-credits">4 Credits</span></div>
+    <div class="sub-chip"><div class="sub-icon">📊</div><div class="sub-info"><h4>Electronic Instrumentation</h4><p>Measurement &amp; testing</p></div><span class="sub-credits">4 Credits</span></div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE -->
+<section class="why-section" style="padding: 72px 48px;">
+  <div style="text-align: center; margin-bottom: 48px;">
+    <div class="section-tag" style="color: var(--accent-orange); justify-content: center;">Why Choose EIEM</div>
+    <h2 class="section-title" style="color: white;">Why Choose This <em style="color: var(--accent-orange);">Programme</em>?</h2>
+    <p class="section-sub" style="color: #8ba3d4; margin: 0 auto;">Advanced electronics labs, modern equipment, and strong industry ties make EIEM the best choice for ECE.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🔬</div>
+      <h3>Industry-Aligned Curriculum</h3>
+      <p>Updated regularly with latest technologies in IoT, Embedded Systems, 5G, and VLSI.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🛠️</div>
+      <h3>Advanced Electronics Labs</h3>
+      <p>Well-equipped labs with CROs, Function Generators, Spectrum Analyzers, and FPGA kits.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">👨‍🏫</div>
+      <h3>Experienced Faculty</h3>
+      <p>Faculty with industry experience from semiconductor, telecom, and embedded system companies.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">💼</div>
+      <h3>Strong Placement Support</h3>
+      <p>Excellent placements with companies like Bosch, TCS, Infosys, Wipro, Intel, and many core electronics firms.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🌐</div>
+      <h3>IoT &amp; Embedded Focus</h3>
+      <p>Special emphasis on Embedded Systems, IoT, and modern wireless technologies.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🎓</div>
+      <h3>Lateral Entry to B.Tech</h3>
+      <p>Opportunity to join 2nd year of B.Tech in ECE/EEE after diploma.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📌</div>
+      <h3>Live Projects</h3>
+      <p>Build real IoT devices, robots, communication systems, and smart gadgets.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">💰</div>
+      <h3>Affordable &amp; Accessible</h3>
+      <p>Reasonable fees with scholarship and education loan assistance available.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS YOU GAIN -->
+<section class="skills-you-gain" style="background: white;">
+  <div class="section-tag">Skills</div>
+  <h2 class="section-title">Skills You <em>Graduate With</em></h2>
+  <p class="section-sub">Practical skills that make you job-ready from day one in the electronics industry.</p>
+  <div class="skill-pills">
+    <span class="skill-pill sp-blue">Circuit Design &amp; Simulation</span>
+    <span class="skill-pill sp-blue">Embedded C Programming</span>
+    <span class="skill-pill sp-orange">PCB Designing</span>
+    <span class="skill-pill sp-green">IoT Development</span>
+    <span class="skill-pill sp-blue">Microcontroller Programming</span>
+    <span class="skill-pill sp-orange">Analog &amp; Digital Testing</span>
+    <span class="skill-pill sp-green">Wireless Communication</span>
+    <span class="skill-pill sp-red">FPGA Basics</span>
+    <span class="skill-pill sp-blue">Soldering &amp; Assembly</span>
+    <span class="skill-pill sp-orange">Signal Processing</span>
+    <span class="skill-pill sp-green">Arduino &amp; Raspberry Pi</span>
+    <span class="skill-pill sp-red">Troubleshooting &amp; Debugging</span>
+    <span class="skill-pill sp-blue">5G &amp; RF Fundamentals</span>
+    <span class="skill-pill sp-orange">VLSI Design Flow</span>
+    <span class="skill-pill sp-green">Project Development</span>
+  </div>
+</section>
+
+<!-- CAREER / JOB BENEFITS -->
+<section style="padding: 72px 48px;">
+  <div class="section-tag">Career Opportunities</div>
+  <h2 class="section-title">Job <em>Opportunities</em> &amp; Benefits</h2>
+  <p class="section-sub">High demand for skilled ECE diploma holders in electronics, telecom, embedded systems, and IoT sectors.</p>
+  <div class="career-grid">
+    <div class="career-card">
+      <div class="career-icon ci-blue">🔌</div>
+      <div>
+        <h3>Electronics Service Engineer</h3>
+        <p>Service and maintenance of electronic equipment and systems.</p>
+        <span class="salary-tag">₹2.8 – 5.5 LPA</span>
+      </div>
+    </div>
+    <div class="career-card">
+      <div class="career-icon ci-amber">📡</div>
+      <div>
+        <h3>Telecom / RF Technician</h3>
+        <p>Work in mobile networks, broadcasting, and communication companies.</p>
+        <span class="salary-tag">₹3 – 6.5 LPA</span>
+      </div>
+    </div>
+    <div class="career-card">
+      <div class="career-icon ci-green">🛠️</div>
+      <div>
+        <h3>Embedded Systems Developer</h3>
+        <p>Design and development of smart devices and IoT solutions.</p>
+        <span class="salary-tag">₹3.2 – 7 LPA</span>
+      </div>
+    </div>
+    <div class="career-card">
+      <div class="career-icon ci-red">🔧</div>
+      <div>
+        <h3>Junior Electronics Engineer</h3>
+        <p>Production, testing, and quality control in electronics manufacturing.</p>
+        <span class="salary-tag">₹2.8 – 5.8 LPA</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ELIGIBILITY -->
+<section class="elig-section" style="padding: 72px 48px;">
+  <div class="section-tag">Admission</div>
+  <h2 class="section-title">Eligibility &amp; <em>Admission Process</em></h2>
+  <p class="section-sub">Simple and transparent admission process.</p>
+  <div class="elig-grid">
+    <div class="elig-card">
+      <div class="e-num">01</div>
+      <h3>Educational Qualification</h3>
+      <p>Passed Class 10 (Madhyamik or equivalent) with Mathematics and Science. Minimum 35% aggregate. Science background preferred.</p>
+    </div>
+    <div class="elig-card">
+      <div class="e-num">02</div>
+      <h3>Age Limit</h3>
+      <p>Minimum 14 years as on date of admission. No upper age limit for regular candidates.</p>
+    </div>
+    <div class="elig-card">
+      <div class="e-num">03</div>
+      <h3>Documents Required</h3>
+      <p>Class 10 Marksheet &amp; Certificate, Aadhaar, Photos, Caste Certificate (if applicable), Migration Certificate.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="foot-logo"><span class="flt">EIEM</span><span class="fls">Est. 2001</span></div>
+      <p>Elitte Institute of Engineering &amp; Management is committed to producing skilled electronics and communication engineers for the future of smart technology and digital India.</p>
+      <div class="socials">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Twitter">&#x1D54F;</a>
+        <a href="#" title="Instagram">&#x1F4F8;</a>
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="YouTube">&#x25B6;</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Quick Links</h4>
+      <a href="#">Home</a><a href="#">About EIEM</a><a href="#">Admissions</a>
+      <a href="#">Academics</a><a href="#">Departments</a><a href="#">Placements</a>
+    </div>
+    <div class="foot-col">
+      <h4>Resources</h4>
+      <a href="#">E-Prospectus 2026–27</a><a href="#">Online Fee Payment</a>
+      <a href="#">Student Login</a><a href="#">Result Portal</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact Us</h4>
+      <div class="fci"><span class="fci-i">📍</span><span>PO: Karnamadhabpur, PS: Ghola, Sodepur, Kolkata – 700113</span></div>
+      <div class="fci"><span class="fci-i">📞</span><span>+91 9163316560 / +91 9831500840</span></div>
+      <div class="fci"><span class="fci-i">✉️</span><span>info@elitte.edu.in</span></div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Elitte Institute of Engineering &amp; Management. All rights reserved.</span>
+    <span>Approved by AICTE · Affiliated to WBSCT &amp; VE &amp; SD</span>
+  </div>
+</footer>
+
+</body>
+</html>

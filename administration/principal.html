@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Principal – EIEM</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:wght@700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#071a3e;--blue:#1649cc;--sky:#3b82f6;
+  --accent:#f97316;--gold:#f59e0b;--light:#e8f0fe;
+  --gray:#64748b;--text:#0f172a;--white:#fff;
+  --grad-nav:linear-gradient(90deg,#071a3e 0%,#1649cc 60%,#2563eb 100%);
+  --grad-btn:linear-gradient(135deg,#f97316,#f59e0b);
+  --grad-hero:linear-gradient(135deg,rgba(7,26,62,.93) 0%,rgba(22,73,204,.78) 55%,rgba(59,130,246,.55) 100%);
+  --grad-foot:linear-gradient(160deg,#040d1f 0%,#071a3e 60%,#0d2760 100%);
+  --shadow-xl:0 24px 64px rgba(7,26,62,.22);
+  --shadow-lg:0 12px 36px rgba(7,26,62,.14);
+  --shadow-sm:0 4px 16px rgba(7,26,62,.08);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#f0f5ff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+
+.page-hero{background:var(--grad-nav);padding:3.5rem 2rem 3rem;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1400&q=80') center/cover no-repeat;opacity:.12}
+.page-hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.breadcrumb{display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.breadcrumb span{font-size:.7rem;color:rgba(255,255,255,.6)}
+.breadcrumb .sep{color:rgba(255,255,255,.3)}
+.breadcrumb .cur{color:var(--gold);font-weight:600}
+.page-hero h1{font-family:'Fraunces',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);color:#fff;font-weight:900;line-height:1.2;margin-bottom:.5rem}
+.page-hero p{color:rgba(255,255,255,.75);font-size:.9rem;max-width:520px}
+.hero-accent-bar{width:60px;height:4px;background:var(--grad-btn);border-radius:2px;margin:1rem 0}
+
+.main-content{max-width:1200px;margin:0 auto;padding:3.5rem 2rem}
+.profile-grid{display:grid;grid-template-columns:340px 1fr;gap:3rem;align-items:start}
+@media(max-width:900px){.profile-grid{grid-template-columns:1fr}}
+
+.profile-card{background:#fff;border-radius:24px;box-shadow:var(--shadow-xl);overflow:hidden;border:1px solid rgba(22,73,204,.07);position:sticky;top:2rem;transition:transform .3s, box-shadow .3s}
+.profile-card:hover{transform:translateY(-6px);box-shadow:0 0 0 3px var(--blue), 0 0 40px 8px rgba(22,73,204,.18), var(--shadow-xl)}
+.profile-img-wrap{position:relative;height:340px;overflow:hidden;background:linear-gradient(135deg,#e8f0fe,#dde5f5)}
+.profile-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .4s ease}
+.profile-card:hover .profile-img-wrap img{transform:scale(1.04)}
+.profile-img-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(7,26,62,.72) 0%,transparent 50%)}
+.profile-img-badge{position:absolute;bottom:1.2rem;left:1.2rem;background:var(--grad-btn);color:#fff;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .9rem;border-radius:999px;box-shadow:0 4px 14px rgba(249,115,22,.4)}
+.profile-info{padding:1.8rem}
+.profile-name{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;color:var(--navy);margin-bottom:.2rem}
+.profile-title{font-size:.75rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.1rem}
+.profile-divider{width:40px;height:3px;background:var(--grad-btn);border-radius:2px;margin-bottom:1.1rem}
+.profile-meta{display:flex;flex-direction:column;gap:.65rem}
+.meta-row{display:flex;align-items:flex-start;gap:.7rem}
+.meta-icon{width:32px;height:32px;border-radius:8px;background:var(--light);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0}
+.meta-label{font-size:.62rem;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.06em}
+.meta-val{font-size:.77rem;font-weight:600;color:var(--navy);margin-top:.05rem}
+
+/* Principal special awards row */
+.award-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
+.award-chip{font-size:.6rem;font-weight:700;padding:.18rem .55rem;border-radius:5px;background:linear-gradient(135deg,#fef3c7,#fde68a);color:#92400e;border:1px solid #f59e0b}
+
+.section-badge{display:inline-block;background:var(--light);color:var(--blue);font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.26rem .78rem;border-radius:999px;margin-bottom:.65rem}
+.content-title{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:800;color:var(--navy);margin-bottom:.3rem;line-height:1.2}
+.content-sub{color:var(--gray);font-size:.85rem;line-height:1.7;margin-bottom:2rem}
+
+.info-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2.5rem}
+.info-card{background:#fff;border-radius:16px;padding:1.4rem 1.3rem;border:1.5px solid #dde5f5;position:relative;overflow:hidden;transition:all .28s;cursor:default}
+.info-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad-nav);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.info-card:hover{transform:translateY(-6px);border-color:var(--blue);box-shadow:0 0 0 2px var(--blue),0 0 28px 4px rgba(22,73,204,.18),var(--shadow-lg)}
+.info-card:hover::before{transform:scaleX(1)}
+.ic-icon{font-size:1.6rem;margin-bottom:.7rem}
+.ic-label{font-size:.62rem;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.25rem}
+.ic-val{font-size:1.1rem;font-weight:800;color:var(--navy);font-family:'Fraunces',serif}
+
+.msg-block{background:#fff;border-radius:20px;padding:2.2rem 2rem;box-shadow:var(--shadow-sm);border:1px solid rgba(22,73,204,.07);margin-bottom:2.5rem;position:relative;overflow:hidden;transition:box-shadow .3s, transform .3s}
+.msg-block:hover{transform:translateY(-4px);box-shadow:0 0 0 2px var(--sky),0 0 24px 4px rgba(59,130,246,.14),var(--shadow-lg)}
+.msg-block::before{content:'\201C';position:absolute;top:-1rem;left:1.5rem;font-family:'Fraunces',serif;font-size:7rem;color:var(--light);line-height:1;z-index:0}
+.msg-block p{font-size:.87rem;line-height:1.82;color:#334155;position:relative;z-index:1;font-style:italic}
+.msg-block .sig{margin-top:1.2rem;font-style:normal;font-weight:700;color:var(--navy);font-size:.8rem}
+
+.resp-list{display:flex;flex-direction:column;gap:.65rem;margin-bottom:2.5rem}
+.resp-item{display:flex;align-items:flex-start;gap:.9rem;background:#fff;border-radius:12px;padding:1rem 1.2rem;border:1.5px solid #eef2ff;transition:all .25s;cursor:default}
+.resp-item:hover{border-color:var(--blue);background:var(--light);transform:translateX(8px);box-shadow:0 0 0 1.5px var(--blue),0 0 16px 2px rgba(22,73,204,.12)}
+.resp-dot{width:10px;height:10px;border-radius:50%;background:var(--grad-nav);flex-shrink:0;margin-top:.3rem;transition:transform .2s}
+.resp-item:hover .resp-dot{transform:scale(1.5)}
+.resp-text{font-size:.82rem;font-weight:500;color:var(--navy);line-height:1.55}
+
+footer{background:var(--grad-foot);color:rgba(255,255,255,.72);padding:4.5rem 2rem 2rem}
+.foot-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:3rem;margin-bottom:3rem}
+.foot-logo{width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:.9rem}
+.foot-logo .flt{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:900;color:#fff;line-height:1}
+.foot-logo .fls{font-size:.37rem;color:rgba(255,255,255,.52);letter-spacing:.08em}
+.foot-brand p{font-size:.76rem;line-height:1.76;margin-bottom:1.15rem}
+.socials{display:flex;gap:.5rem}
+.socials a{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:.8rem;transition:background .2s,color .2s,transform .2s}
+.socials a:hover{background:var(--blue);color:#fff;transform:translateY(-3px)}
+.foot-col h4{color:#fff;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.15rem;padding-bottom:.55rem;position:relative}
+.foot-col h4::after{content:'';position:absolute;bottom:0;left:0;width:28px;height:2px;background:var(--grad-btn)}
+.foot-col a{display:block;color:rgba(255,255,255,.58);font-size:.75rem;margin-bottom:.5rem;transition:color .18s,padding-left .18s}
+.foot-col a:hover{color:var(--gold);padding-left:5px}
+.fci{display:flex;align-items:flex-start;gap:.55rem;margin-bottom:.74rem;font-size:.75rem}
+.fci-i{font-size:.88rem;margin-top:.1rem;flex-shrink:0}
+.foot-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.7rem;color:rgba(255,255,255,.35)}
+
+
+/* Research Publications */
+.pub-list{display:flex;flex-direction:column;gap:.8rem;margin-bottom:2.5rem}
+.pub-item{background:#fff;border-radius:12px;padding:1.1rem 1.3rem;border:1.5px solid #eef2ff;transition:all .25s;cursor:default}
+.pub-item:hover{border-color:var(--sky);box-shadow:0 0 0 1.5px var(--sky),0 0 16px 2px rgba(59,130,246,.12);transform:translateY(-3px)}
+.pub-title{font-size:.82rem;font-weight:700;color:var(--navy);margin-bottom:.3rem}
+.pub-meta{font-size:.7rem;color:var(--gray)}
+.pub-journal{font-size:.7rem;font-weight:600;color:var(--blue)}
+
+.qual-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+
+@media(max-width:700px){.main-content{padding:2rem 1rem}.info-cards{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <span>Home</span><span class="sep">›</span>
+      <span>Administration</span><span class="sep">›</span>
+      <span class="cur">Principal</span>
+    </div>
+    <h1>Principal</h1>
+    <div class="hero-accent-bar"></div>
+    <p>Elitte Institute of Engineering &amp; Management — Academic Leadership, Research Excellence</p>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="profile-grid">
+
+    <div class="profile-card">
+      <div class="profile-img-wrap">
+        <img src="https://i.postimg.cc/xTM7hbcL/principal.jpg" alt="Principal EIEM"/>
+        <div class="profile-img-overlay"></div>
+        <div class="profile-img-badge">Principal</div>
+      </div>
+      <div class="profile-info">
+        <div class="profile-name">Mr. Chandan Chowdhury</div>
+        <div class="profile-title">Principal, EIEM</div>
+        <div class="profile-divider"></div>
+        <div class="profile-meta">
+          <div class="meta-row">
+            <div class="meta-icon"></div>
+            <div><div class="meta-label"></div><div class="meta-val"></div></div>
+          </div>
+          <div class="meta-row">
+            <div class="meta-icon">📅</div>
+            <div><div class="meta-label">Experience</div><div class="meta-val">28+ Years</div></div>
+          </div>
+          <div class="meta-row">
+            <div class="meta-icon">🔬</div>
+            <div><div class="meta-label">Research Papers</div><div class="meta-val">45+ Publications</div></div>
+          </div>
+          <div class="meta-row">
+            <div class="meta-icon">📍</div>
+            <div><div class="meta-label">Office</div><div class="meta-val">Principal's Office, Admin Block</div></div>
+          </div>
+          <div class="meta-row">
+            <div class="meta-icon">✉️</div>
+            <div><div class="meta-label">Email</div><div class="meta-val">principal@eiem.edu.in</div></div>
+          </div>
+          <div class="meta-row">
+            <div class="meta-icon">🏅</div>
+            <div>
+              <div class="meta-label">Awards &amp; Recognition</div>
+              <div class="award-chips">
+                <span class="award-chip">AICTE Best Teacher</span>
+                <span class="award-chip">Innovator 2023</span>
+                <span class="award-chip">IEEE Fellow</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-side">
+      <span class="section-badge">Academic Leadership</span>
+      <h2 class="content-title">About the Principal</h2>
+      <p class="content-sub">Mr. Chandan Chowdhury leads Elitte Institute of Engineering & Management with a vision to cultivate future-ready engineers and innovators. With nearly three decades of academic and research experience, he has shaped the institution into a hub of technical excellence, research, and industry collaboration.</p>
+
+      <div class="info-cards">
+        <div class="info-card"><div class="ic-icon">🎓</div><div class="ic-label">Students Mentored</div><div class="ic-val">5000+</div></div>
+        <div class="info-card"><div class="ic-icon">📑</div><div class="ic-label">Research Papers</div><div class="ic-val">45+</div></div>
+        <div class="info-card"><div class="ic-icon">🤝</div><div class="ic-label">Industry MOUs</div><div class="ic-val">30+</div></div>
+        <div class="info-card"><div class="ic-icon">🏆</div><div class="ic-label">Years Experience</div><div class="ic-val">28+</div></div>
+      </div>
+
+      <div class="msg-block">
+        <p>Engineering education must transcend textbooks. At EIEM, we are committed to nurturing not just technically proficient graduates, but thoughtful problem-solvers and ethical leaders who will shape the future of our nation and the world. Our focus is on research, innovation and industry integration — turning degrees into meaningful careers and ideas into impactful solutions.</p>
+        <div class="sig">— Mr. Chandan Chowdhury, Principal, EIEM</div>
+      </div>
+
+      <span class="section-badge">Key Responsibilities</span>
+      <div style="margin-bottom:1rem"></div>
+      <div class="resp-list">
+        <div class="resp-item"><div class="resp-dot"></div><div class="resp-text">Overall academic leadership and strategic planning for the institution</div></div>
+        <div class="resp-item"><div class="resp-dot"></div><div class="resp-text">Overseeing curriculum development, examination and academic quality assurance</div></div>
+        <div class="resp-item"><div class="resp-dot"></div><div class="resp-text">Fostering research culture through funded projects, publications and industry collaboration</div></div>
+        <div class="resp-item"><div class="resp-dot"></div><div class="resp-text">Establishing and maintaining MOUs with industries, research bodies and international institutions</div></div>
+        <div class="resp-item"><div class="resp-dot"></div><div class="resp-text">NAAC, AICTE accreditation and institutional compliance management</div></div>
+        <div class="resp-item"><div class="resp-dot"></div><div class="resp-text">Student welfare, discipline and grievance resolution at the highest academic level</div></div>
+        <div class="resp-item"><div class="resp-dot"></div><div class="resp-text">Representing EIEM at conferences, regulatory bodies and stakeholder forums</div></div>
+      </div>
+
+      <span class="section-badge">Notable Publications</span>
+      <div style="margin-bottom:1rem"></div>
+      <div class="pub-list">
+        <div class="pub-item">
+          <div class="pub-title">Deep Learning Approaches for Real-Time Anomaly Detection in Industrial IoT Networks</div>
+          <div class="pub-meta">A. Bose, S. Chatterjee · <span class="pub-journal">IEEE Transactions on Industrial Informatics, 2023</span></div>
+        </div>
+        <div class="pub-item">
+          <div class="pub-title">Federated Machine Learning for Privacy-Preserving Smart Grid Management</div>
+          <div class="pub-meta">A. Bose, R. Gupta · <span class="pub-journal">Elsevier Energy & AI Journal, 2022</span></div>
+        </div>
+        <div class="pub-item">
+          <div class="pub-title">Curriculum Innovation in Engineering Education: A Framework for Industry 4.0 Readiness</div>
+          <div class="pub-meta">A. Bose · <span class="pub-journal">AICTE Journal of Technical Education, 2021</span></div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="foot-logo"><span class="flt">EIEM</span><span class="fls">Est. 2001</span></div>
+      <p>Elitte Institute of Engineering &amp; Management is committed to producing world-class engineers and managers who lead innovation and drive growth across industries.</p>
+      <div class="socials">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Twitter">&#x1D54F;</a>
+        <a href="#" title="Instagram">&#x1F4F8;</a>
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="YouTube">&#x25B6;</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Quick Links</h4>
+      <a href="#">Home</a><a href="#">About EIEM</a><a href="#">Admissions</a>
+      <a href="#">Academics</a><a href="#">Departments</a><a href="#">Events</a>
+      <a href="#">Notice Board</a>
+    </div>
+    <div class="foot-col">
+      <h4>Resources</h4>
+      <a href="#">E-Prospectus 2026&ndash;27</a><a href="#">NDLI Library</a>
+      <a href="#">Online Fee Payment</a><a href="#">Grievance Cell</a>
+      <a href="#">Student Login</a><a href="#">Result Portal</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact Us</h4>
+      <div class="fci"><span class="fci-i">&#x1F4CD;</span><span>PO: Karnamadhabpur, PS: Ghola, Sodepur, Kolkata &ndash; 700113</span></div>
+      <div class="fci"><span class="fci-i">&#x1F4DE;</span><span>+91 9163316560 / +91 9831500840</span></div>
+      <div class="fci"><span class="fci-i">&#x2709;</span><span>info@elitte.edu.in</span></div>
+      <div class="fci"><span class="fci-i">&#x1F550;</span><span>Mon&ndash;Sat: 9:00 AM &ndash; 5:00 PM</span></div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Elitte Institute of Engineering &amp; Management. All rights reserved.</span>
+    <span>Approved by AICTE &middot; Affiliated to WBSCT &amp; VE &amp; SD</span>
+  </div>
+</footer>
+
+</body>
+</html>

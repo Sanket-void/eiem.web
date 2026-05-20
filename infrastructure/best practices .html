@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Best Practices – EIEM Infrastructure</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:wght@700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+ --navy:#071a3e;--blue:#1649cc;--sky:#3b82f6;
+  --accent:#f97316;--gold:#f59e0b;--light:#e8f0fe;
+  --gray:#64748b;--text:#0f172a;--white:#fff;
+  --grad-nav:linear-gradient(90deg,#071a3e 0%,#1649cc 60%,#2563eb 100%);
+  --grad-btn:linear-gradient(135deg,#f97316,#f59e0b);
+  --grad-hero:linear-gradient(135deg,rgba(7,26,62,.93) 0%,rgba(22,73,204,.78) 55%,rgba(59,130,246,.55) 100%);
+  --grad-foot:linear-gradient(160deg,#040d1f 0%,#071a3e 60%,#0d2760 100%);
+  --shadow-xl:0 24px 64px rgba(7,26,62,.22);
+  --shadow-lg:0 12px 36px rgba(7,26,62,.14);
+  --shadow-sm:0 4px 16px rgba(7,26,62,.08);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#f0f5ff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* ── PAGE HERO ── */
+.page-hero{
+  background:var(--grad-nav);
+  padding:3.5rem 2rem 2.8rem;
+  text-align:center;position:relative;overflow:hidden;
+}
+.page-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 80% at 50% -10%,rgba(59,130,246,.35),transparent);
+  pointer-events:none;
+}
+.page-hero::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:4px;
+  background:var(--grad-btn);
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.3rem 1.1rem;border-radius:999px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);
+  color:var(--gold);font-size:.68rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  backdrop-filter:blur(8px);margin-bottom:1.2rem;
+}
+.page-hero h1{
+  font-family:'Fraunces',serif;
+  font-size:clamp(2rem,5vw,3rem);
+  color:#fff;line-height:1.2;font-weight:900;
+  text-shadow:0 4px 24px rgba(0,0,0,.28);margin-bottom:.75rem;
+}
+.page-hero h1 span{color:var(--gold)}
+.page-hero p{
+  color:rgba(255,255,255,.8);font-size:.98rem;
+  max-width:660px;margin:0 auto;line-height:1.72;
+}
+.hero-tags{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;margin-top:2rem}
+.htag{
+  display:inline-flex;align-items:center;gap:.4rem;
+  padding:.38rem 1rem;border-radius:999px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);
+  color:rgba(255,255,255,.85);font-size:.71rem;font-weight:600;
+  cursor:default;
+  transition:background .25s,transform .22s,box-shadow .25s;
+}
+.htag:hover{
+  background:rgba(255,255,255,.2);
+  transform:translateY(-3px);
+  box-shadow:0 0 0 1px rgba(245,158,11,.55),0 0 18px 3px rgba(245,158,11,.2),0 8px 20px rgba(0,0,0,.2);
+}
+
+/* ── SECTION WRAPPERS ── */
+.sec-inner{max-width:1200px;margin:0 auto;padding:4rem 2rem}
+.sec-badge{
+  display:inline-block;padding:.26rem .85rem;border-radius:999px;
+  background:var(--light);color:var(--blue);
+  font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+  margin-bottom:.65rem;
+}
+.sec-title{
+  font-family:'Fraunces',serif;font-size:clamp(1.5rem,3vw,2.1rem);
+  font-weight:900;color:var(--navy);line-height:1.25;margin-bottom:.5rem;
+}
+.sec-sub{font-size:.85rem;color:var(--gray);max-width:620px;line-height:1.7}
+.sec-head{margin-bottom:2.8rem}
+
+/* ── PILLAR CARDS ── */
+.pillar-section{background:linear-gradient(170deg,#eef3ff 0%,#f0f5ff 100%)}
+.pillar-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.6rem}
+.pillar-card{
+  background:#fff;border-radius:20px;padding:2.2rem 1.9rem;
+  box-shadow:var(--shadow-sm);border:1px solid rgba(22,73,204,.07);
+  position:relative;overflow:hidden;cursor:default;
+  transition:transform .28s,box-shadow .28s;
+}
+.pillar-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  transform:scaleX(0);transform-origin:left;transition:transform .32s;
+}
+.pc-orange::before{background:var(--grad-btn)}
+.pc-blue::before{background:var(--grad-nav)}
+.pc-gold::before{background:linear-gradient(135deg,#f59e0b,#fcd34d)}
+.pc-green::before{background:linear-gradient(135deg,#16a34a,#4ade80)}
+.pillar-card:hover{transform:translateY(-8px)}
+.pc-orange:hover{box-shadow:var(--glow-orange)}
+.pc-blue:hover{box-shadow:var(--glow-blue)}
+.pc-gold:hover{box-shadow:var(--glow-gold)}
+.pc-green:hover{box-shadow:0 0 0 2px #16a34a,0 0 28px 5px rgba(22,163,74,.2),0 16px 40px rgba(7,26,62,.16)}
+.pillar-card:hover::before{transform:scaleX(1)}
+.pillar-icon{
+  width:58px;height:58px;border-radius:15px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.65rem;margin-bottom:1.3rem;
+  transition:transform .3s;
+}
+.pillar-card:hover .pillar-icon{transform:scale(1.12) rotate(-6deg)}
+.pi-orange{background:#fff7ed;box-shadow:0 4px 14px rgba(249,115,22,.18)}
+.pi-blue{background:var(--light);box-shadow:0 4px 14px rgba(22,73,204,.14)}
+.pi-gold{background:#fffbeb;box-shadow:0 4px 14px rgba(245,158,11,.18)}
+.pi-green{background:#f0fdf4;box-shadow:0 4px 14px rgba(22,163,74,.14)}
+.pillar-card h3{font-size:.96rem;font-weight:800;color:var(--navy);margin-bottom:.5rem}
+.pillar-card p{font-size:.78rem;color:var(--gray);line-height:1.68}
+.pillar-tag{
+  display:inline-block;margin-top:1rem;
+  padding:.22rem .75rem;border-radius:6px;
+  font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;
+  background:var(--light);color:var(--blue);
+}
+
+/* ── PRACTICES ACCORDION / LIST ── */
+.practice-section{background:#fff}
+.practice-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.practice-col h3{
+  font-size:.88rem;font-weight:800;color:var(--navy);
+  padding-bottom:.6rem;margin-bottom:1.2rem;
+  border-bottom:2px solid var(--blue);
+  display:flex;align-items:center;gap:.5rem;
+}
+.practice-item{
+  display:flex;gap:1rem;align-items:flex-start;
+  padding:1rem 1rem;border-radius:12px;border:1.5px solid #eef2ff;
+  margin-bottom:.8rem;cursor:default;background:#f8faff;
+  transition:border-color .22s,box-shadow .22s,transform .22s,background .2s;
+}
+.practice-item:hover{
+  border-color:var(--blue);background:#fff;
+  transform:translateY(-4px) translateX(3px);
+  box-shadow:var(--glow-blue);
+}
+.pi-num{
+  flex-shrink:0;width:34px;height:34px;border-radius:9px;
+  background:var(--grad-nav);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-size:.82rem;font-weight:900;
+  box-shadow:0 3px 12px rgba(22,73,204,.26);
+  transition:transform .22s;
+}
+.practice-item:hover .pi-num{transform:scale(1.12) rotate(-5deg)}
+.pi-body h4{font-size:.83rem;font-weight:700;color:var(--navy);margin-bottom:.22rem}
+.pi-body p{font-size:.73rem;color:var(--gray);line-height:1.6}
+
+/* ── AWARDS & RECOGNITION ── */
+.award-section{background:linear-gradient(170deg,#eef3ff 0%,#f0f5ff 100%)}
+.award-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.5rem}
+.award-card{
+  background:#fff;border-radius:18px;padding:1.8rem 1.7rem;
+  border:1.5px solid #dde5f5;cursor:default;
+  position:relative;overflow:hidden;
+  transition:all .28s;
+}
+.award-card::after{
+  content:'';position:absolute;top:-40px;right:-40px;
+  width:120px;height:120px;border-radius:50%;
+  background:radial-gradient(circle,rgba(245,158,11,.12),transparent);
+  transition:transform .35s;pointer-events:none;
+}
+.award-card:hover{
+  border-color:var(--gold);
+  transform:translateY(-7px);
+  box-shadow:var(--glow-gold);
+}
+.award-card:hover::after{transform:scale(1.5)}
+.award-year{
+  display:inline-block;padding:.2rem .7rem;border-radius:6px;
+  font-size:.62rem;font-weight:700;background:#fffbeb;color:#92400e;
+  text-transform:uppercase;letter-spacing:.06em;margin-bottom:.8rem;
+}
+.award-card h3{font-size:.9rem;font-weight:800;color:var(--navy);margin-bottom:.35rem;line-height:1.4}
+.award-card p{font-size:.76rem;color:var(--gray);line-height:1.65}
+.award-org{
+  display:flex;align-items:center;gap:.4rem;margin-top:.9rem;
+  font-size:.68rem;font-weight:600;color:var(--blue);
+}
+.award-org::before{content:'🏆';font-size:.75rem}
+
+/* ── PROCESS TIMELINE ── */
+.timeline-section{background:#fff}
+.timeline{position:relative;padding-left:2.8rem}
+.timeline::before{
+  content:'';position:absolute;left:.85rem;top:0;bottom:0;width:2px;
+  background:linear-gradient(to bottom,var(--blue),var(--sky),var(--accent));
+  border-radius:2px;
+}
+.tl-item{
+  position:relative;margin-bottom:2.2rem;cursor:default;
+}
+.tl-item:last-child{margin-bottom:0}
+.tl-dot{
+  position:absolute;left:-2.2rem;top:.2rem;
+  width:20px;height:20px;border-radius:50%;
+  background:var(--grad-nav);border:3px solid #fff;
+  box-shadow:0 0 0 2px var(--blue),0 4px 12px rgba(22,73,204,.3);
+  transition:transform .25s,box-shadow .25s;
+}
+.tl-item:hover .tl-dot{
+  transform:scale(1.3);
+  box-shadow:0 0 0 3px var(--blue),0 0 20px 4px rgba(22,73,204,.35);
+}
+.tl-content{
+  background:#f8faff;border-radius:14px;padding:1.4rem 1.6rem;
+  border:1.5px solid #eef2ff;
+  transition:border-color .22s,box-shadow .22s,transform .22s;
+}
+.tl-item:hover .tl-content{
+  border-color:var(--blue);
+  transform:translateX(6px);
+  box-shadow:0 0 0 1px var(--blue),0 0 18px 3px rgba(22,73,204,.12),0 8px 24px rgba(7,26,62,.1);
+}
+.tl-tag{
+  display:inline-block;padding:.18rem .65rem;border-radius:5px;
+  font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;
+  background:var(--light);color:var(--blue);margin-bottom:.5rem;
+}
+.tl-content h4{font-size:.88rem;font-weight:700;color:var(--navy);margin-bottom:.3rem}
+.tl-content p{font-size:.76rem;color:var(--gray);line-height:1.65}
+
+/* ── STATS BANNER ── */
+.stats-banner{
+  background:var(--grad-nav);padding:3rem 2rem;
+  position:relative;overflow:hidden;
+}
+.stats-banner::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 100% at 50% 100%,rgba(59,130,246,.28),transparent);
+  pointer-events:none;
+}
+.stats-inner{max-width:1100px;margin:0 auto}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1.5rem}
+.stat-item{
+  text-align:center;padding:1.5rem 1rem;border-radius:16px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.06);backdrop-filter:blur(6px);
+  cursor:default;
+  transition:background .25s,transform .25s,box-shadow .25s;
+}
+.stat-item:hover{
+  background:rgba(255,255,255,.14);
+  transform:translateY(-6px);
+  box-shadow:0 0 0 1px rgba(245,158,11,.5),0 0 22px 4px rgba(245,158,11,.2),0 12px 30px rgba(0,0,0,.22);
+}
+.stat-val{font-family:'Fraunces',serif;font-size:2rem;font-weight:900;color:var(--gold);line-height:1;margin-bottom:.3rem}
+.stat-lbl{font-size:.68rem;font-weight:600;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.08em}
+
+/* ── COMMITTEES ── */
+.committee-section{background:linear-gradient(170deg,#eef3ff 0%,#f0f5ff 100%)}
+.comm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.4rem}
+.comm-card{
+  background:#fff;border-radius:16px;padding:1.6rem 1.5rem;
+  border:1.5px solid #dde5f5;cursor:default;
+  transition:all .25s;display:flex;gap:.9rem;align-items:flex-start;
+}
+.comm-card:hover{
+  border-color:var(--blue);
+  transform:translateY(-5px);
+  box-shadow:var(--glow-blue);
+}
+.comm-icon{
+  flex-shrink:0;width:44px;height:44px;border-radius:11px;
+  background:var(--light);display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;box-shadow:0 3px 10px rgba(22,73,204,.14);
+  transition:background .25s,transform .25s;
+}
+.comm-card:hover .comm-icon{background:var(--blue);transform:scale(1.1) rotate(-5deg)}
+.comm-body h4{font-size:.84rem;font-weight:700;color:var(--navy);margin-bottom:.25rem}
+.comm-body p{font-size:.73rem;color:var(--gray);line-height:1.6}
+
+footer{background:var(--grad-foot);color:rgba(255,255,255,.72);padding:4.5rem 2rem 2rem}
+.foot-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:3rem;margin-bottom:3rem}
+.foot-logo{width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:.9rem}
+.foot-logo .flt{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:900;color:#fff;line-height:1}
+.foot-logo .fls{font-size:.37rem;color:rgba(255,255,255,.52);letter-spacing:.08em}
+.foot-brand p{font-size:.76rem;line-height:1.76;margin-bottom:1.15rem}
+.socials{display:flex;gap:.5rem}
+.socials a{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:.8rem;transition:background .2s,color .2s,transform .2s}
+.socials a:hover{background:var(--blue);color:#fff;transform:translateY(-3px)}
+.foot-col h4{color:#fff;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.15rem;padding-bottom:.55rem;position:relative}
+.foot-col h4::after{content:'';position:absolute;bottom:0;left:0;width:28px;height:2px;background:var(--grad-btn)}
+.foot-col a{display:block;color:rgba(255,255,255,.58);font-size:.75rem;margin-bottom:.5rem;transition:color .18s,padding-left .18s}
+.foot-col a:hover{color:var(--gold);padding-left:5px}
+.fci{display:flex;align-items:flex-start;gap:.55rem;margin-bottom:.74rem;font-size:.75rem}
+.fci-i{font-size:.88rem;margin-top:.1rem;flex-shrink:0}
+.foot-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.7rem;color:rgba(255,255,255,.35)}
+
+
+/* ── CTA ── */
+.cta-strip{
+  background:var(--grad-nav);padding:3rem 2rem;text-align:center;
+  position:relative;overflow:hidden;
+}
+.cta-strip::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 100% at 50% 100%,rgba(59,130,246,.3),transparent);
+  pointer-events:none;
+}
+.cta-strip h2{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:900;color:#fff;margin-bottom:.5rem}
+.cta-strip p{color:rgba(255,255,255,.75);font-size:.88rem;margin-bottom:1.6rem;max-width:520px;margin-left:auto;margin-right:auto}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.cta-btn{
+  display:inline-block;padding:.78rem 2.2rem;border-radius:9px;
+  font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:700;
+  cursor:pointer;letter-spacing:.04em;
+  transition:transform .2s,box-shadow .2s;
+}
+.cta-btn.hot{background:var(--grad-btn);color:#fff;box-shadow:0 6px 24px rgba(249,115,22,.42)}
+.cta-btn.hot:hover{transform:translateY(-3px);box-shadow:0 0 0 2px var(--accent),0 10px 32px rgba(249,115,22,.55)}
+.cta-btn.ghost{border:1.5px solid rgba(255,255,255,.4);color:#fff;background:transparent}
+.cta-btn.ghost:hover{background:rgba(255,255,255,.12);transform:translateY(-3px);box-shadow:0 0 0 2px rgba(255,255,255,.4),0 8px 24px rgba(0,0,0,.2)}
+
+@media(max-width:768px){
+  .practice-grid{grid-template-columns:1fr}
+  .timeline{padding-left:2.2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="hero-badge">⭐ Infrastructure</div>
+  <h1>Best <span>Practices</span></h1>
+  <p>EIEM's commitment to institutional excellence through evidence-based, student-centric best practices that foster academic integrity, sustainability, and holistic development.</p>
+  <div class="hero-tags">
+    <span class="htag">🎓 Academic Excellence</span>
+    <span class="htag">♻️ Green Campus</span>
+    <span class="htag">🤝 Industry Linkage</span>
+    <span class="htag">🔬 Research Culture</span>
+    <span class="htag">💡 Innovation Ecosystem</span>
+    <span class="htag">🌍 Social Responsibility</span>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="pillar-section">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="sec-badge">Core Pillars</span>
+      <h2 class="sec-title">Four Pillars of Institutional Best Practices</h2>
+      <p class="sec-sub">Every initiative at EIEM is anchored to one of four strategic pillars that together drive our vision of holistic educational excellence.</p>
+    </div>
+    <div class="pillar-grid">
+      <div class="pillar-card pc-orange">
+        <div class="pillar-icon pi-orange">🎓</div>
+        <h3>Academic Excellence</h3>
+        <p>Outcome-based education frameworks, rigorous curriculum revision cycles, expert guest lectures, and mandatory research project components ensure graduates meet global industry standards.</p>
+        <span class="pillar-tag">Core Pillar</span>
+      </div>
+      <div class="pillar-card pc-blue">
+        <div class="pillar-icon pi-blue">🤝</div>
+        <h3>Industry–Academia Integration</h3>
+        <p>MOUs with over 50 industry partners, live project internships, corporate mentorship programmes, and joint certification courses bridge the gap between classroom theory and professional practice.</p>
+        <span class="pillar-tag">Core Pillar</span>
+      </div>
+      <div class="pillar-card pc-gold">
+        <div class="pillar-icon pi-gold">♻️</div>
+        <h3>Sustainability & Green Campus</h3>
+        <p>Rainwater harvesting, solar energy panels, waste segregation, plastic-free zones, and annual environment awareness drives reflect EIEM's commitment to a greener future.</p>
+        <span class="pillar-tag">Core Pillar</span>
+      </div>
+      <div class="pillar-card pc-green">
+        <div class="pillar-icon pi-green">🌍</div>
+        <h3>Social Responsibility</h3>
+        <p>NSS activities, rural education outreach, blood donation camps, skill development workshops for underprivileged youth, and community health programmes demonstrate our societal commitment.</p>
+        <span class="pillar-tag">Core Pillar</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BANNER -->
+<section class="stats-banner">
+  <div class="stats-inner">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-val">50+</div>
+        <div class="stat-lbl">Industry MoUs</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">95%</div>
+        <div class="stat-lbl">Placement Rate</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">120+</div>
+        <div class="stat-lbl">Research Papers</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">5000+</div>
+        <div class="stat-lbl">Alumni Network</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">18+</div>
+        <div class="stat-lbl">Awards Won</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-val">30 kW</div>
+        <div class="stat-lbl">Solar Capacity</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRACTICES LIST -->
+<section class="practice-section">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="sec-badge">In Action</span>
+      <h2 class="sec-title">Practices Across Domains</h2>
+      <p class="sec-sub">Concrete initiatives and policies that distinguish EIEM as a model institution in technical education.</p>
+    </div>
+    <div class="practice-grid">
+      <div>
+        <h3>📘 Academic & Learning</h3>
+        <div class="practice-item">
+          <div class="pi-num">01</div>
+          <div class="pi-body">
+            <h4>Outcome-Based Education (OBE)</h4>
+            <p>All programmes follow OBE guidelines aligned with NBA/NAAC criteria, with clearly defined Course Outcomes (COs) mapped to Programme Outcomes (POs).</p>
+          </div>
+        </div>
+        <div class="practice-item">
+          <div class="pi-num">02</div>
+          <div class="pi-body">
+            <h4>Continuous Internal Assessment</h4>
+            <p>Regular class tests, assignments, and surprise quizzes ensure consistent evaluation and timely identification of students needing academic support.</p>
+          </div>
+        </div>
+        <div class="practice-item">
+          <div class="pi-num">03</div>
+          <div class="pi-body">
+            <h4>Mentor-Mentee Programme</h4>
+            <p>Every student is assigned a faculty mentor who tracks academic progress, counsels on career goals, and provides personalised guidance throughout the programme.</p>
+          </div>
+        </div>
+        <div class="practice-item">
+          <div class="pi-num">04</div>
+          <div class="pi-body">
+            <h4>NPTEL & MOOC Integration</h4>
+            <p>Students are encouraged and given credit for completing certified online courses on SWAYAM, Coursera, and edX platforms as supplementary academic credits.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3>🏭 Industry & Innovation</h3>
+        <div class="practice-item">
+          <div class="pi-num">05</div>
+          <div class="pi-body">
+            <h4>Expert Guest Lecture Series</h4>
+            <p>Industry experts, alumni in leadership roles, and researchers are invited regularly to share real-world insights and emerging technology trends with students.</p>
+          </div>
+        </div>
+        <div class="practice-item">
+          <div class="pi-num">06</div>
+          <div class="pi-body">
+            <h4>Industrial Visits & Exposure</h4>
+            <p>Mandatory industrial visits to manufacturing plants, IT companies, and research labs give students hands-on understanding of professional environments and processes.</p>
+          </div>
+        </div>
+        <div class="practice-item">
+          <div class="pi-num">07</div>
+          <div class="pi-body">
+            <h4>Start-Up Incubation Support</h4>
+            <p>The EIEM IIC cell provides seed funding assistance, mentoring, coworking space, and networking opportunities to student entrepreneurs with viable business ideas.</p>
+          </div>
+        </div>
+        <div class="practice-item">
+          <div class="pi-num">08</div>
+          <div class="pi-body">
+            <h4>Patent Filing Assistance</h4>
+            <p>Faculty and students are supported with legal guidance, documentation help, and filing fees for patents arising from in-house research and innovation projects.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUALITY PROCESS TIMELINE -->
+<section style="background:linear-gradient(170deg,#eef3ff 0%,#f0f5ff 100%)">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="sec-badge">Quality Process</span>
+      <h2 class="sec-title">Annual Quality Enhancement Cycle</h2>
+      <p class="sec-sub">A structured annual cycle drives continuous improvement in academic quality, infrastructure, and student outcomes.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <span class="tl-tag">Step 01 — June</span>
+          <h4>Curriculum Review & Revision</h4>
+          <p>Board of Studies meetings are convened with industry experts and faculty to review syllabi, incorporate emerging technologies, and align outcomes with current job market demands.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <span class="tl-tag">Step 02 — August</span>
+          <h4>Faculty Development Programme (FDP)</h4>
+          <p>Before each academic year, all faculty undergo mandatory FDPs on pedagogical innovation, research methodology, digital tools, and accreditation processes.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <span class="tl-tag">Step 03 — Ongoing</span>
+          <h4>Student Feedback & Attainment Monitoring</h4>
+          <p>Mid-semester and end-semester student feedback surveys and CO/PO attainment calculations are reviewed by the IQAC to identify areas for pedagogical improvement.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <span class="tl-tag">Step 04 — January</span>
+          <h4>Annual IQAC Review Meeting</h4>
+          <p>The Internal Quality Assurance Cell compiles the Annual Quality Assurance Report (AQAR), reviews accreditation metrics, and sets improvement targets for the next cycle.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <span class="tl-tag">Step 05 — April</span>
+          <h4>Placement Outcome Analysis & Gap Bridging</h4>
+          <p>Post-placement season, a detailed analysis of skill gaps is conducted and findings are fed back into the curriculum and co-curricular planning for the next academic year.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section class="award-section">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="sec-badge">Recognition</span>
+      <h2 class="sec-title">Awards & Accreditations</h2>
+      <p class="sec-sub">National and state-level recognition validating EIEM's commitment to best practices in technical education and institutional governance.</p>
+    </div>
+    <div class="award-grid">
+      <div class="award-card">
+        <div class="award-year">2024</div>
+        <h3>Best Engineering College — Eastern India</h3>
+        <p>Awarded by the Higher Education Forum for consistent academic results, placement performance, and infrastructure development over five consecutive years.</p>
+        <div class="award-org">Higher Education Forum, New Delhi</div>
+      </div>
+      <div class="award-card">
+        <div class="award-year">2023</div>
+        <h3>NAAC Accreditation — Grade B++</h3>
+        <p>Secured B++ grade in the NAAC assessment cycle with commendation for student support services, research output, and governance transparency.</p>
+        <div class="award-org">NAAC, Bangalore</div>
+      </div>
+      <div class="award-card">
+        <div class="award-year">2023</div>
+        <h3>IIC Star Rating — 4 Stars</h3>
+        <p>Institution Innovation Council achieved 4-star rating from MoE for promoting a culture of innovation, entrepreneurship, and start-up ecosystem among students.</p>
+        <div class="award-org">Ministry of Education, Govt. of India</div>
+      </div>
+      <div class="award-card">
+        <div class="award-year">2022</div>
+        <h3>Green Campus Award</h3>
+        <p>Recognised by the West Bengal Pollution Control Board for solar energy adoption, rainwater harvesting infrastructure, and zero-plastic campus initiatives.</p>
+        <div class="award-org">WBPCB, Kolkata</div>
+      </div>
+      <div class="award-card">
+        <div class="award-year">2022</div>
+        <h3>Best Placement Record — Private Engineering Colleges</h3>
+        <p>Acknowledged by a leading education survey for achieving 95%+ placement across all departments with packages above the state average for three consecutive years.</p>
+        <div class="award-org">Education World Rankings</div>
+      </div>
+      <div class="award-card">
+        <div class="award-year">2021</div>
+        <h3>ARIIA Performers Band — Band C</h3>
+        <p>Listed in the Atal Ranking of Institutions on Innovation Achievements for demonstrating measurable impact of innovation and entrepreneurship policies.</p>
+        <div class="award-org">AICTE / MoE, Govt. of India</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMITTEES -->
+<section class="committee-section">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="sec-badge">Governance</span>
+      <h2 class="sec-title">Committees Driving Best Practices</h2>
+      <p class="sec-sub">Dedicated committees ensure structured implementation and ongoing monitoring of all institutional best practice initiatives.</p>
+    </div>
+    <div class="comm-grid">
+      <div class="comm-card">
+        <div class="comm-icon">📋</div>
+        <div class="comm-body">
+          <h4>IQAC — Internal Quality Assurance Cell</h4>
+          <p>Oversees all quality benchmarking, NAAC/NBA documentation, feedback mechanisms, and annual quality improvement plans.</p>
+        </div>
+      </div>
+      <div class="comm-card">
+        <div class="comm-icon">💡</div>
+        <div class="comm-body">
+          <h4>IIC — Institution Innovation Council</h4>
+          <p>Promotes start-up culture, organises hackathons, innovation challenges, and facilitates patent and IPR support for students and faculty.</p>
+        </div>
+      </div>
+      <div class="comm-card">
+        <div class="comm-icon">🌿</div>
+        <div class="comm-body">
+          <h4>Green Campus Committee</h4>
+          <p>Plans and monitors sustainability initiatives including energy conservation, waste management, plantation drives, and environment policy compliance.</p>
+        </div>
+      </div>
+      <div class="comm-card">
+        <div class="comm-icon">🤲</div>
+        <div class="comm-body">
+          <h4>NSS & Social Outreach Cell</h4>
+          <p>Coordinates NSS activities, community service projects, rural education camps, health awareness drives, and disaster relief volunteer mobilisation.</p>
+        </div>
+      </div>
+      <div class="comm-card">
+        <div class="comm-icon">🎯</div>
+        <div class="comm-body">
+          <h4>Placement & Career Services Cell</h4>
+          <p>Manages corporate relationships, organises pre-placement training, mock interviews, and facilitates on-campus and off-campus recruitment drives.</p>
+        </div>
+      </div>
+      <div class="comm-card">
+        <div class="comm-icon">🔬</div>
+        <div class="comm-body">
+          <h4>Research & Development Cell</h4>
+          <p>Encourages faculty research, supports journal publications, manages research grants, and fosters collaborative projects with external institutions and industries.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+</body>
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="foot-logo"><span class="flt">EIEM</span><span class="fls">Est. 2001</span></div>
+      <p>Elitte Institute of Engineering &amp; Management is committed to producing world-class engineers and managers who lead innovation and drive growth across industries.</p>
+      <div class="socials">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Twitter">&#x1D54F;</a>
+        <a href="#" title="Instagram">&#x1F4F8;</a>
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="YouTube">&#x25B6;</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Quick Links</h4>
+      <a href="#">Home</a><a href="#">About EIEM</a><a href="#">Admissions</a>
+      <a href="#">Academics</a><a href="#">Departments</a><a href="#">Events</a>
+      <a href="#">Notice Board</a>
+    </div>
+    <div class="foot-col">
+      <h4>Resources</h4>
+      <a href="#">E-Prospectus 2026&ndash;27</a><a href="#">NDLI Library</a>
+      <a href="#">Online Fee Payment</a><a href="#">Grievance Cell</a>
+      <a href="#">Student Login</a><a href="#">Result Portal</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact Us</h4>
+      <div class="fci"><span class="fci-i">&#x1F4CD;</span><span>PO: Karnamadhabpur, PS: Ghola, Sodepur, Kolkata &ndash; 700113</span></div>
+      <div class="fci"><span class="fci-i">&#x1F4DE;</span><span>+91 9163316560 / +91 9831500840</span></div>
+      <div class="fci"><span class="fci-i">&#x2709;</span><span>info@elitte.edu.in</span></div>
+      <div class="fci"><span class="fci-i">&#x1F550;</span><span>Mon&ndash;Sat: 9:00 AM &ndash; 5:00 PM</span></div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Elitte Institute of Engineering &amp; Management. All rights reserved.</span>
+    <span>Approved by AICTE &middot; Affiliated to WBSCT &amp; VE &amp; SD</span>
+  </div>
+</footer>
+
+</html>

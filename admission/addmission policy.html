@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Admission Policy – EIEM</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:wght@700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+ --navy:#071a3e;--blue:#1649cc;--sky:#3b82f6;
+  --accent:#f97316;--gold:#f59e0b;--light:#e8f0fe;
+  --gray:#64748b;--text:#0f172a;--white:#fff;
+  --grad-nav:linear-gradient(90deg,#071a3e 0%,#1649cc 60%,#2563eb 100%);
+  --grad-btn:linear-gradient(135deg,#f97316,#f59e0b);
+  --grad-hero:linear-gradient(135deg,rgba(7,26,62,.93) 0%,rgba(22,73,204,.78) 55%,rgba(59,130,246,.55) 100%);
+  --grad-foot:linear-gradient(160deg,#040d1f 0%,#071a3e 60%,#0d2760 100%);
+  --shadow-xl:0 24px 64px rgba(7,26,62,.22);
+  --shadow-lg:0 12px 36px rgba(7,26,62,.14);
+  --shadow-sm:0 4px 16px rgba(7,26,62,.08);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#f0f5ff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+
+
+
+/* NAVBAR */
+.navbar{background:var(--grad-nav);position:sticky;top:0;z-index:1000;box-shadow:0 4px 24px rgba(7,26,62,.32)}
+.nav-inner{display:flex;align-items:center;padding:0 1.5rem;max-width:100%;position:relative}
+.nav-menu{display:flex;align-items:center;list-style:none;flex:1;flex-wrap:nowrap}
+.nav-menu>li{position:relative;flex-shrink:0}
+.nav-menu>li>a{display:inline-flex;align-items:center;gap:.22rem;color:rgba(255,255,255,.88);font-size:.71rem;font-weight:500;padding:.84rem .72rem;letter-spacing:.02em;white-space:nowrap;transition:color .18s,background .18s}
+.nav-menu>li>a:hover,.nav-menu>li>a.active{color:#fff;background:rgba(255,255,255,.13);border-radius:5px}
+.nav-menu>li>a.active{color:var(--gold);font-weight:700}
+.caret{font-size:.58rem;opacity:.72;transition:transform .22s;display:inline-block}
+.nav-menu>li:hover>a .caret{transform:rotate(180deg)}
+.drop1{display:none;position:absolute;top:100%;left:0;background:#fff;min-width:222px;border-top:3px solid var(--blue);border-radius:0 0 12px 12px;box-shadow:var(--shadow-xl);z-index:2000;animation:fadeDown .2s ease}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.nav-menu>li:hover>.drop1{display:block}
+.drop1>li{position:relative}
+.drop1>li>a{display:flex;align-items:center;justify-content:space-between;padding:.62rem 1.15rem;font-size:.72rem;color:var(--navy);font-weight:500;border-bottom:1px solid #eef2ff;transition:background .15s,padding-left .15s,color .15s}
+.drop1>li:last-child>a{border-bottom:none}
+.drop1>li>a:hover{background:var(--light);padding-left:1.5rem;color:var(--blue)}
+.nav-notice>a{color:var(--gold)!important;font-weight:700!important}
+.nav-apply>a{background:var(--grad-btn)!important;color:#fff!important;font-weight:700!important;border-radius:6px;margin:.28rem .3rem;padding:.5rem .9rem!important;box-shadow:0 3px 12px rgba(249,115,22,.32)}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:.4rem;margin-left:auto}
+.hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
+
+/* ANNOUNCE BAR */
+.announce-bar{background:linear-gradient(90deg,#b91c1c,#dc2626,#ea580c,#f97316,#ea580c,#dc2626,#b91c1c);background-size:300% 100%;animation:gradShift 5s ease infinite;padding:.38rem 0;overflow:hidden;position:sticky;top:44px;z-index:900}
+@keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.announce-bar marquee{font-size:.76rem;font-weight:700;color:#fff;letter-spacing:.05em;text-transform:uppercase}
+.announce-bar marquee span{margin:0 2.5rem}
+
+/* PAGE HERO */
+.page-hero{
+  background:var(--grad-nav);
+  padding:4rem 2rem;
+  position:relative;
+  overflow:hidden;
+}
+.page-hero::before{
+  content:'';position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1400&q=80') center/cover;
+  opacity:.13;
+}
+.page-hero-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1}
+.page-hero-label{
+  display:inline-block;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);
+  color:var(--gold);font-size:.64rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:.28rem .9rem;border-radius:999px;backdrop-filter:blur(8px);margin-bottom:1rem;
+}
+.page-hero h2{
+  font-family:'Fraunces',serif;font-size:clamp(1.8rem,4vw,3rem);
+  color:#fff;font-weight:900;line-height:1.2;margin-bottom:.6rem;
+}
+.page-hero h2 span{color:var(--gold)}
+.page-hero p{color:rgba(255,255,255,.78);font-size:.92rem;max-width:580px;line-height:1.72}
+.breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.68rem;color:rgba(255,255,255,.5);margin-top:1.2rem;flex-wrap:wrap}
+.breadcrumb a{color:rgba(255,255,255,.6);transition:color .2s}
+.breadcrumb a:hover{color:var(--gold)}
+.breadcrumb span{color:rgba(255,255,255,.3)}
+
+/* MAIN CONTENT */
+.page-body{max-width:1100px;margin:0 auto;padding:4rem 2rem;display:grid;grid-template-columns:1fr 320px;gap:3rem;align-items:start}
+
+/* POLICY CARDS */
+.policy-section{margin-bottom:2.5rem}
+.section-label{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.63rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--blue);background:var(--light);padding:.26rem .78rem;border-radius:999px;margin-bottom:1.2rem;
+}
+
+.policy-block{
+  background:#fff;border-radius:20px;box-shadow:var(--shadow-sm);
+  border:1px solid rgba(22,73,204,.07);
+  overflow:hidden;margin-bottom:1.6rem;
+  transition:transform .28s,box-shadow .28s;
+  cursor:default;
+  position:relative;
+}
+.policy-block::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--grad-nav);transform:scaleX(0);transform-origin:left;
+  transition:transform .3s;
+}
+.policy-block:hover{transform:translateY(-6px);box-shadow:var(--shadow-xl)}
+.policy-block:hover::before{transform:scaleX(1)}
+
+.pb-header{
+  background:linear-gradient(90deg,var(--navy),var(--blue));
+  padding:1.3rem 1.8rem;
+  display:flex;align-items:center;gap:1rem;
+}
+.pb-icon{
+  width:48px;height:48px;border-radius:12px;
+  background:rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;flex-shrink:0;
+}
+.pb-header h3{color:#fff;font-family:'Fraunces',serif;font-size:1.08rem;font-weight:800;line-height:1.25}
+.pb-header p{color:rgba(255,255,255,.65);font-size:.71rem;margin-top:.15rem}
+.pb-body{padding:1.8rem}
+
+/* ELIGIBILITY ROW */
+.elig-row{
+  display:flex;align-items:flex-start;gap:1rem;
+  padding:1.1rem 1.2rem;border-radius:12px;
+  background:#f8faff;border:1px solid #dde5f5;
+  margin-bottom:1rem;
+  transition:border-color .2s,background .2s,transform .2s;
+  cursor:default;
+}
+.elig-row:hover{border-color:var(--blue);background:var(--light);transform:translateX(5px)}
+.elig-row:last-child{margin-bottom:0}
+.er-badge{
+  flex-shrink:0;width:44px;height:44px;border-radius:10px;
+  background:var(--grad-nav);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:800;font-size:.78rem;
+  box-shadow:0 4px 14px rgba(22,73,204,.28);
+}
+.er-content h4{font-size:.82rem;font-weight:700;color:var(--navy);margin-bottom:.35rem}
+.er-content p{font-size:.76rem;color:var(--gray);line-height:1.65}
+.er-content ul{margin:.35rem 0 0 1rem}
+.er-content ul li{font-size:.75rem;color:var(--gray);line-height:1.6;margin-bottom:.2rem;list-style:disc}
+
+/* OR divider */
+.or-divider{display:flex;align-items:center;gap:.8rem;margin:.6rem 0;padding:0 .5rem}
+.or-divider::before,.or-divider::after{content:'';flex:1;height:1px;background:#dde5f5}
+.or-divider span{font-size:.62rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;white-space:nowrap;background:var(--light);padding:.18rem .6rem;border-radius:999px;border:1px solid rgba(249,115,22,.25)}
+
+/* NOTES */
+.notes-list{list-style:none;padding:0}
+.notes-list li{
+  display:flex;align-items:flex-start;gap:.75rem;
+  padding:.85rem 1rem;border-radius:10px;
+  border-left:3px solid var(--accent);
+  background:#fff9f5;margin-bottom:.75rem;
+  font-size:.78rem;color:var(--navy);line-height:1.65;
+  transition:border-color .2s,background .2s,transform .2s;
+}
+.notes-list li:hover{border-color:var(--blue);background:var(--light);transform:translateX(5px)}
+.notes-list li::before{content:'★';color:var(--accent);font-size:.8rem;flex-shrink:0;margin-top:.1rem}
+
+footer{background:var(--grad-foot);color:rgba(255,255,255,.72);padding:4.5rem 2rem 2rem}
+.foot-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:3rem;margin-bottom:3rem}
+.foot-logo{width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:.9rem}
+.foot-logo .flt{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:900;color:#fff;line-height:1}
+.foot-logo .fls{font-size:.37rem;color:rgba(255,255,255,.52);letter-spacing:.08em}
+.foot-brand p{font-size:.76rem;line-height:1.76;margin-bottom:1.15rem}
+.socials{display:flex;gap:.5rem}
+.socials a{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:.8rem;transition:background .2s,color .2s,transform .2s}
+.socials a:hover{background:var(--blue);color:#fff;transform:translateY(-3px)}
+.foot-col h4{color:#fff;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.15rem;padding-bottom:.55rem;position:relative}
+.foot-col h4::after{content:'';position:absolute;bottom:0;left:0;width:28px;height:2px;background:var(--grad-btn)}
+.foot-col a{display:block;color:rgba(255,255,255,.58);font-size:.75rem;margin-bottom:.5rem;transition:color .18s,padding-left .18s}
+.foot-col a:hover{color:var(--gold);padding-left:5px}
+.fci{display:flex;align-items:flex-start;gap:.55rem;margin-bottom:.74rem;font-size:.75rem}
+.fci-i{font-size:.88rem;margin-top:.1rem;flex-shrink:0}
+.foot-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.7rem;color:rgba(255,255,255,.35)}
+
+
+/* SIDEBAR */
+.sidebar{}
+.sidebar-card{
+  background:#fff;border-radius:18px;box-shadow:var(--shadow-sm);
+  border:1px solid rgba(22,73,204,.07);
+  padding:1.6rem;margin-bottom:1.4rem;
+  transition:transform .28s,box-shadow .28s;
+}
+.sidebar-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.sidebar-card h4{
+  font-family:'Fraunces',serif;font-size:.92rem;font-weight:800;
+  color:var(--navy);margin-bottom:1rem;padding-bottom:.6rem;
+  border-bottom:2px solid var(--light);display:flex;align-items:center;gap:.5rem;
+}
+.sc-link{
+  display:flex;align-items:center;gap:.7rem;
+  padding:.62rem .8rem;border-radius:9px;
+  font-size:.75rem;font-weight:500;color:var(--navy);
+  border:1px solid #dde5f5;background:#f8faff;margin-bottom:.55rem;
+  transition:all .2s;cursor:pointer;
+}
+.sc-link:hover{background:var(--light);border-color:var(--blue);color:var(--blue);transform:translateX(5px)}
+.sc-link .sl-icon{font-size:1rem;flex-shrink:0}
+.sc-link .sl-arrow{margin-left:auto;font-size:.7rem;opacity:.5}
+.sc-link:hover .sl-arrow{opacity:1}
+
+.info-chip{
+  display:flex;align-items:center;gap:.7rem;
+  padding:.7rem .8rem;border-radius:9px;
+  background:var(--light);margin-bottom:.55rem;
+  font-size:.75rem;color:var(--navy);
+  transition:transform .2s;
+}
+.info-chip:hover{transform:translateX(3px)}
+.info-chip .ic-dot{width:8px;height:8px;border-radius:50%;background:var(--blue);flex-shrink:0}
+
+.apply-btn{
+  display:block;width:100%;
+  background:var(--grad-btn);color:#fff;
+  border:none;border-radius:12px;padding:1rem;
+  font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:700;
+  letter-spacing:.04em;cursor:pointer;text-align:center;
+  box-shadow:0 6px 24px rgba(249,115,22,.35);
+  transition:transform .2s,box-shadow .2s;
+}
+.apply-btn:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(249,115,22,.5)}
+
+
+@media(max-width:900px){
+  .page-body{grid-template-columns:1fr}
+  .sidebar{order:-1}
+  .hamburger{display:flex}
+  .nav-menu{display:none;flex-direction:column;align-items:flex-start;position:absolute;top:100%;left:0;right:0;background:var(--navy);padding:1rem 0;box-shadow:0 8px 24px rgba(7,26,62,.4);max-height:72vh;overflow-y:auto;z-index:1000;width:100%}
+  .nav-menu.open{display:flex}
+  .nav-menu>li{width:100%}
+  .nav-menu>li>a{width:100%;padding:.75rem 1.5rem;font-size:.8rem}
+  .nav-menu>li>.drop1{position:static;display:none;box-shadow:none;border-radius:0;border-top:none;border-left:3px solid var(--blue);margin-left:1.5rem;width:calc(100% - 1.5rem);animation:none}
+  .nav-menu>li.mob-open>.drop1{display:block}
+}
+@media(max-width:700px){
+  .page-body{padding:2rem 1rem}
+}
+</style>
+</head>
+<body>  
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-hero-label">Admission</div>
+    <h2>Admission <span>Policy</span></h2>
+    <p>Everything you need to know about eligibility, reservations, and how to join our diploma engineering programmes for the academic year 2026–27.</p>
+    <div class="breadcrumb">
+      <a href="#">Home</a><span>›</span>
+      <a href="#">Admission</a><span>›</span>
+      <span style="color:var(--gold)">Policy</span>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE BODY -->
+<div class="page-body">
+
+  <!-- MAIN CONTENT -->
+  <main>
+
+    <!-- POLYTECHNIC SECTION -->
+    <div class="policy-section">
+      <div class="section-label">🎓 Polytechnic Diploma Programmes</div>
+
+      <!-- 1ST YEAR -->
+      <div class="policy-block">
+        <div class="pb-header">
+          <div class="pb-icon">1️⃣</div>
+          <div>
+            <h3>1st Year Admission Eligibility</h3>
+            <p>Direct entry into the first semester of the Diploma Engineering programme</p>
+          </div>
+        </div>
+        <div class="pb-body">
+          <div class="elig-row">
+            <div class="er-badge">10th</div>
+            <div class="er-content">
+              <h4>Madhyamik or Equivalent Board Examination</h4>
+              <p>Candidates must have passed the Madhyamik (Class 10) or an equivalent recognized board examination with the following compulsory subjects:</p>
+              <ul>
+                <li>Science / Physical Science</li>
+                <li>Mathematics</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2ND YEAR -->
+      <div class="policy-block">
+        <div class="pb-header">
+          <div class="pb-icon">2️⃣</div>
+          <div>
+            <h3>2nd Year Lateral Entry Eligibility</h3>
+            <p>Direct entry into the third semester of the Diploma Engineering programme</p>
+          </div>
+        </div>
+        <div class="pb-body">
+
+          <div class="elig-row">
+            <div class="er-badge">10+2</div>
+            <div class="er-content">
+              <h4>Higher Secondary or Equivalent Examination</h4>
+              <p>Candidates who have passed the Higher Secondary (10+2) or equivalent examination with any of the following subjects:</p>
+              <ul>
+                <li>Physics, Mathematics, Chemistry</li>
+                <li>Biology, Agriculture, Computer Science</li>
+                <li>Electronics, Information Technology, Biotechnology</li>
+                <li>Technical Vocational Subject, Engineering Graphics</li>
+                <li>Business Studies, Entrepreneurship</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="or-divider"><span>OR</span></div>
+
+          <div class="elig-row">
+            <div class="er-badge">ITI</div>
+            <div class="er-content">
+              <h4>ITI (Industrial Training Institute) Certificate</h4>
+              <p>Candidates who have successfully completed a 2-year ITI course approved by NCVT (National Council for Vocational Training) after passing Class 10 or its equivalent examination.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- IMPORTANT NOTES -->
+    <div class="policy-section">
+      <div class="section-label">📌 Important Notes &amp; Reservations</div>
+      <ul class="notes-list">
+        <li>There is <strong>no upper age limit</strong> for the admission of Diploma in Engineering &amp; Technology at EIEM.</li>
+        <li>There will be a reservation of <strong>20% seats for female candidates</strong> uniformly in all categories as per the directives of WBSCTVE &amp; SD.</li>
+        <li>There will be <strong>10% reservation for the Economically Weaker Sections (EWS)</strong> as per the directives of WBSCTVE &amp; SD.</li>
+        <li>All reservations and admissions are subject to the guidelines and norms laid down by <strong>WBSCT &amp; VE &amp; SD</strong>, Government of West Bengal.</li>
+        <li>Admission is subject to merit, document verification, and seat availability in the selected programme.</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="sidebar-card">
+      <h4>🗂️ Admission Pages</h4>
+      <div class="sc-link"><span class="sl-icon">📋</span> Admission Policy <span class="sl-arrow">›</span></div>
+      <div class="sc-link"><span class="sl-icon">💰</span> Fee Structure <span class="sl-arrow">›</span></div>
+      <div class="sc-link"><span class="sl-icon">📖</span> E-Prospectus <span class="sl-arrow">›</span></div>
+    </div>
+
+    <div class="sidebar-card">
+      <h4>📅 Key Dates 2026–27</h4>
+      <div class="info-chip"><div class="ic-dot"></div> Application Opens: June 2026</div>
+      <div class="info-chip"><div class="ic-dot"></div> Last Date: July 2026</div>
+      <div class="info-chip"><div class="ic-dot"></div> Merit List: August 2026</div>
+      <div class="info-chip"><div class="ic-dot"></div> Admission Closes: August 2026</div>
+    </div>
+
+    <div class="sidebar-card">
+      <h4>📞 Admission Help</h4>
+      <div class="info-chip"><div class="ic-dot" style="background:var(--accent)"></div> +91 9163316560</div>
+      <div class="info-chip"><div class="ic-dot" style="background:var(--accent)"></div> +91 9831500840</div>
+      <div class="info-chip"><div class="ic-dot" style="background:var(--accent)"></div> info@eiem.ac.in</div>
+    </div>
+
+    <button class="apply-btn">🎓 Apply for Admission</button>
+
+  </aside>
+
+</div><!-- end .page-body -->
+<script>
+(function(){
+  const btn=document.getElementById('ham');
+  const menu=document.getElementById('navMenu');
+  btn.onclick=()=>{btn.classList.toggle('open');menu.classList.toggle('open')};
+  if(window.innerWidth<=900){
+    menu.querySelectorAll('li>a').forEach(a=>{
+      if(a.nextElementSibling){
+        a.addEventListener('click',e=>{e.preventDefault();a.parentElement.classList.toggle('mob-open')});
+      }
+    });
+  }
+})();
+</script>
+</body>
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="foot-logo"><span class="flt">EIEM</span><span class="fls">Est. 2001</span></div>
+      <p>Elitte Institute of Engineering &amp; Management is committed to producing world-class engineers and managers who lead innovation and drive growth across industries.</p>
+      <div class="socials">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Twitter">&#x1D54F;</a>
+        <a href="#" title="Instagram">&#x1F4F8;</a>
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="YouTube">&#x25B6;</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Quick Links</h4>
+      <a href="#">Home</a><a href="#">About EIEM</a><a href="#">Admissions</a>
+      <a href="#">Academics</a><a href="#">Departments</a><a href="#">Events</a>
+      <a href="#">Notice Board</a>
+    </div>
+    <div class="foot-col">
+      <h4>Resources</h4>
+      <a href="#">E-Prospectus 2026&ndash;27</a><a href="#">NDLI Library</a>
+      <a href="#">Online Fee Payment</a><a href="#">Grievance Cell</a>
+      <a href="#">Student Login</a><a href="#">Result Portal</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact Us</h4>
+      <div class="fci"><span class="fci-i">&#x1F4CD;</span><span>PO: Karnamadhabpur, PS: Ghola, Sodepur, Kolkata &ndash; 700113</span></div>
+      <div class="fci"><span class="fci-i">&#x1F4DE;</span><span>+91 9163316560 / +91 9831500840</span></div>
+      <div class="fci"><span class="fci-i">&#x2709;</span><span>info@elitte.edu.in</span></div>
+      <div class="fci"><span class="fci-i">&#x1F550;</span><span>Mon&ndash;Sat: 9:00 AM &ndash; 5:00 PM</span></div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Elitte Institute of Engineering &amp; Management. All rights reserved.</span>
+    <span>Approved by AICTE &middot; Affiliated to WBSCT &amp; VE &amp; SD</span>
+  </div>
+</footer>
+
+</html>

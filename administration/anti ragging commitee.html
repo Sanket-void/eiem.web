@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Anti-Ragging Committee – EIEM</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:wght@700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#071a3e;--blue:#1649cc;--sky:#3b82f6;
+  --accent:#f97316;--gold:#f59e0b;--light:#e8f0fe;
+  --gray:#64748b;--text:#0f172a;--white:#fff;
+  --grad-nav:linear-gradient(90deg,#071a3e 0%,#1649cc 60%,#2563eb 100%);
+  --grad-btn:linear-gradient(135deg,#f97316,#f59e0b);
+  --grad-hero:linear-gradient(135deg,rgba(7,26,62,.93) 0%,rgba(22,73,204,.78) 55%,rgba(59,130,246,.55) 100%);
+  --grad-foot:linear-gradient(160deg,#040d1f 0%,#071a3e 60%,#0d2760 100%);
+  --shadow-xl:0 24px 64px rgba(7,26,62,.22);
+  --shadow-lg:0 12px 36px rgba(7,26,62,.14);
+  --shadow-sm:0 4px 16px rgba(7,26,62,.08);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#f0f5ff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+.page-hero{background:var(--grad-nav);padding:3.5rem 2rem 3rem;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1400&q=80') center/cover no-repeat;opacity:.1}
+.page-hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.breadcrumb{display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.breadcrumb span{font-size:.7rem;color:rgba(255,255,255,.6)}
+.breadcrumb .sep{color:rgba(255,255,255,.3)}
+.breadcrumb .cur{color:var(--gold);font-weight:600}
+.page-hero h1{font-family:'Fraunces',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);color:#fff;font-weight:900;line-height:1.2;margin-bottom:.5rem}
+.page-hero p{color:rgba(255,255,255,.75);font-size:.9rem;max-width:620px}
+.hero-accent-bar{width:60px;height:4px;background:var(--grad-btn);border-radius:2px;margin:1rem 0}
+
+.main-content{max-width:1200px;margin:0 auto;padding:3.5rem 2rem}
+
+.section-badge{display:inline-block;background:var(--light);color:var(--blue);font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.26rem .78rem;border-radius:999px;margin-bottom:.7rem}
+.section-title{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:800;color:var(--navy);margin-bottom:.4rem}
+.section-sub{color:var(--gray);font-size:.82rem;margin-bottom:1.8rem;line-height:1.6}
+
+.intro-block{background:#fff;border-radius:20px;padding:2rem 2.2rem;box-shadow:var(--shadow-sm);border-left:5px solid var(--blue);margin-bottom:2.5rem;transition:box-shadow .3s, transform .3s}
+.intro-block:hover{transform:translateY(-4px);box-shadow:0 0 0 2px var(--blue),0 0 28px 4px rgba(22,73,204,.12),var(--shadow-lg)}
+.intro-block p{font-size:.88rem;line-height:1.8;color:#334155}
+
+/* CHAIRMAN HIGHLIGHT */
+.chairman-block{
+  display:flex;align-items:center;gap:2rem;flex-wrap:wrap;
+  background:var(--grad-nav);border-radius:20px;padding:2rem;
+  margin-bottom:2.5rem;
+  transition:box-shadow .3s, transform .3s;
+}
+.chairman-block:hover{transform:translateY(-4px);box-shadow:0 0 0 3px rgba(255,255,255,.3),0 0 40px 8px rgba(22,73,204,.25)}
+.ch-avatar{
+  width:90px;height:90px;border-radius:50%;flex-shrink:0;
+  background:rgba(255,255,255,.15);border:3px solid rgba(255,255,255,.4);
+  display:flex;align-items:center;justify-content:center;font-size:2.5rem;
+}
+.ch-info h3{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:900;color:#fff;margin-bottom:.2rem}
+.ch-info .ch-role{font-size:.72rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.4rem}
+.ch-info p{font-size:.78rem;color:rgba(255,255,255,.75);line-height:1.6}
+.ch-contact{display:flex;gap:1rem;margin-top:.8rem;flex-wrap:wrap}
+.ch-contact a{font-size:.72rem;font-weight:700;color:#fff;background:rgba(255,255,255,.15);padding:.3rem .8rem;border-radius:7px;border:1px solid rgba(255,255,255,.25);transition:background .2s}
+.ch-contact a:hover{background:rgba(255,255,255,.25)}
+
+/* MEMBER GRID */
+.member-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;margin-bottom:2.5rem}
+.member-card{
+  background:#fff;border-radius:18px;padding:1.6rem;
+  border:1.5px solid #dde5f5;
+  transition:all .28s;cursor:default;
+  position:relative;overflow:hidden;
+}
+.member-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:var(--grad-nav);transform:scaleX(0);transform-origin:left;transition:transform .3s;
+}
+.member-card:hover{transform:translateY(-6px);border-color:var(--blue);box-shadow:0 0 0 2px var(--blue),0 0 30px 5px rgba(22,73,204,.16),var(--shadow-lg)}
+.member-card:hover::after{transform:scaleX(1)}
+.mc-top{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+.mc-avatar{
+  width:52px;height:52px;border-radius:12px;flex-shrink:0;
+  background:var(--grad-nav);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:1.3rem;
+}
+.mc-name{font-size:.87rem;font-weight:700;color:var(--navy)}
+.mc-role{font-size:.68rem;font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:.05em;margin-top:.1rem}
+.mc-dept{font-size:.72rem;color:var(--gray);margin-bottom:.5rem}
+.mc-tags{display:flex;flex-wrap:wrap;gap:.35rem}
+.mc-tag{font-size:.6rem;font-weight:600;padding:.15rem .55rem;border-radius:5px;background:var(--light);color:var(--blue)}
+.mc-tag.ext{background:#f0fdf4;color:#16a34a}
+.mc-tag.stu{background:#fff7ed;color:#c2410c}
+
+/* MANDATE LIST */
+.mandate-list{display:flex;flex-direction:column;gap:.65rem;margin-bottom:2.5rem}
+.mandate-item{display:flex;align-items:flex-start;gap:.9rem;background:#fff;border-radius:12px;padding:1rem 1.2rem;border:1.5px solid #eef2ff;transition:all .25s;cursor:default}
+.mandate-item:hover{border-color:var(--blue);background:var(--light);transform:translateX(8px);box-shadow:0 0 0 1.5px var(--blue),0 0 16px 2px rgba(22,73,204,.1)}
+.mandate-dot{width:10px;height:10px;border-radius:50%;background:var(--grad-nav);flex-shrink:0;margin-top:.3rem;transition:transform .2s}
+.mandate-item:hover .mandate-dot{transform:scale(1.5)}
+.mandate-text{font-size:.82rem;font-weight:500;color:var(--navy);line-height:1.6}
+
+footer{background:var(--grad-foot);color:rgba(255,255,255,.72);padding:4.5rem 2rem 2rem}
+.foot-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:3rem;margin-bottom:3rem}
+.foot-logo{width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:.9rem}
+.foot-logo .flt{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:900;color:#fff;line-height:1}
+.foot-logo .fls{font-size:.37rem;color:rgba(255,255,255,.52);letter-spacing:.08em}
+.foot-brand p{font-size:.76rem;line-height:1.76;margin-bottom:1.15rem}
+.socials{display:flex;gap:.5rem}
+.socials a{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:.8rem;transition:background .2s,color .2s,transform .2s}
+.socials a:hover{background:var(--blue);color:#fff;transform:translateY(-3px)}
+.foot-col h4{color:#fff;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.15rem;padding-bottom:.55rem;position:relative}
+.foot-col h4::after{content:'';position:absolute;bottom:0;left:0;width:28px;height:2px;background:var(--grad-btn)}
+.foot-col a{display:block;color:rgba(255,255,255,.58);font-size:.75rem;margin-bottom:.5rem;transition:color .18s,padding-left .18s}
+.foot-col a:hover{color:var(--gold);padding-left:5px}
+.fci{display:flex;align-items:flex-start;gap:.55rem;margin-bottom:.74rem;font-size:.75rem}
+.fci-i{font-size:.88rem;margin-top:.1rem;flex-shrink:0}
+.foot-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.7rem;color:rgba(255,255,255,.35)}
+
+
+/* CONTACT BLOCK */
+.contact-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-bottom:2rem}
+.contact-card{background:#fff;border-radius:16px;padding:1.5rem;border:1.5px solid #dde5f5;text-align:center;transition:all .28s;cursor:default}
+.contact-card:hover{transform:translateY(-5px);border-color:var(--blue);box-shadow:0 0 0 2px var(--blue),0 0 24px 4px rgba(22,73,204,.14),var(--shadow-sm)}
+.contact-card .cc-icon{font-size:1.8rem;margin-bottom:.5rem}
+.contact-card h4{font-size:.82rem;font-weight:700;color:var(--navy);margin-bottom:.25rem}
+.contact-card p{font-size:.78rem;font-weight:600;color:var(--blue)}
+
+@media(max-width:700px){.main-content{padding:2rem 1rem}.chairman-block{flex-direction:column}.member-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <span>Home</span><span class="sep">›</span>
+      <span>Administration</span><span class="sep">›</span>
+      <span class="cur">Anti-Ragging Committee</span>
+    </div>
+    <h1>Anti-Ragging Committee</h1>
+    <div class="hero-accent-bar"></div>
+    <p>A dedicated body committed to maintaining a ragging-free, safe and respectful campus for all students at EIEM</p>
+  </div>
+</div>
+
+<div class="main-content">
+
+  <div class="intro-block">
+    <p>The Anti-Ragging Committee at EIEM is constituted as per the UGC Regulations on Curbing the Menace of Ragging in Higher Educational Institutions, 2009 and AICTE guidelines. The committee is responsible for investigating complaints, recommending appropriate action and conducting awareness campaigns to ensure every student feels safe and respected on campus.</p>
+  </div>
+
+  <!-- Chairman -->
+  <span class="section-badge">Committee Chair</span>
+  <div style="margin-bottom:1rem"></div>
+  <div class="chairman-block">
+    <div class="ch-avatar">👨‍💼</div>
+    <div class="ch-info">
+      <h3>Prof. Mr. Chandan Chowdhury</h3>
+      <div class="ch-role">Chairman — Anti-Ragging Committee</div>
+      <p>As Principal of EIEM, Mr. Chandan Chowdhury chairs the Anti-Ragging Committee and is personally accountable for implementing zero-tolerance measures across all campus zones.</p>
+      <div class="ch-contact">
+        <a href="#">✉ principal@eiem.ac.in</a>
+        <a href="#">📞 +91 9163316560</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Committee Members -->
+  <span class="section-badge">Committee Members</span>
+  <div class="section-title">Committee Composition</div>
+  <p class="section-sub">The committee includes faculty representatives, administrative officers, a civil society member, a student representative and a police liaison as mandated by UGC.</p>
+  <div class="member-grid">
+    <div class="member-card">
+      <div class="mc-top"><div class="mc-avatar">👩‍🏫</div><div><div class="mc-name">Mr. Chandan Chowdhury</div><div class="mc-role">Principal</div></div></div>
+      <div class="mc-dept"> </div>
+      <div class="mc-tags"><span class="mc-tag"></span><span class="mc-tag"></span></div>
+    </div>
+    <div class="member-card">
+      <div class="mc-top"><div class="mc-avatar">👨‍🏫</div><div><div class="mc-name">Mr. Sankar Ray</div><div class="mc-role">Manager Co-ordination</div></div></div>
+      <div class="mc-dept"></div>
+      <div class="mc-tags"><span class="mc-tag"></span></div>
+    </div>
+    <div class="member-card">
+      <div class="mc-top"><div class="mc-avatar">👩‍💼</div><div><div class="mc-name">Mr. Biswajit Dutta</div><div class="mc-role">Manager Logistic & Maintenance</div></div></div>
+      <div class="mc-dept"></div>
+      <div class="mc-tags"><span class="mc-tag"></span></div>
+    </div>
+    <div class="member-card">
+      <div class="mc-top"><div class="mc-avatar">🏛️</div><div><div class="mc-name">Ms. Banani Ghosh</div><div class="mc-role">Assistant Professor</div></div></div>
+      <div class="mc-dept"></div>
+      <div class="mc-tags"><span class="mc-tag ext"></span><span class="mc-tag ext"></span></div>
+    </div>
+    <div class="member-card">
+      <div class="mc-top"><div class="mc-avatar">🎓</div><div><div class="mc-name">Ms. Srabanti Chakraborty</div><div class="mc-role">Assistant Professor</div></div></div>
+      <div class="mc-dept"></div>
+      <div class="mc-tags"><span class="mc-tag stu"></span><span class="mc-tag stu"></span></div>
+    </div>
+    <div class="member-card">
+      <div class="mc-top"><div class="mc-avatar">👮</div><div><div class="mc-name">Ms. Anupama Ganguly</div><div class="mc-role">Assistant Professor</div></div></div>
+      <div class="mc-dept"></div>
+      <div class="mc-tags"><span class="mc-tag ext"></span><span class="mc-tag ext"></span></div>
+    </div>
+    <div class="member-card">
+      <div class="mc-top"><div class="mc-avatar">🧑‍👩‍👦</div><div><div class="mc-name">Mr. Rajdeep Das</div><div class="mc-role">Assistant Professor</div></div></div>
+      <div class="mc-dept"></div>
+      <div class="mc-tags"><span class="mc-tag stu"></span><span class="mc-tag ext"></span></div>
+    </div>
+    <div class="member-card">
+      <div class="mc-top"><div class="mc-avatar">👨‍⚕️</div><div><div class="mc-name">Mr. Suvojit Shome</div><div class="mc-role">Assistant Professor</div></div></div>
+      <div class="mc-dept"></div>
+      <div class="mc-tags"><span class="mc-tag"></span><span class="mc-tag"></span></div>
+    </div>
+  </div>
+
+  <!-- Mandate -->
+  <span class="section-badge">Committee Mandate</span>
+  <div class="section-title">Functions &amp; Responsibilities</div>
+  <div class="mandate-list">
+    <div class="mandate-item"><div class="mandate-dot"></div><div class="mandate-text">Receive and investigate all complaints of ragging received through any channel — oral, written or online</div></div>
+    <div class="mandate-item"><div class="mandate-dot"></div><div class="mandate-text">Recommend appropriate punishment after due inquiry to the Principal and Governing Body</div></div>
+    <div class="mandate-item"><div class="mandate-dot"></div><div class="mandate-text">Conduct awareness campaigns, orientation programmes and interactive sessions with first-year students</div></div>
+    <div class="mandate-item"><div class="mandate-dot"></div><div class="mandate-text">Ensure availability and visibility of anti-ragging notices, helpline numbers and complaint mechanisms across campus</div></div>
+    <div class="mandate-item"><div class="mandate-dot"></div><div class="mandate-text">Liaise with police and civil authorities in cases where criminal action is warranted</div></div>
+    <div class="mandate-item"><div class="mandate-dot"></div><div class="mandate-text">Submit annual reports to UGC, AICTE and other regulatory bodies as required</div></div>
+    <div class="mandate-item"><div class="mandate-dot"></div><div class="mandate-text">Monitor student hostels and common areas through surprise visits during sensitive periods such as fresher orientation week</div></div>
+  </div>
+
+  <!-- Contact -->
+  <span class="section-badge">Contact</span>
+  <div class="section-title">Reach the Committee</div>
+  <div class="contact-row">
+    <div class="contact-card"><div class="cc-icon">📞</div><h4>UGC Helpline</h4><p>1800-180-5522</p></div>
+    <div class="contact-card"><div class="cc-icon">🏫</div><h4>EIEM Cell</h4><p>+91 9163316560</p></div>
+    <div class="contact-card"><div class="cc-icon">✉️</div><h4>Email</h4><p>antiragging@eiem.edu.in</p></div>
+    <div class="contact-card"><div class="cc-icon">📍</div><h4>Office</h4><p>Admin Block, Room 110</p></div>
+  </div>
+
+</div>
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="foot-logo"><span class="flt">EIEM</span><span class="fls">Est. 2001</span></div>
+      <p>Elitte Institute of Engineering &amp; Management is committed to producing world-class engineers and managers who lead innovation and drive growth across industries.</p>
+      <div class="socials">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Twitter">&#x1D54F;</a>
+        <a href="#" title="Instagram">&#x1F4F8;</a>
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="YouTube">&#x25B6;</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Quick Links</h4>
+      <a href="#">Home</a><a href="#">About EIEM</a><a href="#">Admissions</a>
+      <a href="#">Academics</a><a href="#">Departments</a><a href="#">Events</a>
+      <a href="#">Notice Board</a>
+    </div>
+    <div class="foot-col">
+      <h4>Resources</h4>
+      <a href="#">E-Prospectus 2026&ndash;27</a><a href="#">NDLI Library</a>
+      <a href="#">Online Fee Payment</a><a href="#">Grievance Cell</a>
+      <a href="#">Student Login</a><a href="#">Result Portal</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact Us</h4>
+      <div class="fci"><span class="fci-i">&#x1F4CD;</span><span>PO: Karnamadhabpur, PS: Ghola, Sodepur, Kolkata &ndash; 700113</span></div>
+      <div class="fci"><span class="fci-i">&#x1F4DE;</span><span>+91 9163316560 / +91 9831500840</span></div>
+      <div class="fci"><span class="fci-i">&#x2709;</span><span>info@elitte.edu.in</span></div>
+      <div class="fci"><span class="fci-i">&#x1F550;</span><span>Mon&ndash;Sat: 9:00 AM &ndash; 5:00 PM</span></div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Elitte Institute of Engineering &amp; Management. All rights reserved.</span>
+    <span>Approved by AICTE &middot; Affiliated to WBSCT &amp; VE &amp; SD</span>
+  </div>
+  </footer>
+</body>
+</html>

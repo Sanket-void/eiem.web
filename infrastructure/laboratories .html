@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Laboratories | EIEM Infrastructure</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:wght@700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+ --navy:#071a3e;--blue:#1649cc;--sky:#3b82f6;
+  --accent:#f97316;--gold:#f59e0b;--light:#e8f0fe;
+  --gray:#64748b;--text:#0f172a;--white:#fff;
+  --grad-nav:linear-gradient(90deg,#071a3e 0%,#1649cc 60%,#2563eb 100%);
+  --grad-btn:linear-gradient(135deg,#f97316,#f59e0b);
+  --grad-hero:linear-gradient(135deg,rgba(7,26,62,.93) 0%,rgba(22,73,204,.78) 55%,rgba(59,130,246,.55) 100%);
+  --grad-foot:linear-gradient(160deg,#040d1f 0%,#071a3e 60%,#0d2760 100%);
+  --shadow-xl:0 24px 64px rgba(7,26,62,.22);
+  --shadow-lg:0 12px 36px rgba(7,26,62,.14);
+  --shadow-sm:0 4px 16px rgba(7,26,62,.08);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#f0f5ff;overflow-x:hidden}
+
+/* PAGE HERO */
+.page-hero{
+  background:var(--grad-nav);padding:3.5rem 2rem 3rem;
+  position:relative;overflow:hidden;
+}
+.page-hero::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.page-hero::after{
+  content:'';position:absolute;right:-80px;top:-80px;
+  width:380px;height:380px;border-radius:50%;
+  background:radial-gradient(circle,rgba(245,158,11,.18) 0%,transparent 70%);
+}
+.hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:rgba(255,255,255,.6);margin-bottom:1.2rem}
+.breadcrumb span{color:var(--gold)}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(255,255,255,.12);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.2);border-radius:50px;
+  padding:.38rem 1rem;font-size:.72rem;font-weight:600;
+  color:rgba(255,255,255,.9);margin-bottom:1rem;
+}
+.page-hero h1{font-family:'Fraunces',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:#fff;line-height:1.1}
+.page-hero h1 span{color:var(--gold)}
+.page-hero p{color:rgba(255,255,255,.78);font-size:1rem;max-width:600px;margin-top:.9rem;line-height:1.7}
+
+/* SECTION */
+.sec{padding:4rem 2rem;max-width:1200px;margin:0 auto}
+.sec-badge{
+  display:inline-block;background:var(--light);color:var(--blue);
+  font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:.32rem .88rem;border-radius:50px;margin-bottom:.9rem;
+  border:1px solid rgba(22,73,204,.15);
+}
+.sec-title{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;color:var(--navy);margin-bottom:.7rem}
+.sec-sub{color:var(--gray);font-size:.95rem;line-height:1.7;max-width:640px;margin-bottom:2.5rem}
+
+/* LAB GRID */
+.lab-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+  gap:2rem;
+}
+.lab-card{
+  background:#fff;border-radius:22px;overflow:hidden;
+  box-shadow:var(--shadow-lg);
+  border:1px solid rgba(22,73,204,.07);
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .35s;
+  cursor:default;
+}
+.lab-card:hover{transform:translateY(-12px) scale(1.018);box-shadow:0 36px 90px rgba(7,26,62,.32)}
+
+footer{background:var(--grad-foot);color:rgba(255,255,255,.72);padding:4.5rem 2rem 2rem}
+.foot-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:3rem;margin-bottom:3rem}
+.foot-logo{width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:.9rem}
+.foot-logo .flt{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:900;color:#fff;line-height:1}
+.foot-logo .fls{font-size:.37rem;color:rgba(255,255,255,.52);letter-spacing:.08em}
+.foot-brand p{font-size:.76rem;line-height:1.76;margin-bottom:1.15rem}
+.socials{display:flex;gap:.5rem}
+.socials a{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:.8rem;transition:background .2s,color .2s,transform .2s}
+.socials a:hover{background:var(--blue);color:#fff;transform:translateY(-3px)}
+.foot-col h4{color:#fff;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.15rem;padding-bottom:.55rem;position:relative}
+.foot-col h4::after{content:'';position:absolute;bottom:0;left:0;width:28px;height:2px;background:var(--grad-btn)}
+.foot-col a{display:block;color:rgba(255,255,255,.58);font-size:.75rem;margin-bottom:.5rem;transition:color .18s,padding-left .18s}
+.foot-col a:hover{color:var(--gold);padding-left:5px}
+.fci{display:flex;align-items:flex-start;gap:.55rem;margin-bottom:.74rem;font-size:.75rem}
+.fci-i{font-size:.88rem;margin-top:.1rem;flex-shrink:0}
+.foot-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.7rem;color:rgba(255,255,255,.35)}
+
+/* Photo placeholder with gradient bg + icon */
+.lab-img-wrap{
+  position:relative;height:220px;overflow:hidden;
+}
+.lab-img-wrap img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .5s ease,filter .35s;
+  filter:brightness(.92);
+}
+.lab-card:hover .lab-img-wrap img{transform:scale(1.07);filter:brightness(1.05)}
+.lab-img-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 45%,rgba(7,26,62,.72) 100%);
+}
+.lab-dept-chip{
+  position:absolute;top:1rem;left:1rem;
+  background:rgba(255,255,255,.18);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.3);border-radius:50px;
+  padding:.28rem .8rem;font-size:.65rem;font-weight:700;
+  color:#fff;letter-spacing:.06em;text-transform:uppercase;
+}
+.lab-num{
+  position:absolute;bottom:1rem;right:1rem;
+  font-family:'Fraunces',serif;font-size:2rem;font-weight:900;
+  color:rgba(255,255,255,.18);line-height:1;
+}
+
+.lab-body{padding:1.6rem 1.6rem 1.8rem}
+.lab-icon{
+  width:48px;height:48px;border-radius:12px;
+  background:var(--light);display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;margin-bottom:1rem;
+  transition:transform .3s,background .3s;flex-shrink:0;
+}
+.lab-card:hover .lab-icon{transform:scale(1.15) rotate(-8deg);background:var(--grad-nav)}
+.lab-name{
+  font-family:'Fraunces',serif;font-size:1.15rem;font-weight:800;
+  color:var(--navy);margin-bottom:.5rem;
+  transition:color .2s;
+}
+.lab-card:hover .lab-name{color:var(--blue)}
+.lab-desc{font-size:.84rem;color:var(--gray);line-height:1.7;margin-bottom:1rem}
+.lab-specs{display:flex;flex-wrap:wrap;gap:.5rem}
+.spec-chip{
+  font-size:.68rem;font-weight:600;
+  background:var(--light);color:var(--blue);
+  border:1px solid rgba(22,73,204,.15);
+  padding:.22rem .68rem;border-radius:50px;
+  transition:background .2s,color .2s;
+}
+.lab-card:hover .spec-chip{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+/* HIGHLIGHT BAND */
+.highlight-band{
+  background:var(--grad-nav);border-radius:24px;padding:3rem 2.5rem;margin:3rem 0;
+  display:flex;align-items:center;gap:2rem;flex-wrap:wrap;position:relative;overflow:hidden;
+}
+.highlight-band::before{
+  content:'';position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;
+  background:radial-gradient(circle,rgba(245,158,11,.2) 0%,transparent 70%);
+}
+.highlight-band h3{font-family:'Fraunces',serif;font-size:1.7rem;font-weight:900;color:#fff;flex:1;min-width:240px;position:relative;z-index:1}
+.highlight-band p{color:rgba(255,255,255,.78);font-size:.92rem;line-height:1.7;flex:2;min-width:240px;position:relative;z-index:1}
+</style>
+</head>
+<body>
+
+<div class="page-hero">
+  <div class="hero-inner">
+    <div class="breadcrumb">Home <span>›</span> Infrastructure <span>›</span> Laboratories</div>
+    <div class="hero-badge">🔬 State-of-the-Art Labs</div>
+    <h1>Our <span>Laboratories</span></h1>
+    <p>Fully equipped, industry-aligned laboratories across all engineering disciplines — giving students real-world, hands-on experience from day one.</p>
+  </div>
+</div>
+
+<div class="sec">
+  <span class="sec-badge">Hands-On Learning</span>
+  <h2 class="sec-title">Explore Our World-Class Labs</h2>
+  <p class="sec-sub">Each laboratory at EIEM is designed to meet and exceed AICTE standards, equipped with the latest instruments, software, and experimental setups to bridge the gap between theory and practice.</p>
+
+  <div class="lab-grid">
+
+    <!-- 1. Science Lab -->
+    <div class="lab-card">
+      <div class="lab-img-wrap">
+        <img src="https://i.postimg.cc/Gm7HkhPF/chemistry-lab-jpg.jpg" alt="Science Laboratory"/>
+        <div class="lab-img-overlay"></div>
+        <div class="lab-dept-chip">Applied Sciences</div>
+        <div class="lab-num">01</div>
+      </div>
+      <div class="lab-body">
+        <div class="lab-icon">⚗️</div>
+        <div class="lab-name">Science Laboratory</div>
+        <div class="lab-desc">A comprehensive lab for physics, chemistry, and biology experiments. Equipped with precision instruments, fume hoods, safety cabinets, and modern analytical equipment to support foundational science courses across all departments.</div>
+        <div class="lab-specs">
+          <span class="spec-chip">60 Seats</span>
+          <span class="spec-chip">Fume Hoods</span>
+          <span class="spec-chip">Spectrometers</span>
+          <span class="spec-chip">Digital Balances</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Computer Science Lab -->
+    <div class="lab-card">
+      <div class="lab-img-wrap">
+        <img src="https://i.postimg.cc/yxkQnTkK/computer-lab-jpg.jpg" alt="Computer Science Laboratory"/>
+        <div class="lab-img-overlay"></div>
+        <div class="lab-dept-chip">CSE / IT</div>
+        <div class="lab-num">02</div>
+      </div>
+      <div class="lab-body">
+        <div class="lab-icon">💻</div>
+        <div class="lab-name">Computer Science Lab</div>
+        <div class="lab-desc">High-performance workstations with multi-core processors, 32GB RAM, and dual monitors. Supports programming, data science, ML/AI experimentation, networking simulations, and cloud computing coursework.</div>
+        <div class="lab-specs">
+          <span class="spec-chip">80 Workstations</span>
+          <span class="spec-chip">1 Gbps LAN</span>
+          <span class="spec-chip">GPU Cluster</span>
+          <span class="spec-chip">24/7 Access</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Electrical Engineering Lab -->
+    <div class="lab-card">
+      <div class="lab-img-wrap">
+        <img src="https://i.postimg.cc/GmHLG0LC/EE-LAB-jpg.jpg" alt="Electrical Engineering Laboratory"/>
+        <div class="lab-img-overlay"></div>
+        <div class="lab-dept-chip">Electrical Engg.</div>
+        <div class="lab-num">03</div>
+      </div>
+      <div class="lab-body">
+        <div class="lab-icon">⚡</div>
+        <div class="lab-name">Electrical Engineering Lab</div>
+        <div class="lab-desc">Equipped with motors, transformers, power supply units, digital storage oscilloscopes, and PLC systems for hands-on training in circuits, machines, power systems, and electrical drives.</div>
+        <div class="lab-specs">
+          <span class="spec-chip">DSO Sets</span>
+          <span class="spec-chip">PLC Trainers</span>
+          <span class="spec-chip">Power Analysers</span>
+          <span class="spec-chip">MATLAB Licences</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Mechanical Engineering Lab -->
+    <div class="lab-card">
+      <div class="lab-img-wrap">
+        <img src="https://i.postimg.cc/ZY2V4pWp/ME-lab-jpg.jpg" alt="Mechanical Engineering Laboratory"/>
+        <div class="lab-img-overlay"></div>
+        <div class="lab-dept-chip">Mechanical Engg.</div>
+        <div class="lab-num">04</div>
+      </div>
+      <div class="lab-body">
+        <div class="lab-icon">⚙️</div>
+        <div class="lab-name">Mechanical Engineering Lab</div>
+        <div class="lab-desc">Houses CNC machines, lathes, milling machines, 3D printers, hydraulic test rigs, and material testing equipment for thermal, fluid mechanics, and manufacturing process experiments.</div>
+        <div class="lab-specs">
+          <span class="spec-chip">CNC Machines</span>
+          <span class="spec-chip">3D Printers</span>
+          <span class="spec-chip">CAD Stations</span>
+          <span class="spec-chip">Fluid Test Rigs</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Automobile Engineering Lab -->
+    <div class="lab-card">
+      <div class="lab-img-wrap">
+        <img src="https://i.postimg.cc/sDg6TTd1/AE-LAB-jpg.jpg" alt="Automobile Engineering Laboratory"/>
+        <div class="lab-img-overlay"></div>
+        <div class="lab-dept-chip">Automobile Engg.</div>
+        <div class="lab-num">05</div>
+      </div>
+      <div class="lab-body">
+        <div class="lab-icon">🚗</div>
+        <div class="lab-name">Automobile Engineering Lab</div>
+        <div class="lab-desc">Features actual engine cut-sections, chassis dynamometers, fuel injection systems, EV drive train trainers, and automotive diagnostic tools to develop industry-ready automobile engineers.</div>
+        <div class="lab-specs">
+          <span class="spec-chip">Engine Trainers</span>
+          <span class="spec-chip">EV Systems</span>
+          <span class="spec-chip">Chassis Dyno</span>
+          <span class="spec-chip">OBD Scanners</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Electronics & Telecom Lab -->
+    <div class="lab-card">
+      <div class="lab-img-wrap">
+        <img src="https://i.postimg.cc/GmHLG0LC/EE-LAB-jpg.jpg" alt="Electronics and Telecommunication Laboratory"/>
+        <div class="lab-img-overlay"></div>
+        <div class="lab-dept-chip">ECE / ET</div>
+        <div class="lab-num">06</div>
+      </div>
+      <div class="lab-body">
+        <div class="lab-icon">📡</div>
+        <div class="lab-name">Electronics & Telecom Lab</div>
+        <div class="lab-desc">Advanced workbenches with signal generators, spectrum analysers, FPGA boards, DSP kits, communication trainers, and fibre optic setups for RF, embedded systems, and telecom experiments.</div>
+        <div class="lab-specs">
+          <span class="spec-chip">FPGA Boards</span>
+          <span class="spec-chip">Spectrum Analyser</span>
+          <span class="spec-chip">DSP Kits</span>
+          <span class="spec-chip">Fibre Optics</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Civil Lab -->
+    <div class="lab-card">
+      <div class="lab-img-wrap">
+        <img src="https://i.postimg.cc/brjg0R0f/civil-lab-jpg.jpg" alt="Civil Engineering Laboratory"/>
+        <div class="lab-img-overlay"></div>
+        <div class="lab-dept-chip">Civil Engg.</div>
+        <div class="lab-num">07</div>
+      </div>
+      <div class="lab-body">
+        <div class="lab-icon">🏗️</div>
+        <div class="lab-name">Civil Engineering Lab</div>
+        <div class="lab-desc">Equipped with a survey lab, concrete testing units, soil compaction apparatus, Total Stations, GPS equipment, AutoCAD and STAAD.Pro workstations for complete civil engineering training.</div>
+        <div class="lab-specs">
+          <span class="spec-chip">Total Station</span>
+          <span class="spec-chip">Concrete Mixers</span>
+          <span class="spec-chip">Soil Testing</span>
+          <span class="spec-chip">AutoCAD / STAAD</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="highlight-band">
+    <h3>Industry-Standard Equipment Across Every Lab</h3>
+    <p>All EIEM laboratories are regularly upgraded in collaboration with industry partners and are in full compliance with AICTE and NBA norms. Students benefit from supervised project hours, tinkering sessions, and industry-sponsored practicals that prepare them for real engineering careers.</p>
+  </div>
+</div>
+
+</body>
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="foot-logo"><span class="flt">EIEM</span><span class="fls">Est. 2001</span></div>
+      <p>Elitte Institute of Engineering &amp; Management is committed to producing world-class engineers and managers who lead innovation and drive growth across industries.</p>
+      <div class="socials">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Twitter">&#x1D54F;</a>
+        <a href="#" title="Instagram">&#x1F4F8;</a>
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="YouTube">&#x25B6;</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Quick Links</h4>
+      <a href="#">Home</a><a href="#">About EIEM</a><a href="#">Admissions</a>
+      <a href="#">Academics</a><a href="#">Departments</a><a href="#">Events</a>
+      <a href="#">Notice Board</a>
+    </div>
+    <div class="foot-col">
+      <h4>Resources</h4>
+      <a href="#">E-Prospectus 2026&ndash;27</a><a href="#">NDLI Library</a>
+      <a href="#">Online Fee Payment</a><a href="#">Grievance Cell</a>
+      <a href="#">Student Login</a><a href="#">Result Portal</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact Us</h4>
+      <div class="fci"><span class="fci-i">&#x1F4CD;</span><span>PO: Karnamadhabpur, PS: Ghola, Sodepur, Kolkata &ndash; 700113</span></div>
+      <div class="fci"><span class="fci-i">&#x1F4DE;</span><span>+91 9163316560 / +91 9831500840</span></div>
+      <div class="fci"><span class="fci-i">&#x2709;</span><span>info@elitte.edu.in</span></div>
+      <div class="fci"><span class="fci-i">&#x1F550;</span><span>Mon&ndash;Sat: 9:00 AM &ndash; 5:00 PM</span></div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Elitte Institute of Engineering &amp; Management. All rights reserved.</span>
+    <span>Approved by AICTE &middot; Affiliated to WBSCT &amp; VE &amp; SD</span>
+  </div>
+</footer>
+</html>

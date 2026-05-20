@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Internet Facility – EIEM Infrastructure</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:wght@700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+ --navy:#071a3e;--blue:#1649cc;--sky:#3b82f6;
+  --accent:#f97316;--gold:#f59e0b;--light:#e8f0fe;
+  --gray:#64748b;--text:#0f172a;--white:#fff;
+  --grad-nav:linear-gradient(90deg,#071a3e 0%,#1649cc 60%,#2563eb 100%);
+  --grad-btn:linear-gradient(135deg,#f97316,#f59e0b);
+  --grad-hero:linear-gradient(135deg,rgba(7,26,62,.93) 0%,rgba(22,73,204,.78) 55%,rgba(59,130,246,.55) 100%);
+  --grad-foot:linear-gradient(160deg,#040d1f 0%,#071a3e 60%,#0d2760 100%);
+  --shadow-xl:0 24px 64px rgba(7,26,62,.22);
+  --shadow-lg:0 12px 36px rgba(7,26,62,.14);
+  --shadow-sm:0 4px 16px rgba(7,26,62,.08);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#f0f5ff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* ── PAGE HERO BANNER ── */
+.page-hero{
+  background:var(--grad-nav);
+  padding:3.5rem 2rem 2.8rem;
+  text-align:center;position:relative;overflow:hidden;
+}
+.page-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 80% at 50% -10%,rgba(59,130,246,.35),transparent);
+  pointer-events:none;
+}
+.page-hero::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:4px;
+  background:var(--grad-btn);
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.3rem 1.1rem;border-radius:999px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);
+  color:var(--gold);font-size:.68rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;
+  backdrop-filter:blur(8px);margin-bottom:1.2rem;
+}
+.page-hero h1{
+  font-family:'Fraunces',serif;
+  font-size:clamp(2rem,5vw,3rem);
+  color:#fff;line-height:1.2;font-weight:900;
+  text-shadow:0 4px 24px rgba(0,0,0,.28);margin-bottom:.75rem;
+}
+.page-hero h1 span{color:var(--gold)}
+.page-hero p{
+  color:rgba(255,255,255,.8);font-size:.98rem;
+  max-width:640px;margin:0 auto;line-height:1.72;
+}
+.hero-stats{
+  display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;
+  margin-top:2.2rem;
+}
+.hs{
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+  border-radius:14px;padding:.95rem 2rem;backdrop-filter:blur(8px);
+  transition:background .25s,transform .25s,box-shadow .25s;cursor:default;
+}
+.hs:hover{
+  background:rgba(255,255,255,.17);
+  transform:translateY(-5px);
+  box-shadow:0 0 0 1px rgba(245,158,11,.5),0 0 22px 4px rgba(245,158,11,.2),0 12px 30px rgba(0,0,0,.22);
+}
+.hs-val{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:900;color:var(--gold);line-height:1}
+.hs-lbl{font-size:.64rem;font-weight:600;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.08em;margin-top:.22rem}
+
+/* ── SECTION WRAPPERS ── */
+.sec-inner{max-width:1200px;margin:0 auto;padding:4rem 2rem}
+.sec-badge{
+  display:inline-block;padding:.26rem .85rem;border-radius:999px;
+  background:var(--light);color:var(--blue);
+  font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+  margin-bottom:.65rem;
+}
+.sec-title{
+  font-family:'Fraunces',serif;font-size:clamp(1.5rem,3vw,2.1rem);
+  font-weight:900;color:var(--navy);line-height:1.25;margin-bottom:.5rem;
+}
+.sec-sub{font-size:.85rem;color:var(--gray);max-width:600px;line-height:1.7}
+.sec-head{margin-bottom:2.8rem}
+
+/* ── CONNECTIVITY OVERVIEW ── */
+.conn-section{background:linear-gradient(170deg,#eef3ff 0%,#f0f5ff 100%)}
+.conn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}
+.conn-card{
+  background:#fff;border-radius:18px;padding:2rem 1.8rem;
+  box-shadow:var(--shadow-sm);border:1px solid rgba(22,73,204,.07);
+  position:relative;overflow:hidden;
+  transition:transform .28s,box-shadow .28s;cursor:default;
+}
+.conn-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:var(--grad-nav);transform:scaleX(0);transform-origin:left;transition:transform .3s;
+}
+.conn-card:hover{transform:translateY(-8px);box-shadow:var(--glow-blue)}
+.conn-card:hover::before{transform:scaleX(1)}
+.conn-icon{
+  width:54px;height:54px;border-radius:14px;background:var(--light);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.55rem;margin-bottom:1.2rem;
+  transition:background .3s,transform .3s;
+}
+.conn-card:hover .conn-icon{background:var(--blue);transform:scale(1.1) rotate(-5deg)}
+.conn-card h3{font-size:.93rem;font-weight:700;color:var(--navy);margin-bottom:.4rem}
+.conn-card p{font-size:.77rem;color:var(--gray);line-height:1.65}
+.conn-badge{
+  display:inline-block;margin-top:.85rem;
+  padding:.22rem .7rem;border-radius:6px;
+  font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;
+}
+.cb-green{background:#dcfce7;color:#15803d}
+.cb-blue{background:var(--light);color:var(--blue)}
+
+/* ── BANDWIDTH TABLE ── */
+.bw-section{background:#fff}
+.bw-table-wrap{overflow-x:auto;border-radius:16px;box-shadow:var(--shadow-lg)}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+thead{background:var(--grad-nav)}
+thead th{
+  color:#fff;font-weight:700;font-size:.72rem;text-transform:uppercase;
+  letter-spacing:.07em;padding:1rem 1.4rem;text-align:left;white-space:nowrap;
+}
+thead th:first-child{border-radius:16px 0 0 0}
+thead th:last-child{border-radius:0 16px 0 0}
+tbody tr{
+  border-bottom:1px solid #eef2ff;
+  transition:background .18s,transform .18s,box-shadow .2s;cursor:default;
+}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{
+  background:var(--light);
+  box-shadow:inset 4px 0 0 var(--blue),0 0 18px 2px rgba(22,73,204,.1);
+}
+tbody td{padding:.9rem 1.4rem;color:var(--text);vertical-align:middle}
+.td-label{font-weight:600;color:var(--navy)}
+.td-pill{
+  display:inline-block;padding:.18rem .65rem;border-radius:6px;
+  font-size:.64rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+}
+.pill-active{background:#dcfce7;color:#15803d}
+.pill-backup{background:#fef3c7;color:#92400e}
+.pill-high{background:#fee2e2;color:#b91c1c}
+
+/* ── NETWORK FEATURES ── */
+.feat-section{background:linear-gradient(170deg,#eef3ff 0%,#f0f5ff 100%)}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.feat-item{
+  background:#fff;border-radius:16px;padding:1.6rem 1.7rem;
+  border:1.5px solid #dde5f5;cursor:default;
+  display:flex;gap:1.1rem;align-items:flex-start;
+  transition:border-color .25s,box-shadow .25s,transform .25s;
+}
+.feat-item:hover{
+  border-color:var(--blue);
+  transform:translateY(-5px) translateX(4px);
+  box-shadow:var(--glow-blue);
+}
+.feat-num{
+  flex-shrink:0;width:40px;height:40px;border-radius:10px;
+  background:var(--grad-nav);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fraunces',serif;font-size:.95rem;font-weight:900;
+  box-shadow:0 4px 14px rgba(22,73,204,.3);
+  transition:transform .25s;
+}
+.feat-item:hover .feat-num{transform:scale(1.12) rotate(-5deg)}
+.feat-body h4{font-size:.88rem;font-weight:700;color:var(--navy);margin-bottom:.3rem}
+.feat-body p{font-size:.76rem;color:var(--gray);line-height:1.65}
+
+/* ── USAGE POLICY ── */
+.policy-section{background:#fff}
+.policy-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start}
+.policy-block{background:#f8faff;border-radius:16px;padding:2rem;border:1px solid rgba(22,73,204,.07)}
+.policy-block h3{
+  font-size:.88rem;font-weight:800;color:var(--navy);
+  margin-bottom:1.2rem;padding-bottom:.6rem;
+  border-bottom:2px solid var(--blue);
+  display:flex;align-items:center;gap:.5rem;
+}
+.policy-list{list-style:none}
+.policy-list li{
+  display:flex;align-items:flex-start;gap:.75rem;
+  padding:.7rem .5rem;border-bottom:1px solid #eef2ff;
+  font-size:.78rem;color:var(--text);line-height:1.6;
+  transition:background .18s,padding-left .2s;cursor:default;border-radius:8px;
+}
+.policy-list li:last-child{border-bottom:none}
+.policy-list li:hover{background:var(--light);padding-left:1rem;color:var(--blue)}
+.policy-list li:hover .pl-dot{transform:scale(1.6)}
+.pl-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--grad-nav);flex-shrink:0;margin-top:.42rem;
+  transition:transform .2s;
+}
+.pl-dot.red{background:linear-gradient(135deg,#dc2626,#b91c1c)}
+
+/* ── LAB ACCESS HOURS ── */
+.hours-section{background:linear-gradient(170deg,#eef3ff 0%,#f0f5ff 100%)}
+.hours-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.2rem}
+.hour-card{
+  background:#fff;border-radius:16px;padding:1.6rem 1.2rem;text-align:center;
+  border:1.5px solid #dde5f5;cursor:default;
+  transition:all .28s;position:relative;overflow:hidden;
+}
+.hour-card::after{
+  content:'';position:absolute;inset:0;border-radius:16px;
+  background:radial-gradient(circle at 50% 0%,rgba(22,73,204,.1),transparent 70%);
+  opacity:0;transition:opacity .3s;pointer-events:none;
+}
+.hour-card:hover{
+  border-color:var(--blue);
+  transform:translateY(-7px);
+  box-shadow:var(--glow-blue);
+}
+.hour-card:hover::after{opacity:1}
+.hour-day{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray);margin-bottom:.4rem}
+.hour-time{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900;color:var(--navy);line-height:1.3;margin-bottom:.5rem}
+.hour-tag{display:inline-block;font-size:.58rem;font-weight:700;padding:.16rem .55rem;border-radius:5px;text-transform:uppercase;letter-spacing:.05em}
+.ht-open{background:#dcfce7;color:#15803d}
+.ht-limited{background:#fef3c7;color:#92400e}
+.ht-closed{background:#fee2e2;color:#b91c1c}
+
+footer{background:var(--grad-foot);color:rgba(255,255,255,.72);padding:4.5rem 2rem 2rem}
+.foot-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:3rem;margin-bottom:3rem}
+.foot-logo{width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:.9rem}
+.foot-logo .flt{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:900;color:#fff;line-height:1}
+.foot-logo .fls{font-size:.37rem;color:rgba(255,255,255,.52);letter-spacing:.08em}
+.foot-brand p{font-size:.76rem;line-height:1.76;margin-bottom:1.15rem}
+.socials{display:flex;gap:.5rem}
+.socials a{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:.8rem;transition:background .2s,color .2s,transform .2s}
+.socials a:hover{background:var(--blue);color:#fff;transform:translateY(-3px)}
+.foot-col h4{color:#fff;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.15rem;padding-bottom:.55rem;position:relative}
+.foot-col h4::after{content:'';position:absolute;bottom:0;left:0;width:28px;height:2px;background:var(--grad-btn)}
+.foot-col a{display:block;color:rgba(255,255,255,.58);font-size:.75rem;margin-bottom:.5rem;transition:color .18s,padding-left .18s}
+.foot-col a:hover{color:var(--gold);padding-left:5px}
+.fci{display:flex;align-items:flex-start;gap:.55rem;margin-bottom:.74rem;font-size:.75rem}
+.fci-i{font-size:.88rem;margin-top:.1rem;flex-shrink:0}
+.foot-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.7rem;color:rgba(255,255,255,.35)}
+
+
+/* ── CTA STRIP ── */
+.cta-strip{
+  background:var(--grad-nav);padding:3rem 2rem;text-align:center;
+  position:relative;overflow:hidden;
+}
+.cta-strip::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 100% at 50% 100%,rgba(59,130,246,.3),transparent);
+  pointer-events:none;
+}
+.cta-strip h2{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:900;color:#fff;margin-bottom:.5rem}
+.cta-strip p{color:rgba(255,255,255,.75);font-size:.88rem;margin-bottom:1.6rem;max-width:520px;margin-left:auto;margin-right:auto}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.cta-btn{
+  display:inline-block;padding:.78rem 2.2rem;border-radius:9px;
+  font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:700;
+  cursor:pointer;letter-spacing:.04em;
+  transition:transform .2s,box-shadow .2s;
+}
+.cta-btn.hot{background:var(--grad-btn);color:#fff;box-shadow:0 6px 24px rgba(249,115,22,.42)}
+.cta-btn.hot:hover{transform:translateY(-3px);box-shadow:0 0 0 2px var(--accent),0 10px 32px rgba(249,115,22,.55)}
+.cta-btn.ghost{border:1.5px solid rgba(255,255,255,.4);color:#fff;background:transparent}
+.cta-btn.ghost:hover{background:rgba(255,255,255,.12);transform:translateY(-3px);box-shadow:0 0 0 2px rgba(255,255,255,.4),0 8px 24px rgba(0,0,0,.2)}
+
+@media(max-width:768px){
+  .policy-grid{grid-template-columns:1fr}
+  .hero-stats{gap:1rem}
+  .hs{padding:.75rem 1.2rem}
+}
+</style>
+</head>
+<body>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="hero-badge">🌐 Infrastructure</div>
+  <h1>Internet <span>Facility</span></h1>
+  <p>State-of-the-art high-speed connectivity across all campus buildings, empowering students and faculty with seamless access to global knowledge resources.</p>
+  <div class="hero-stats">
+    <div class="hs">
+      <div class="hs-val">1 Gbps</div>
+      <div class="hs-lbl">Backbone Speed</div>
+    </div>
+    <div class="hs">
+      <div class="hs-val">500+</div>
+      <div class="hs-lbl">Wi-Fi Access Points</div>
+    </div>
+    <div class="hs">
+      <div class="hs-val">24×7</div>
+      <div class="hs-lbl">Connectivity</div>
+    </div>
+    <div class="hs">
+      <div class="hs-val">99.9%</div>
+      <div class="hs-lbl">Uptime SLA</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONNECTIVITY OVERVIEW -->
+<section class="conn-section">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="sec-badge">Connectivity Overview</span>
+      <h2 class="sec-title">Campus Network Infrastructure</h2>
+      <p class="sec-sub">A robust, multi-layered network architecture ensuring fast, secure, and reliable internet access for every stakeholder on campus.</p>
+    </div>
+    <div class="conn-grid">
+      <div class="conn-card">
+        <div class="conn-icon">🔗</div>
+        <h3>Optical Fibre Backbone</h3>
+        <p>A campus-wide optical fibre ring network connects all academic blocks, hostels, and administrative offices at gigabit speeds with redundant pathways.</p>
+        <span class="conn-badge cb-green">Active</span>
+      </div>
+      <div class="conn-card">
+        <div class="conn-icon">📡</div>
+        <h3>Wi-Fi Coverage</h3>
+        <p>IEEE 802.11ac/ax (Wi-Fi 6) access points blanket every classroom, lab, library, cafeteria, and open-air zone with seamless roaming capability.</p>
+        <span class="conn-badge cb-green">Full Campus</span>
+      </div>
+      <div class="conn-card">
+        <div class="conn-icon">🖥️</div>
+        <h3>Wired LAN Labs</h3>
+        <p>All computer laboratories are equipped with dedicated gigabit Ethernet ports at every workstation, providing stable high-throughput connectivity for compute-intensive tasks.</p>
+        <span class="conn-badge cb-blue">500+ Nodes</span>
+      </div>
+      <div class="conn-card">
+        <div class="conn-icon">🔒</div>
+        <h3>Firewall & Security</h3>
+        <p>Enterprise-grade next-generation firewall with deep packet inspection, intrusion detection, and content filtering protects the campus network round the clock.</p>
+        <span class="conn-badge cb-green">Secured</span>
+      </div>
+      <div class="conn-card">
+        <div class="conn-icon">☁️</div>
+        <h3>Cloud & Research Access</h3>
+        <p>Dedicated bandwidth tiers for accessing IEEE Xplore, Springer, Elsevier, NDLI, and cloud platforms including AWS Academy and Google Cloud for Students.</p>
+        <span class="conn-badge cb-blue">Premium</span>
+      </div>
+      <div class="conn-card">
+        <div class="conn-icon">🔄</div>
+        <h3>Redundant ISP Links</h3>
+        <p>Dual ISP failover configuration ensures uninterrupted connectivity. If the primary link experiences issues, traffic automatically reroutes within milliseconds.</p>
+        <span class="conn-badge cb-green">Live Failover</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BANDWIDTH TABLE -->
+<section class="bw-section">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="sec-badge">Network Specifications</span>
+      <h2 class="sec-title">Bandwidth Allocation & Zones</h2>
+      <p class="sec-sub">Intelligently distributed bandwidth ensures priority access for academic and research activities without compromising general use.</p>
+    </div>
+    <div class="bw-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Zone / Area</th>
+            <th>Connection Type</th>
+            <th>Allocated Bandwidth</th>
+            <th>Max Users</th>
+            <th>Priority</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-label">Computer Laboratories</td>
+            <td>Wired Gigabit + Wi-Fi 6</td>
+            <td>500 Mbps dedicated</td>
+            <td>600</td>
+            <td><span class="td-pill pill-high">High</span></td>
+            <td><span class="td-pill pill-active">Active</span></td>
+          </tr>
+          <tr>
+            <td class="td-label">Central Library</td>
+            <td>Wired + Wi-Fi 6</td>
+            <td>200 Mbps dedicated</td>
+            <td>250</td>
+            <td><span class="td-pill pill-high">High</span></td>
+            <td><span class="td-pill pill-active">Active</span></td>
+          </tr>
+          <tr>
+            <td class="td-label">Classrooms & Seminar Halls</td>
+            <td>Wi-Fi 6 (802.11ax)</td>
+            <td>150 Mbps shared</td>
+            <td>800</td>
+            <td><span class="td-pill pill-high">High</span></td>
+            <td><span class="td-pill pill-active">Active</span></td>
+          </tr>
+          <tr>
+            <td class="td-label">Faculty & Administrative Offices</td>
+            <td>Wired Gigabit</td>
+            <td>100 Mbps dedicated</td>
+            <td>150</td>
+            <td><span class="td-pill pill-high">High</span></td>
+            <td><span class="td-pill pill-active">Active</span></td>
+          </tr>
+          <tr>
+            <td class="td-label">Hostel Blocks</td>
+            <td>Wi-Fi 5 (802.11ac)</td>
+            <td>200 Mbps shared</td>
+            <td>1200</td>
+            <td><span class="td-pill pill-backup">Medium</span></td>
+            <td><span class="td-pill pill-active">Active</span></td>
+          </tr>
+          <tr>
+            <td class="td-label">Cafeteria & Common Areas</td>
+            <td>Wi-Fi 5</td>
+            <td>50 Mbps shared</td>
+            <td>500</td>
+            <td><span class="td-pill pill-backup">Low</span></td>
+            <td><span class="td-pill pill-active">Active</span></td>
+          </tr>
+          <tr>
+            <td class="td-label">Backup / Failover Link</td>
+            <td>Secondary ISP (Leased Line)</td>
+            <td>500 Mbps standby</td>
+            <td>—</td>
+            <td><span class="td-pill pill-backup">Failover</span></td>
+            <td><span class="td-pill pill-backup">Standby</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- NETWORK FEATURES -->
+<section class="feat-section">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="sec-badge">Key Features</span>
+      <h2 class="sec-title">What Our Network Offers</h2>
+      <p class="sec-sub">Designed to support modern academic workflows, from cloud computing labs to digital research and online examinations.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-item">
+        <div class="feat-num">01</div>
+        <div class="feat-body">
+          <h4>NME-ICT Compliant Network</h4>
+          <p>Meets all National Mission on Education through ICT guidelines, ensuring eligibility for NPTEL, SWAYAM, and other national e-learning platforms.</p>
+        </div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-num">02</div>
+        <div class="feat-body">
+          <h4>LDAP-Based User Authentication</h4>
+          <p>Secure single sign-on (SSO) for all students and staff using centralized LDAP directory, with unique credentials and personalised bandwidth allocation.</p>
+        </div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-num">03</div>
+        <div class="feat-body">
+          <h4>VPN Access for Remote Learning</h4>
+          <p>Students and faculty can securely access campus library databases, internal portals, and lab resources remotely via institute-provided VPN credentials.</p>
+        </div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-num">04</div>
+        <div class="feat-body">
+          <h4>e-Journal & Database Subscriptions</h4>
+          <p>Campus-wide IP-based access to IEEE Xplore Digital Library, Springer, Elsevier ScienceDirect, J-Gate, NDLI, and Web of Science with no per-article charges.</p>
+        </div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-num">05</div>
+        <div class="feat-body">
+          <h4>Network Monitoring & Analytics</h4>
+          <p>24×7 real-time network monitoring dashboard with automated alerts, bandwidth utilisation reports, and predictive fault detection to maximise uptime.</p>
+        </div>
+      </div>
+      <div class="feat-item">
+        <div class="feat-num">06</div>
+        <div class="feat-body">
+          <h4>Smart Bandwidth Management</h4>
+          <p>Quality-of-Service (QoS) policies prioritise academic and research traffic. Streaming and non-academic traffic is throttled during peak examination hours automatically.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USAGE POLICY -->
+<section class="policy-section">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="sec-badge">Usage Policy</span>
+      <h2 class="sec-title">Acceptable Use Guidelines</h2>
+      <p class="sec-sub">All users of the campus internet facility are expected to adhere to the institutional Acceptable Use Policy (AUP) for responsible and ethical use.</p>
+    </div>
+    <div class="policy-grid">
+      <div class="policy-block">
+        <h3>✅ Permitted Activities</h3>
+        <ul class="policy-list">
+          <li><span class="pl-dot"></span>Accessing academic databases, research papers, and e-journals</li>
+          <li><span class="pl-dot"></span>Using NPTEL, SWAYAM, Coursera, and other MOOC platforms</li>
+          <li><span class="pl-dot"></span>Downloading course materials, lecture notes, and software tools</li>
+          <li><span class="pl-dot"></span>Online examinations, virtual labs, and simulation software</li>
+          <li><span class="pl-dot"></span>Video conferencing for classes, seminars, and webinars</li>
+          <li><span class="pl-dot"></span>Professional networking on LinkedIn and GitHub</li>
+          <li><span class="pl-dot"></span>Accessing cloud-based development environments and IDE tools</li>
+        </ul>
+      </div>
+      <div class="policy-block">
+        <h3>🚫 Prohibited Activities</h3>
+        <ul class="policy-list">
+          <li><span class="pl-dot red"></span>Accessing obscene, offensive, or unlawful content</li>
+          <li><span class="pl-dot red"></span>Peer-to-peer (P2P) file sharing of copyrighted material</li>
+          <li><span class="pl-dot red"></span>Attempting to bypass firewall, proxy, or content filters</li>
+          <li><span class="pl-dot red"></span>Installing unauthorised software or network scanning tools</li>
+          <li><span class="pl-dot red"></span>Using torrents or excessive bandwidth for personal streaming</li>
+          <li><span class="pl-dot red"></span>Hacking, phishing, or any malicious network activity</li>
+          <li><span class="pl-dot red"></span>Sharing personal credentials or misusing institute login accounts</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCESS HOURS -->
+<section class="hours-section">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="sec-badge">Availability</span>
+      <h2 class="sec-title">Internet Lab Access Hours</h2>
+      <p class="sec-sub">Dedicated internet access labs are open beyond regular class hours to ensure every student has adequate online learning time.</p>
+    </div>
+    <div class="hours-grid">
+      <div class="hour-card">
+        <div class="hour-day">Monday</div>
+        <div class="hour-time">8:00 AM – 9:00 PM</div>
+        <span class="hour-tag ht-open">Open</span>
+      </div>
+      <div class="hour-card">
+        <div class="hour-day">Tuesday</div>
+        <div class="hour-time">8:00 AM – 9:00 PM</div>
+        <span class="hour-tag ht-open">Open</span>
+      </div>
+      <div class="hour-card">
+        <div class="hour-day">Wednesday</div>
+        <div class="hour-time">8:00 AM – 9:00 PM</div>
+        <span class="hour-tag ht-open">Open</span>
+      </div>
+      <div class="hour-card">
+        <div class="hour-day">Thursday</div>
+        <div class="hour-time">8:00 AM – 9:00 PM</div>
+        <span class="hour-tag ht-open">Open</span>
+      </div>
+      <div class="hour-card">
+        <div class="hour-day">Friday</div>
+        <div class="hour-time">8:00 AM – 9:00 PM</div>
+        <span class="hour-tag ht-open">Open</span>
+      </div>
+      <div class="hour-card">
+        <div class="hour-day">Saturday</div>
+        <div class="hour-time">9:00 AM – 5:00 PM</div>
+        <span class="hour-tag ht-limited">Limited</span>
+      </div>
+      <div class="hour-card">
+        <div class="hour-day">Sunday</div>
+        <div class="hour-time">Closed</div>
+        <span class="hour-tag ht-closed">Closed</span>
+      </div>
+    </div>
+    <p style="margin-top:1.4rem;font-size:.76rem;color:var(--gray);text-align:center;">
+      ℹ️ 24×7 Wi-Fi access is available across the campus network. Lab hours apply to supervised computer lab sessions only.
+    </p>
+  </div>
+</section>
+
+
+
+</body>
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="foot-logo"><span class="flt">EIEM</span><span class="fls">Est. 2001</span></div>
+      <p>Elitte Institute of Engineering &amp; Management is committed to producing world-class engineers and managers who lead innovation and drive growth across industries.</p>
+      <div class="socials">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Twitter">&#x1D54F;</a>
+        <a href="#" title="Instagram">&#x1F4F8;</a>
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="YouTube">&#x25B6;</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Quick Links</h4>
+      <a href="#">Home</a><a href="#">About EIEM</a><a href="#">Admissions</a>
+      <a href="#">Academics</a><a href="#">Departments</a><a href="#">Events</a>
+      <a href="#">Notice Board</a>
+    </div>
+    <div class="foot-col">
+      <h4>Resources</h4>
+      <a href="#">E-Prospectus 2026&ndash;27</a><a href="#">NDLI Library</a>
+      <a href="#">Online Fee Payment</a><a href="#">Grievance Cell</a>
+      <a href="#">Student Login</a><a href="#">Result Portal</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact Us</h4>
+      <div class="fci"><span class="fci-i">&#x1F4CD;</span><span>PO: Karnamadhabpur, PS: Ghola, Sodepur, Kolkata &ndash; 700113</span></div>
+      <div class="fci"><span class="fci-i">&#x1F4DE;</span><span>+91 9163316560 / +91 9831500840</span></div>
+      <div class="fci"><span class="fci-i">&#x2709;</span><span>info@elitte.edu.in</span></div>
+      <div class="fci"><span class="fci-i">&#x1F550;</span><span>Mon&ndash;Sat: 9:00 AM &ndash; 5:00 PM</span></div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Elitte Institute of Engineering &amp; Management. All rights reserved.</span>
+    <span>Approved by AICTE &middot; Affiliated to WBSCT &amp; VE &amp; SD</span>
+  </div>
+</footer>
+
+</html>

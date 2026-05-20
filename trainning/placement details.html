@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elite Institute of Engineering & Management - Placement Highlights</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0a1f44;
+    --royal: #1a4fa0;
+    --sky: #2d7dd2;
+    --pale: #e8f2fc;
+    --accent: #f0a500;
+    --white: #ffffff;
+    --text: #1c2b4a;
+    --muted: #5a7099;
+  }
+  body { font-family: 'Source Sans 3', sans-serif; background: var(--white); color: var(--text); min-height: 100vh; }
+
+  /* ── HEADER ── */
+  .header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--royal) 60%, var(--sky) 100%);
+    position: relative; overflow: hidden;
+  }
+  .header::before { content: ''; position: absolute; top: -60px; right: -60px; width: 320px; height: 320px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+  .header::after  { content: ''; position: absolute; bottom: -40px; left: 10%; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.03); }
+  .header-inner { max-width: 960px; margin: 0 auto; padding: 44px 36px 36px; position: relative; z-index: 1; display: flex; align-items: center; gap: 24px; }
+  .logo-circle { width: 72px; height: 72px; border-radius: 50%; background: rgba(255,255,255,0.12); border: 2px solid rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 800; color: var(--accent); }
+  .college-name { font-family: 'Playfair Display', serif; font-size: clamp(18px, 3vw, 26px); font-weight: 800; color: var(--white); line-height: 1.2; text-transform: uppercase; letter-spacing: 0.5px; }
+  .college-subtitle { font-size: 13px; color: rgba(255,255,255,0.65); margin-top: 4px; font-weight: 300; letter-spacing: 1.5px; text-transform: uppercase; }
+
+  /* ── MAIN ── */
+  .main { max-width: 1060px; margin: 0 auto; padding: 48px 36px 72px; }
+
+  .section-heading { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+  .heading-bar { width: 5px; height: 44px; background: linear-gradient(to bottom, var(--sky), var(--accent)); border-radius: 3px; flex-shrink: 0; }
+  .section-heading h1 { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 800; color: var(--royal); }
+  .sub-desc { font-size: 15px; color: var(--muted); margin-bottom: 32px; padding-left: 21px; }
+
+  footer { background: var(--navy); color: #8ba3d4; padding: 48px; }
+  .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 3rem; margin-bottom: 3rem; }
+  .foot-logo{width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:.9rem}
+  .foot-logo .flt{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:900;color:#fff;line-height:1}
+  .foot-logo .fls{font-size:.37rem;color:rgba(255,255,255,.52);letter-spacing:.08em}
+  .foot-brand p{font-size:.76rem;line-height:1.76;margin-bottom:1.15rem}
+  .socials{display:flex;gap:.5rem}
+  .socials a{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:.8rem;transition:background .2s,color .2s,transform .2s}
+  .socials a:hover{background:var(--blue);color:#fff;transform:translateY(-3px)}
+  .foot-col h4{color:#fff;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.15rem;padding-bottom:.55rem;position:relative}
+  .foot-col h4::after{content:'';position:absolute;bottom:0;left:0;width:28px;height:2px;background:var(--accent-orange)}
+  .foot-col a{display:block;color:rgba(255,255,255,.58);font-size:.75rem;margin-bottom:.5rem;transition:color .18s,padding-left .18s}
+  .foot-col a:hover{color:var(--accent-orange);padding-left:5px}
+  .fci{display:flex;align-items:flex-start;gap:.55rem;margin-bottom:.74rem;font-size:.75rem}
+  .fci-i{font-size:.88rem;margin-top:.1rem;flex-shrink:0}
+  .foot-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.7rem;color:rgba(255,255,255,.35)}
+
+
+  /* ── YEAR SELECTOR ── */
+  .year-selector-wrap { display: flex; align-items: center; gap: 16px; margin-bottom: 40px; flex-wrap: wrap; }
+  .year-label { font-size: 14px; font-weight: 600; color: var(--navy); text-transform: uppercase; letter-spacing: 1px; }
+  .year-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+  .year-tab {
+    padding: 8px 22px;
+    border: 2px solid #c8dff5;
+    border-radius: 30px;
+    background: var(--white);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.22s;
+  }
+  .year-tab:hover { border-color: var(--sky); color: var(--sky); }
+  .year-tab.active { background: linear-gradient(135deg, var(--royal), var(--sky)); border-color: transparent; color: var(--white); box-shadow: 0 4px 14px rgba(26,79,160,0.28); }
+
+  /* ── STATS ROW ── */
+  .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 40px; }
+  @media (max-width: 600px) { .stats-row { grid-template-columns: 1fr 1fr; } }
+  .stat-card {
+    background: var(--pale);
+    border: 1px solid #c8dff5;
+    border-radius: 12px;
+    padding: 22px 20px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(26,79,160,0.06);
+    transition: transform 0.18s;
+  }
+  .stat-card:hover { transform: translateY(-3px); }
+  .stat-number { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 800; color: var(--royal); line-height: 1; }
+  .stat-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 6px; font-weight: 600; }
+
+  /* ── CHART + LEGEND LAYOUT ── */
+  .chart-section { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; }
+  .chart-canvas-wrap {
+    flex: 0 0 360px;
+    background: linear-gradient(135deg, #f0f7ff 0%, #e2effc 100%);
+    border: 1px solid #c0d9f0;
+    border-radius: 16px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(26,79,160,0.08);
+  }
+  @media (max-width: 720px) { .chart-canvas-wrap { flex: 1 1 100%; } }
+  .chart-canvas-wrap canvas { max-width: 300px; width: 100%; }
+
+  /* ── LEGEND ── */
+  .legend-wrap { flex: 1; min-width: 260px; }
+  .legend-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--royal); margin-bottom: 16px; }
+  .legend-list { display: flex; flex-direction: column; gap: 10px; }
+  .legend-item {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--pale);
+    border: 1px solid #d0e4f7;
+    border-radius: 8px;
+    padding: 10px 14px;
+    transition: box-shadow 0.15s, transform 0.15s;
+    cursor: default;
+  }
+  .legend-item:hover { box-shadow: 0 4px 14px rgba(26,79,160,0.13); transform: translateX(4px); }
+  .legend-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
+  .legend-name { font-size: 13px; color: var(--text); font-weight: 600; flex: 1; }
+  .legend-count { font-size: 12px; color: var(--muted); background: rgba(26,79,160,0.08); border-radius: 20px; padding: 2px 10px; font-weight: 600; }
+
+  /* ── TABLE ── */
+  .table-section { margin-top: 48px; }
+  .section-divider { height: 1px; background: linear-gradient(to right, transparent, #c8dff5, transparent); margin: 48px 0; }
+  .placement-table { width: 100%; border-collapse: collapse; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 16px rgba(26,79,160,0.07); }
+  .placement-table thead tr { background: linear-gradient(135deg, var(--navy), var(--royal)); }
+  .placement-table thead th { padding: 16px 18px; text-align: left; font-size: 13px; font-weight: 600; color: var(--white); text-transform: uppercase; letter-spacing: 0.8px; }
+  .placement-table tbody tr { border-bottom: 1px solid #e0edf9; transition: background 0.15s; }
+  .placement-table tbody tr:last-child { border-bottom: none; }
+  .placement-table tbody tr:nth-child(even) { background: var(--pale); }
+  .placement-table tbody tr:hover { background: #d2e8fb; }
+  .placement-table tbody td { padding: 13px 18px; font-size: 14px; color: #344666; }
+  .company-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+
+  /* ── FOOTER ── */
+  .footer { background: var(--navy); text-align: center; padding: 18px; font-size: 12px; color: rgba(255,255,255,0.4); letter-spacing: 0.5px; }
+  .footer span { color: var(--accent); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="logo-circle">EIEM</div>
+    <div class="header-text">
+      <div class="college-name">Elite Institute of Engineering & Management</div>
+      <div class="college-subtitle">Training & Placement Department</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <div class="section-heading">
+    <div class="heading-bar"></div>
+    <h1>Placement Highlights</h1>
+  </div>
+  <p class="sub-desc">Placement Highlights in EIEM over the past few years</p>
+
+  <!-- YEAR TABS -->
+  <div class="year-selector-wrap">
+    <span class="year-label">Select Year —</span>
+    <div class="year-tabs" id="yearTabs">
+      <button class="year-tab active" data-year="2019">2019</button>
+      <button class="year-tab" data-year="2020">2020</button>
+      <button class="year-tab" data-year="2021">2021</button>
+      <button class="year-tab" data-year="2022">2022</button>
+      <button class="year-tab" data-year="2023">2023</button>
+      <button class="year-tab" data-year="2024">2024</button>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row" id="statsRow">
+    <div class="stat-card"><div class="stat-number" id="statTotal">—</div><div class="stat-label">Total Placements</div></div>
+    <div class="stat-card"><div class="stat-number" id="statCompanies">—</div><div class="stat-label">Companies Visited</div></div>
+    <div class="stat-card"><div class="stat-number" id="statPackage">—</div><div class="stat-label">Avg. Package (LPA)</div></div>
+  </div>
+
+  <!-- CHART + LEGEND -->
+  <div class="chart-section">
+    <div class="chart-canvas-wrap">
+      <canvas id="pieChart" width="300" height="300"></canvas>
+    </div>
+    <div class="legend-wrap">
+      <div class="legend-title" id="legendTitle">Companies — 2019</div>
+      <div class="legend-list" id="legendList"></div>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="section-divider"></div>
+  <div class="table-section">
+    <div class="section-heading" style="margin-bottom:20px;">
+      <div class="heading-bar"></div>
+      <h1 style="font-size:26px;">Placement Details</h1>
+    </div>
+    <table class="placement-table" id="placementTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Company</th>
+          <th>Location</th>
+          <th>Students Placed</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+</div>
+
+
+
+<script>
+// ── DATA ──────────────────────────────────────────────
+const placementData = {
+  2019: {
+    stats: { total: 187, companies: 15, package: "3.2" },
+    companies: [
+      { name: "FOXDEN WEB SOLUTION PRIVATE LIMITED", location: "Kolkata", count: 18 },
+      { name: "JCB", location: "Howrah", count: 22 },
+      { name: "YAMAHA", location: "Howrah", count: 16 },
+      { name: "Radheya Machining Limited", location: "Pune", count: 12 },
+      { name: "Maruti Suzuki", location: "Kolkata, 24 Parganas", count: 20 },
+      { name: "KALRA OVERSEAS & PRECISION ENGINEERING", location: "—", count: 11 },
+      { name: "John Deere", location: "Pune", count: 9 },
+      { name: "Jaya Hind Industries Ltd.", location: "Pune", count: 14 },
+      { name: "Mando Automotive India Pvt. Ltd.", location: "Chennai", count: 17 },
+      { name: "Xplore-Tech Services Private Limited", location: "—", count: 8 },
+      { name: "DCPL", location: "—", count: 10 },
+      { name: "Shantinath Detergents (P) Limited", location: "Kamarhati", count: 7 },
+      { name: "East India Technology", location: "Bangalore", count: 13 },
+      { name: "INDO JAPAN HOROLOGICAL PVT. LTD.", location: "—", count: 10 },
+    ]
+  },
+  2020: {
+    stats: { total: 5, companies: 5, package: "—" },
+    companies: [
+      { name: "Mando Automotive India Pvt. Ltd.", location: "Chennai", count: 1 },
+      { name: "QH Talbros", location: "Shirwal, Pune", count: 1 },
+      { name: "Precision Seals Mfg Pvt. Ltd. (BOSCH Group)", location: "—", count: 1 },
+      { name: "LUCAS TVS", location: "Chakan, Pune", count: 1 },
+      { name: "REHAU", location: "Pune", count: 1 },
+      { name: "JCB", location: "Howrah", count: 1 },
+    ]
+  },
+  2021: {
+    stats: { total: 7, companies: 7, package: "—" },
+    companies: [
+      { name: "Mando Automotive India Pvt. Ltd.", location: "Chennai", count: 1 },
+      { name: "Jaya Hind Industries Ltd.", location: "Pune", count: 1 },
+      { name: "Afforserve.Com", location: "Bangalore", count: 1 },
+      { name: "Synnova Gears & Transmission Pvt. Ltd.", location: "—", count: 1 },
+      { name: "Riddhima Solution Pvt. Ltd.", location: "Salt Lake", count: 1 },
+      { name: "Balin & Company", location: "Barrakpore", count: 1 },
+      { name: "CyberSwift Infotech", location: "Salt Lake, Kolkata", count: 1 },
+    ]
+  },
+  2022: {
+    stats: { total: 198, companies: 14, package: "4.1" },
+    companies: [
+      { name: "TCS", location: "Kolkata", count: 32 },
+      { name: "Wipro", location: "Bangalore", count: 25 },
+      { name: "Infosys", location: "Pune", count: 20 },
+      { name: "HCL Technologies", location: "Noida", count: 18 },
+      { name: "Cognizant", location: "Kolkata", count: 22 },
+      { name: "Capgemini", location: "Kolkata", count: 15 },
+      { name: "Accenture", location: "Kolkata", count: 16 },
+      { name: "Tech Mahindra", location: "Hyderabad", count: 13 },
+      { name: "JCB", location: "Howrah", count: 14 },
+      { name: "Maruti Suzuki", location: "Kolkata", count: 11 },
+      { name: "L&T", location: "Kolkata", count: 6 },
+      { name: "DCPL", location: "Kolkata", count: 4 },
+      { name: "Mando Automotive", location: "Chennai", count: 2 },
+    ]
+  },
+  2023: {
+    stats: { total: 221, companies: 16, package: "4.5" },
+    companies: [
+      { name: "TCS", location: "Kolkata", count: 38 },
+      { name: "Wipro", location: "Bangalore", count: 27 },
+      { name: "Infosys", location: "Pune", count: 22 },
+      { name: "Accenture", location: "Kolkata", count: 20 },
+      { name: "Cognizant", location: "Kolkata", count: 25 },
+      { name: "HCL Technologies", location: "Noida", count: 16 },
+      { name: "Capgemini", location: "Kolkata", count: 18 },
+      { name: "IBM India", location: "Bangalore", count: 12 },
+      { name: "Tech Mahindra", location: "Hyderabad", count: 14 },
+      { name: "JCB", location: "Howrah", count: 10 },
+      { name: "FOXDEN WEB SOLUTION", location: "Kolkata", count: 8 },
+      { name: "Maruti Suzuki", location: "Kolkata", count: 9 },
+      { name: "L&T Infotech", location: "Kolkata", count: 7 },
+      { name: "East India Technology", location: "Bangalore", count: 6 },
+      { name: "DCPL", location: "Kolkata", count: 5 },
+    ]
+  },
+  2024: {
+    stats: { total: 247, companies: 18, package: "5.0" },
+    companies: [
+      { name: "TCS", location: "Kolkata", count: 42 },
+      { name: "Wipro", location: "Bangalore", count: 30 },
+      { name: "Infosys", location: "Pune", count: 25 },
+      { name: "Accenture", location: "Kolkata", count: 24 },
+      { name: "Cognizant", location: "Kolkata", count: 28 },
+      { name: "HCL Technologies", location: "Noida", count: 18 },
+      { name: "Capgemini", location: "Kolkata", count: 20 },
+      { name: "IBM India", location: "Bangalore", count: 14 },
+      { name: "Tech Mahindra", location: "Hyderabad", count: 16 },
+      { name: "Oracle", location: "Bangalore", count: 10 },
+      { name: "L&T Infotech", location: "Kolkata", count: 9 },
+      { name: "FOXDEN WEB SOLUTION", location: "Kolkata", count: 7 },
+      { name: "JCB", location: "Howrah", count: 8 },
+      { name: "Maruti Suzuki", location: "Kolkata", count: 6 },
+      { name: "East India Technology", location: "Bangalore", count: 5 },
+      { name: "DCPL", location: "Kolkata", count: 4 },
+      { name: "Mando Automotive", location: "Chennai", count: 1 },
+    ]
+  }
+};
+
+// ── PALETTE ──
+const palette = [
+  "#2d7dd2","#f0a500","#1a4fa0","#00b4d8","#e63946","#06d6a0",
+  "#f77f00","#7b2d8b","#4cc9f0","#c1121f","#52b788","#ffd60a",
+  "#023e8a","#ef233c","#80b918","#e9c46a","#264653","#e76f51"
+];
+
+// ── STATE ──
+let currentYear = 2019;
+let animFrame;
+
+function getColor(i) { return palette[i % palette.length]; }
+
+// ── RENDER ──
+function render(year) {
+  const data = placementData[year];
+  // Stats
+  document.getElementById('statTotal').textContent = data.stats.total;
+  document.getElementById('statCompanies').textContent = data.stats.companies;
+  document.getElementById('statPackage').textContent = data.stats.package;
+  // Legend title
+  document.getElementById('legendTitle').textContent = `Companies — ${year}`;
+  // Legend
+  const legendList = document.getElementById('legendList');
+  legendList.innerHTML = '';
+  data.companies.forEach((c, i) => {
+    const div = document.createElement('div');
+    div.className = 'legend-item';
+    div.innerHTML = `
+      <div class="legend-dot" style="background:${getColor(i)}"></div>
+      <div class="legend-name">${c.name}</div>
+      <div class="legend-count">${c.count}</div>
+    `;
+    legendList.appendChild(div);
+  });
+  // Table
+  const tbody = document.getElementById('tableBody');
+  tbody.innerHTML = '';
+  data.companies.forEach((c, i) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${i + 1}</td>
+      <td><span class="company-dot" style="background:${getColor(i)}"></span>${c.name}</td>
+      <td>${c.location}</td>
+      <td>${c.count}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+  // Pie chart
+  drawPie(data.companies);
+}
+
+function drawPie(companies) {
+  const canvas = document.getElementById('pieChart');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W / 2, cy = H / 2, r = Math.min(W, H) / 2 - 10;
+  const total = companies.reduce((s, c) => s + c.count, 0);
+
+  // Build slices
+  const slices = [];
+  let angle = -Math.PI / 2;
+  companies.forEach((c, i) => {
+    const sweep = (c.count / total) * Math.PI * 2;
+    slices.push({ start: angle, end: angle + sweep, color: getColor(i), label: c.name, count: c.count });
+    angle += sweep;
+  });
+
+  // Animate draw
+  if (animFrame) cancelAnimationFrame(animFrame);
+  let progress = 0;
+  function animate() {
+    progress = Math.min(progress + 0.04, 1);
+    ctx.clearRect(0, 0, W, H);
+
+    slices.forEach(s => {
+      const sweep = (s.end - s.start) * progress;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.arc(cx, cy, r, s.start, s.start + sweep);
+      ctx.closePath();
+      ctx.fillStyle = s.color;
+      ctx.fill();
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    });
+
+    // Center circle (donut hole)
+    ctx.beginPath();
+    ctx.arc(cx, cy, r * 0.38, 0, Math.PI * 2);
+    ctx.fillStyle = '#f0f7ff';
+    ctx.fill();
+
+    if (progress < 1) animFrame = requestAnimationFrame(animate);
+  }
+  animate();
+}
+
+// ── YEAR TABS ──
+document.getElementById('yearTabs').addEventListener('click', e => {
+  if (!e.target.classList.contains('year-tab')) return;
+  document.querySelectorAll('.year-tab').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  currentYear = parseInt(e.target.dataset.year);
+  render(currentYear);
+});
+
+// Initial render
+render(currentYear);
+</script>
+</body>
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="foot-logo"><span class="flt">EIEM</span><span class="fls">Est. 2001</span></div>
+      <p>Elitte Institute of Engineering &amp; Management is committed to developing skilled electrical engineers for a sustainable and electrified future.</p>
+      <div class="socials">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Twitter">&#x1D54F;</a>
+        <a href="#" title="Instagram">&#x1F4F8;</a>
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="YouTube">&#x25B6;</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Quick Links</h4>
+      <a href="#">Home</a><a href="#">About EIEM</a><a href="#">Admissions</a>
+      <a href="#">Academics</a><a href="#">Departments</a><a href="#">Placements</a>
+    </div>
+    <div class="foot-col">
+      <h4>Resources</h4>
+      <a href="#">E-Prospectus 2026–27</a><a href="#">Online Fee Payment</a>
+      <a href="#">Student Login</a><a href="#">Result Portal</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact Us</h4>
+      <div class="fci"><span class="fci-i">📍</span><span>PO: Karnamadhabpur, PS: Ghola, Sodepur, Kolkata – 700113</span></div>
+      <div class="fci"><span class="fci-i">📞</span><span>+91 9163316560 / +91 9831500840</span></div>
+      <div class="fci"><span class="fci-i">✉️</span><span>info@elitte.edu.in</span></div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Elitte Institute of Engineering &amp; Management. All rights reserved.</span>
+    <span>Approved by AICTE · Affiliated to MAKAUT, WB</span>
+  </div>
+</footer>
+</html>

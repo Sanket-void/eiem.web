@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Anti-Ragging Policy – EIEM</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:wght@700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+ --navy:#071a3e;--blue:#1649cc;--sky:#3b82f6;
+  --accent:#f97316;--gold:#f59e0b;--light:#e8f0fe;
+  --gray:#64748b;--text:#0f172a;--white:#fff;
+  --grad-nav:linear-gradient(90deg,#071a3e 0%,#1649cc 60%,#2563eb 100%);
+  --grad-btn:linear-gradient(135deg,#f97316,#f59e0b);
+  --grad-hero:linear-gradient(135deg,rgba(7,26,62,.93) 0%,rgba(22,73,204,.78) 55%,rgba(59,130,246,.55) 100%);
+  --grad-foot:linear-gradient(160deg,#040d1f 0%,#071a3e 60%,#0d2760 100%);
+  --shadow-xl:0 24px 64px rgba(7,26,62,.22);
+  --shadow-lg:0 12px 36px rgba(7,26,62,.14);
+  --shadow-sm:0 4px 16px rgba(7,26,62,.08);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#f0f5ff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+.page-hero{background:var(--grad-nav);padding:3.5rem 2rem 3rem;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?w=1400&q=80') center/cover no-repeat;opacity:.1}
+.page-hero-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1}
+.breadcrumb{display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.breadcrumb span{font-size:.7rem;color:rgba(255,255,255,.6)}
+.breadcrumb .sep{color:rgba(255,255,255,.3)}
+.breadcrumb .cur{color:var(--gold);font-weight:600}
+.page-hero h1{font-family:'Fraunces',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);color:#fff;font-weight:900;line-height:1.2;margin-bottom:.5rem}
+.page-hero p{color:rgba(255,255,255,.75);font-size:.9rem;max-width:600px}
+.hero-accent-bar{width:60px;height:4px;background:var(--grad-btn);border-radius:2px;margin:1rem 0}
+
+/* HELPLINE BANNER */
+.helpline-bar{background:var(--grad-red);padding:1rem 2rem;text-align:center}
+.helpline-bar p{color:#fff;font-size:.88rem;font-weight:700;letter-spacing:.03em}
+.helpline-bar span{font-size:1.1rem;font-weight:900;margin:0 .3rem}
+
+.main-content{max-width:1100px;margin:0 auto;padding:3.5rem 2rem}
+
+.section-badge{display:inline-block;background:var(--light);color:var(--blue);font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.26rem .78rem;border-radius:999px;margin-bottom:.7rem}
+.section-title{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:800;color:var(--navy);margin-bottom:1.2rem}
+
+.intro-block{background:#fff;border-radius:20px;padding:2rem 2.2rem;box-shadow:var(--shadow-sm);border-left:5px solid var(--red);margin-bottom:2.5rem;transition:box-shadow .3s, transform .3s}
+.intro-block:hover{transform:translateY(-4px);box-shadow:0 0 0 2px var(--red),0 0 28px 4px rgba(220,38,38,.12),var(--shadow-lg)}
+.intro-block p{font-size:.88rem;line-height:1.8;color:#334155}
+
+/* ZERO TOLERANCE CALLOUT */
+.zt-callout{
+  background:linear-gradient(135deg,#fef2f2,#fff);
+  border:2px solid var(--red);border-radius:20px;
+  padding:2rem 2.2rem;margin-bottom:2.5rem;text-align:center;
+  transition:all .3s;cursor:default;
+}
+.zt-callout:hover{box-shadow:0 0 0 3px var(--red),0 0 36px 8px rgba(220,38,38,.14);transform:translateY(-4px)}
+.zt-callout .zt-icon{font-size:2.5rem;margin-bottom:.6rem}
+.zt-callout h3{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:900;color:var(--red);margin-bottom:.5rem}
+.zt-callout p{font-size:.84rem;color:#7f1d1d;line-height:1.7;max-width:600px;margin:0 auto}
+
+/* DEFINITION GRID */
+.def-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-bottom:2.5rem}
+.def-card{background:#fff;border-radius:16px;padding:1.6rem 1.5rem;border:1.5px solid #dde5f5;position:relative;overflow:hidden;transition:all .28s;cursor:default}
+.def-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad-red);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.def-card:hover{transform:translateY(-6px);border-color:var(--red);box-shadow:0 0 0 2px var(--red),0 0 28px 4px rgba(220,38,38,.14),var(--shadow-lg)}
+.def-card:hover::before{transform:scaleX(1)}
+.def-icon{font-size:1.8rem;margin-bottom:.7rem}
+.def-head{font-size:.87rem;font-weight:700;color:var(--navy);margin-bottom:.4rem}
+.def-body{font-size:.78rem;color:var(--gray);line-height:1.7}
+
+/* RULE LIST */
+.rule-list{display:flex;flex-direction:column;gap:.6rem;margin-bottom:2.5rem}
+.rule-item{display:flex;align-items:flex-start;gap:.85rem;background:#fff;border-radius:11px;padding:.9rem 1.1rem;border:1.5px solid #eef2ff;transition:all .24s;cursor:default}
+.rule-item:hover{border-color:var(--red);background:#fff5f5;transform:translateX(6px);box-shadow:0 0 0 1.5px var(--red),0 0 14px 2px rgba(220,38,38,.08)}
+.rule-item-num{width:26px;height:26px;border-radius:50%;flex-shrink:0;background:var(--grad-red);color:#fff;font-size:.68rem;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:.08rem}
+.rule-item-text{font-size:.8rem;font-weight:500;color:var(--navy);line-height:1.6}
+
+/* PENALTY TABLE */
+.penalty-table{width:100%;border-collapse:separate;border-spacing:0;border-radius:16px;overflow:hidden;box-shadow:var(--shadow-sm);margin-bottom:2.5rem}
+.penalty-table thead{background:var(--grad-red)}
+.penalty-table thead th{color:#fff;font-size:.75rem;font-weight:700;padding:.9rem 1.1rem;text-align:left;letter-spacing:.04em}
+.penalty-table tbody tr{background:#fff;transition:all .22s;cursor:default}
+.penalty-table tbody tr:nth-child(even){background:#fff5f5}
+.penalty-table tbody tr:hover{background:var(--red-light);transform:scale(1.005);box-shadow:0 0 0 2px rgba(220,38,38,.2)}
+.penalty-table tbody td{padding:.85rem 1.1rem;font-size:.78rem;color:var(--navy);border-bottom:1px solid #fee2e2}
+.penalty-table tbody tr:last-child td{border-bottom:none}
+.sev-badge{display:inline-block;font-size:.6rem;font-weight:700;padding:.18rem .55rem;border-radius:5px;text-transform:uppercase;letter-spacing:.06em}
+.sev-low{background:#dcfce7;color:#16a34a}
+.sev-med{background:#fef3c7;color:#92400e}
+.sev-high{background:#fee2e2;color:#dc2626}
+.sev-crit{background:#450a0a;color:#fca5a5}
+
+footer{background:var(--grad-foot);color:rgba(255,255,255,.72);padding:4.5rem 2rem 2rem}
+.foot-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:3rem;margin-bottom:3rem}
+.foot-logo{width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:.9rem}
+.foot-logo .flt{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:900;color:#fff;line-height:1}
+.foot-logo .fls{font-size:.37rem;color:rgba(255,255,255,.52);letter-spacing:.08em}
+.foot-brand p{font-size:.76rem;line-height:1.76;margin-bottom:1.15rem}
+.socials{display:flex;gap:.5rem}
+.socials a{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:.8rem;transition:background .2s,color .2s,transform .2s}
+.socials a:hover{background:var(--blue);color:#fff;transform:translateY(-3px)}
+.foot-col h4{color:#fff;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.15rem;padding-bottom:.55rem;position:relative}
+.foot-col h4::after{content:'';position:absolute;bottom:0;left:0;width:28px;height:2px;background:var(--grad-btn)}
+.foot-col a{display:block;color:rgba(255,255,255,.58);font-size:.75rem;margin-bottom:.5rem;transition:color .18s,padding-left .18s}
+.foot-col a:hover{color:var(--gold);padding-left:5px}
+.fci{display:flex;align-items:flex-start;gap:.55rem;margin-bottom:.74rem;font-size:.75rem}
+.fci-i{font-size:.88rem;margin-top:.1rem;flex-shrink:0}
+.foot-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.7rem;color:rgba(255,255,255,.35)}
+
+
+/* REPORTING */
+.report-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;margin-bottom:2.5rem}
+.report-card{background:#fff;border-radius:16px;padding:1.5rem;border:1.5px solid #dde5f5;text-align:center;transition:all .28s;cursor:default}
+.report-card:hover{transform:translateY(-6px);border-color:var(--blue);box-shadow:0 0 0 2px var(--blue),0 0 28px 4px rgba(22,73,204,.16),var(--shadow-lg)}
+.report-card .rc-icon{font-size:2rem;margin-bottom:.6rem}
+.report-card h4{font-size:.84rem;font-weight:700;color:var(--navy);margin-bottom:.25rem}
+.report-card p{font-size:.74rem;color:var(--gray);line-height:1.6}
+.report-card .rc-contact{font-size:.8rem;font-weight:700;color:var(--blue);margin-top:.5rem}
+
+@media(max-width:700px){.main-content{padding:2rem 1rem}}
+</style>
+</head>
+<body>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <span>Home</span><span class="sep">›</span>
+      <span>Administration</span><span class="sep">›</span>
+      <span class="cur">Anti-Ragging Policy</span>
+    </div>
+    <h1>Anti-Ragging Policy</h1>
+    <div class="hero-accent-bar"></div>
+    <p>EIEM maintains a strict zero-tolerance policy against all forms of ragging. Our campus is a safe, inclusive and respectful environment for every student.</p>
+  </div>
+</div>
+
+<!-- HELPLINE BANNER -->
+<div class="helpline-bar">
+  <p>🚨 UGC Anti-Ragging Helpline: <span>1800-180-5522</span> | EIEM Helpline: <span>+91 9163316560</span> | Available 24×7</p>
+</div>
+
+<div class="main-content">
+
+  <div class="intro-block">
+    <p>This policy is framed in compliance with the Hon'ble Supreme Court of India's directives, UGC Regulations on Curbing the Menace of Ragging in Higher Educational Institutions, 2009, and AICTE guidelines. All students, parents and guardians are required to submit the mandatory anti-ragging undertaking at the time of admission. Violation of this policy is a criminal offence under Indian Penal Code Sections 339, 340, 341 and 323.</p>
+  </div>
+
+  <div class="zt-callout">
+    <div class="zt-icon">🚫</div>
+    <h3>Zero Tolerance. No Exceptions.</h3>
+    <p>Elitte Institute of Engineering & Management takes a firm and uncompromising stand against ragging in any form. Every complaint will be investigated thoroughly and strict action — including expulsion and criminal prosecution — will follow.</p>
+  </div>
+
+  <!-- What Constitutes Ragging -->
+  <span class="section-badge">Definition</span>
+  <div class="section-title">What Constitutes Ragging?</div>
+  <div class="def-grid">
+    <div class="def-card"><div class="def-icon">🗣️</div><div class="def-head">Verbal Abuse</div><div class="def-body">Any act that involves verbal taunting, using derogatory language, making fun of personal characteristics, or psychologically tormenting a student.</div></div>
+    <div class="def-card"><div class="def-icon">👊</div><div class="def-head">Physical Harm</div><div class="def-body">Any physical contact, assault, forced exercise, sleep deprivation or any bodily harm inflicted on a student by seniors or peers.</div></div>
+    <div class="def-card"><div class="def-icon">💻</div><div class="def-head">Cyberbullying</div><div class="def-body">Harassment through digital platforms, social media, messaging apps or any online medium targeting a student's dignity or mental health.</div></div>
+    <div class="def-card"><div class="def-icon">🎭</div><div class="def-head">Forced Acts</div><div class="def-body">Compelling a student to do any act that they are unwilling to perform, including tasks related to personal services, embarrassing performances or rituals.</div></div>
+    <div class="def-card"><div class="def-icon">🧪</div><div class="def-head">Substance Coercion</div><div class="def-body">Forcing or pressuring students to consume alcohol, drugs or any controlled substance against their will.</div></div>
+    <div class="def-card"><div class="def-icon">💬</div><div class="def-head">Sexual Harassment</div><div class="def-body">Any unwelcome sexual conduct, comment, gesture or demand, whether in person or online, directed at a student constitutes ragging and sexual harassment.</div></div>
+  </div>
+
+  <!-- Rules -->
+  <span class="section-badge">Obligations</span>
+  <div class="section-title">Student Obligations</div>
+  <div class="rule-list">
+    <div class="rule-item"><div class="rule-item-num">1</div><div class="rule-item-text">All students must submit a signed anti-ragging undertaking (self and parent/guardian) at the time of admission and annually thereafter.</div></div>
+    <div class="rule-item"><div class="rule-item-num">2</div><div class="rule-item-text">Witnessing an act of ragging and not reporting it to authorities makes a student equally culpable and subject to disciplinary action.</div></div>
+    <div class="rule-item"><div class="rule-item-num">3</div><div class="rule-item-text">Students must not incite, abet or participate in ragging in any form — directly or indirectly, inside or outside the campus.</div></div>
+    <div class="rule-item"><div class="rule-item-num">4</div><div class="rule-item-text">Fresher students have the right to refuse any request by seniors that makes them uncomfortable, and to immediately report the same to the Anti-Ragging Committee.</div></div>
+    <div class="rule-item"><div class="rule-item-num">5</div><div class="rule-item-text">False complaints made with malicious intent are also punishable and will be investigated accordingly.</div></div>
+  </div>
+
+  <!-- Penalties -->
+  <span class="section-badge">Penalties</span>
+  <div class="section-title">Penalties for Ragging</div>
+  <table class="penalty-table">
+    <thead>
+      <tr><th>Nature of Offence</th><th>Severity</th><th>Penalty</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Verbal taunting, teasing or mild harassment</td><td><span class="sev-badge sev-low">Minor</span></td><td>Written warning, community service, counselling</td></tr>
+      <tr><td>Psychological harassment, group intimidation</td><td><span class="sev-badge sev-med">Moderate</span></td><td>Suspension for 1 semester, withholding marks/results</td></tr>
+      <tr><td>Physical assault, coercion, cyberbullying</td><td><span class="sev-badge sev-high">Severe</span></td><td>Expulsion from the institution, FIR with police</td></tr>
+      <tr><td>Sexual harassment, grave injury or criminal offence</td><td><span class="sev-badge sev-crit">Critical</span></td><td>Expulsion + criminal prosecution under IPC</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Reporting -->
+  <span class="section-badge">Reporting</span>
+  <div class="section-title">How to Report Ragging</div>
+  <div class="report-grid">
+    <div class="report-card"><div class="rc-icon">📞</div><h4>UGC Helpline</h4><p>National helpline available 24 hours for confidential reporting of ragging incidents</p><div class="rc-contact">1800-180-5522</div></div>
+    <div class="report-card"><div class="rc-icon">🏫</div><h4>EIEM Helpline</h4><p>Contact the institute's Anti-Ragging Cell directly for immediate intervention and support</p><div class="rc-contact">+91 9163316560</div></div>
+    <div class="report-card"><div class="rc-icon">✉️</div><h4>Email Complaint</h4><p>Send a detailed written complaint to the Anti-Ragging Committee at EIEM</p><div class="rc-contact">antiragging@eiem.edu.in</div></div>
+    <div class="report-card"><div class="rc-icon">🌐</div><h4>Online Portal</h4><p>Register your complaint securely through the UGC Anti-Ragging online portal</p><div class="rc-contact">antiragging.in</div></div>
+  </div>
+
+</div>
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="foot-logo"><span class="flt">EIEM</span><span class="fls">Est. 2001</span></div>
+      <p>Elitte Institute of Engineering &amp; Management is committed to producing world-class engineers and managers who lead innovation and drive growth across industries.</p>
+      <div class="socials">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Twitter">&#x1D54F;</a>
+        <a href="#" title="Instagram">&#x1F4F8;</a>
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="YouTube">&#x25B6;</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Quick Links</h4>
+      <a href="#">Home</a><a href="#">About EIEM</a><a href="#">Admissions</a>
+      <a href="#">Academics</a><a href="#">Departments</a><a href="#">Events</a>
+      <a href="#">Notice Board</a>
+    </div>
+    <div class="foot-col">
+      <h4>Resources</h4>
+      <a href="#">E-Prospectus 2026&ndash;27</a><a href="#">NDLI Library</a>
+      <a href="#">Online Fee Payment</a><a href="#">Grievance Cell</a>
+      <a href="#">Student Login</a><a href="#">Result Portal</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact Us</h4>
+      <div class="fci"><span class="fci-i">&#x1F4CD;</span><span>PO: Karnamadhabpur, PS: Ghola, Sodepur, Kolkata &ndash; 700113</span></div>
+      <div class="fci"><span class="fci-i">&#x1F4DE;</span><span>+91 9163316560 / +91 9831500840</span></div>
+      <div class="fci"><span class="fci-i">&#x2709;</span><span>info@elitte.edu.in</span></div>
+      <div class="fci"><span class="fci-i">&#x1F550;</span><span>Mon&ndash;Sat: 9:00 AM &ndash; 5:00 PM</span></div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Elitte Institute of Engineering &amp; Management. All rights reserved.</span>
+    <span>Approved by AICTE &middot; Affiliated to WBSCT &amp; VE &amp; SD</span>
+  </div>
+</footer>
+</body>
+</html>

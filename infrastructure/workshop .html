@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Workshop | EIEM Infrastructure</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:wght@700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#071a3e;--blue:#1649cc;--sky:#3b82f6;
+  --accent:#f97316;--gold:#f59e0b;--light:#e8f0fe;
+  --gray:#64748b;--text:#0f172a;--white:#fff;
+  --grad-nav:linear-gradient(90deg,#071a3e 0%,#1649cc 60%,#2563eb 100%);
+  --grad-btn:linear-gradient(135deg,#f97316,#f59e0b);
+  --grad-hero:linear-gradient(135deg,rgba(7,26,62,.93) 0%,rgba(22,73,204,.78) 55%,rgba(59,130,246,.55) 100%);
+  --grad-foot:linear-gradient(160deg,#040d1f 0%,#071a3e 60%,#0d2760 100%);
+  --shadow-xl:0 24px 64px rgba(7,26,62,.22);
+  --shadow-lg:0 12px 36px rgba(7,26,62,.14);
+  --shadow-sm:0 4px 16px rgba(7,26,62,.08);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#f0f5ff;overflow-x:hidden}
+.page-hero{background:var(--grad-nav);padding:3.5rem 2rem 3rem;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.page-hero::after{content:'';position:absolute;right:-80px;top:-80px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,.18) 0%,transparent 70%)}
+.hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:rgba(255,255,255,.6);margin-bottom:1.2rem}
+.breadcrumb span{color:var(--gold)}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2);border-radius:50px;padding:.38rem 1rem;font-size:.72rem;font-weight:600;color:rgba(255,255,255,.9);margin-bottom:1rem}
+.page-hero h1{font-family:'Fraunces',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:#fff;line-height:1.1}
+.page-hero h1 span{color:var(--gold)}
+.page-hero p{color:rgba(255,255,255,.78);font-size:1rem;max-width:600px;margin-top:.9rem;line-height:1.7}
+
+.sec{padding:4rem 2rem;max-width:1200px;margin:0 auto}
+.sec-badge{display:inline-block;background:var(--light);color:var(--blue);font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.32rem .88rem;border-radius:50px;margin-bottom:.9rem;border:1px solid rgba(22,73,204,.15)}
+.sec-title{font-family:'Fraunces',serif;font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:900;color:var(--navy);margin-bottom:.7rem}
+.sec-sub{color:var(--gray);font-size:.95rem;line-height:1.7;max-width:640px;margin-bottom:2.5rem}
+
+/* WORKSHOP SECTIONS */
+.ws-section{
+  background:#fff;border-radius:20px;padding:2.4rem;
+  box-shadow:var(--shadow-lg);border:1px solid rgba(22,73,204,.07);
+  margin-bottom:1.8rem;display:flex;gap:2rem;align-items:flex-start;flex-wrap:wrap;
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;cursor:default;
+  position:relative;overflow:hidden;
+}
+.ws-section::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--grad-btn);border-radius:4px 0 0 4px;transform:scaleY(0);transition:transform .3s;transform-origin:bottom}
+.ws-section:hover{transform:translateY(-6px) scale(1.01);box-shadow:var(--shadow-xl)}
+.ws-section:hover::before{transform:scaleY(1)}
+.ws-icon{width:72px;height:72px;border-radius:18px;background:var(--light);display:flex;align-items:center;justify-content:center;font-size:2rem;flex-shrink:0;transition:transform .3s,background .3s}
+.ws-section:hover .ws-icon{transform:scale(1.12) rotate(-6deg);background:var(--grad-nav)}
+.ws-content{flex:1;min-width:220px}
+.ws-title{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:800;color:var(--navy);margin-bottom:.5rem;transition:color .2s}
+.ws-section:hover .ws-title{color:var(--blue)}
+.ws-desc{font-size:.88rem;color:var(--gray);line-height:1.75;margin-bottom:1rem}
+.ws-chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.ws-chip{font-size:.68rem;font-weight:600;background:var(--light);color:var(--blue);border:1px solid rgba(22,73,204,.15);padding:.22rem .68rem;border-radius:50px;transition:background .2s,color .2s}
+.ws-section:hover .ws-chip{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.4rem;margin-bottom:3rem}
+.stat-card{background:#fff;border-radius:16px;padding:1.7rem 1.2rem;text-align:center;box-shadow:var(--shadow-lg);border:1px solid rgba(22,73,204,.07);transition:transform .28s cubic-bezier(.34,1.56,.64,1),box-shadow .28s;cursor:default;position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--grad-btn);transform:scaleX(0);transition:transform .3s;transform-origin:left}
+.stat-card:hover{transform:translateY(-8px) scale(1.03);box-shadow:var(--shadow-xl)}
+.stat-card:hover::before{transform:scaleX(1)}
+.stat-num{font-family:'Fraunces',serif;font-size:2.4rem;font-weight:900;color:var(--blue);line-height:1}
+.stat-num span{color:var(--accent);font-size:1.8rem}
+.stat-label{font-size:.73rem;font-weight:600;color:var(--gray);margin-top:.5rem;text-transform:uppercase;letter-spacing:.05em}
+
+footer{background:var(--grad-foot);color:rgba(255,255,255,.72);padding:4.5rem 2rem 2rem}
+.foot-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:3rem;margin-bottom:3rem}
+.foot-logo{width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:.9rem}
+.foot-logo .flt{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:900;color:#fff;line-height:1}
+.foot-logo .fls{font-size:.37rem;color:rgba(255,255,255,.52);letter-spacing:.08em}
+.foot-brand p{font-size:.76rem;line-height:1.76;margin-bottom:1.15rem}
+.socials{display:flex;gap:.5rem}
+.socials a{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:.8rem;transition:background .2s,color .2s,transform .2s}
+.socials a:hover{background:var(--blue);color:#fff;transform:translateY(-3px)}
+.foot-col h4{color:#fff;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.15rem;padding-bottom:.55rem;position:relative}
+.foot-col h4::after{content:'';position:absolute;bottom:0;left:0;width:28px;height:2px;background:var(--grad-btn)}
+.foot-col a{display:block;color:rgba(255,255,255,.58);font-size:.75rem;margin-bottom:.5rem;transition:color .18s,padding-left .18s}
+.foot-col a:hover{color:var(--gold);padding-left:5px}
+.fci{display:flex;align-items:flex-start;gap:.55rem;margin-bottom:.74rem;font-size:.75rem}
+.fci-i{font-size:.88rem;margin-top:.1rem;flex-shrink:0}
+.foot-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.7rem;color:rgba(255,255,255,.35)}
+
+
+/* SAFETY SECTION */
+.safety-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.2rem;margin-top:2rem}
+.safety-item{background:#fff;border-radius:14px;padding:1.4rem 1.2rem;box-shadow:var(--shadow-lg);border:1px solid rgba(22,73,204,.07);display:flex;align-items:flex-start;gap:.9rem;transition:transform .28s cubic-bezier(.34,1.56,.64,1),box-shadow .28s,border-color .28s;cursor:default}
+.safety-item:hover{transform:translateY(-6px) scale(1.02);box-shadow:var(--shadow-xl);border-color:rgba(22,73,204,.3)}
+.safety-ico{font-size:1.5rem;flex-shrink:0;transition:transform .25s}
+.safety-item:hover .safety-ico{transform:scale(1.2)}
+.safety-text{font-size:.86rem;font-weight:600;color:var(--navy);line-height:1.4}
+.safety-sub{font-size:.75rem;color:var(--gray);margin-top:.2rem}
+
+.highlight-band{background:var(--grad-nav);border-radius:24px;padding:3rem 2.5rem;margin:3rem 0;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;position:relative;overflow:hidden}
+.highlight-band::before{content:'';position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,.2) 0%,transparent 70%)}
+.highlight-band h3{font-family:'Fraunces',serif;font-size:1.7rem;font-weight:900;color:#fff;flex:1;min-width:240px;position:relative;z-index:1}
+.highlight-band p{color:rgba(255,255,255,.78);font-size:.92rem;line-height:1.7;flex:2;min-width:240px;position:relative;z-index:1}
+</style>
+</head>
+<body>
+
+<div class="page-hero">
+  <div class="hero-inner">
+    <div class="breadcrumb">Home <span>›</span> Infrastructure <span>›</span> Workshop</div>
+    <div class="hero-badge">🔧 Skill Development Hub</div>
+    <h1>Central <span>Workshop</span></h1>
+    <p>A sprawling, industry-grade workshop complex where students master fabrication, machining, and hands-on manufacturing — the backbone of practical engineering education.</p>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-num">6<span>+</span></div><div class="stat-label">Workshop Sections</div></div>
+    <div class="stat-card"><div class="stat-num">120<span>+</span></div><div class="stat-label">Machines & Tools</div></div>
+    <div class="stat-card"><div class="stat-num">5000<span>sqft</span></div><div class="stat-label">Total Area</div></div>
+    <div class="stat-card"><div class="stat-num">40<span>+</span></div><div class="stat-label">Students / Batch</div></div>
+  </div>
+
+  <span class="sec-badge">Workshop Sections</span>
+  <h2 class="sec-title">Hands-On Craftsmanship & Engineering</h2>
+  <p class="sec-sub">The EIEM Central Workshop is divided into six specialized sections, each equipped with professional-grade machinery and supervised by experienced technical staff.</p>
+
+  <div class="ws-section">
+    <div class="ws-icon">🔩</div>
+    <div class="ws-content">
+      <div class="ws-title">Fitting & Smithy Shop</div>
+      <div class="ws-desc">Students learn precision fitting, filing, chiselling, and metal joining techniques. The smithy section includes coal and gas forges, anvils, hammers, and tongs for metal forming and forging operations — fundamental skills for all mechanical engineers.</div>
+      <div class="ws-chips"><span class="ws-chip">Bench Vices</span><span class="ws-chip">Forges</span><span class="ws-chip">Anvils</span><span class="ws-chip">Precision Tools</span></div>
+    </div>
+  </div>
+
+  <div class="ws-section">
+    <div class="ws-icon">🔄</div>
+    <div class="ws-content">
+      <div class="ws-title">Machining & Lathe Shop</div>
+      <div class="ws-desc">Equipped with centre lathes, milling machines, drilling machines, and shaper machines. Students perform turning, boring, threading, and surface finishing operations under expert supervision, developing core machining competencies.</div>
+      <div class="ws-chips"><span class="ws-chip">Centre Lathes</span><span class="ws-chip">Milling Machines</span><span class="ws-chip">Drill Presses</span><span class="ws-chip">Grinders</span></div>
+    </div>
+  </div>
+
+  <div class="ws-section">
+    <div class="ws-icon">🔥</div>
+    <div class="ws-content">
+      <div class="ws-title">Welding & Sheet Metal Shop</div>
+      <div class="ws-desc">Modern arc welding, MIG/MAG, TIG, and gas welding stations alongside sheet metal cutting, bending, and forming equipment. Emphasizes joint quality, safety protocols, and metallurgical understanding essential for structural fabrication.</div>
+      <div class="ws-chips"><span class="ws-chip">TIG Welding</span><span class="ws-chip">MIG/MAG</span><span class="ws-chip">Sheet Benders</span><span class="ws-chip">Guillotines</span></div>
+    </div>
+  </div>
+
+  <div class="ws-section">
+    <div class="ws-icon">🪵</div>
+    <div class="ws-content">
+      <div class="ws-title">Carpentry & Pattern Making Shop</div>
+      <div class="ws-desc">Traditional and modern woodworking tools including band saws, jointers, planers, and lathes for creating patterns, moulds, and structural elements. Develops spatial understanding and precision craftsmanship.</div>
+      <div class="ws-chips"><span class="ws-chip">Band Saws</span><span class="ws-chip">Wood Lathes</span><span class="ws-chip">Jointers</span><span class="ws-chip">Routers</span></div>
+    </div>
+  </div>
+
+  <div class="ws-section">
+    <div class="ws-icon">🖨️</div>
+    <div class="ws-content">
+      <div class="ws-title">CNC & Rapid Prototyping Shop</div>
+      <div class="ws-desc">Houses CNC turning centres, CNC milling machines, and FDM 3D printers. Students learn G-code programming, CAM software, and additive manufacturing techniques to produce precision components and functional prototypes.</div>
+      <div class="ws-chips"><span class="ws-chip">CNC Lathe</span><span class="ws-chip">CNC Mill</span><span class="ws-chip">3D Printers</span><span class="ws-chip">CAM Software</span></div>
+    </div>
+  </div>
+
+  <div class="ws-section">
+    <div class="ws-icon">⚡</div>
+    <div class="ws-content">
+      <div class="ws-title">Electrical Wiring & Plumbing Shop</div>
+      <div class="ws-desc">Practical training in domestic wiring, switchboard assembly, pipeline fitting, and plumbing tasks. Teaches students about service infrastructure, circuit layouts, and maintenance skills applicable in civil and electrical engineering.</div>
+      <div class="ws-chips"><span class="ws-chip">Wiring Panels</span><span class="ws-chip">Pipe Fittings</span><span class="ws-chip">Test Equipment</span><span class="ws-chip">Safety Gear</span></div>
+    </div>
+  </div>
+
+  <div class="highlight-band">
+    <h3>Where Ideas Become Real</h3>
+    <p>The EIEM Workshop is more than just a practical training space — it's a maker's environment where engineering concepts take physical form. With dedicated safety training, PPE for all students, and experienced technicians guiding every session, students graduate with the confidence to build, repair, and innovate.</p>
+  </div>
+
+  <span class="sec-badge">Safety & Standards</span>
+  <h2 class="sec-title">Safety is Our First Priority</h2>
+  <div class="safety-grid">
+    <div class="safety-item"><div class="safety-ico">🦺</div><div><div class="safety-text">Mandatory PPE for All</div><div class="safety-sub">Helmets, gloves, goggles & aprons provided</div></div></div>
+    <div class="safety-item"><div class="safety-ico">🚒</div><div><div class="safety-text">Fire Suppression Systems</div><div class="safety-sub">CO₂ extinguishers at every station</div></div></div>
+    <div class="safety-item"><div class="safety-ico">🏥</div><div><div class="safety-text">First Aid on Site</div><div class="safety-sub">Medical kit and trained staff always present</div></div></div>
+    <div class="safety-item"><div class="safety-ico">📋</div><div><div class="safety-text">Safety Induction Mandatory</div><div class="safety-sub">All students briefed before first session</div></div></div>
+    <div class="safety-item"><div class="safety-ico">🔒</div><div><div class="safety-text">Lockout / Tagout Procedures</div><div class="safety-sub">Strict machine isolation protocols enforced</div></div></div>
+    <div class="safety-item"><div class="safety-ico">👷</div><div><div class="safety-text">Trained Supervisors</div><div class="safety-sub">Expert technician present at every session</div></div></div>
+  </div>
+</div>
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="foot-logo"><span class="flt">EIEM</span><span class="fls">Est. 2001</span></div>
+      <p>Elitte Institute of Engineering &amp; Management is committed to producing world-class engineers and managers who lead innovation and drive growth across industries.</p>
+      <div class="socials">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Twitter">&#x1D54F;</a>
+        <a href="#" title="Instagram">&#x1F4F8;</a>
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="YouTube">&#x25B6;</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Quick Links</h4>
+      <a href="#">Home</a><a href="#">About EIEM</a><a href="#">Admissions</a>
+      <a href="#">Academics</a><a href="#">Departments</a><a href="#">Events</a>
+      <a href="#">Notice Board</a>
+    </div>
+    <div class="foot-col">
+      <h4>Resources</h4>
+      <a href="#">E-Prospectus 2026&ndash;27</a><a href="#">NDLI Library</a>
+      <a href="#">Online Fee Payment</a><a href="#">Grievance Cell</a>
+      <a href="#">Student Login</a><a href="#">Result Portal</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact Us</h4>
+      <div class="fci"><span class="fci-i">&#x1F4CD;</span><span>PO: Karnamadhabpur, PS: Ghola, Sodepur, Kolkata &ndash; 700113</span></div>
+      <div class="fci"><span class="fci-i">&#x1F4DE;</span><span>+91 9163316560 / +91 9831500840</span></div>
+      <div class="fci"><span class="fci-i">&#x2709;</span><span>info@elitte.edu.in</span></div>
+      <div class="fci"><span class="fci-i">&#x1F550;</span><span>Mon&ndash;Sat: 9:00 AM &ndash; 5:00 PM</span></div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Elitte Institute of Engineering &amp; Management. All rights reserved.</span>
+    <span>Approved by AICTE &middot; Affiliated to WBSCT &amp; VE &amp; SD</span>
+  </div>
+  </footer>
+
+</body>
+</html>

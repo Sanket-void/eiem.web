@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Training & Placement | EIEM</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b3e;
+    --blue: #1a3a8f;
+    --mid-blue: #2756c5;
+    --accent-orange: #f5a623;
+    --accent-amber: #e8830a;
+    --light-blue: #dce8ff;
+    --white: #ffffff;
+    --off-white: #f4f7ff;
+    --gray: #6b7a99;
+    --light-gray: #eef1f8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--white);
+    color: var(--navy);
+    line-height: 1.7;
+  }
+  /* Header / Hero */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+    padding: 80px 48px 60px;
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero h1 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .hero p {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.95;
+  }
+  section { padding: 72px 48px; }
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--mid-blue); margin-bottom: 12px;
+  }
+  .section-tag::before { content: ''; display: block; width: 28px; height: 3px; background: var(--accent-orange); }
+  h2.section-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2.4rem; font-weight: 700; color: var(--navy); margin-bottom: 20px;
+  }
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 40px 0;
+    background: var(--off-white);
+    padding: 32px;
+    border-radius: 16px;
+  }
+  .info-item {
+    display: flex;
+    gap: 16px;
+  }
+  .info-label { font-weight: 700; color: var(--mid-blue); width: 140px; flex-shrink: 0; }
+  .objectives {
+    background: var(--off-white);
+    padding: 40px;
+    border-radius: 16px;
+    border-left: 6px solid var(--accent-orange);
+  }
+  .objectives ul {
+    list-style: none;
+  }
+  .objectives li {
+    padding: 12px 0;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    gap: 12px;
+  }
+  .objectives li:last-child { border-bottom: none; }
+  .objectives li::before {
+    content: '▶';
+    color: var(--accent-orange);
+    font-size: 1.1rem;
+  }
+  
+  /* Footer */
+  footer { background: var(--navy); color: #8ba3d4; padding: 48px; }
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.2fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+  .foot-logo{
+    width:56px;height:56px;border-radius:12px;
+    background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.16);
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    margin-bottom:.9rem
+  }
+  .foot-logo .flt{
+    font-family:'Rajdhani',sans-serif;
+    font-size:1.35rem;font-weight:900;color:#fff;line-height:1
+  }
+  .foot-logo .fls{
+    font-size:.37rem;color:rgba(255,255,255,.52);letter-spacing:.08em
+  }
+  .foot-brand p{
+    font-size:.76rem;line-height:1.76;margin-bottom:1.15rem
+  }
+  .socials{
+    display:flex;gap:.5rem
+  }
+  .socials a{
+    width:34px;height:34px;border-radius:8px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.12);
+    display:flex;align-items:center;justify-content:center;
+    color:rgba(255,255,255,.6);font-size:.8rem;
+    transition:background .2s,color .2s,transform .2s
+  }
+  .socials a:hover{
+    background:var(--blue);color:#fff;transform:translateY(-3px)
+  }
+  .foot-col h4{
+    color:#fff;font-size:.78rem;font-weight:700;
+    text-transform:uppercase;letter-spacing:.07em;
+    margin-bottom:1.15rem;padding-bottom:.55rem;
+    position:relative
+  }
+  .foot-col h4::after{
+    content:'';position:absolute;bottom:0;left:0;
+    width:28px;height:2px;background:var(--accent-orange)
+  }
+  .foot-col a{
+    display:block;color:rgba(255,255,255,.58);
+    font-size:.75rem;margin-bottom:.5rem;
+    transition:color .18s,padding-left .18s
+  }
+  .foot-col a:hover{
+    color:var(--accent-orange);padding-left:5px
+  }
+  .fci{
+    display:flex;align-items:flex-start;gap:.55rem;
+    margin-bottom:.74rem;font-size:.75rem
+  }
+  .fci-i{font-size:.88rem;margin-top:.1rem;flex-shrink:0}
+  .foot-bottom{
+    max-width:1200px;margin:0 auto;
+    border-top:1px solid rgba(255,255,255,.08);
+    padding-top:1.8rem;
+    display:flex;justify-content:space-between;
+    align-items:center;flex-wrap:wrap;gap:1rem;
+    font-size:.7rem;color:rgba(255,255,255,.35)
+  }
+  @media (max-width: 900px) {
+    .foot-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .hero h1 { font-size: 2.4rem; }
+  }
+</style>
+</head>
+<body>
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="section-tag" style="color: #f5a623; justify-content: center; margin-bottom: 16px;">Training & Placement Cell</div>
+    <h1>Training & Placement</h1>
+    <p>Bridging the gap between academic excellence and industry readiness</p>
+  </div>
+</section>
+<!-- OVERVIEW -->
+<section>
+  <div class="section-tag">Placement Cell</div>
+  <h2 class="section-title">Overview</h2>
+  <div class="info-grid">
+    <div class="info-item">
+      <div class="info-label">Placement Officer</div>
+      <div>Mrs. Banani Ghosh</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Email ID</div>
+      <div>Mrs. Banani Ghosh</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Phone</div>
+      <div>+91 83369 17465</div>
+    </div>
+  </div>
+  <p style="max-width: 900px; margin-bottom: 40px;">
+    Here we nurture the students to boost up their technical knowledge, talents and personality to face the industry requirements.
+  </p>
+  <div class="objectives">
+    <h3 style="margin-bottom: 20px; color: var(--navy);">Objectives of Training and Placement Department</h3>
+    <ul>
+      <li>To maintain close liaison with industries / institutions / organizations to facilitate placements of the students.</li>
+      <li>To arrange for all recruitment drives and other related activities.</li>
+      <li>To plan and organize career talks & personality development programmes.</li>
+      <li>To upgrade the student's skill sets commensurate with the expectations of the industry.</li>
+      <li>To generate awareness amongst the students with respect to future career options available for them.</li>
+      <li>To motivate and counsel students about Industry practices and improving their soft skills.</li>
+      <li>To give Industry feedback to the departments concerned for improving student's skill set.</li>
+      <li>To Assist faculty in inviting speakers for Guest Lectures and Technical Workshops.</li>
+    </ul>
+  </div>
+</section>
+<!-- TRAINING DETAILS -->
+<section style="background: var(--off-white);">
+  <div class="section-tag">Training</div>
+  <h2 class="section-title">Training Details</h2>
+  <p style="max-width: 800px; margin-bottom: 32px;">
+    The Training and Placement Cell of Elitte Institute of Engineering & Management aims to mold the students into professional and employable citizens.
+  </p>
+  <div class="objectives" style="border-left-color: var(--mid-blue);">
+    <ul>
+      <li>General and Technical Aptitude Training</li>
+      <li>Professional Grooming and Business Etiquette and developing soft skills.</li>
+      <li>Team Building and Leadership Coaching</li>
+    </ul>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="foot-logo"><span class="flt">EIEM</span><span class="fls">Est. 2001</span></div>
+      <p>Elitte Institute of Engineering &amp; Management is committed to developing skilled engineers with strong industry readiness and professional excellence.</p>
+      <div class="socials">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Twitter">&#x1D54F;</a>
+        <a href="#" title="Instagram">&#x1F4F8;</a>
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="YouTube">&#x25B6;</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Quick Links</h4>
+      <a href="#">Home</a><a href="#">About EIEM</a><a href="#">Admissions</a>
+      <a href="#">Academics</a><a href="#">Departments</a><a href="#">Placements</a>
+    </div>
+    <div class="foot-col">
+      <h4>Resources</h4>
+      <a href="#">E-Prospectus 2026–27</a><a href="#">Online Fee Payment</a>
+      <a href="#">Student Login</a><a href="#">Result Portal</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact Us</h4>
+      <div class="fci"><span class="fci-i">📍</span><span>PO: Karnamadhabpur, PS: Ghola, Sodepur, Kolkata – 700113</span></div>
+      <div class="fci"><span class="fci-i">📞</span><span>+91 9163316560 / +91 9831500840</span></div>
+      <div class="fci"><span class="fci-i">✉️</span><span>info@elitte.edu.in</span></div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Elitte Institute of Engineering &amp; Management. All rights reserved.</span>
+    <span>Approved by AICTE · Affiliated to MAKAUT, WB</span>
+  </div>
+</footer>
+</body>
+</html> 

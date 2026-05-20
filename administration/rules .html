@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rules &amp; Regulations – EIEM</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:wght@700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+    --navy:#071a3e;--blue:#1649cc;--sky:#3b82f6;
+  --accent:#f97316;--gold:#f59e0b;--light:#e8f0fe;
+  --gray:#64748b;--text:#0f172a;--white:#fff;
+  --grad-nav:linear-gradient(90deg,#071a3e 0%,#1649cc 60%,#2563eb 100%);
+  --grad-btn:linear-gradient(135deg,#f97316,#f59e0b);
+  --grad-hero:linear-gradient(135deg,rgba(7,26,62,.93) 0%,rgba(22,73,204,.78) 55%,rgba(59,130,246,.55) 100%);
+  --grad-foot:linear-gradient(160deg,#040d1f 0%,#071a3e 60%,#0d2760 100%);
+  --shadow-xl:0 24px 64px rgba(7,26,62,.22);
+  --shadow-lg:0 12px 36px rgba(7,26,62,.14);
+  --shadow-sm:0 4px 16px rgba(7,26,62,.08);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#f0f5ff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+.page-hero{background:var(--grad-nav);padding:3.5rem 2rem 3rem;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1400&q=80') center/cover no-repeat;opacity:.12}
+.page-hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.breadcrumb{display:flex;align-items:center;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.breadcrumb span{font-size:.7rem;color:rgba(255,255,255,.6)}
+.breadcrumb .sep{color:rgba(255,255,255,.3)}
+.breadcrumb .cur{color:var(--gold);font-weight:600}
+.page-hero h1{font-family:'Fraunces',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);color:#fff;font-weight:900;line-height:1.2;margin-bottom:.5rem}
+.page-hero p{color:rgba(255,255,255,.75);font-size:.9rem;max-width:600px}
+.hero-accent-bar{width:60px;height:4px;background:var(--grad-btn);border-radius:2px;margin:1rem 0}
+
+.main-content{max-width:1100px;margin:0 auto;padding:3.5rem 2rem}
+
+/* INTRO BLOCK */
+.intro-block{
+  background:#fff;border-radius:20px;padding:2rem 2.2rem;
+  box-shadow:var(--shadow-sm);border-left:5px solid var(--blue);
+  margin-bottom:2.5rem;
+  transition:box-shadow .3s, transform .3s;
+}
+.intro-block:hover{transform:translateY(-4px);box-shadow:0 0 0 2px var(--blue),0 0 28px 4px rgba(22,73,204,.12),var(--shadow-lg)}
+.intro-block p{font-size:.88rem;line-height:1.8;color:#334155}
+
+/* SECTION */
+.rule-section{margin-bottom:3rem}
+.section-badge{display:inline-block;background:var(--light);color:var(--blue);font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.26rem .78rem;border-radius:999px;margin-bottom:.7rem}
+.section-title{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:800;color:var(--navy);margin-bottom:1.2rem}
+
+/* RULE CARDS */
+.rule-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}
+.rule-card{
+  background:#fff;border-radius:16px;padding:1.6rem 1.5rem;
+  border:1.5px solid #dde5f5;
+  position:relative;overflow:hidden;
+  transition:all .28s;cursor:default;
+}
+.rule-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad-nav);transform:scaleX(0);transform-origin:left;transition:transform .32s}
+.rule-card:hover{transform:translateY(-6px);border-color:var(--blue);box-shadow:0 0 0 2px var(--blue),0 0 32px 6px rgba(22,73,204,.16),var(--shadow-lg)}
+.rule-card:hover::before{transform:scaleX(1)}
+.rule-num{font-family:'Fraunces',serif;font-size:2rem;font-weight:900;color:var(--light);line-height:1;margin-bottom:.5rem}
+.rule-head{font-size:.87rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.rule-body{font-size:.78rem;color:var(--gray);line-height:1.7}
+
+/* NUMBERED LIST STYLE */
+.rule-list{display:flex;flex-direction:column;gap:.6rem}
+.rule-item{
+  display:flex;align-items:flex-start;gap:.85rem;
+  background:#fff;border-radius:11px;padding:.9rem 1.1rem;
+  border:1.5px solid #eef2ff;
+  transition:all .24s;cursor:default;
+}
+.rule-item:hover{border-color:var(--sky);background:#f0f7ff;transform:translateX(6px);box-shadow:0 0 0 1.5px var(--sky),0 0 14px 2px rgba(59,130,246,.1)}
+.rule-item-num{
+  width:26px;height:26px;border-radius:50%;flex-shrink:0;
+  background:var(--grad-nav);color:#fff;
+  font-size:.68rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  margin-top:.08rem;
+}
+.rule-item-text{font-size:.8rem;font-weight:500;color:var(--navy);line-height:1.6}
+
+footer{background:var(--grad-foot);color:rgba(255,255,255,.72);padding:4.5rem 2rem 2rem}
+.foot-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:3rem;margin-bottom:3rem}
+.foot-logo{width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:.9rem}
+.foot-logo .flt{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:900;color:#fff;line-height:1}
+.foot-logo .fls{font-size:.37rem;color:rgba(255,255,255,.52);letter-spacing:.08em}
+.foot-brand p{font-size:.76rem;line-height:1.76;margin-bottom:1.15rem}
+.socials{display:flex;gap:.5rem}
+.socials a{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:.8rem;transition:background .2s,color .2s,transform .2s}
+.socials a:hover{background:var(--blue);color:#fff;transform:translateY(-3px)}
+.foot-col h4{color:#fff;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.15rem;padding-bottom:.55rem;position:relative}
+.foot-col h4::after{content:'';position:absolute;bottom:0;left:0;width:28px;height:2px;background:var(--grad-btn)}
+.foot-col a{display:block;color:rgba(255,255,255,.58);font-size:.75rem;margin-bottom:.5rem;transition:color .18s,padding-left .18s}
+.foot-col a:hover{color:var(--gold);padding-left:5px}
+.fci{display:flex;align-items:flex-start;gap:.55rem;margin-bottom:.74rem;font-size:.75rem}
+.fci-i{font-size:.88rem;margin-top:.1rem;flex-shrink:0}
+.foot-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.7rem;color:rgba(255,255,255,.35)}
+
+
+/* WARNING BLOCK */
+.warn-block{
+  background:linear-gradient(135deg,#fff7ed,#fff);
+  border-radius:16px;padding:1.5rem 1.6rem;
+  border:1.5px solid #fed7aa;border-left:5px solid var(--accent);
+  margin-bottom:2rem;
+  transition:all .28s;cursor:default;
+}
+.warn-block:hover{box-shadow:0 0 0 2px var(--accent),0 0 24px 4px rgba(249,115,22,.12);transform:translateY(-3px)}
+.warn-block h4{font-size:.85rem;font-weight:700;color:#c2410c;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
+.warn-block p{font-size:.78rem;color:#7c2d12;line-height:1.7}
+
+@media(max-width:700px){.main-content{padding:2rem 1rem}.rule-cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <span>Home</span><span class="sep">›</span>
+      <span>Administration</span><span class="sep">›</span>
+      <span class="cur">Rules &amp; Regulations</span>
+    </div>
+    <h1>Rules &amp; Regulations</h1>
+    <div class="hero-accent-bar"></div>
+    <p>Guidelines governing academic integrity, conduct and institutional life at Elitte Institute of Engineering &amp; Management</p>
+  </div>
+</div>
+
+<div class="main-content">
+
+  <div class="intro-block">
+    <p>The Rules and Regulations of Elitte Institute of Engineering & Management are framed in accordance with AICTE guidelines, WBSCT & VE & SD norms and the institution's own charter of excellence. All students, faculty and staff are expected to familiarise themselves with these rules and uphold them with integrity. These regulations are reviewed annually and updated as required by regulatory authorities.</p>
+  </div>
+
+  <!-- Academic Rules -->
+  <div class="rule-section">
+    <span class="section-badge">Academic</span>
+    <div class="section-title">Academic Rules</div>
+    <div class="rule-cards">
+      <div class="rule-card">
+        <div class="rule-num">01</div>
+        <div class="rule-head">Attendance Requirement</div>
+        <div class="rule-body">A minimum of 75% attendance in theory and practical classes is mandatory for all students to be eligible to appear in semester examinations. Medical exemptions require certified documentation submitted to the Principal's office within 7 days.</div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">02</div>
+        <div class="rule-head">Examination Conduct</div>
+        <div class="rule-body">Students must carry their valid identity card during all examinations. Possession of unauthorised materials, electronic devices or communication with other candidates during examinations will result in immediate disqualification and disciplinary action.</div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">03</div>
+        <div class="rule-head">Academic Integrity</div>
+        <div class="rule-body">Plagiarism in assignments, projects or thesis work is strictly prohibited. All submissions are subject to similarity checks. Plagiarism above 25% will attract penalties ranging from assignment cancellation to suspension.</div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">04</div>
+        <div class="rule-head">Laboratory & Workshop</div>
+        <div class="rule-body">Students must adhere to safety protocols in all labs and workshops. Protective equipment must be worn at all times. Any damage to equipment due to negligence will be recovered from the student concerned.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Code of Conduct -->
+  <div class="rule-section">
+    <span class="section-badge">Conduct</span>
+    <div class="section-title">Code of Conduct</div>
+    <div class="rule-list">
+      <div class="rule-item"><div class="rule-item-num">1</div><div class="rule-item-text">All students must maintain respectful and courteous behaviour towards faculty, staff, fellow students and visitors at all times within the campus and at external events representing EIEM.</div></div>
+      <div class="rule-item"><div class="rule-item-num">2</div><div class="rule-item-text">Use of mobile phones is strictly prohibited inside classrooms, examination halls and laboratories. Phones must be kept on silent mode in library and study areas.</div></div>
+      <div class="rule-item"><div class="rule-item-num">3</div><div class="rule-item-text">Students are expected to dress appropriately and professionally. Formal attire is required on institute days, examinations and industry visits. The dress code policy is displayed at all entry points.</div></div>
+      <div class="rule-item"><div class="rule-item-num">4</div><div class="rule-item-text">Smoking, consumption of alcohol or any controlled substance is strictly prohibited on campus premises. Violation is grounds for immediate expulsion.</div></div>
+      <div class="rule-item"><div class="rule-item-num">5</div><div class="rule-item-text">Any form of verbal, physical or cyberbullying, harassment or discrimination based on gender, caste, religion or ethnicity is a punishable offence as per IPC and institutional rules.</div></div>
+      <div class="rule-item"><div class="rule-item-num">6</div><div class="rule-item-text">Students must not engage in political activities, unauthorised assemblies, distribution of pamphlets or any activity that disrupts the academic environment of the campus.</div></div>
+      <div class="rule-item"><div class="rule-item-num">7</div><div class="rule-item-text">Permission from the Head of Department and Principal is required for any student event, external visit, industrial trip or off-campus activity conducted under the institute's name.</div></div>
+    </div>
+  </div>
+
+  <!-- Warning Block -->
+  <div class="warn-block">
+    <h4>⚠️ Important Notice</h4>
+    <p>Violation of these rules may result in disciplinary action including suspension, expulsion or referral to law enforcement authorities as appropriate. Students are encouraged to report violations to the Disciplinary Committee or through the official Grievance Portal. All complaints will be treated with strict confidentiality.</p>
+  </div>
+
+  <!-- Library & IT Rules -->
+  <div class="rule-section">
+    <span class="section-badge">Library &amp; IT</span>
+    <div class="section-title">Library &amp; IT Usage Rules</div>
+    <div class="rule-cards">
+      <div class="rule-card">
+        <div class="rule-num">A</div>
+        <div class="rule-head">Library Usage</div>
+        <div class="rule-body">Books must be returned within the stipulated loan period. A fine of ₹5 per day per book is charged for overdue returns. Damage or loss of library property will be charged at replacement cost plus a penalty.</div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">B</div>
+        <div class="rule-head">Internet &amp; Network Policy</div>
+        <div class="rule-body">The institute's internet and network infrastructure is for academic purposes only. Access to social media, streaming platforms and non-academic content is restricted. Misuse of network resources is subject to disciplinary action.</div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-num">C</div>
+        <div class="rule-head">Software &amp; Data</div>
+        <div class="rule-body">Installation of unlicensed software on institute computers is prohibited. Students are personally responsible for data stored on institute systems. The institute reserves the right to audit system usage logs.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="foot-logo"><span class="flt">EIEM</span><span class="fls">Est. 2001</span></div>
+      <p>Elitte Institute of Engineering &amp; Management is committed to producing world-class engineers and managers who lead innovation and drive growth across industries.</p>
+      <div class="socials">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Twitter">&#x1D54F;</a>
+        <a href="#" title="Instagram">&#x1F4F8;</a>
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="YouTube">&#x25B6;</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Quick Links</h4>
+      <a href="#">Home</a><a href="#">About EIEM</a><a href="#">Admissions</a>
+      <a href="#">Academics</a><a href="#">Departments</a><a href="#">Events</a>
+      <a href="#">Notice Board</a>
+    </div>
+    <div class="foot-col">
+      <h4>Resources</h4>
+      <a href="#">E-Prospectus 2026&ndash;27</a><a href="#">NDLI Library</a>
+      <a href="#">Online Fee Payment</a><a href="#">Grievance Cell</a>
+      <a href="#">Student Login</a><a href="#">Result Portal</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact Us</h4>
+      <div class="fci"><span class="fci-i">&#x1F4CD;</span><span>PO: Karnamadhabpur, PS: Ghola, Sodepur, Kolkata &ndash; 700113</span></div>
+      <div class="fci"><span class="fci-i">&#x1F4DE;</span><span>+91 9163316560 / +91 9831500840</span></div>
+      <div class="fci"><span class="fci-i">&#x2709;</span><span>info@elitte.edu.in</span></div>
+      <div class="fci"><span class="fci-i">&#x1F550;</span><span>Mon&ndash;Sat: 9:00 AM &ndash; 5:00 PM</span></div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Elitte Institute of Engineering &amp; Management. All rights reserved.</span>
+    <span>Approved by AICTE &middot; Affiliated to WBSCT &amp; VE &amp; SD</span>
+  </div>
+</footer>
+</body>
+</html>

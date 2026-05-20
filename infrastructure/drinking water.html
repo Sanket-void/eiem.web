@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Drinking Water – EIEM Infrastructure</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:wght@700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#071a3e;--blue:#1649cc;--sky:#3b82f6;
+  --accent:#f97316;--gold:#f59e0b;--light:#e8f0fe;
+  --gray:#64748b;--text:#0f172a;--white:#fff;
+  --grad-nav:linear-gradient(90deg,#071a3e 0%,#1649cc 60%,#2563eb 100%);
+  --grad-btn:linear-gradient(135deg,#f97316,#f59e0b);
+  --grad-hero:linear-gradient(135deg,rgba(7,26,62,.93) 0%,rgba(22,73,204,.78) 55%,rgba(59,130,246,.55) 100%);
+  --grad-foot:linear-gradient(160deg,#040d1f 0%,#071a3e 60%,#0d2760 100%);
+  --shadow-xl:0 24px 64px rgba(7,26,62,.22);
+  --shadow-lg:0 12px 36px rgba(7,26,62,.14);
+  --shadow-sm:0 4px 16px rgba(7,26,62,.08);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#f0f5ff;overflow-x:hidden}
+
+.page-hero{background:var(--grad-nav);padding:3.5rem 2rem 2.5rem;position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 30%, rgba(245,158,11,.15) 0%, transparent 60%);pointer-events:none;}
+.page-hero::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:56px;background:#f0f5ff;clip-path:ellipse(55% 100% at 50% 100%);}
+.hero-inner{max-width:960px;margin:0 auto;position:relative;z-index:1;}
+.breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.7rem;color:rgba(255,255,255,.6);margin-bottom:1.2rem;letter-spacing:.04em;text-transform:uppercase;}
+.breadcrumb span{color:var(--gold)}
+.page-hero h1{font-family:'Fraunces',serif;font-size:clamp(2rem,5vw,3rem);font-weight:900;color:#fff;line-height:1.1;text-shadow:0 4px 20px rgba(7,26,62,.4);}
+.page-hero h1 span{color:var(--gold)}
+.hero-sub{font-size:.92rem;color:rgba(255,255,255,.75);margin-top:.8rem;max-width:520px;line-height:1.7;}
+.hero-badges{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.5rem}
+.h-badge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);padding:.28rem .9rem;border-radius:30px;font-size:.68rem;font-weight:600;color:rgba(255,255,255,.9);letter-spacing:.04em;backdrop-filter:blur(6px);transition:all .25s;cursor:default;}
+.h-badge:hover{background:var(--gold);color:var(--navy);border-color:var(--gold);box-shadow:var(--glow-gold);transform:translateY(-2px);}
+
+.page-body{max-width:960px;margin:0 auto;padding:2.5rem 1.5rem 4rem;}
+.sec-label{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,rgba(22,73,204,.09),rgba(59,130,246,.06));border:1px solid rgba(22,73,204,.18);border-radius:30px;padding:.3rem 1rem;font-size:.68rem;font-weight:700;color:var(--blue);letter-spacing:.06em;text-transform:uppercase;margin-bottom:.9rem;}
+.sec-label::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;}
+.section-title{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:800;color:var(--navy);margin-bottom:1.3rem;}
+
+.intro-card{background:#fff;border-radius:18px;padding:2rem 2.2rem;box-shadow:var(--shadow-sm);border-left:4px solid var(--accent);margin-bottom:2.5rem;transition:all .3s;}
+.intro-card:hover{box-shadow:var(--shadow-glow);transform:translateY(-3px)}
+.intro-card p{font-size:.96rem;line-height:1.8;color:#334155;}
+
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1.2rem;margin-bottom:2.5rem;}
+.stat-box{background:#fff;border-radius:16px;padding:1.5rem 1.2rem;text-align:center;box-shadow:var(--shadow-sm);border-top:3px solid var(--blue);cursor:default;transition:all .3s cubic-bezier(.23,1,.32,1);position:relative;overflow:hidden;}
+.stat-box::before{content:'';position:absolute;inset:0;background:var(--grad-nav);opacity:0;transition:opacity .3s;border-radius:16px;}
+.stat-box:hover{transform:translateY(-6px) scale(1.03);box-shadow:var(--shadow-glow);}
+.stat-box:hover::before{opacity:1}
+.stat-box:hover .stat-num,.stat-box:hover .stat-lbl{color:#fff;position:relative;z-index:1}
+.stat-num{font-family:'Fraunces',serif;font-size:2rem;font-weight:900;color:var(--navy);line-height:1;margin-bottom:.35rem;transition:color .3s;}
+.stat-lbl{font-size:.72rem;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:.05em;transition:color .3s;}
+
+.tile-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.3rem;margin-bottom:2.5rem;}
+.tile{background:#fff;border-radius:16px;padding:1.6rem 1.5rem;box-shadow:var(--shadow-sm);border:1px solid rgba(22,73,204,.07);cursor:default;transition:all .32s cubic-bezier(.23,1,.32,1);position:relative;overflow:hidden;}
+.tile::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--grad-btn);transform:scaleX(0);transform-origin:left;transition:transform .32s ease;}
+.tile:hover{transform:translateY(-7px);box-shadow:0 20px 50px rgba(22,73,204,.22), 0 0 0 2px rgba(22,73,204,.12);}
+.tile:hover::after{transform:scaleX(1)}
+.tile-icon{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,rgba(22,73,204,.1),rgba(59,130,246,.08));display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:1rem;transition:all .3s;}
+.tile:hover .tile-icon{background:var(--grad-btn);box-shadow:var(--glow-accent);transform:scale(1.1) rotate(-4deg);}
+.tile h3{font-size:.88rem;font-weight:700;color:var(--navy);margin-bottom:.45rem;}
+.tile p{font-size:.78rem;line-height:1.7;color:var(--gray);}
+
+footer{background:var(--grad-foot);color:rgba(255,255,255,.72);padding:4.5rem 2rem 2rem}
+.foot-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:3rem;margin-bottom:3rem}
+.foot-logo{width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:.9rem}
+.foot-logo .flt{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:900;color:#fff;line-height:1}
+.foot-logo .fls{font-size:.37rem;color:rgba(255,255,255,.52);letter-spacing:.08em}
+.foot-brand p{font-size:.76rem;line-height:1.76;margin-bottom:1.15rem}
+.socials{display:flex;gap:.5rem}
+.socials a{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:.8rem;transition:background .2s,color .2s,transform .2s}
+.socials a:hover{background:var(--blue);color:#fff;transform:translateY(-3px)}
+.foot-col h4{color:#fff;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.15rem;padding-bottom:.55rem;position:relative}
+.foot-col h4::after{content:'';position:absolute;bottom:0;left:0;width:28px;height:2px;background:var(--grad-btn)}
+.foot-col a{display:block;color:rgba(255,255,255,.58);font-size:.75rem;margin-bottom:.5rem;transition:color .18s,padding-left .18s}
+.foot-col a:hover{color:var(--gold);padding-left:5px}
+.fci{display:flex;align-items:flex-start;gap:.55rem;margin-bottom:.74rem;font-size:.75rem}
+.fci-i{font-size:.88rem;margin-top:.1rem;flex-shrink:0}
+.foot-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.7rem;color:rgba(255,255,255,.35)}
+
+
+/* COLLECTION TABS */
+.collection-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2.5rem;}
+.coll-card{
+  background:#fff;border-radius:14px;padding:1.4rem 1.2rem;
+  box-shadow:var(--shadow-sm);text-align:center;cursor:default;
+  transition:all .3s cubic-bezier(.23,1,.32,1);
+  border-bottom:3px solid transparent;
+  position:relative;overflow:hidden;
+}
+.coll-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 18px 45px rgba(22,73,204,.2);
+  border-bottom-color:var(--accent);
+}
+.coll-card:hover .coll-icon{transform:scale(1.15);background:var(--grad-btn);box-shadow:var(--glow-accent);}
+.coll-icon{
+  width:52px;height:52px;border-radius:14px;
+  background:linear-gradient(135deg,rgba(22,73,204,.09),rgba(59,130,246,.06));
+  display:flex;align-items:center;justify-content:center;font-size:1.6rem;
+  margin:0 auto .8rem;transition:all .3s;
+}
+.coll-card h4{font-size:.85rem;font-weight:700;color:var(--navy);margin-bottom:.3rem;}
+.coll-count{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:900;color:var(--blue);margin-bottom:.2rem;}
+.coll-card p{font-size:.72rem;color:var(--gray);}
+
+/* HOURS TABLE */
+.table-wrap{background:#fff;border-radius:18px;box-shadow:var(--shadow-sm);overflow:hidden;margin-bottom:2.5rem;transition:box-shadow .3s;}
+.table-wrap:hover{box-shadow:var(--shadow-glow)}
+table{width:100%;border-collapse:collapse;}
+thead{background:var(--grad-nav);}
+thead th{padding:.85rem 1.2rem;font-size:.72rem;font-weight:700;color:rgba(255,255,255,.9);text-align:left;letter-spacing:.05em;text-transform:uppercase;}
+tbody tr{border-bottom:1px solid #eef2ff;transition:all .22s;cursor:default;}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:#e8f0fe;transform:translateX(4px)}
+tbody td{padding:.78rem 1.2rem;font-size:.8rem;color:#334155;}
+tbody td:first-child{font-weight:600;color:var(--navy);}
+.open-tag{display:inline-block;background:#dcfce7;color:#15803d;font-size:.6rem;font-weight:700;padding:.1rem .5rem;border-radius:20px;}
+.closed-tag{display:inline-block;background:#fee2e2;color:#b91c1c;font-size:.6rem;font-weight:700;padding:.1rem .5rem;border-radius:20px;}
+
+/* E-RESOURCES */
+.eresource-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.1rem;margin-bottom:2.5rem;}
+.er-card{background:#fff;border-radius:14px;padding:1.3rem 1.2rem;box-shadow:var(--shadow-sm);display:flex;gap:.9rem;align-items:flex-start;cursor:default;transition:all .3s cubic-bezier(.23,1,.32,1);border:1px solid rgba(22,73,204,.06);}
+.er-card:hover{transform:translateY(-5px);box-shadow:0 16px 42px rgba(22,73,204,.2), 0 0 0 2px rgba(249,115,22,.25);}
+.er-card:hover .er-icon{background:var(--grad-btn);box-shadow:var(--glow-accent);}
+.er-icon{width:38px;height:38px;min-width:38px;border-radius:10px;background:linear-gradient(135deg,rgba(249,115,22,.12),rgba(245,158,11,.08));display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:all .3s;}
+.er-body h4{font-size:.82rem;font-weight:700;color:var(--navy);margin-bottom:.25rem;}
+.er-body p{font-size:.74rem;line-height:1.6;color:var(--gray);}
+
+.notice-banner{background:linear-gradient(135deg,var(--navy),#1649cc);border-radius:16px;padding:1.6rem 2rem;display:flex;gap:1.2rem;align-items:center;box-shadow:var(--shadow-lg);margin-top:1rem;cursor:default;transition:all .3s;}
+.notice-banner:hover{box-shadow:var(--shadow-glow);transform:translateY(-3px)}
+.nb-icon{font-size:2rem;flex-shrink:0}
+.nb-text h4{font-size:.96rem;font-weight:700;color:#fff;margin-bottom:.3rem;}
+.nb-text p{font-size:.78rem;color:rgba(255,255,255,.75);line-height:1.6;}
+</style>
+</head>
+<body>
+
+<div class="page-hero">
+  <div class="hero-inner">
+    <div class="breadcrumb">Infrastructure <span>›</span> Drinking Water</div>
+    <h1>Safe <span>Drinking Water</span></h1>
+    <p class="hero-sub">Pure, safe and abundant drinking water for the entire EIEM campus — powered by advanced RO purification systems and regular quality monitoring.</p>
+    <div class="hero-badges">
+      <div class="h-badge">💧 24×7 Availability</div>
+      <div class="h-badge">🧪 BIS Compliant</div>
+      <div class="h-badge">🔄 Regular Testing</div>
+      <div class="h-badge">🌍 Eco-Friendly</div>
+    </div>
+  </div>
+</div>
+
+<div class="page-body">
+
+  <div class="sec-label">About the Facility</div>
+  <div class="intro-card">
+    <p>The EIEM Central Drinking Water System provides 100% purified drinking water across the entire campus through state-of-the-art Reverse Osmosis (RO) plants combined with UV disinfection and mineral cartridges. The facility ensures every student, faculty member, and staff has access to safe, great-tasting water at multiple convenient locations. Water quality is tested regularly by NABL-accredited laboratories.</p>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-box"><div class="stat-num">50,000+</div><div class="stat-lbl">Litres / Day</div></div>
+    <div class="stat-box"><div class="stat-num">18</div><div class="stat-lbl">RO Units</div></div>
+    <div class="stat-box"><div class="stat-num">65+</div><div class="stat-lbl">Water Points</div></div>
+    <div class="stat-box"><div class="stat-num">24×7</div><div class="stat-lbl">Supply</div></div>
+  </div>
+
+  <!-- COLLECTION -->
+  <div class="sec-label">Water Infrastructure</div>
+  <h2 class="section-title">Our Water Facilities</h2>
+  <div class="collection-grid">
+    <div class="coll-card">
+      <div class="coll-icon">🏭</div>
+      <div class="coll-count">8,000</div>
+      <h4>LPH Central RO Plant</h4>
+      <p>High-capacity industrial RO with automated operation</p>
+    </div>
+    <div class="coll-card">
+      <div class="coll-icon">🧪</div>
+      <div class="coll-count">Weekly</div>
+      <h4>Quality Testing</h4>
+      <p>pH, TDS, Microbial &amp; Heavy Metal checks</p>
+    </div>
+    <div class="coll-card">
+      <div class="coll-icon">📍</div>
+      <div class="coll-count">65+</div>
+      <h4>Water Coolers</h4>
+      <p>Strategically placed across academic blocks &amp; hostels</p>
+    </div>
+    <div class="coll-card">
+      <div class="coll-icon">🌊</div>
+      <div class="coll-count">12</div>
+      <h4>UV + Mineralizers</h4>
+      <p>Advanced post-RO treatment at key locations</p>
+    </div>
+    <div class="coll-card">
+      <div class="coll-icon">🛠</div>
+      <div class="coll-count">Daily</div>
+      <h4>Maintenance</h4>
+      <p>Round-the-clock technical team supervision</p>
+    </div>
+  </div>
+
+  <!-- FACILITIES -->
+  <div class="sec-label">Facilities &amp; Access</div>
+  <h2 class="section-title">Campus Water Network</h2>
+  <div class="tile-grid">
+    <div class="tile"><div class="tile-icon">💧</div><h3>Central RO Plant</h3><p>8,000 LPH state-of-the-art RO system with pre-treatment, high-pressure pumps, and automated backwash.</p></div>
+    <div class="tile"><div class="tile-icon">🧊</div><h3>Chilled Water Coolers</h3><p>Energy-efficient water coolers with instant cooling at all academic blocks, library, cafeteria &amp; hostels.</p></div>
+    <div class="tile"><div class="tile-icon">📱</div><h3>Smart Monitoring</h3><p>IoT-based real-time TDS &amp; flow monitoring with alerts for any deviation in water quality.</p></div>
+    <div class="tile"><div class="tile-icon">🚰</div><h3>Hostel &amp; Mess Supply</h3><p>Dedicated RO lines with storage tanks ensuring uninterrupted supply in all hostels and mess areas.</p></div>
+    <div class="tile"><div class="tile-icon">🔬</div><h3>Water Testing Lab</h3><p>On-campus facility for rapid testing of pH, TDS, turbidity, and bacteriological parameters.</p></div>
+    <div class="tile"><div class="tile-icon">♻️</div><h3>Waste Water Recycling</h3><p>RO reject water is reused for gardening and flushing, promoting sustainability.</p></div>
+  </div>
+
+  <!-- HOURS -->
+  <div class="sec-label">Availability &amp; Maintenance</div>
+  <h2 class="section-title">Supply Schedule</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Area</th><th>Supply Hours</th><th>Maintenance Window</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Academic Blocks</td><td>24 Hours</td><td>3:00 AM – 4:00 AM</td><td><span class="open-tag">24×7</span></td></tr>
+        <tr><td>Hostels &amp; Mess</td><td>24 Hours</td><td>2:30 AM – 3:30 AM</td><td><span class="open-tag">24×7</span></td></tr>
+        <tr><td>Library &amp; Admin</td><td>7:00 AM – 8:00 PM</td><td>As required</td><td><span class="open-tag">OPEN</span></td></tr>
+        <tr><td>Campus Wide</td><td>Round the Clock</td><td>Minimal disruption</td><td><span class="open-tag">ACTIVE</span></td></tr>
+        <tr><td>Emergency</td><td>Anytime</td><td>–</td><td><span class="open-tag">SUPPORT</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- E-RESOURCES -->
+  <div class="sec-label">Water Quality &amp; Reports</div>
+  <h2 class="section-title">Transparency &amp; Reports</h2>
+  <div class="eresource-grid">
+    <div class="er-card"><div class="er-icon">📊</div><div class="er-body"><h4>Monthly Water Quality Report</h4><p>Detailed lab reports of all parameters available on student portal.</p></div></div>
+    <div class="er-card"><div class="er-icon">🧪</div><div class="er-body"><h4>Real-time TDS Monitor</h4><p>Live dashboard showing current TDS levels at major water points.</p></div></div>
+    <div class="er-card"><div class="er-icon">📋</div><div class="er-body"><h4>Annual BIS Compliance</h4><p>Yearly certification as per IS 10500:2012 standards.</p></div></div>
+    <div class="er-card"><div class="er-icon">📢</div><div class="er-body"><h4>Maintenance Log</h4><p>Transparent record of filter changes, membrane cleaning &amp; servicing.</p></div></div>
+    <div class="er-card"><div class="er-icon">🌍</div><div class="er-body"><h4>Sustainability Report</h4><p>Water conservation and recycling achievements of the campus.</p></div></div>
+    <div class="er-card"><div class="er-icon">🛡️</div><div class="er-body"><h4>Emergency Contact</h4><p>24×7 water facility helpline for any issues.</p></div></div>
+  </div>
+
+  <div class="notice-banner">
+    <div class="nb-icon">💧</div>
+    <div class="nb-text">
+      <h4>Water Usage Guidelines</h4>
+      <p>All students are requested to use water responsibly. Report any leakage immediately to the maintenance team. Do not tamper with RO units or coolers. Clean drinking water is a shared resource — let’s keep it safe and pure for everyone.</p>
+    </div>
+  </div>
+
+</div>
+</body>
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="foot-logo"><span class="flt">EIEM</span><span class="fls">Est. 2001</span></div>
+      <p>Elitte Institute of Engineering &amp; Management is committed to producing world-class engineers and managers who lead innovation and drive growth across industries.</p>
+      <div class="socials">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Twitter">&#x1D54F;</a>
+        <a href="#" title="Instagram">&#x1F4F8;</a>
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="YouTube">&#x25B6;</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Quick Links</h4>
+      <a href="#">Home</a><a href="#">About EIEM</a><a href="#">Admissions</a>
+      <a href="#">Academics</a><a href="#">Departments</a><a href="#">Events</a>
+      <a href="#">Notice Board</a>
+    </div>
+    <div class="foot-col">
+      <h4>Resources</h4>
+      <a href="#">E-Prospectus 2026&ndash;27</a><a href="#">NDLI Library</a>
+      <a href="#">Online Fee Payment</a><a href="#">Grievance Cell</a>
+      <a href="#">Student Login</a><a href="#">Result Portal</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact Us</h4>
+      <div class="fci"><span class="fci-i">&#x1F4CD;</span><span>PO: Karnamadhabpur, PS: Ghola, Sodepur, Kolkata &ndash; 700113</span></div>
+      <div class="fci"><span class="fci-i">&#x1F4DE;</span><span>+91 9163316560 / +91 9831500840</span></div>
+      <div class="fci"><span class="fci-i">&#x2709;</span><span>info@elitte.edu.in</span></div>
+      <div class="fci"><span class="fci-i">&#x1F550;</span><span>Mon&ndash;Sat: 9:00 AM &ndash; 5:00 PM</span></div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Elitte Institute of Engineering &amp; Management. All rights reserved.</span>
+    <span>Approved by AICTE &middot; Affiliated to WBSCT &amp; VE &amp; SD</span>
+  </div>
+</footer>
+</html>
