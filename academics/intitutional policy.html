@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Institutional Plan – Elitte Institute of Engineering & Management</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:wght@700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#071a3e;--blue:#1649cc;--sky:#3b82f6;
+  --accent:#f97316;--gold:#f59e0b;--light:#e8f0fe;
+  --gray:#64748b;--text:#0f172a;--white:#fff;
+  --grad-nav:linear-gradient(90deg,#071a3e 0%,#1649cc 60%,#2563eb 100%);
+  --grad-btn:linear-gradient(135deg,#f97316,#f59e0b);
+  --grad-hero:linear-gradient(135deg,rgba(7,26,62,.93) 0%,rgba(22,73,204,.78) 55%,rgba(59,130,246,.55) 100%);
+  --grad-foot:linear-gradient(160deg,#040d1f 0%,#071a3e 60%,#0d2760 100%);
+  --shadow-xl:0 24px 64px rgba(7,26,62,.22);
+  --shadow-lg:0 12px 36px rgba(7,26,62,.14);
+  --shadow-sm:0 4px 16px rgba(7,26,62,.08);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--text);background:#f0f5ff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+
+
+
+.page-hero{background:var(--grad-nav);padding:4rem 2rem 3.5rem;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1562774053-701939374585?w=1400&q=80') center/cover;opacity:.12}
+.page-hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.page-breadcrumb{display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:rgba(255,255,255,.6);margin-bottom:1.2rem;flex-wrap:wrap}
+.page-breadcrumb a{color:rgba(255,255,255,.6);transition:color .2s}
+.page-breadcrumb a:hover{color:var(--gold)}
+.page-breadcrumb .sep{color:rgba(255,255,255,.3)}
+.page-breadcrumb .cur{color:var(--gold);font-weight:600}
+.page-hero h2{font-family:'Fraunces',serif;font-size:clamp(2rem,4vw,3rem);font-weight:900;color:#fff;margin-bottom:.65rem;line-height:1.2}
+.page-hero h2 span{color:var(--gold)}
+.page-hero p{color:rgba(255,255,255,.78);font-size:.95rem;max-width:600px;line-height:1.7}
+
+.acad-main{max-width:1200px;margin:0 auto;padding:3rem 2rem 5rem}
+.sec-badge{display:inline-block;background:var(--grad-btn);color:#fff;padding:.35rem .85rem;border-radius:20px;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:1rem}
+.sec-title{font-family:'Fraunces',serif;font-size:2.2rem;font-weight:900;color:var(--navy);margin-bottom:.6rem;line-height:1.2}
+.sec-sub{font-size:.92rem;color:var(--gray);line-height:1.8;max-width:700px;margin-bottom:2rem}
+
+.stat-strip{display:flex;flex-wrap:wrap;gap:1rem;margin:2rem 0}
+.stat-pill{background:var(--grad-nav);color:#fff;padding:.7rem 1.4rem;border-radius:12px;display:flex;flex-direction:column;align-items:center;min-width:120px;flex:1;box-shadow:0 6px 20px rgba(22,73,204,.25);transition:transform .2s,box-shadow .2s}
+.stat-pill:hover{transform:translateY(-4px);box-shadow:0 10px 32px rgba(22,73,204,.38)}
+.stat-pill .sp-num{font-family:'Fraunces',serif;font-size:1.7rem;font-weight:900;color:var(--gold);line-height:1}
+.stat-pill .sp-lbl{font-size:.63rem;font-weight:500;color:rgba(255,255,255,.65);margin-top:.22rem;letter-spacing:.05em;text-transform:uppercase;text-align:center}
+
+.highlight-strip{background:linear-gradient(135deg,var(--navy),var(--blue));border-radius:18px;padding:2rem 2.4rem;display:flex;align-items:flex-start;gap:1.5rem;margin:2.5rem 0;box-shadow:0 12px 40px rgba(7,26,62,.25)}
+.hs-icon{font-size:2.5rem;flex-shrink:0}
+.hs-text h4{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:.4rem}
+.hs-text p{font-size:.82rem;color:rgba(255,255,255,.72);line-height:1.7}
+
+.info-block{background:#fff;border-radius:18px;padding:2rem 2.2rem;border:1px solid #e8efff;box-shadow:var(--shadow-sm);margin-bottom:2rem;transition:box-shadow .25s,border-color .25s}
+.info-block:hover{box-shadow:0 0 0 2px rgba(22,73,204,.12),var(--shadow-lg);border-color:rgba(22,73,204,.2)}
+.info-block h3{font-family:'Fraunces',serif;font-size:1.12rem;font-weight:800;color:var(--navy);margin-bottom:.75rem;display:flex;align-items:center;gap:.55rem}
+.info-block h3 .ib-icon{font-size:1.2rem}
+.info-block p,.info-block li{font-size:.84rem;color:var(--gray);line-height:1.75}
+.info-block ul{padding-left:1.2rem;margin-top:.5rem}
+.info-block ul li{margin-bottom:.35rem}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.8rem}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem}
+
+.label-group{margin:2rem 0}
+.label-group-title{font-family:'Fraunces',serif;font-size:.85rem;font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.08em;margin-bottom:1rem;display:block}
+.labels-row{display:flex;flex-wrap:wrap;gap:.7rem}
+.glabel{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem .85rem;background:#fff;border:1.5px solid #dde5f5;border-radius:20px;font-size:.75rem;font-weight:600;color:var(--navy);transition:all .2s}
+.glabel:hover{border-color:var(--blue);background:var(--light)}
+.glabel-dot{width:8px;height:8px;border-radius:50%;background:var(--blue);transition:transform .2s}
+.glabel:hover .glabel-dot{transform:scale(1.4)}
+.glabel.gold{border-color:#f59e0b;color:#f59e0b}
+.glabel.gold .glabel-dot{background:#f59e0b}
+.glabel.green{border-color:#10b981;color:#10b981}
+.glabel.green .glabel-dot{background:#10b981}
+.glabel.accent{border-color:#f97316;color:#f97316}
+.glabel.accent .glabel-dot{background:#f97316}
+
+.styled-table{width:100%;border-collapse:collapse;margin-top:1.2rem;background:#fff;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-sm)}
+.styled-table thead{background:var(--grad-nav)}
+.styled-table thead th{color:#fff;font-size:.74rem;font-weight:700;padding:.85rem 1.2rem;text-align:left;letter-spacing:.04em;text-transform:uppercase}
+.styled-table tbody tr{border-bottom:1px solid #eef2ff;transition:background .15s}
+.styled-table tbody tr:last-child{border-bottom:none}
+.styled-table tbody tr:hover{background:var(--light)}
+.styled-table tbody td{padding:.78rem 1.2rem;font-size:.8rem;color:var(--text)}
+.styled-table tbody td:first-child{font-weight:600;color:var(--navy)}
+
+footer{background:var(--grad-foot);color:rgba(255,255,255,.72);padding:4.5rem 2rem 2rem}
+.foot-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:3rem;margin-bottom:3rem}
+.foot-logo{width:56px;height:56px;border-radius:12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:.9rem}
+.foot-logo .flt{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:900;color:#fff;line-height:1}
+.foot-logo .fls{font-size:.37rem;color:rgba(255,255,255,.52);letter-spacing:.08em}
+.foot-brand p{font-size:.76rem;line-height:1.76;margin-bottom:1.15rem}
+.socials{display:flex;gap:.5rem}
+.socials a{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:.8rem;transition:background .2s,color .2s,transform .2s}
+.socials a:hover{background:var(--blue);color:#fff;transform:translateY(-3px)}
+.foot-col h4{color:#fff;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.15rem;padding-bottom:.55rem;position:relative}
+.foot-col h4::after{content:'';position:absolute;bottom:0;left:0;width:28px;height:2px;background:var(--grad-btn)}
+.foot-col a{display:block;color:rgba(255,255,255,.58);font-size:.75rem;margin-bottom:.5rem;transition:color .18s,padding-left .18s}
+.foot-col a:hover{color:var(--gold);padding-left:5px}
+.fci{display:flex;align-items:flex-start;gap:.55rem;margin-bottom:.74rem;font-size:.75rem}
+.fci-i{font-size:.88rem;margin-top:.1rem;flex-shrink:0}
+.foot-bottom{max-width:1200px;margin:0 auto;border-top:1px solid rgba(255,255,255,.08);padding-top:1.8rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.7rem;color:rgba(255,255,255,.35)}
+
+@media(max-width:1024px){.two-col,.three-col{grid-template-columns:1fr 1fr}.foot-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){
+  .top-bar{flex-direction:column;gap:.3rem;padding:.38rem 1rem}
+  .main-header{flex-direction:column;align-items:flex-start;padding:.8rem 1rem}
+  .hdr-actions{width:100%}
+  .two-col,.three-col{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr;gap:2rem}
+  .foot-bottom{flex-direction:column;text-align:center}
+  .acad-main{padding:2.5rem 1rem 4rem}
+  .highlight-strip{flex-direction:column;gap:1rem}
+}
+</style>
+</head>
+<body>
+
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-breadcrumb">
+    </div>
+    <h2 id="hero-title">Institutional <span>Plan</span></h2>
+    <p id="hero-desc">A comprehensive strategic roadmap guiding EIEM academic, research, infrastructural, and governance activities toward long-term excellence.</p>
+  </div>
+</div>
+
+<div class="acad-main">
+  <span class="sec-badge">Strategic Framework</span>
+  <h2 class="sec-title">Institutional Plan</h2>
+  <p class="sec-sub">EIEM's institutional plan is a comprehensive roadmap aligning academic, infrastructural, research, and governance activities toward achieving long-term excellence in technical education.</p>
+
+  <div class="stat-strip">
+    <div class="stat-pill"><span class="sp-num">2026</span><span class="sp-lbl">Plan Period</span></div>
+    <div class="stat-pill"><span class="sp-num">7</span><span class="sp-lbl">Strategic Pillars</span></div>
+    <div class="stat-pill"><span class="sp-num">25+</span><span class="sp-lbl">Key Initiatives</span></div>
+    <div class="stat-pill"><span class="sp-num">5000+</span><span class="sp-lbl">Beneficiaries</span></div>
+  </div>
+
+  <div class="highlight-strip">
+    <div class="hs-icon">🗺️</div>
+    <div class="hs-text">
+      <h4>Vision 2030: Engineering Tomorrow's Leaders</h4>
+      <p>EIEM envisions becoming a nationally recognized institution for quality technical education, research-driven pedagogy, and industry-integrated learning by 2030 — anchored in values of integrity, innovation, and inclusivity.</p>
+    </div>
+  </div>
+
+  <div class="label-group">
+    <div class="label-group-title">📌 Strategic Objectives</div>
+    <div class="labels-row">
+      <span class="glabel"><span class="glabel-dot"></span>Academic Excellence</span>
+      <span class="glabel gold"><span class="glabel-dot"></span>Research Promotion</span>
+      <span class="glabel green"><span class="glabel-dot"></span>Industry Collaboration</span>
+      <span class="glabel accent"><span class="glabel-dot"></span>Student Development</span>
+      <span class="glabel"><span class="glabel-dot"></span>Faculty Enhancement</span>
+      <span class="glabel gold"><span class="glabel-dot"></span>Infrastructure Upgradation</span>
+      <span class="glabel green"><span class="glabel-dot"></span>Digital Transformation</span>
+      <span class="glabel accent"><span class="glabel-dot"></span>Community Outreach</span>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="info-block">
+      <h3><span class="ib-icon">📚</span>Academic Development</h3>
+      <p>Curriculum revision in alignment with NEP 2020 guidelines, introduction of interdisciplinary electives, enhanced project-based learning modules, and mandatory industry internships for all undergraduate programmes.</p>
+      <ul>
+        <li>Outcome-Based Education (OBE) implementation</li>
+        <li>Choice-Based Credit System (CBCS) compliance</li>
+        <li>Annual curriculum review with industry experts</li>
+        <li>E-learning integration with LMS portal</li>
+      </ul>
+    </div>
+    <div class="info-block">
+      <h3><span class="ib-icon">🏗️</span>Infrastructure Planning</h3>
+      <p>Phased development of smart classrooms, advanced computing labs, research incubation centres, and modernisation of existing laboratory infrastructure across all departments.</p>
+      <ul>
+        <li>Smart classroom rollout: 12 rooms by 2026</li>
+        <li>High-performance computing cluster</li>
+        <li>Innovation and Start-up Hub</li>
+        <li>Library digitisation and NDLI integration</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="label-group" style="margin-top:1rem">
+    <div class="label-group-title">🎯 Key Performance Indicators</div>
+    <div class="labels-row">
+      <span class="glabel green"><span class="glabel-dot"></span>95% Placement Rate</span>
+      <span class="glabel gold"><span class="glabel-dot"></span>100% NBA-Ready Programmes</span>
+      <span class="glabel"><span class="glabel-dot"></span>50+ MoU Partnerships</span>
+      <span class="glabel accent"><span class="glabel-dot"></span>25+ Research Publications / Year</span>
+      <span class="glabel green"><span class="glabel-dot"></span>≥ 80% Student Satisfaction</span>
+      <span class="glabel"><span class="glabel-dot"></span>Zero Academic Backlogs Target</span>
+    </div>
+  </div>
+
+  <div class="info-block" style="margin-top:1.5rem">
+    <h3><span class="ib-icon">📅</span>Implementation Timeline</h3>
+    <table class="styled-table">
+      <thead>
+        <tr><th>Phase</th><th>Period</th><th>Focus Area</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Phase I</td><td>2022–2023</td><td>Curriculum Redesign & OBE Setup</td><td>✅ Completed</td></tr>
+        <tr><td>Phase II</td><td>2023–2024</td><td>Smart Infrastructure & Digital Labs</td><td>✅ Completed</td></tr>
+        <tr><td>Phase III</td><td>2024–2025</td><td>Research Centres & Industry MoUs</td><td>🔄 Ongoing</td></tr>
+        <tr><td>Phase IV</td><td>2025–2026</td><td>Accreditation & National Ranking</td><td>🔄 In Progress</td></tr>
+        <tr><td>Phase V</td><td>2026–2030</td><td>Global Collaborations & PhD Programmes</td><td>📋 Planned</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="foot-logo"><span class="flt">EIEM</span><span class="fls">Est. 2001</span></div>
+      <p>Elitte Institute of Engineering &amp; Management is committed to producing world-class engineers and managers who lead innovation and drive growth across industries.</p>
+      <div class="socials">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Twitter">𝕏</a>
+        <a href="#" title="Instagram">📸</a>
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="YouTube">▶</a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>About EIEM</h4>
+      <a href="#">Our Story</a>
+      <a href="#">Vision & Mission</a>
+      <a href="#">Achievements</a>
+    </div>
+    <div class="foot-col">
+      <h4>Resources</h4>
+      <a href="#">E-Prospectus 2026–27</a>
+      <a href="#">NDLI Library</a>
+      <a href="#">Online Fee Payment</a>
+      <a href="#">Result Portal</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact Us</h4>
+      <div class="fci"><span class="fci-i">📍</span><span>PO: Karnamadhabpur, PS: Ghola, Sodepur, Kolkata – 700113</span></div>
+      <div class="fci"><span class="fci-i">📞</span><span>+91 9163316560 / +91 9831500840</span></div>
+      <div class="fci"><span class="fci-i">✉</span><span>info@eiem.ac.in</span></div>
+      <div class="fci"><span class="fci-i">🕐</span><span>Mon–Sat: 9:00 AM – 5:00 PM</span></div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Elitte Institute of Engineering &amp; Management. All rights reserved.</span>
+    <span>Approved by AICTE · Affiliated to WBSCT &amp; VE &amp; SD</span>
+  </div>
+</footer>
+
+</body>
+</html>
