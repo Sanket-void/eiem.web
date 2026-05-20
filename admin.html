@@ -1,0 +1,1849 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>University Portal — Admin Panel</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #f4f1ec;
+      --surface: #ffffff;
+      --border: #e2ddd6;
+      --text: #1a1714;
+      --muted: #8a857e;
+      --accent: #2d6a4f;
+      --accent-light: #e8f5f0;
+      --danger: #c0392b;
+      --danger-light: #fdf0ee;
+      --warning: #e67e22;
+      --warning-light: #fef6ec;
+      --info: #2980b9;
+      --info-light: #eaf4fb;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.10);
+      --radius: 10px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── LOGIN ── */
+    #loginScreen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f4f1ec 0%, #e8e4dc 100%);
+    }
+
+    .login-card {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 48px 40px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .login-card .logo {
+      width: 56px;
+      height: 56px;
+      background: var(--accent);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 26px;
+    }
+
+    .login-card h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .login-card p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 32px;
+    }
+
+    .login-card input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      background: var(--bg);
+      margin-bottom: 14px;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    .login-card input:focus {
+      border-color: var(--accent);
+      background: #fff;
+    }
+
+    .login-card button {
+      width: 100%;
+      padding: 13px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+
+    .login-card button:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .login-err {
+      color: var(--danger);
+      font-size: 0.84rem;
+      margin-top: 12px;
+      display: none;
+    }
+
+    /* ── LAYOUT ── */
+    #adminPanel {
+      display: none;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 230px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      z-index: 100;
+    }
+
+    .sidebar-header {
+      padding: 24px 20px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-header .brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .sidebar-header .brand span {
+      color: var(--accent);
+    }
+
+    .sidebar-header small {
+      color: var(--muted);
+      font-size: 0.75rem;
+      display: block;
+      margin-top: 2px;
+    }
+
+    .nav {
+      flex: 1;
+      padding: 16px 12px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      margin-bottom: 2px;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+    }
+
+    .nav-item:hover {
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .nav-item.active {
+      background: var(--accent-light);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .nav-item .icon {
+      font-size: 1rem;
+      width: 20px;
+      text-align: center;
+    }
+
+    .nav-badge {
+      margin-left: auto;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.7rem;
+      padding: 2px 7px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .sidebar-footer {
+      padding: 16px 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .logout-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      color: var(--danger);
+      cursor: pointer;
+      transition: background 0.15s;
+      border: none;
+      background: none;
+      width: 100%;
+    }
+
+    .logout-btn:hover {
+      background: var(--danger-light);
+    }
+
+    /* Main content */
+    .main {
+      margin-left: 230px;
+      padding: 32px;
+    }
+
+    /* Top bar */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+
+    .topbar h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .admin-tag {
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    /* Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card .label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .stat-card .value {
+      font-size: 1.9rem;
+      font-weight: 700;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .stat-card .value.green {
+      color: var(--accent);
+    }
+
+    .stat-card .value.orange {
+      color: var(--warning);
+    }
+
+    .stat-card .value.red {
+      color: var(--danger);
+    }
+
+    .stat-card .value.blue {
+      color: var(--info);
+    }
+
+    /* Section */
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    /* Card */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-header h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    /* Filters */
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      border: 1.5px solid var(--border);
+      background: var(--bg);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      border-color: var(--accent);
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+
+    /* Query list */
+    .query-list {
+      padding: 0;
+    }
+
+    .query-row {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.12s;
+    }
+
+    .query-row:last-child {
+      border-bottom: none;
+    }
+
+    .query-row:hover {
+      background: #fafaf8;
+    }
+
+    .query-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .query-info {
+      flex: 1;
+    }
+
+    .query-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .query-meta {
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-top: 2px;
+    }
+
+    .query-course {
+      display: inline-block;
+      background: var(--info-light);
+      color: var(--info);
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .query-message {
+      font-size: 0.88rem;
+      color: var(--text);
+      background: var(--bg);
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin: 10px 0;
+      border-left: 3px solid var(--border);
+    }
+
+    .status-badge {
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.73rem;
+      font-weight: 600;
+      white-space: nowrap;
+      margin-left: 12px;
+    }
+
+    .status-pending {
+      background: var(--warning-light);
+      color: var(--warning);
+    }
+
+    .status-replied {
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+
+    .status-closed {
+      background: #f0f0f0;
+      color: #999;
+    }
+
+    .query-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      align-items: center;
+    }
+
+    .reply-area {
+      display: none;
+      margin-top: 10px;
+    }
+
+    .reply-area textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      resize: vertical;
+      min-height: 70px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .reply-area textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .reply-area .reply-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 7px 14px;
+      border-radius: 7px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: opacity 0.15s, transform 0.1s;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn:hover {
+      opacity: 0.85;
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-outline {
+      background: #fff;
+      color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+
+    .btn-danger {
+      background: var(--danger-light);
+      color: var(--danger);
+    }
+
+    .btn-sm {
+      padding: 5px 11px;
+      font-size: 0.78rem;
+    }
+
+    /* Admin reply shown */
+    .admin-reply-shown {
+      background: var(--accent-light);
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 0.86rem;
+      margin-top: 8px;
+      border-left: 3px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .admin-reply-shown strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Notice / Events upload */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      padding: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full {
+      grid-column: 1/-1;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      outline: none;
+      background: var(--bg);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+      background: #fff;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-footer {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+    }
+
+    /* Posts list */
+    .posts-list {
+      padding: 0;
+    }
+
+    .post-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .post-item:last-child {
+      border-bottom: none;
+    }
+
+    .post-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 9px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    .post-icon.notice {
+      background: var(--warning-light);
+    }
+
+    .post-icon.event {
+      background: var(--info-light);
+    }
+
+    .post-body {
+      flex: 1;
+    }
+
+    .post-title {
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+
+    .post-desc {
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin-top: 2px;
+    }
+
+    .post-meta {
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .post-actions {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    /* Toast */
+    #toast {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: var(--text);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+      z-index: 9999;
+      box-shadow: var(--shadow-md);
+    }
+
+    #toast.show {
+      opacity: 1;
+    }
+
+    #toast.success {
+      background: var(--accent);
+    }
+
+    #toast.error {
+      background: var(--danger);
+    }
+
+    /* Empty state */
+    .empty {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--muted);
+    }
+
+    .empty .icon {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+    }
+
+    .empty p {
+      font-size: 0.9rem;
+    }
+
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 36px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+
+    /* ── IMAGE UPLOAD ── */
+    .img-upload-wrap {
+      position: relative;
+    }
+
+    .img-upload-wrap input[type="file"] {
+      display: none;
+    }
+
+    .img-upload-ui {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      background: var(--bg);
+      transition: border-color .2s, background .2s;
+    }
+
+    .img-upload-ui:hover {
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .img-upload-icon {
+      font-size: 1.8rem;
+      margin-bottom: 6px;
+    }
+
+    .img-upload-text {
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .img-upload-hint {
+      font-size: .74rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .img-preview {
+      width: 100%;
+      max-height: 220px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      margin-top: 10px;
+      display: block;
+      border: 1px solid var(--border);
+    }
+
+    .img-remove-btn {
+      margin-top: 8px;
+      background: var(--danger-light);
+      color: var(--danger);
+      border: none;
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: .78rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .img-remove-btn:hover {
+      background: #fbd5d2;
+    }
+
+    @media (max-width: 900px) {
+      .sidebar {
+        width: 200px;
+      }
+
+      .main {
+        margin-left: 200px;
+        padding: 20px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══════════════ LOGIN ══════════════ -->
+  <div id="loginScreen">
+    <div class="login-card">
+      <div class="logo">🎓</div>
+      <h1>Admin Portal</h1>
+      <p>University Query Management System</p>
+      <input type="text" id="adminUser" placeholder="Admin Username" autocomplete="off" />
+      <input type="password" id="adminPass" placeholder="Admin Password" />
+      <button onclick="doLogin()">Sign In →</button>
+      <div class="login-err" id="loginErr">Invalid credentials. Please try again.</div>
+    </div>
+  </div>
+
+  <!-- ══════════════ ADMIN PANEL ══════════════ -->
+  <div id="adminPanel">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand">Uni<span>Portal</span></div>
+        <small>Admin Dashboard</small>
+      </div>
+      <nav class="nav">
+        <button class="nav-item active" data-sec="sec-dashboard" onclick="showSection('dashboard', this)">
+          <span class="icon">📊</span> Dashboard
+        </button>
+        <button class="nav-item" data-sec="sec-queries" onclick="showSection('queries', this)">
+          <span class="icon">💬</span> Queries
+          <span class="nav-badge" id="pendingBadge">0</span>
+        </button>
+        <button class="nav-item" data-sec="sec-teachers" onclick="showSection('teachers', this)">
+          <span class="icon">👨‍🏫</span> Teachers
+          <span class="nav-badge" id="teacherBadge">0</span>
+        </button>
+        <button class="nav-item" data-sec="sec-students" onclick="showSection('students', this)">
+          <span class="icon">🎓</span> Students
+          <span class="nav-badge" id="studentNavBadge">0</span>
+        </button>
+        <button class="nav-item" data-sec="sec-notices" onclick="showSection('notices', this)">
+          <span class="icon">📢</span> Notices
+        </button>
+        <button class="nav-item" data-sec="sec-events" onclick="showSection('events', this)">
+          <span class="icon">📅</span> Events
+        </button>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="logout-btn" onclick="doLogout()">
+          <span>🚪</span> Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+
+      <!-- Top bar -->
+      <div class="topbar">
+        <h2 id="sectionTitle">Dashboard</h2>
+        <div class="topbar-right">
+          <span class="admin-tag">👤 Admin</span>
+        </div>
+      </div>
+
+      <!-- ── DASHBOARD ── -->
+      <div class="section active" id="sec-dashboard">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="label">Total Queries</div>
+            <div class="value blue" id="statTotal">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Pending</div>
+            <div class="value orange" id="statPending">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Teachers</div>
+            <div class="value blue" id="statTeachers">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Students</div>
+            <div class="value green" id="statStudents">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Replies</div>
+            <div class="value green" id="statReplied">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Notices & Events</div>
+            <div class="value" id="statPosts">—</div>
+          </div>
+        </div>
+
+        <!-- Recent queries -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Recent Queries</h3>
+            <button class="btn btn-outline btn-sm"
+              onclick="showSection('queries', document.querySelectorAll('.nav-item')[1])">View All</button>
+          </div>
+          <div class="query-list" id="dashRecentList">
+            <div class="loading">Loading...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── QUERIES ── -->
+      <div class="section" id="sec-queries">
+        <div class="card">
+          <div class="card-header">
+            <h3>All Queries</h3>
+            <div class="filter-bar">
+              <button class="filter-btn active" onclick="filterQueries('all', this)">All</button>
+              <button class="filter-btn" onclick="filterQueries('pending', this)">Pending</button>
+              <button class="filter-btn" onclick="filterQueries('replied', this)">Replied</button>
+              <button class="filter-btn" onclick="filterQueries('closed', this)">Closed</button>
+            </div>
+          </div>
+          <div class="query-list" id="queryList">
+            <div class="loading">Loading queries...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── TEACHERS ── -->
+      <div class="section" id="sec-teachers">
+        <div class="card" style="margin-bottom:20px">
+          <div class="card-header">
+            <h3>👨‍🏫 Add Teacher Account</h3>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" id="tchName" placeholder="e.g. Dr. Ramesh Kumar" />
+            </div>
+            <div class="form-group">
+              <label>Username</label>
+              <input type="text" id="tchUsername" placeholder="e.g. ramesh.kumar" autocomplete="off" />
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input type="password" id="tchPassword" placeholder="Set login password" />
+            </div>
+            <div class="form-group">
+              <label>Department</label>
+              <select id="tchDept">
+                <option>Computer Science</option>
+                <option>Electronics</option>
+                <option>Mechanical</option>
+                <option>Civil</option>
+                <option>Mathematics</option>
+                <option>Physics</option>
+                <option>Chemistry</option>
+                <option>English</option>
+                <option>Management</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Designation</label>
+              <input type="text" id="tchDesig" placeholder="e.g. Assistant Professor" />
+            </div>
+            <div class="form-group">
+              <label>Subject Specialization</label>
+              <input type="text" id="tchSubject" placeholder="e.g. Data Structures, Algorithms" />
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" id="tchEmail" placeholder="teacher@university.edu" />
+            </div>
+            <div class="form-group">
+              <label>Phone</label>
+              <input type="text" id="tchPhone" placeholder="10-digit mobile" />
+            </div>
+          </div>
+          <div class="form-footer">
+            <button class="btn btn-primary" onclick="addTeacher()">👨‍🏫 Add Teacher</button>
+            <button class="btn btn-outline" onclick="clearTeacherForm()">Clear</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Registered Teachers</h3>
+            <div class="filter-bar">
+              <input type="text" id="tchSearch" placeholder="🔍 Search by name or dept…"
+                style="padding:6px 12px;border:1.5px solid var(--border);border-radius:20px;font-family:'DM Sans',sans-serif;font-size:0.8rem;outline:none;background:var(--bg);min-width:220px"
+                oninput="filterTeacherList(this.value)" />
+            </div>
+          </div>
+          <div class="posts-list" id="teacherList">
+            <div class="loading">Loading...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── NOTICES ── -->
+      <div class="section" id="sec-notices">
+        <div class="card" style="margin-bottom:20px">
+          <div class="card-header">
+            <h3>📢 Post a Notice</h3>
+          </div>
+          <div class="form-grid">
+            <div class="form-group full">
+              <label>Notice Title</label>
+              <input type="text" id="noticeTitle" placeholder="e.g. Admission Open 2026-27" />
+            </div>
+            <div class="form-group full">
+              <label>Notice Content</label>
+              <textarea id="noticeContent" placeholder="Write the full notice here..."></textarea>
+            </div>
+            <div class="form-group">
+              <label>Category</label>
+              <select id="noticeCategory">
+                <option>General</option>
+                <option>Admission</option>
+                <option>Exam</option>
+                <option>Fee</option>
+                <option>Holiday</option>
+                <option>Result</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Valid Until</label>
+              <input type="date" id="noticeExpiry" />
+            </div>
+            <div class="form-group full">
+              <label>Redirect Link <span style="font-weight:400;color:var(--muted);font-size:.8rem">(optional — users
+                  can click to open)</span></label>
+              <input type="url" id="noticeLink" placeholder="https://example.com/notice-details" />
+            </div>
+          </div>
+          <div class="form-footer">
+            <button class="btn btn-primary" onclick="postNotice()">📢 Post Notice</button>
+            <button class="btn btn-outline" onclick="clearNoticeForm()">Clear</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Posted Notices</h3>
+          </div>
+          <div class="posts-list" id="noticeList">
+            <div class="loading">Loading...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── STUDENTS ── -->
+      <div class="section" id="sec-students">
+        <div class="card" style="margin-bottom:20px">
+          <div class="card-header">
+            <h3>🎓 Add Student Account</h3>
+          </div>
+          <div class="form-grid">
+            <div class="form-group"><label>Full Name</label><input type="text" id="admStuName"
+                placeholder="e.g. Priya Sharma" /></div>
+            <div class="form-group"><label>Roll Number</label><input type="text" id="admStuRoll"
+                placeholder="e.g. CS2024001" /></div>
+            <div class="form-group"><label>Email</label><input type="email" id="admStuEmail"
+                placeholder="student@eiem.ac.in" /></div>
+            <div class="form-group"><label>Password</label><input type="password" id="admStuPass"
+                placeholder="Set login password" /></div>
+            <div class="form-group"><label>Phone</label><input type="text" id="admStuPhone"
+                placeholder="10-digit mobile" /></div>
+            <div class="form-group"><label>Class / Section</label><input type="text" id="admStuClass"
+                placeholder="e.g. CSE-A 3rd Year" /></div>
+            <div class="form-group"><label>Course</label><input type="text" id="admStuCourse"
+                placeholder="e.g. B.Tech CSE" /></div>
+            <div class="form-group"><label>Academic Year</label>
+              <select id="admStuYear">
+                <option>2024-25</option>
+                <option>2025-26</option>
+                <option>2026-27</option>
+                <option>2027-28</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-footer">
+            <button class="btn btn-primary" onclick="addStudentByAdmin()">🎓 Add Student</button>
+            <button class="btn btn-outline" onclick="clearAdmStudentForm()">Clear</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h3>All Students</h3>
+            <input type="text" id="admStuSearch" placeholder="🔍 Search by name, roll or class…"
+              style="padding:6px 12px;border:1.5px solid var(--border);border-radius:20px;font-family:'DM Sans',sans-serif;font-size:0.8rem;outline:none;background:var(--bg);min-width:240px"
+              oninput="filterAdmStudentList(this.value)" />
+          </div>
+          <div class="posts-list" id="admStudentList">
+            <div class="loading">Loading...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── EVENTS ── -->
+      <div class="section" id="sec-events">
+        <div class="card" style="margin-bottom:20px">
+          <div class="card-header">
+            <h3>📅 Create an Event</h3>
+          </div>
+          <div class="form-grid">
+            <div class="form-group full">
+              <label>Event Name</label>
+              <input type="text" id="eventTitle" placeholder="e.g. Annual Tech Fest 2026" />
+            </div>
+            <div class="form-group full">
+              <label>Description</label>
+              <textarea id="eventDesc" placeholder="Event details, venue, requirements..."></textarea>
+            </div>
+            <div class="form-group">
+              <label>Event Date</label>
+              <input type="date" id="eventDate" />
+            </div>
+            <div class="form-group">
+              <label>Venue</label>
+              <input type="text" id="eventVenue" placeholder="e.g. Main Auditorium" />
+            </div>
+            <div class="form-group">
+              <label>Category</label>
+              <select id="eventCategory">
+                <option>Cultural</option>
+                <option>Technical</option>
+                <option>Sports</option>
+                <option>Academic</option>
+                <option>Workshop</option>
+                <option>Seminar</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Registration Link (optional)</label>
+              <input type="url" id="eventLink" placeholder="https://..." />
+            </div>
+            <div class="form-group full">
+              <label>Event Image (optional)</label>
+              <div class="img-upload-wrap" id="imgUploadWrap">
+                <input type="file" id="eventImage" accept="image/*" onchange="previewImage(this)" />
+                <div class="img-upload-ui" onclick="document.getElementById('eventImage').click()">
+                  <div class="img-upload-icon">🖼️</div>
+                  <div class="img-upload-text">Click to upload image</div>
+                  <div class="img-upload-hint">JPG, PNG, WEBP · max 5 MB</div>
+                </div>
+                <img id="imgPreview" class="img-preview" src="" alt="Preview" style="display:none" />
+                <button type="button" class="img-remove-btn" id="imgRemoveBtn" onclick="removeImage()"
+                  style="display:none">✕ Remove</button>
+              </div>
+              <div id="imgUploadStatus" style="font-size:.78rem;margin-top:.4rem"></div>
+            </div>
+          </div>
+          <div class="form-footer">
+            <button class="btn btn-primary" onclick="postEvent()">📅 Create Event</button>
+            <button class="btn btn-outline" onclick="clearEventForm()">Clear</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Upcoming Events</h3>
+          </div>
+          <div class="posts-list" id="eventList">
+            <div class="loading">Loading...</div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast"></div>
+
+  <script>
+    // ══════════════════════════════════════════
+    //  CONFIG — Admin credentials (hardcoded)
+    // ══════════════════════════════════════════
+    const ADMIN_USERNAME = "admin";
+    const ADMIN_PASSWORD = "admin@eiem2026";
+
+    const SUPABASE_URL = "https://zmrowyxzpygrvwnqvucy.supabase.co";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inptcm93eXh6cHlncnZ3bnF2dWN5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxMTQyNjUsImV4cCI6MjA5NDY5MDI2NX0.6nXMU-d-11e1etRQgOOIdGxHB5FiNWZMyxBvZQknqz8";
+
+    let sb;
+    let allQueries = [];
+    let currentFilter = 'all';
+
+    // ══════════════════════════════════════════
+    //  INIT
+    // ══════════════════════════════════════════
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        if (typeof window.supabase === 'undefined' || typeof window.supabase.createClient !== 'function') {
+          alert('Supabase failed to load. Please refresh.');
+          return;
+        }
+        sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        console.log('✅ Supabase client ready');
+
+        if (sessionStorage.getItem('adminAuth') === 'true') showAdmin();
+
+        document.getElementById('adminPass').addEventListener('keydown', e => {
+          if (e.key === 'Enter') doLogin();
+        });
+      }, 500);
+    });
+
+    // ══════════════════════════════════════════
+    //  AUTH
+    // ══════════════════════════════════════════
+    function doLogin() {
+      const u = document.getElementById('adminUser').value.trim();
+      const p = document.getElementById('adminPass').value.trim();
+      if (u === ADMIN_USERNAME && p === ADMIN_PASSWORD) {
+        sessionStorage.setItem('adminAuth', 'true');
+        showAdmin();
+      } else {
+        document.getElementById('loginErr').style.display = 'block';
+      }
+    }
+
+    function showAdmin() {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('adminPanel').style.display = 'block';
+      loadAll();
+    }
+
+    function doLogout() {
+      sessionStorage.removeItem('adminAuth');
+      location.reload();
+    }
+
+    // ══════════════════════════════════════════
+    //  NAVIGATION
+    // ══════════════════════════════════════════
+    const titles = { dashboard: 'Dashboard', queries: 'Query Management', teachers: 'Teacher Management', students: 'Student Management', notices: 'Notices', events: 'Events' };
+
+    function showSection(id, el) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      document.getElementById('sec-' + id).classList.add('active');
+      if (el) el.classList.add('active');
+      document.getElementById('sectionTitle').textContent = titles[id] || id;
+    }
+
+    // ══════════════════════════════════════════
+    //  LOAD ALL DATA
+    // ══════════════════════════════════════════
+    async function loadAll() {
+      await loadQueries();
+      await loadTeachers();
+      await loadStudentsAdmin();
+      await loadNotices();
+      await loadEvents();
+    }
+
+    // ══════════════════════════════════════════
+    //  QUERIES
+    // ══════════════════════════════════════════
+    async function loadQueries() {
+      const { data, error } = await sb
+        .from('queries')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) { toast('Failed to load queries', 'error'); return; }
+      allQueries = data || [];
+      renderStats();
+      renderQueryList('queryList', allQueries, currentFilter);
+      renderQueryList('dashRecentList', allQueries.slice(0, 5), 'all', true);
+    }
+
+    function renderStats() {
+      const total = allQueries.length;
+      const pending = allQueries.filter(q => (q.status || 'pending') === 'pending').length;
+      const replied = allQueries.filter(q => q.status === 'replied').length;
+      document.getElementById('statTotal').textContent = total;
+      document.getElementById('statPending').textContent = pending;
+      document.getElementById('statReplied').textContent = replied;
+      document.getElementById('pendingBadge').textContent = pending;
+    }
+
+    // ══════════════════════════════════════════
+    //  STUDENTS (Admin)
+    // ══════════════════════════════════════════
+    let allStudentsAdmin = [];
+
+    async function loadStudentsAdmin() {
+      const { data, error } = await sb.from('students').select('*').order('created_at', { ascending: false });
+      if (error) { console.error('Students fetch failed:', error.message); return; }
+      allStudentsAdmin = data || [];
+      const count = allStudentsAdmin.length;
+      document.getElementById('statStudents').textContent = count;
+      document.getElementById('studentNavBadge').textContent = count;
+      renderAdmStudentList(allStudentsAdmin);
+    }
+
+    function filterAdmStudentList(q) {
+      const lq = q.toLowerCase();
+      const filtered = allStudentsAdmin.filter(s =>
+        (s.name || '').toLowerCase().includes(lq) ||
+        (s.roll_number || '').toLowerCase().includes(lq) ||
+        (s.class || '').toLowerCase().includes(lq) ||
+        (s.email || '').toLowerCase().includes(lq)
+      );
+      renderAdmStudentList(filtered);
+    }
+
+    function renderAdmStudentList(list) {
+      const el = document.getElementById('admStudentList');
+      if (!list.length) {
+        el.innerHTML = `<div class="empty"><div class="icon">🎓</div><p>No students found.</p></div>`;
+        return;
+      }
+      el.innerHTML = list.map(s => `
+    <div class="post-item">
+      <div class="post-icon notice" style="background:var(--accent-light);font-size:1.1rem">🎓</div>
+      <div class="post-body">
+        <div class="post-title">${escHtml(s.name)}
+          <span style="display:inline-block;background:var(--info-light);color:var(--info);padding:2px 10px;border-radius:12px;font-size:0.72rem;font-weight:600;margin-left:6px">${escHtml(s.roll_number || '—')}</span>
+          <span style="display:inline-block;background:var(--accent-light);color:var(--accent);padding:2px 10px;border-radius:12px;font-size:0.72rem;font-weight:600;margin-left:4px">${escHtml(s.class || '—')}</span>
+        </div>
+        <div class="post-desc">📧 ${escHtml(s.email || '—')} &nbsp;|&nbsp; 📞 ${escHtml(s.phone || '—')} &nbsp;|&nbsp; 📚 ${escHtml(s.course || '—')}</div>
+        <div class="post-meta">🗓 ${escHtml(s.academic_year || '—')} &nbsp;|&nbsp; Added by: ${escHtml(s.added_by || 'teacher')} &nbsp;|&nbsp; 🕐 ${new Date(s.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</div>
+      </div>
+      <div class="post-actions" style="flex-direction:column;gap:6px;align-items:flex-end">
+        <button class="btn btn-outline btn-sm" onclick="resetStudentPassword('${s.id}','${escHtml(s.name)}')">🔑 Reset</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteStudentAdmin('${s.id}')">🗑 Remove</button>
+      </div>
+    </div>`).join('');
+    }
+
+    async function addStudentByAdmin() {
+      const name = document.getElementById('admStuName').value.trim();
+      const roll = document.getElementById('admStuRoll').value.trim();
+      const email = document.getElementById('admStuEmail').value.trim();
+      const pass = document.getElementById('admStuPass').value.trim();
+      const phone = document.getElementById('admStuPhone').value.trim();
+      const cls = document.getElementById('admStuClass').value.trim();
+      const course = document.getElementById('admStuCourse').value.trim();
+      const year = document.getElementById('admStuYear').value;
+
+      if (!name || !roll || !pass) { toast('Name, roll number and password are required', 'error'); return; }
+
+      const { data: ex } = await sb.from('students').select('id').eq('roll_number', roll).maybeSingle();
+  if (ex) { toast('Roll number already exists! Use a different roll number.', 'error'); return; }
+
+        const { error } = await sb.from('students').insert([{
+          name,
+          roll_number: roll,
+          email,
+          password: pass,
+          phone,
+          class: cls,
+          year: year,
+         course
+}]);
+      if (error) { toast('Failed to add student: ' + error.message, 'error'); return; }
+      toast('Student added! 🎓', 'success');
+      clearAdmStudentForm();
+      loadStudentsAdmin();
+    }
+
+    async function deleteStudentAdmin(id) {
+      if (!confirm('Remove this student? This will also delete their marks, attendance and fee records.')) return;
+      const { error } = await sb.from('students').delete().eq('id', id);
+      if (error) { toast('Error removing student', 'error'); return; }
+      toast('Student removed');
+      loadStudentsAdmin();
+    }
+
+    async function resetStudentPassword(id, name) {
+      const newPass = prompt(`Set new password for ${name}:`);
+      if (!newPass || !newPass.trim()) return;
+      const { error } = await sb.from('students').update({ password: newPass.trim() }).eq('id', id);
+      if (error) { toast('Failed to reset password', 'error'); return; }
+      toast(`Password updated for ${name}`, 'success');
+    }
+
+    function clearAdmStudentForm() {
+      ['admStuName', 'admStuRoll', 'admStuEmail', 'admStuPass', 'admStuPhone', 'admStuClass', 'admStuCourse'].forEach(id => {
+        const el = document.getElementById(id); if (el) el.value = '';
+      });
+      document.getElementById('admStuYear').selectedIndex = 0;
+    }
+
+    function filterQueries(filter, btn) {
+      currentFilter = filter;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      renderQueryList('queryList', allQueries, filter);
+    }
+
+    function renderQueryList(containerId, queries, filter, compact = false) {
+      const el = document.getElementById(containerId);
+      let list = filter === 'all' ? queries : queries.filter(q => (q.status || 'pending') === filter);
+      if (!list.length) {
+        el.innerHTML = `<div class="empty"><div class="icon">📭</div><p>No queries found.</p></div>`;
+        return;
+      }
+      el.innerHTML = list.map(q => queryCard(q, compact)).join('');
+    }
+
+    function queryCard(q, compact) {
+      const status = q.status || 'pending';
+      const date = new Date(q.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+      const replyShown = q.admin_reply
+        ? `<div class="admin-reply-shown"><strong>Admin Reply</strong>${escHtml(q.admin_reply)}</div>`
+        : '';
+      const replyArea = compact ? '' : `
+    <div class="reply-area" id="replyArea-${q.id}">
+      <textarea placeholder="Type your reply to ${escHtml(q.name)}..." id="replyText-${q.id}"></textarea>
+      <div class="reply-actions">
+        <button class="btn btn-primary btn-sm" onclick="sendReply('${q.id}')">✉️ Send Reply</button>
+        <button class="btn btn-outline btn-sm" onclick="toggleReply('${q.id}')">Cancel</button>
+      </div>
+    </div>`;
+
+      const actions = compact ? '' : `
+    <div class="query-actions">
+      <button class="btn btn-outline btn-sm" onclick="toggleReply('${q.id}')">💬 Reply</button>
+      ${status !== 'closed' ? `<button class="btn btn-outline btn-sm" onclick="closeQuery('${q.id}')">✓ Close</button>` : ''}
+      <button class="btn btn-danger btn-sm" onclick="deleteQuery('${q.id}')">🗑 Delete</button>
+    </div>`;
+
+      return `
+    <div class="query-row" id="qrow-${q.id}">
+      <div class="query-top">
+        <div class="query-info">
+          <div class="query-name">${escHtml(q.name)}</div>
+          <div class="query-meta">📧 ${escHtml(q.email)} &nbsp;|&nbsp; 📞 ${escHtml(q.phone)} &nbsp;|&nbsp; 🕐 ${date}</div>
+          <span class="query-course">${escHtml(q.course)}</span>
+        </div>
+        <span class="status-badge status-${status}">${status.charAt(0).toUpperCase() + status.slice(1)}</span>
+      </div>
+      <div class="query-message">${escHtml(q.message)}</div>
+      ${replyShown}
+      ${replyArea}
+      ${actions}
+    </div>`;
+    }
+
+    function toggleReply(id) {
+      const area = document.getElementById('replyArea-' + id);
+      if (!area) return;
+      area.style.display = area.style.display === 'block' ? 'none' : 'block';
+      if (area.style.display === 'block') area.querySelector('textarea').focus();
+    }
+
+    async function sendReply(id) {
+      const text = document.getElementById('replyText-' + id).value.trim();
+      if (!text) { toast('Please type a reply first', 'error'); return; }
+      const { error } = await sb.from('queries').update({
+        admin_reply: text, status: 'replied', replied_at: new Date().toISOString()
+      }).eq('id', id);
+      if (error) { toast('Failed to send reply', 'error'); return; }
+      toast('Reply sent!', 'success');
+      loadQueries();
+    }
+
+    async function closeQuery(id) {
+      const { error } = await sb.from('queries').update({ status: 'closed' }).eq('id', id);
+      if (error) { toast('Error', 'error'); return; }
+      toast('Query closed');
+      loadQueries();
+    }
+
+    async function deleteQuery(id) {
+      if (!confirm('Delete this query permanently?')) return;
+      const { error } = await sb.from('queries').delete().eq('id', id);
+      if (error) { toast('Error deleting', 'error'); return; }
+      toast('Query deleted');
+      loadQueries();
+    }
+
+    // ══════════════════════════════════════════
+    //  TEACHERS
+    // ══════════════════════════════════════════
+    let allTeachers = [];
+
+    async function loadTeachers() {
+      const { data, error } = await sb.from('teachers').select('*').order('created_at', { ascending: false });
+      if (error) { console.error('Teachers fetch failed:', error.message); return; }
+      allTeachers = data || [];
+      const count = allTeachers.length;
+      document.getElementById('statTeachers').textContent = count;
+      document.getElementById('teacherBadge').textContent = count;
+      renderTeacherList(allTeachers);
+    }
+
+    function renderTeacherList(list) {
+      const el = document.getElementById('teacherList');
+      if (!list.length) {
+        el.innerHTML = `<div class="empty"><div class="icon">👨‍🏫</div><p>No teachers added yet. Add your first teacher above.</p></div>`;
+        return;
+      }
+      el.innerHTML = list.map(t => `
+    <div class="post-item">
+      <div class="post-icon notice" style="background:var(--accent-light);font-size:1.3rem">👨‍🏫</div>
+      <div class="post-body">
+        <div class="post-title">${escHtml(t.name)}
+          <span style="display:inline-block;background:var(--info-light);color:var(--info);padding:2px 10px;border-radius:12px;font-size:0.72rem;font-weight:600;margin-left:6px">${escHtml(t.designation || 'Faculty')}</span>
+        </div>
+        <div class="post-desc">🆔 Username: <strong>${escHtml(t.username)}</strong> &nbsp;|&nbsp; 🏛 ${escHtml(t.department || '—')} &nbsp;|&nbsp; 📖 ${escHtml(t.subject || '—')}</div>
+        <div class="post-meta">📧 ${escHtml(t.email || '—')} &nbsp;|&nbsp; 📞 ${escHtml(t.phone || '—')} &nbsp;|&nbsp; 🕐 ${new Date(t.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</div>
+      </div>
+      <div class="post-actions" style="flex-direction:column;gap:6px;align-items:flex-end">
+        <button class="btn btn-outline btn-sm" onclick="resetTeacherPassword('${t.id}','${escHtml(t.name)}')">🔑 Reset Password</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteTeacher('${t.id}')">🗑 Remove</button>
+      </div>
+    </div>`).join('');
+    }
+
+    function filterTeacherList(q) {
+      const lq = q.toLowerCase();
+      const filtered = allTeachers.filter(t =>
+        (t.name || '').toLowerCase().includes(lq) ||
+        (t.department || '').toLowerCase().includes(lq) ||
+        (t.username || '').toLowerCase().includes(lq) ||
+        (t.subject || '').toLowerCase().includes(lq)
+      );
+      renderTeacherList(filtered);
+    }
+
+    async function addTeacher() {
+      const name = document.getElementById('tchName').value.trim();
+      const username = document.getElementById('tchUsername').value.trim();
+      const password = document.getElementById('tchPassword').value.trim();
+      const dept = document.getElementById('tchDept').value;
+      const desig = document.getElementById('tchDesig').value.trim();
+      const subject = document.getElementById('tchSubject').value.trim();
+      const email = document.getElementById('tchEmail').value.trim();
+      const phone = document.getElementById('tchPhone').value.trim();
+
+      if (!name || !username || !password) {
+        toast('Name, username and password are required', 'error'); return;
+      }
+      if (username.includes(' ')) {
+        toast('Username must not contain spaces', 'error'); return;
+      }
+
+      // Check uniqueness
+      const { data: existing } = await sb.from('teachers').select('id').eq('username', username).maybeSingle();
+      if (existing) { toast('Username already taken. Choose another.', 'error'); return; }
+
+      const { error } = await sb.from('teachers').insert([{
+        name, username, password, department: dept,
+        designation: desig, subject, email, phone
+      }]);
+      if (error) { toast('Failed to add teacher: ' + error.message, 'error'); return; }
+      toast('Teacher account created! 🎉', 'success');
+      clearTeacherForm();
+      loadTeachers();
+    }
+
+    async function deleteTeacher(id) {
+      if (!confirm('Remove this teacher? Their students will remain but this login will be deleted.')) return;
+      const { error } = await sb.from('teachers').delete().eq('id', id);
+      if (error) { toast('Error removing teacher', 'error'); return; }
+      toast('Teacher removed');
+      loadTeachers();
+    }
+
+    async function resetTeacherPassword(id, name) {
+      const newPass = prompt(`Set new password for ${name}:`);
+      if (!newPass || !newPass.trim()) return;
+      const { error } = await sb.from('teachers').update({ password: newPass.trim() }).eq('id', id);
+      if (error) { toast('Failed to reset password', 'error'); return; }
+      toast(`Password updated for ${name}`, 'success');
+    }
+
+    function clearTeacherForm() {
+      ['tchName', 'tchUsername', 'tchPassword', 'tchDesig', 'tchSubject', 'tchEmail', 'tchPhone'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+      document.getElementById('tchDept').selectedIndex = 0;
+    }
+
+    // ══════════════════════════════════════════
+    //  NOTICES
+    // ══════════════════════════════════════════
+    async function loadNotices() {
+      const { data } = await sb.from('notices').select('*').order('created_at', { ascending: false });
+      const list = data || [];
+      const el = document.getElementById('noticeList');
+      if (!list.length) {
+        el.innerHTML = `<div class="empty"><div class="icon">📭</div><p>No notices posted yet.</p></div>`;
+        updatePostsStat();
+        return;
+      }
+      el.innerHTML = list.map(n => `
+    <div class="post-item">
+      <div class="post-icon notice">📢</div>
+      <div class="post-body">
+        <div class="post-title">${escHtml(n.title)}</div>
+        <div class="post-desc">${escHtml(n.content)}</div>
+        <div class="post-meta">📁 ${escHtml(n.category || 'General')} &nbsp;|&nbsp; 🕐 ${new Date(n.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}${n.link ? ` &nbsp;|&nbsp; <a href="${escHtml(n.link)}" target="_blank" style="color:var(--accent)">🔗 View Link</a>` : ''}</div>
+      </div>
+      <div class="post-actions">
+        <button class="btn btn-danger btn-sm" onclick="deleteNotice('${n.id}')">🗑</button>
+      </div>
+    </div>`).join('');
+      updatePostsStat();
+    }
+
+    async function postNotice() {
+      const title = document.getElementById('noticeTitle').value.trim();
+      const content = document.getElementById('noticeContent').value.trim();
+      const category = document.getElementById('noticeCategory').value;
+      const expiry = document.getElementById('noticeExpiry').value;
+      const link = document.getElementById('noticeLink').value.trim();
+      if (!title || !content) { toast('Fill title and content', 'error'); return; }
+      const { error } = await sb.from('notices').insert([{ title, content, category, expiry: expiry || null, link: link || null }]);
+      if (error) { toast('Failed to post notice', 'error'); return; }
+      toast('Notice posted!', 'success');
+      clearNoticeForm();
+      loadNotices();
+    }
+
+    async function deleteNotice(id) {
+      if (!confirm('Delete this notice?')) return;
+      await sb.from('notices').delete().eq('id', id);
+      toast('Notice deleted');
+      loadNotices();
+    }
+
+    function clearNoticeForm() {
+      ['noticeTitle', 'noticeContent', 'noticeExpiry', 'noticeLink'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('noticeCategory').selectedIndex = 0;
+    }
+
+    // ══════════════════════════════════════════
+    //  EVENTS
+    // ══════════════════════════════════════════
+    async function loadEvents() {
+      const { data, error } = await sb.from('events').select('*').order('event_date', { ascending: true });
+      if (error) {
+        console.error('Events fetch failed:', error.message);
+        const el = document.getElementById('eventList');
+        if (el) el.innerHTML = `<div class="empty"><div class="icon">⚠️</div><p>Failed to load events: ${escHtml(error.message)}</p></div>`;
+        return;
+      }
+      const list = data || [];
+      const el = document.getElementById('eventList');
+      if (!list.length) {
+        el.innerHTML = `<div class="empty"><div class="icon">📭</div><p>No events created yet.</p></div>`;
+        updatePostsStat();
+        return;
+      }
+      el.innerHTML = list.map(ev => `
+    <div class="post-item">
+      ${ev.image_url
+          ? `<img src="${escHtml(ev.image_url)}" style="width:64px;height:64px;object-fit:cover;border-radius:8px;flex-shrink:0;border:1px solid var(--border)" alt=""/>`
+          : `<div class="post-icon event">📅</div>`
+        }
+      <div class="post-body">
+        <div class="post-title">${escHtml(ev.title)}</div>
+        <div class="post-desc">${escHtml(ev.description || '')}</div>
+        <div class="post-meta">
+          📍 ${escHtml(ev.venue || '—')} &nbsp;|&nbsp;
+          🗓 ${ev.event_date ? new Date(ev.event_date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '—'} &nbsp;|&nbsp;
+          📁 ${escHtml(ev.category || '—')}
+          ${ev.link ? ` &nbsp;|&nbsp; <a href="${escHtml(ev.link)}" target="_blank" style="color:var(--accent)">Register →</a>` : ''}
+        </div>
+      </div>
+      <div class="post-actions">
+        <button class="btn btn-danger btn-sm" onclick="deleteEvent('${ev.id}')">🗑</button>
+      </div>
+    </div>`).join('');
+      updatePostsStat();
+    }
+
+    // ── Image preview helpers ──
+    function previewImage(input) {
+      const file = input.files[0];
+      if (!file) return;
+      if (file.size > 5 * 1024 * 1024) {
+        toast('Image must be under 5 MB', 'error');
+        input.value = '';
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = e => {
+        const preview = document.getElementById('imgPreview');
+        const ui = document.querySelector('.img-upload-ui');
+        const removeBtn = document.getElementById('imgRemoveBtn');
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+        ui.style.display = 'none';
+        removeBtn.style.display = 'inline-block';
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function removeImage() {
+      document.getElementById('eventImage').value = '';
+      document.getElementById('imgPreview').style.display = 'none';
+      document.getElementById('imgRemoveBtn').style.display = 'none';
+      document.querySelector('.img-upload-ui').style.display = 'block';
+      document.getElementById('imgUploadStatus').textContent = '';
+    }
+
+    async function uploadEventImage(file) {
+      const ext = file.name.split('.').pop();
+      const fileName = `event_${Date.now()}.${ext}`;
+      const statusEl = document.getElementById('imgUploadStatus');
+      statusEl.textContent = '⏳ Uploading image...';
+      statusEl.style.color = 'var(--muted)';
+
+      const { data, error } = await sb.storage
+        .from('event-images')
+        .upload(fileName, file, { cacheControl: '3600', upsert: false });
+
+      if (error) {
+        statusEl.textContent = '❌ Image upload failed: ' + error.message;
+        statusEl.style.color = 'var(--danger)';
+        return null;
+      }
+
+      const { data: urlData } = sb.storage.from('event-images').getPublicUrl(fileName);
+      statusEl.textContent = '✅ Image uploaded!';
+      statusEl.style.color = 'var(--accent)';
+      return urlData.publicUrl;
+    }
+
+    async function postEvent() {
+      const title = document.getElementById('eventTitle').value.trim();
+      const desc = document.getElementById('eventDesc').value.trim();
+      const date = document.getElementById('eventDate').value;
+      const venue = document.getElementById('eventVenue').value.trim();
+      const category = document.getElementById('eventCategory').value;
+      const link = document.getElementById('eventLink').value.trim();
+      const imageFile = document.getElementById('eventImage').files[0];
+
+      if (!title || !date) { toast('Event name and date are required', 'error'); return; }
+
+      // Upload image first if provided
+      let image_url = null;
+      if (imageFile) {
+        image_url = await uploadEventImage(imageFile);
+        if (!image_url) return; // upload failed — don't proceed
+      }
+
+      const { error } = await sb.from('events').insert([{
+        title, description: desc, event_date: date, venue, category,
+        link: link || null, image_url: image_url || null
+      }]);
+      if (error) { toast('Failed to create event: ' + error.message, 'error'); return; }
+      toast('Event created!', 'success');
+      clearEventForm();
+      loadEvents();
+    }
+
+    async function deleteEvent(id) {
+      if (!confirm('Delete this event?')) return;
+
+      // First get the image_url before deleting the row
+      const { data } = await sb.from('event-images').select('image_url').eq('id', id).single();
+
+      // Delete the image from storage if it exists
+      if (data && data.image_url) {
+        // Extract filename from full URL
+        // URL format: https://xxx.supabase.co/storage/v1/object/public/events/event_123.png
+        const fileName = data.image_url.split('/event-images/').pop();
+        if (fileName) {
+          await sb.storage.from('events').remove([fileName]);
+        }
+      }
+
+      // Then delete the DB row
+      const { error } = await sb.from('events').delete().eq('id', id);
+      if (error) { toast('Error deleting event', 'error'); return; }
+
+      toast('Event deleted');
+      loadEvents();
+    }
+
+    function clearEventForm() {
+      ['eventTitle', 'eventDesc', 'eventDate', 'eventVenue', 'eventLink'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('eventCategory').selectedIndex = 0;
+      removeImage();
+      document.getElementById('imgUploadStatus').textContent = '';
+    }
+
+    // ══════════════════════════════════════════
+    //  HELPERS
+    // ══════════════════════════════════════════
+    function updatePostsStat() {
+      const n = document.getElementById('noticeList').querySelectorAll('.post-item').length;
+      const e = document.getElementById('eventList').querySelectorAll('.post-item').length;
+      document.getElementById('statPosts').textContent = n + e;
+    }
+
+    function escHtml(str) {
+      return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    let toastTimer;
+    function toast(msg, type = 'success') {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className = 'show ' + type;
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.className = '', 3000);
+    }
+  </script>
+</body>
+
+</html>

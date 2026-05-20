@@ -1,0 +1,1947 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teacher Portal — EIEM</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #f4f1ec;
+      --surface: #ffffff;
+      --border: #e2ddd6;
+      --text: #1a1714;
+      --muted: #8a857e;
+      --accent: #1649cc;
+      --accent-light: #eef3ff;
+      --danger: #c0392b;
+      --danger-light: #fdf0ee;
+      --warning: #e67e22;
+      --warning-light: #fef6ec;
+      --info: #2980b9;
+      --info-light: #eaf4fb;
+      --success: #2d6a4f;
+      --success-light: #e8f5f0;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.10);
+      --radius: 10px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* LOGIN */
+    #loginScreen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #eef3ff 0%, #e8e4dc 100%);
+    }
+
+    .login-card {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 48px 40px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .login-card .logo {
+      width: 56px;
+      height: 56px;
+      background: var(--accent);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 26px;
+    }
+
+    .login-card h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      margin-bottom: 4px;
+    }
+
+    .login-card p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 32px;
+    }
+
+    .login-card input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      background: var(--bg);
+      margin-bottom: 14px;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    .login-card input:focus {
+      border-color: var(--accent);
+      background: #fff;
+    }
+
+    .login-card button {
+      width: 100%;
+      padding: 13px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+
+    .login-card button:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .login-err {
+      color: var(--danger);
+      font-size: 0.84rem;
+      margin-top: 12px;
+      display: none;
+    }
+
+    /* LAYOUT */
+    #teacherPanel {
+      display: none;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 230px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+    }
+
+    .sidebar-header {
+      padding: 24px 20px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-header .brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .sidebar-header .brand span {
+      color: var(--accent);
+    }
+
+    .sidebar-header small {
+      color: var(--muted);
+      font-size: 0.75rem;
+      display: block;
+      margin-top: 2px;
+    }
+
+    .nav {
+      flex: 1;
+      padding: 16px 12px;
+      overflow-y: auto;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      margin-bottom: 2px;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+    }
+
+    .nav-item:hover {
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .nav-item.active {
+      background: var(--accent-light);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .nav-item .icon {
+      font-size: 1rem;
+      width: 20px;
+      text-align: center;
+    }
+
+    .nav-badge {
+      margin-left: auto;
+      background: var(--danger);
+      color: #fff;
+      font-size: 0.7rem;
+      padding: 2px 7px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .sidebar-footer {
+      padding: 16px 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .logout-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      color: var(--danger);
+      cursor: pointer;
+      transition: background 0.15s;
+      border: none;
+      background: none;
+      width: 100%;
+    }
+
+    .logout-btn:hover {
+      background: var(--danger-light);
+    }
+
+    .main {
+      margin-left: 230px;
+      padding: 32px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+    }
+
+    .topbar h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    .teacher-tag {
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    /* STATS */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card .label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .stat-card .value {
+      font-size: 1.9rem;
+      font-weight: 700;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .stat-card .value.blue {
+      color: var(--accent);
+    }
+
+    .stat-card .value.green {
+      color: var(--success);
+    }
+
+    .stat-card .value.orange {
+      color: var(--warning);
+    }
+
+    .stat-card .value.red {
+      color: var(--danger);
+    }
+
+    /* SECTIONS */
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    /* CARD */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .card-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-header h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    /* FORMS */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      padding: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full {
+      grid-column: 1/-1;
+    }
+
+    .form-group label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      outline: none;
+      background: var(--bg);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+      background: #fff;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-footer {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+    }
+
+    /* BUTTONS */
+    .btn {
+      padding: 7px 14px;
+      border-radius: 7px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: opacity 0.15s, transform 0.1s;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn:hover {
+      opacity: 0.85;
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-success {
+      background: var(--success);
+      color: #fff;
+    }
+
+    .btn-outline {
+      background: #fff;
+      color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+
+    .btn-danger {
+      background: var(--danger-light);
+      color: var(--danger);
+    }
+
+    .btn-sm {
+      padding: 5px 11px;
+      font-size: 0.78rem;
+    }
+
+    /* LIST ITEMS */
+    .list-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.12s;
+    }
+
+    .list-item:last-child {
+      border-bottom: none;
+    }
+
+    .list-item:hover {
+      background: #fafaf8;
+    }
+
+    .item-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 9px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    .item-icon.blue {
+      background: var(--accent-light);
+    }
+
+    .item-icon.green {
+      background: var(--success-light);
+    }
+
+    .item-icon.orange {
+      background: var(--warning-light);
+    }
+
+    .item-icon.red {
+      background: var(--danger-light);
+    }
+
+    .item-body {
+      flex: 1;
+    }
+
+    .item-title {
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+
+    .item-desc {
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin-top: 2px;
+    }
+
+    .item-meta {
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .item-actions {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    /* ATTENDANCE TABLE */
+    .att-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .att-table th {
+      padding: 10px 16px;
+      background: var(--bg);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .att-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+
+    .att-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .att-btn {
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: 1.5px solid var(--border);
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.15s;
+      background: #fff;
+      margin-right: 4px;
+    }
+
+    .att-btn.present {
+      background: var(--success-light);
+      color: var(--success);
+      border-color: var(--success);
+    }
+
+    .att-btn.absent {
+      background: var(--danger-light);
+      color: var(--danger);
+      border-color: var(--danger);
+    }
+
+    .att-btn.late {
+      background: var(--warning-light);
+      color: var(--warning);
+      border-color: var(--warning);
+    }
+
+    /* BADGE */
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 0.73rem;
+      font-weight: 600;
+    }
+
+    .badge-blue {
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+
+    .badge-green {
+      background: var(--success-light);
+      color: var(--success);
+    }
+
+    .badge-orange {
+      background: var(--warning-light);
+      color: var(--warning);
+    }
+
+    .badge-red {
+      background: var(--danger-light);
+      color: var(--danger);
+    }
+
+    /* MESSAGES */
+    .msg-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 500px;
+    }
+
+    .msg-sidebar {
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+    }
+
+    .msg-thread {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.12s;
+    }
+
+    .msg-thread:hover {
+      background: var(--bg);
+    }
+
+    .msg-thread.active {
+      background: var(--accent-light);
+    }
+
+    .msg-thread-name {
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+
+    .msg-thread-preview {
+      font-size: 0.76rem;
+      color: var(--muted);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .msg-main {
+      display: flex;
+      flex-direction: column;
+      min-height: 500px;
+    }
+
+    .msg-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      font-weight: 600;
+    }
+
+    .msg-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 400px;
+    }
+
+    .msg-bubble {
+      max-width: 70%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .msg-bubble.sent {
+      background: var(--accent);
+      color: #fff;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+
+    .msg-bubble.received {
+      background: var(--bg);
+      color: var(--text);
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+
+    .msg-bubble-time {
+      font-size: 0.68rem;
+      opacity: 0.7;
+      margin-top: 4px;
+    }
+
+    .msg-footer {
+      padding: 14px 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+    }
+
+    .msg-footer input {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .msg-footer input:focus {
+      border-color: var(--accent);
+    }
+
+    .msg-empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 40px;
+    }
+
+    /* FILE UPLOAD */
+    .file-drop {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      background: var(--bg);
+      transition: border-color .2s, background .2s;
+    }
+
+    .file-drop:hover {
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .file-drop input {
+      display: none;
+    }
+
+    /* EMPTY / LOADING */
+    .empty {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--muted);
+    }
+
+    .empty .icon {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+    }
+
+    .empty p {
+      font-size: 0.9rem;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 36px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* TOAST */
+    #toast {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: var(--text);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+      z-index: 9999;
+      box-shadow: var(--shadow-md);
+    }
+
+    #toast.show {
+      opacity: 1;
+    }
+
+    #toast.success {
+      background: var(--success);
+    }
+
+    #toast.error {
+      background: var(--danger);
+    }
+
+    @media(max-width:900px) {
+      .sidebar {
+        width: 200px;
+      }
+
+      .main {
+        margin-left: 200px;
+        padding: 20px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .att-btn { padding:4px 10px; border-radius:6px; border:1.5px solid var(--border); background:#f8fafc; font-size:.78rem; cursor:pointer; margin-right:4px; transition:all .15s; }
+.active-present { background:#dcfce7; border-color:#16a34a; color:#16a34a; font-weight:700; }
+.active-absent  { background:#fee2e2; border-color:#dc2626; color:#dc2626; font-weight:700; }
+.active-late    { background:#fef3c7; border-color:#d97706; color:#d97706; font-weight:700; }
+  </style>
+</head>
+
+<body>
+
+  <!-- LOGIN -->
+  <div id="loginScreen">
+    <div class="login-card">
+      <div class="logo">👨‍🏫</div>
+      <h1>Teacher Portal</h1>
+      <p>EIEM — Faculty Management System</p>
+      <input type="text" id="teacherUser" placeholder="Username" autocomplete="off" />
+      <input type="password" id="teacherPass" placeholder="Password" />
+      <button onclick="doLogin()">Sign In →</button>
+      <div class="login-err" id="loginErr">Invalid credentials. Please try again.</div>
+    </div>
+  </div>
+
+  <!-- TEACHER PANEL -->
+  <div id="teacherPanel">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand">EIEM <span>Faculty</span></div>
+        <small>Teacher Dashboard</small>
+      </div>
+      <nav class="nav">
+        <button class="nav-item active" data-sec="sec-dashboard" onclick="showSection('dashboard',this)"><span class="icon">📊</span>
+          Dashboard</button>
+        <button class="nav-item" data-sec="sec-students" onclick="showSection('students',this)"><span class="icon">🎓</span> Students<span
+            class="nav-badge" id="studentBadge" style="display:none">0</span></button>
+        <button class="nav-item" data-sec="sec-announcements" onclick="showSection('announcements',this)"><span class="icon">📢</span>
+          Announcements</button>
+        <button class="nav-item" data-sec="sec-materials" onclick="showSection('materials',this)"><span class="icon">📚</span> Study
+          Materials</button>
+     <button class="nav-item" data-sec="sec-attendance" onclick="showSection('attendance',this);initAttendanceSection()"><span class="icon">✅</span>
+          Attendance</button>
+        <button class="nav-item" data-sec="sec-marks" onclick="showSection('marks',this)"><span class="icon">📝</span> Marks &
+          Results</button>
+        <button class="nav-item" data-sec="sec-assignments" onclick="showSection('assignments',this)"><span class="icon">📋</span>
+          Assignments</button>
+        <button class="nav-item" data-sec="sec-queries" onclick="showSection('queries',this)"><span class="icon">💬</span> Student Queries<span
+            class="nav-badge" id="queryBadge" style="display:none">0</span></button>
+        <button class="nav-item" data-sec="sec-messages" onclick="showSection('messages',this)"><span class="icon">✉️</span> Messages</button>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="logout-btn" onclick="doLogout()"><span>🚪</span> Logout</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <h2 id="sectionTitle">Dashboard</h2>
+        <span class="teacher-tag">👨‍🏫 Faculty</span>
+      </div>
+
+      <!-- STUDENTS -->
+      <div class="section" id="sec-students">
+        <div class="card" style="margin-bottom:20px">
+          <div class="card-header">
+            <h3>🎓 Add Student</h3>
+          </div>
+          <div class="form-grid">
+            <div class="form-group"><label>Full Name</label><input type="text" id="stuName"
+                placeholder="e.g. Priya Sharma" /></div>
+            <div class="form-group"><label>Roll Number</label><input type="text" id="stuRoll"
+                placeholder="e.g. CS2024001" /></div>
+            <div class="form-group"><label>Email</label><input type="email" id="stuEmail"
+                placeholder="student@college.edu" /></div>
+            <div class="form-group"><label>Password <span style="color:var(--danger)">*</span></label><input type="text"
+                id="stuPassword" placeholder="Set login password for student" /></div>
+            <div class="form-group"><label>Phone</label><input type="text" id="stuPhone"
+                placeholder="10-digit mobile" /></div>
+            <div class="form-group"><label>Class / Section</label><input type="text" id="stuClass"
+                placeholder="e.g. CSE-A 3rd Year" /></div>
+            <div class="form-group"><label>Academic Year</label>
+              <select id="stuYear">
+                <option>2024-25</option>
+                <option>2025-26</option>
+                <option>2026-27</option>
+                <option>2027-28</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Course / Programme</label><input type="text" id="stuCourse"
+                placeholder="e.g. B.Tech CSE" /></div>
+            <div class="form-group"><label>Date of Birth</label><input type="date" id="stuDob" /></div>
+            <div class="form-group"><label>Parent / Guardian Name</label><input type="text" id="stuParent"
+                placeholder="Parent's full name" /></div>
+            <div class="form-group"><label>Parent Phone</label><input type="text" id="stuParentPhone"
+                placeholder="10-digit mobile" /></div>
+            <div class="form-group full"><label>Address</label><input type="text" id="stuAddress"
+                placeholder="Home address (optional)" /></div>
+          </div>
+          <div class="form-footer">
+            <button class="btn btn-primary" onclick="addStudent()">🎓 Add Student</button>
+            <button class="btn btn-outline" onclick="clearStudentForm()">Clear</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>My Students</h3>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <input type="text" id="stuSearch" placeholder="🔍 Search name or roll…"
+                style="padding:6px 12px;border:1.5px solid var(--border);border-radius:20px;font-family:'DM Sans',sans-serif;font-size:0.8rem;outline:none;background:var(--bg);min-width:200px"
+                oninput="filterStudentList(this.value)" />
+              <select id="stuClassFilter" onchange="filterStudentList(document.getElementById('stuSearch').value)"
+                style="padding:6px 12px;border:1.5px solid var(--border);border-radius:20px;font-family:'DM Sans',sans-serif;font-size:0.8rem;outline:none;background:var(--bg)">
+                <option value="">All Classes</option>
+              </select>
+            </div>
+          </div>
+          <div id="stuList">
+            <div class="loading">Loading...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DASHBOARD -->
+      <div class="section active" id="sec-dashboard">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="label">Students</div>
+            <div class="value blue" id="statStu">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Announcements</div>
+            <div class="value green" id="statAnn">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Assignments</div>
+            <div class="value orange" id="statAss">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="label">Pending Queries</div>
+            <div class="value red" id="statQry">—</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h3>📋 Recent Announcements</h3>
+          </div>
+          <div id="dashActivity">
+            <div class="loading">Loading...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANNOUNCEMENTS -->
+      <div class="section" id="sec-announcements">
+        <div class="card">
+          <div class="card-header">
+            <h3>📢 Post Announcement</h3>
+          </div>
+          <div class="form-grid">
+            <div class="form-group full"><label>Title</label><input type="text" id="annTitle"
+                placeholder="e.g. Class test on Monday" /></div>
+            <div class="form-group full"><label>Message</label><textarea id="annContent"
+                placeholder="Write your announcement..."></textarea></div>
+            <div class="form-group"><label>Subject / Class</label><input type="text" id="annSubject"
+                placeholder="e.g. CSE 3rd Year" /></div>
+            <div class="form-group"><label>Priority</label>
+              <select id="annPriority">
+                <option value="normal">Normal</option>
+                <option value="important">Important</option>
+                <option value="urgent">Urgent</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-footer">
+            <button class="btn btn-primary" onclick="postAnnouncement()">📢 Post Announcement</button>
+            <button class="btn btn-outline" onclick="clearFields('annTitle','annContent','annSubject')">Clear</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h3>My Announcements</h3>
+          </div>
+          <div id="annList">
+            <div class="loading">Loading...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MATERIALS -->
+      <div class="section" id="sec-materials">
+        <div class="card">
+          <div class="card-header">
+            <h3>📚 Upload Study Material</h3>
+          </div>
+          <div class="form-grid">
+            <div class="form-group full"><label>Title</label><input type="text" id="matTitle"
+                placeholder="e.g. Unit 3 Notes" /></div>
+            <div class="form-group"><label>Subject</label><input type="text" id="matSubject"
+                placeholder="e.g. Data Structures" /></div>
+            <div class="form-group"><label>Type</label>
+              <select id="matType">
+                <option>Notes</option>
+                <option>Assignment</option>
+                <option>Question Paper</option>
+                <option>Reference</option>
+                <option>Syllabus</option>
+              </select>
+            </div>
+            <div class="form-group full"><label>Description</label><textarea id="matDesc"
+                placeholder="Brief description..."></textarea></div>
+            <div class="form-group full">
+              <label>Upload File</label>
+              <div class="file-drop" onclick="document.getElementById('matFile').click()">
+                <input type="file" id="matFile" accept=".pdf,.doc,.docx,.ppt,.pptx,.zip,.jpg,.jpeg,.png,.mp4,.xlsx,.xls" />
+                <div style="font-size:1.8rem;margin-bottom:6px">📎</div>
+                <div style="font-size:.88rem;font-weight:600">Click to upload file</div>
+                <div style="font-size:.74rem;color:var(--muted);margin-top:2px">PDF, DOC, PPT · max 20 MB</div>
+              </div>
+              <div id="matFileStatus" style="font-size:.78rem;margin-top:.4rem;color:var(--muted)"></div>
+            </div>
+          </div>
+          <div class="form-footer">
+            <button class="btn btn-primary" onclick="uploadMaterial()">📤 Upload</button>
+            <button class="btn btn-outline" onclick="clearFields('matTitle','matSubject','matDesc')">Clear</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <h3>Uploaded Materials</h3>
+          </div>
+          <div id="matList">
+            <div class="loading">Loading...</div>
+          </div>
+        </div>
+      </div>
+
+     <!-- ATTENDANCE -->
+      <div class="section" id="sec-attendance">
+        <div class="card">
+          <div class="card-header">
+            <h3>✅ Mark Attendance</h3>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Class</label>
+              <select id="attClass" onchange="loadStudentsForAttendance()">
+                <option value="">-- Select Class --</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Subject</label><input type="text" id="attSubject" placeholder="e.g. Data Structures" /></div>
+            <div class="form-group"><label>Date</label><input type="date" id="attDate" /></div>
+          </div>
+          <div class="form-footer">
+            <button class="btn btn-primary" onclick="generateAttendance()">📋 Generate Sheet</button>
+          </div>
+        </div>
+
+        <div class="card" id="attSheetCard" style="display:none">
+          <div class="card-header">
+            <h3 id="attSheetLabel">Attendance Sheet</h3>
+            <button class="btn btn-success btn-sm" onclick="saveAttendance()">💾 Save Attendance</button>
+          </div>
+          <div style="overflow-x:auto;padding:16px">
+            <table class="att-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Roll No</th>
+                  <th>Name</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="attBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3>Attendance Records</h3>
+            <div style="display:flex;gap:8px">
+              <select id="attFilterClass" onchange="filterAttendanceRecords()" style="padding:6px 10px;border:1px solid var(--border);border-radius:8px;font-size:.8rem">
+                <option value="">All Classes</option>
+              </select>
+              <select id="attFilterSubject" onchange="filterAttendanceRecords()" style="padding:6px 10px;border:1px solid var(--border);border-radius:8px;font-size:.8rem">
+                <option value="">All Subjects</option>
+              </select>
+            </div>
+          </div>
+          <div id="attRecords">
+            <div class="loading">Loading...</div>
+          </div>
+        </div>
+  </div>
+
+      <!-- MARKS -->
+      <div class="section" id="sec-marks">
+        <div class="card">
+          <div class="card-header"><h3>📝 Upload Marks</h3></div>
+          <div class="form-grid">
+            <div class="form-group"><label>Exam Name</label><input type="text" id="markExam" placeholder="e.g. Mid Semester" /></div>
+            <div class="form-group"><label>Subject</label><input type="text" id="markSubject" placeholder="e.g. Data Structures" /></div>
+            <div class="form-group"><label>Class</label><input type="text" id="markClass" placeholder="e.g. CSE-A" /></div>
+            <div class="form-group"><label>Max Marks</label><input type="number" id="markMax" placeholder="e.g. 100" /></div>
+            <div class="form-group full"><label>Marks (Roll No : Marks, one per line)</label><textarea id="markData" style="min-height:120px" placeholder="001 : 85&#10;002 : 72&#10;003 : 90"></textarea></div>
+            <div class="form-group full"><label>Remarks</label><input type="text" id="markRemarks" placeholder="Optional remarks..." /></div>
+          </div>
+          <div class="form-footer">
+            <button class="btn btn-primary" onclick="uploadMarks()">📊 Upload Marks</button>
+            <button class="btn btn-outline" onclick="clearFields('markExam','markSubject','markClass','markMax','markData','markRemarks')">Clear</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h3>🎯 Push Marks to Student</h3></div>
+          <div class="form-grid">
+            <div class="form-group"><label>Student Roll No</label><input type="text" id="pushRoll" placeholder="e.g. CS2024001" /></div>
+            <div class="form-group"><label>Subject</label><input type="text" id="pushSubject" placeholder="e.g. Data Structures" /></div>
+            <div class="form-group"><label>Exam Type</label>
+              <select id="pushExamType">
+                <option value="Mid Semester">Mid Semester</option>
+                <option value="End Semester">End Semester</option>
+                <option value="Internal">Internal</option>
+                <option value="Assignment">Assignment</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Marks Obtained</label><input type="number" id="pushObtained" placeholder="e.g. 85" /></div>
+            <div class="form-group"><label>Max Marks</label><input type="number" id="pushMax" placeholder="e.g. 100" /></div>
+            <div class="form-group"><label>Remarks</label><input type="text" id="pushRemarks" placeholder="Optional" /></div>
+          </div>
+          <div class="form-footer">
+            <button class="btn btn-primary" onclick="pushStudentMark()">📤 Push to Student</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h3>📋 Push Attendance Summary</h3></div>
+          <div class="form-grid">
+            <div class="form-group"><label>Student Roll No</label><input type="text" id="attPushRoll" placeholder="e.g. 34" /></div>
+            <div class="form-group"><label>Subject</label><input type="text" id="attPushSubject" placeholder="e.g. Algorithm" /></div>
+            <div class="form-group"><label>Total Classes</label><input type="number" id="attPushTotal" placeholder="e.g. 50" /></div>
+            <div class="form-group"><label>Classes Present</label><input type="number" id="attPushPresent" placeholder="e.g. 40" /></div>
+          </div>
+          <div class="form-footer">
+            <button class="btn btn-primary" onclick="pushStudentAttendance()">📤 Push Attendance</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h3>Uploaded Marks</h3></div>
+          <div id="markList"><div class="loading">Loading...</div></div>
+        </div>
+      </div>
+
+      <!-- ASSIGNMENTS -->
+      <div class="section" id="sec-assignments">
+        <div class="card">
+          <div class="card-header"><h3>📋 Create Assignment</h3></div>
+          <div class="form-grid">
+            <div class="form-group"><label>Title</label><input type="text" id="assTitle" placeholder="e.g. Unit 3 Assignment" /></div>
+            <div class="form-group"><label>Subject</label><input type="text" id="assSubject" placeholder="e.g. Data Structures" /></div>
+            <div class="form-group"><label>Class</label><input type="text" id="assClass" placeholder="e.g. CSE-A" /></div>
+            <div class="form-group"><label>Due Date</label><input type="date" id="assDue" /></div>
+            <div class="form-group"><label>Max Marks</label><input type="number" id="assMarks" placeholder="e.g. 20" /></div>
+            <div class="form-group full"><label>Instructions</label><textarea id="assDesc" placeholder="Assignment instructions..."></textarea></div>
+          </div>
+          <div class="form-footer">
+            <button class="btn btn-primary" onclick="createAssignment()">📋 Post Assignment</button>
+            <button class="btn btn-outline" onclick="clearFields('assTitle','assSubject','assClass','assDue','assMarks','assDesc')">Clear</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h3>Posted Assignments</h3></div>
+          <div id="assList"><div class="loading">Loading...</div></div>
+        </div>
+      </div>
+
+      <!-- QUERIES -->
+      <div class="section" id="sec-queries">
+        <div class="card">
+          <div class="card-header">
+            <h3>💬 Student Queries</h3>
+            <span class="badge badge-orange" id="queryBadge" style="display:none">0</span>
+          </div>
+          <div id="queryList"><div class="loading">Loading...</div></div>
+        </div>
+      </div>
+
+      <!-- MESSAGES -->
+      <div class="section" id="sec-messages">
+        <div class="card">
+          <div class="card-header"><h3>✉️ Send Message</h3></div>
+          <div class="form-grid">
+            <div class="form-group"><label>To (Student Roll No)</label><input type="text" id="msgTo" placeholder="e.g. 34" /></div>
+            <div class="form-group"><label>Subject</label><input type="text" id="msgSubject" placeholder="Message subject" /></div>
+            <div class="form-group full"><label>Message</label><textarea id="msgBody" placeholder="Type your message..."></textarea></div>
+          </div>
+          <div class="form-footer">
+            <button class="btn btn-primary" onclick="sendMessage()">✉️ Send Message</button>
+            <button class="btn btn-outline" onclick="clearFields('msgTo','msgSubject','msgBody')">Clear</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h3>Sent Messages</h3></div>
+          <div id="msgList"><div class="loading">Loading...</div></div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <div id="toast"></div>
+
+  <script>
+    // ══════════════════════════════════════════
+    //  CONFIG
+    // ══════════════════════════════════════════
+    const SUPABASE_URL = "https://zmrowyxzpygrvwnqvucy.supabase.co";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inptcm93eXh6cHlncnZ3bnF2dWN5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxMTQyNjUsImV4cCI6MjA5NDY5MDI2NX0.6nXMU-d-11e1etRQgOOIdGxHB5FiNWZMyxBvZQknqz8";
+
+    let sb, currentTeacher = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        if (typeof window.supabase === 'undefined') { alert('Supabase failed to load. Refresh.'); return; }
+        sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        const saved = sessionStorage.getItem('teacherData');
+        if (saved) { currentTeacher = JSON.parse(saved); showPanel(); }
+        document.getElementById('teacherPass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+      }, 300);
+    });
+
+    // ══ AUTH ══
+    async function doLogin() {
+      const u = document.getElementById('teacherUser').value.trim();
+      const p = document.getElementById('teacherPass').value.trim();
+      const btn = document.querySelector('#loginScreen button');
+      if (!u || !p) { document.getElementById('loginErr').style.display = 'block'; return; }
+      btn.textContent = 'Signing in…'; btn.disabled = true;
+      const { data, error } = await sb.from('teachers').select('*').eq('username', u).eq('password', p).maybeSingle();
+      btn.textContent = 'Sign In →'; btn.disabled = false;
+      if (data) {
+        currentTeacher = data;
+        sessionStorage.setItem('teacherAuth', 'true');
+        sessionStorage.setItem('teacherData', JSON.stringify(data));
+        showPanel();
+      } else {
+        document.getElementById('loginErr').style.display = 'block';
+      }
+    }
+
+    function showPanel() {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('teacherPanel').style.display = 'block';
+      // Show teacher name in topbar
+      if (currentTeacher) {
+        const tag = document.querySelector('.teacher-tag');
+        if (tag) tag.textContent = '👨‍🏫 ' + currentTeacher.name;
+      }
+      loadAll();
+    }
+
+    function doLogout() {
+      sessionStorage.removeItem('teacherAuth');
+      sessionStorage.removeItem('teacherData');
+      currentTeacher = null;
+      location.reload();
+    }
+
+    // ══ NAVIGATION ══
+    const titles = { dashboard: 'Dashboard', students: 'Student Management', announcements: 'Announcements', materials: 'Study Materials', attendance: 'Attendance', marks: 'Marks & Results', assignments: 'Assignments', queries: 'Student Queries', messages: 'Messages' };
+
+    function showSection(id, el) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      document.getElementById('sec-' + id).classList.add('active');
+      if (el) el.classList.add('active');
+      document.getElementById('sectionTitle').textContent = titles[id] || id;
+    }
+
+    // ══ LOAD ALL ══
+    async function loadAll() {
+      loadDashboard();
+      loadStudents();
+      loadAnnouncements();
+      loadMaterials();
+      loadAssignments();
+      loadAttendanceRecords();
+      loadMarks();
+      loadQueries();
+      loadMessages();
+    }
+
+    // ══ DASHBOARD ══
+    async function loadDashboard() {
+      if (!currentTeacher) return;
+      const tid = currentTeacher.id;
+      const [stu, ann, ass, qry] = await Promise.all([
+        sb.from('students').select('*', { count: 'exact', head: true }),
+        sb.from('teacher_announcements').select('*', { count: 'exact', head: true }).eq('teacher_id', tid),
+        sb.from('teacher_assignments').select('*', { count: 'exact', head: true }).eq('teacher_id', tid),
+        sb.from('teacher_queries').select('*', { count: 'exact', head: true }).eq('status', 'pending'),
+      ]);
+      document.getElementById('statStu').textContent = stu.count ?? 0;
+      document.getElementById('statAnn').textContent = ann.count ?? 0;
+      document.getElementById('statAss').textContent = ass.count ?? 0;
+      document.getElementById('statQry').textContent = qry.count ?? 0;
+
+      const { data: recent } = await sb.from('teacher_announcements').select('*')
+        .eq('teacher_id', tid).order('created_at', { ascending: false }).limit(5);
+      const el = document.getElementById('dashActivity');
+      if (!recent || !recent.length) { el.innerHTML = emptyState('📭', 'No announcements yet.'); return; }
+      el.innerHTML = recent.map(a => `
+    <div class="list-item">
+      <div class="item-icon blue">📢</div>
+      <div class="item-body">
+        <div class="item-title">${esc(a.title)}</div>
+        <div class="item-desc">${esc(a.content)}</div>
+        <div class="item-meta">📚 ${esc(a.subject || 'General')} · ${fmtDate(a.created_at)}</div>
+      </div>
+    </div>`).join('');
+    }
+
+    // ══ STUDENTS ══
+    let allStudents = [];
+
+    async function loadStudents() {
+      const { data, error } = await sb.from('students').select('*').order('created_at', { ascending: false });
+      if (error) { console.error('Students fetch failed:', error.message); return; }
+      allStudents = data || [];
+
+      // Update badge & stat
+      const count = allStudents.length;
+      document.getElementById('statStu').textContent = count;
+      const badge = document.getElementById('studentBadge');
+      badge.textContent = count;
+      badge.style.display = count > 0 ? 'inline' : 'none';
+
+      // Build class filter dropdown
+      const classFilter = document.getElementById('stuClassFilter');
+      const classes = [...new Set(allStudents.map(s => s.class).filter(Boolean))].sort();
+      classFilter.innerHTML = '<option value="">All Classes</option>' + classes.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join('');
+
+      renderStudentList(allStudents);
+    }
+
+    function filterStudentList(q) {
+      const lq = (q || '').toLowerCase();
+      const cls = document.getElementById('stuClassFilter').value;
+      const filtered = allStudents.filter(s => {
+        const matchQ = !lq || (s.name || '').toLowerCase().includes(lq) || (s.roll_number || '').toLowerCase().includes(lq) || (s.email || '').toLowerCase().includes(lq);
+        const matchCls = !cls || s.class === cls;
+        return matchQ && matchCls;
+      });
+      renderStudentList(filtered);
+    }
+
+    function renderStudentList(list) {
+      const el = document.getElementById('stuList');
+      if (!list.length) {
+        el.innerHTML = `<div class="empty"><div class="icon">🎓</div><p>No students found. Add your first student above.</p></div>`;
+        return;
+      }
+      el.innerHTML = list.map((s, idx) => `
+    <div class="list-item">
+      <div class="item-icon blue" style="font-size:1rem;font-weight:700;font-family:'Playfair Display',serif">${idx + 1}</div>
+      <div class="item-body">
+        <div class="item-title">${esc(s.name)}
+          <span class="badge badge-blue">${esc(s.roll_number || '—')}</span>
+          <span class="badge" style="background:var(--success-light);color:var(--success)">${esc(s.class || '—')}</span>
+        </div>
+        <div class="item-desc">📧 ${esc(s.email || '—')} &nbsp;|&nbsp; 📞 ${esc(s.phone || '—')} &nbsp;|&nbsp; 📚 ${esc(s.course || '—')}</div>
+        <div class="item-meta">
+          👨‍👩‍👦 ${esc(s.parent_name || '—')}
+          ${s.parent_phone ? ' &nbsp;|&nbsp; 📞 ' + esc(s.parent_phone) : ''}
+          ${s.dob ? ' &nbsp;|&nbsp; 🎂 ' + esc(s.dob) : ''}
+          &nbsp;|&nbsp; 🗓 ${esc(s.academic_year || '—')}
+        </div>
+        ${s.address ? `<div class="item-meta">🏠 ${esc(s.address)}</div>` : ''}
+      </div>
+      <div class="item-actions">
+        <button class="btn btn-danger btn-sm" onclick="deleteStudent('${s.id}')">🗑</button>
+      </div>
+    </div>`).join('');
+    }
+
+    async function addStudent() {
+      const name = document.getElementById('stuName').value.trim();
+      const roll = document.getElementById('stuRoll').value.trim();
+      const email = document.getElementById('stuEmail').value.trim();
+      const password = document.getElementById('stuPassword').value.trim();
+      const phone = document.getElementById('stuPhone').value.trim();
+      const cls = document.getElementById('stuClass').value.trim();
+      const year = document.getElementById('stuYear').value;
+      const course = document.getElementById('stuCourse').value.trim();
+      const dob = document.getElementById('stuDob').value;
+      const parent = document.getElementById('stuParent').value.trim();
+      const parentPhone = document.getElementById('stuParentPhone').value.trim();
+      const address = document.getElementById('stuAddress').value.trim();
+
+      if (!name || !roll) { toast('Name and Roll Number are required', 'error'); return; }
+      if (!password) { toast('Please set a login password for the student', 'error'); return; }
+
+      // Check roll number uniqueness
+      const { data: existing } = await sb.from('students').select('id').eq('roll_number', roll).maybeSingle();
+      if (existing) { toast('Roll number already exists!', 'error'); return; }
+
+      const { error } = await sb.from('students').insert([{
+        name,
+        roll_number: roll,
+        email,
+        password,
+        phone,
+        class: cls,
+        year: year,
+        course,
+        dob: dob || null,
+        parent_name: parent,
+        parent_phone: parentPhone,
+        address
+      }]);
+      if (error) { toast('Failed to add student: ' + error.message, 'error'); return; }
+      toast('Student added successfully! 🎓', 'success');
+      clearStudentForm();
+      loadStudents();
+      loadDashboard();
+    }
+
+    async function deleteStudent(id) {
+      if (!confirm('Remove this student record?')) return;
+      const { error } = await sb.from('students').delete().eq('id', id);
+      if (error) { toast('Error removing student', 'error'); return; }
+      toast('Student removed');
+      loadStudents();
+      loadDashboard();
+    }
+
+    function clearStudentForm() {
+      ['stuName', 'stuRoll', 'stuEmail', 'stuPassword', 'stuPhone', 'stuClass', 'stuCourse', 'stuDob', 'stuParent', 'stuParentPhone', 'stuAddress'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+      });
+      document.getElementById('stuYear').selectedIndex = 0;
+    }
+
+    // ══ ANNOUNCEMENTS ══
+    async function postAnnouncement() {
+      const title = document.getElementById('annTitle').value.trim();
+      const content = document.getElementById('annContent').value.trim();
+      const subject = document.getElementById('annSubject').value.trim();
+      const priority = document.getElementById('annPriority').value;
+      if (!title || !content) { toast('Fill title and message', 'error'); return; }
+      const { error } = await sb.from('teacher_announcements').insert([{
+        title, content, subject, priority, teacher_id: currentTeacher.id
+      }]);
+      if (error) { toast('Failed: ' + error.message, 'error'); return; }
+      toast('Announcement posted!', 'success');
+      clearFields('annTitle', 'annContent', 'annSubject');
+      loadAnnouncements(); loadDashboard();
+    }
+
+    async function loadAnnouncements() {
+      const { data } = await sb.from('teacher_announcements').select('*')
+        .eq('teacher_id', currentTeacher.id).order('created_at', { ascending: false });
+      const el = document.getElementById('annList');
+      if (!data || !data.length) { el.innerHTML = emptyState('📭', 'No announcements yet.'); return; }
+      el.innerHTML = data.map(a => `
+    <div class="list-item">
+      <div class="item-icon ${a.priority === 'urgent' ? 'red' : a.priority === 'important' ? 'orange' : 'blue'}">📢</div>
+      <div class="item-body">
+        <div class="item-title">${esc(a.title)} <span class="badge badge-${a.priority === 'urgent' ? 'red' : a.priority === 'important' ? 'orange' : 'blue'}">${a.priority || 'normal'}</span></div>
+        <div class="item-desc">${esc(a.content)}</div>
+        <div class="item-meta">📚 ${esc(a.subject || 'General')} · ${fmtDate(a.created_at)}</div>
+      </div>
+      <div class="item-actions"><button class="btn btn-danger btn-sm" onclick="delRow('teacher_announcements','${a.id}',loadAnnouncements)">🗑</button></div>
+    </div>`).join('');
+    }
+
+    // ══ MATERIALS ══
+    async function uploadMaterial() {
+      const title = document.getElementById('matTitle').value.trim();
+      const subject = document.getElementById('matSubject').value.trim();
+      const type = document.getElementById('matType').value;
+      const desc = document.getElementById('matDesc').value.trim();
+      const file = document.getElementById('matFile').files[0];
+      const status = document.getElementById('matFileStatus');
+      if (!title || !subject) { toast('Fill title and subject', 'error'); return; }
+
+      let file_url = null;
+      if (file) {
+        if (file.size > 20 * 1024 * 1024) { toast('File must be under 20 MB', 'error'); return; }
+        status.textContent = '⏳ Uploading...';
+        const ext = file.name.split('.').pop();
+        const fileName = `material_${Date.now()}.${ext}`;
+        const { error: upErr } = await sb.storage.from('teacher-materials').upload(fileName, file, { cacheControl: '3600', upsert: false });
+        if (upErr) { toast('Upload failed: ' + upErr.message, 'error'); status.textContent = ''; return; }
+        const { data: urlData } = sb.storage.from('teacher-materials').getPublicUrl(fileName);
+        file_url = urlData.publicUrl;
+        status.textContent = '✅ Uploaded!';
+      }
+
+      const { error } = await sb.from('teacher_materials').insert([{
+        title, subject, type, description: desc, file_url,
+        teacher_id: currentTeacher.id
+      }]);
+      if (error) { toast('Failed: ' + error.message, 'error'); return; }
+      toast('Material uploaded! ✅', 'success');
+clearFields('matTitle', 'matSubject', 'matDesc');
+document.getElementById('matFile').value = '';
+status.textContent = '✅ File saved!';
+
+// Show loading in list
+const matList = document.getElementById('matList');
+if (matList) matList.innerHTML = '<div style="padding:1rem;text-align:center;color:#64748b">⏳ Loading materials...</div>';
+
+await loadMaterials();
+loadDashboard();
+
+// Scroll to list
+if (matList) {
+  matList.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+setTimeout(() => { status.textContent = ''; }, 3000);
+    }
+
+    async function loadMaterials() {
+      const { data } = await sb.from('teacher_materials').select('*')
+        .eq('teacher_id', currentTeacher.id).order('created_at', { ascending: false });
+      const el = document.getElementById('matList');
+      if (!data || !data.length) { el.innerHTML = emptyState('📭', 'No materials yet.'); return; }
+      el.innerHTML = data.map(m => `
+    <div class="list-item">
+      <div class="item-icon green">📚</div>
+      <div class="item-body">
+        <div class="item-title">${esc(m.title)} <span class="badge badge-blue">${esc(m.type || '')}</span></div>
+        <div class="item-desc">${esc(m.description || '')}</div>
+        <div class="item-meta">📖 ${esc(m.subject || '')} · ${fmtDate(m.created_at)}</div>
+      </div>
+      <div class="item-actions">
+        ${m.file_url ? `<a href="${esc(m.file_url)}" target="_blank" class="btn btn-outline btn-sm">⬇ Download</a>` : ''}
+        <button class="btn btn-danger btn-sm" onclick="delRow('teacher_materials','${m.id}',loadMaterials)">🗑</button>
+      </div>
+    </div>`).join('');
+    }
+
+    // ══ ATTENDANCE ══
+    // ══ ATTENDANCE ══
+let attendanceStudents = [];
+let allAttendanceRecords = [];
+
+async function initAttendanceSection() {
+  // Set today's date
+  const dateEl = document.getElementById('attDate');
+  if (dateEl && !dateEl.value) dateEl.value = new Date().toISOString().split('T')[0];
+
+  // Load unique classes from students
+  const { data } = await sb.from('students').select('class').order('class');
+  const classes = [...new Set((data || []).map(s => s.class).filter(Boolean))];
+  const attClass = document.getElementById('attClass');
+  const filterClass = document.getElementById('attFilterClass');
+  classes.forEach(c => {
+    attClass.innerHTML += `<option value="${esc(c)}">${esc(c)}</option>`;
+    filterClass.innerHTML += `<option value="${esc(c)}">${esc(c)}</option>`;
+  });
+
+  loadAttendanceRecords();
+}
+
+async function loadStudentsForAttendance() {
+  const cls = document.getElementById('attClass').value;
+  if (!cls) { attendanceStudents = []; return; }
+  const { data } = await sb.from('students').select('id,name,roll_number').eq('class', cls).order('roll_number');
+  attendanceStudents = data || [];
+}
+
+async function generateAttendance() {
+  const cls = document.getElementById('attClass').value;
+  const subject = document.getElementById('attSubject').value.trim();
+  const date = document.getElementById('attDate').value;
+
+  if (!cls || !subject || !date) { toast('Select class, subject and date', 'error'); return; }
+  if (!attendanceStudents.length) {
+    await loadStudentsForAttendance();
+    if (!attendanceStudents.length) { toast('No students found in this class', 'error'); return; }
+  }
+
+  document.getElementById('attSheetLabel').textContent = `${cls} — ${subject} — ${date}`;
+  document.getElementById('attSheetCard').style.display = 'block';
+
+  document.getElementById('attBody').innerHTML = attendanceStudents.map((s, i) => `
+    <tr id="att-row-${i}" data-status="present" data-id="${s.id}" data-roll="${esc(s.roll_number)}">
+      <td>${i + 1}</td>
+      <td><strong>${esc(s.roll_number)}</strong></td>
+      <td>${esc(s.name)}</td>
+      <td>
+        <button class="att-btn present active-present" onclick="setAtt(${i},'present')">✅ Present</button>
+        <button class="att-btn" onclick="setAtt(${i},'absent')">❌ Absent</button>
+        <button class="att-btn" onclick="setAtt(${i},'late')">⏰ Late</button>
+      </td>
+    </tr>
+  `).join('');
+
+  document.getElementById('attSheetCard').scrollIntoView({ behavior: 'smooth' });
+}
+
+function setAtt(i, status) {
+  const row = document.getElementById('att-row-' + i);
+  row.dataset.status = status;
+  row.querySelectorAll('.att-btn').forEach(b => {
+    b.classList.remove('active-present', 'active-absent', 'active-late');
+  });
+  const idx = status === 'present' ? 0 : status === 'absent' ? 1 : 2;
+  row.querySelectorAll('.att-btn')[idx].classList.add(`active-${status}`);
+}
+
+async function saveAttendance() {
+  const cls = document.getElementById('attClass').value;
+  const subject = document.getElementById('attSubject').value.trim();
+  const date = document.getElementById('attDate').value;
+  const rows = document.querySelectorAll('#attBody tr');
+
+  const records = Array.from(rows).map(row => ({
+    teacher_id:  currentTeacher.id,
+    student_id:  row.dataset.id || null,
+    roll_number: row.dataset.roll,
+    class:       cls,
+    subject,
+    date,
+    status:      row.dataset.status || 'present',
+    is_present:  (row.dataset.status || 'present') === 'present'
+  }));
+
+  const { error } = await sb.from('teacher_attendance').insert(records);
+  if (error) { toast('Failed: ' + error.message, 'error'); return; }
+  toast(`Attendance saved for ${records.length} students! ✅`, 'success');
+  document.getElementById('attSheetCard').style.display = 'none';
+  loadAttendanceRecords();
+}
+
+async function loadAttendanceRecords() {
+  const { data } = await sb.from('teacher_attendance')
+    .select('*')
+    .eq('teacher_id', currentTeacher.id)
+    .order('date', { ascending: false });
+
+  allAttendanceRecords = data || [];
+
+  // Populate subject filter
+  const subjects = [...new Set(allAttendanceRecords.map(r => r.subject).filter(Boolean))];
+  const filterSubject = document.getElementById('attFilterSubject');
+  filterSubject.innerHTML = '<option value="">All Subjects</option>';
+  subjects.forEach(s => filterSubject.innerHTML += `<option value="${esc(s)}">${esc(s)}</option>`);
+
+  renderAttendanceRecords(allAttendanceRecords);
+}
+
+function filterAttendanceRecords() {
+  const cls = document.getElementById('attFilterClass').value;
+  const sub = document.getElementById('attFilterSubject').value;
+  const filtered = allAttendanceRecords.filter(r =>
+    (!cls || r.class === cls) && (!sub || r.subject === sub)
+  );
+  renderAttendanceRecords(filtered);
+}
+
+function renderAttendanceRecords(records) {
+  const el = document.getElementById('attRecords');
+  if (!records.length) { el.innerHTML = emptyState('📭', 'No attendance records yet.'); return; }
+
+  // Group by date + class + subject
+  const groups = {};
+  records.forEach(r => {
+    const key = `${r.date}||${r.class}||${r.subject}`;
+    if (!groups[key]) groups[key] = { date: r.date, cls: r.class, subject: r.subject, students: [] };
+    groups[key].students.push(r);
+  });
+
+  el.innerHTML = Object.values(groups).map(g => {
+    const present = g.students.filter(s => s.is_present).length;
+    const absent  = g.students.filter(s => !s.is_present).length;
+    const total   = g.students.length;
+    const pct     = Math.round(present / total * 100);
+
+    return `
+      <div class="list-item" style="flex-direction:column;align-items:stretch;gap:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div class="item-title">${esc(g.cls)} — ${esc(g.subject)}</div>
+            <div class="item-meta">🗓 ${g.date} · Total: ${total} · ✅ ${present} Present · ❌ ${absent} Absent · ${pct}%</div>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">View Details</button>
+        </div>
+        <div style="display:none;overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-size:.82rem">
+            <thead><tr style="background:#f0f5ff">
+              <th style="padding:6px 10px;text-align:left">Roll No</th>
+              <th style="padding:6px 10px;text-align:left">Status</th>
+            </tr></thead>
+            <tbody>
+              ${g.students.map(s => `
+                <tr style="border-bottom:1px solid #eef2ff">
+                  <td style="padding:6px 10px"><strong>${esc(s.roll_number)}</strong></td>
+                  <td style="padding:6px 10px;color:${s.is_present ? 'var(--green)' : 'var(--red)'};font-weight:600">
+                    ${s.status === 'late' ? '⏰ Late' : s.is_present ? '✅ Present' : '❌ Absent'}
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+      // ══ MARKS ══
+      async function uploadMarks() {
+        const exam = document.getElementById('markExam').value.trim();
+        const subject = document.getElementById('markSubject').value.trim();
+        const cls = document.getElementById('markClass').value.trim();
+        const max = document.getElementById('markMax').value.trim();
+        const raw = document.getElementById('markData').value.trim();
+        const remarks = document.getElementById('markRemarks').value.trim();
+        if (!exam || !subject || !raw) { toast('Fill required fields', 'error'); return; }
+        const { error } = await sb.from('teacher_marks').insert([{
+        exam_name: exam,
+        exam_type: exam,
+        roll_number: 'batch',
+        roll_no: 'batch',
+        subject,
+        class: cls,
+        max_marks: parseInt(max) || null,
+        marks_data: raw,
+        remarks: remarks || null,
+        teacher_id: currentTeacher.id
+      }]);
+        if (error) { toast('Failed: ' + error.message, 'error'); return; }
+        toast('Marks uploaded!', 'success');
+        clearFields('markExam', 'markSubject', 'markClass', 'markMax', 'markData', 'markRemarks');
+        loadMarks();
+      }
+
+      async function loadMarks() {
+        const { data } = await sb.from('teacher_marks').select('*')
+          .eq('teacher_id', currentTeacher.id).order('created_at', { ascending: false });
+        const el = document.getElementById('markList');
+        if (!data || !data.length) { el.innerHTML = emptyState('📭', 'No marks uploaded yet.'); return; }
+        el.innerHTML = data.map(m => `
+    <div class="list-item">
+      <div class="item-icon orange">📝</div>
+      <div class="item-body">
+        <div class="item-title">${esc(m.exam_name)} <span class="badge badge-orange">${esc(m.subject || '')}</span></div>
+        <div class="item-meta">${esc(m.class || '')} ${m.max_marks ? '· Max: ' + m.max_marks : ''} · ${fmtDate(m.created_at)}</div>
+      </div>
+      <div class="item-actions"><button class="btn btn-danger btn-sm" onclick="delRow('teacher_marks','${m.id}',loadMarks)">🗑</button></div>
+    </div>`).join('');
+      }
+
+      // ══ ASSIGNMENTS ══
+      async function createAssignment() {
+        const title = document.getElementById('assTitle').value.trim();
+        const desc = document.getElementById('assDesc').value.trim();
+        const subject = document.getElementById('assSubject').value.trim();
+        const cls = document.getElementById('assClass').value.trim();
+        const due = document.getElementById('assDue').value;
+        const marks = document.getElementById('assMarks').value.trim();
+        if (!title || !subject || !due) { toast('Fill title, subject and due date', 'error'); return; }
+        const { error } = await sb.from('teacher_assignments').insert([{
+          title, instructions: desc || title, subject, class: cls,
+          due_date: due, max_marks: marks || null, teacher_id: currentTeacher.id
+        }]);
+        if (error) { toast('Failed: ' + error.message, 'error'); return; }
+        toast('Assignment posted!', 'success');
+        clearFields('assTitle', 'assDesc', 'assSubject', 'assClass', 'assDue', 'assMarks');
+        loadAssignments(); loadDashboard();
+      }
+
+      async function loadAssignments() {
+        const { data } = await sb.from('teacher_assignments').select('*')
+          .eq('teacher_id', currentTeacher.id).order('due_date', { ascending: true });
+        const el = document.getElementById('assList');
+        if (!data || !data.length) { el.innerHTML = emptyState('📭', 'No assignments yet.'); return; }
+        el.innerHTML = data.map(a => {
+          const overdue = a.due_date && new Date(a.due_date) < new Date();
+          return `
+    <div class="list-item">
+      <div class="item-icon ${overdue ? 'red' : 'orange'}">📋</div>
+      <div class="item-body">
+        <div class="item-title">${esc(a.title)} <span class="badge badge-${overdue ? 'red' : 'orange'}">${overdue ? 'Overdue' : 'Active'}</span></div>
+        <div class="item-desc">${esc(a.instructions || '')}</div>
+        <div class="item-meta">📖 ${esc(a.subject || '')} · 🏫 ${esc(a.class || '—')} · Due: ${a.due_date || '—'} ${a.max_marks ? '· Marks: ' + a.max_marks : ''}</div>
+      </div>
+      <div class="item-actions"><button class="btn btn-danger btn-sm" onclick="delRow('teacher_assignments','${a.id}',loadAssignments)">🗑</button></div>
+    </div>`;
+        }).join('');
+      }
+
+      // ══ QUERIES ══
+      async function loadQueries() {
+        const { data } = await sb.from('teacher_queries').select('*').order('created_at', { ascending: false });
+        const el = document.getElementById('queryList');
+        const pending = (data || []).filter(q => q.status === 'pending').length;
+        const badge = document.getElementById('queryBadge');
+        badge.textContent = pending;
+        badge.style.display = pending > 0 ? 'inline' : 'none';
+        document.getElementById('statQry').textContent = pending;
+        if (!data || !data.length) { el.innerHTML = emptyState('📭', 'No student queries yet.'); return; }
+        el.innerHTML = data.map(q => `
+    <div class="list-item">
+      <div class="item-icon ${q.status === 'pending' ? 'orange' : 'green'}">💬</div>
+      <div class="item-body">
+        <div class="item-title">${esc(q.student_name || 'Student')} <span class="badge badge-${q.status === 'pending' ? 'orange' : 'green'}">${q.status}</span></div>
+        <div class="item-desc">${esc(q.message)}</div>
+        ${q.reply ? `<div style="margin-top:6px;padding:8px 12px;background:var(--accent-light);border-radius:6px;font-size:.82rem;color:var(--accent);border-left:3px solid var(--accent)"><strong>Your reply:</strong> ${esc(q.reply)}</div>` : ''}
+        <div style="margin-top:8px;display:flex;gap:8px">
+          <input type="text" id="qreply-${q.id}" placeholder="Type reply..." style="flex:1;padding:7px 12px;border:1.5px solid var(--border);border-radius:7px;font-family:'DM Sans',sans-serif;font-size:.82rem;outline:none"/>
+          <button class="btn btn-primary btn-sm" onclick="replyQuery('${q.id}')">✉️ Reply</button>
+        </div>
+      </div>
+    </div>`).join('');
+      }
+
+      async function replyQuery(id) {
+        const reply = document.getElementById('qreply-' + id).value.trim();
+        if (!reply) { toast('Type a reply first', 'error'); return; }
+        const { error } = await sb.from('teacher_queries').update({ reply, status: 'replied' }).eq('id', id);
+        if (error) { toast('Failed: ' + error.message, 'error'); return; }
+        toast('Reply sent!', 'success');
+        loadQueries();
+      }
+
+      // ══ MESSAGES ══
+      async function sendMessage() {
+        const to = document.getElementById('msgTo').value.trim();
+        const subject = document.getElementById('msgSubject').value.trim();
+        const body = document.getElementById('msgBody').value.trim();
+        if (!to || !body) { toast('Fill recipient and message', 'error'); return; }
+        const { error } = await sb.from('teacher_messages').insert([{
+          student_name: to, subject, content: body,
+          sender_role: 'teacher', teacher_id: currentTeacher.id
+        }]);
+        if (error) { toast('Failed: ' + error.message, 'error'); return; }
+        toast('Message sent!', 'success');
+        clearFields('msgTo', 'msgSubject', 'msgBody');
+        loadMessages();
+      }
+
+      async function loadMessages() {
+        const { data } = await sb.from('teacher_messages').select('*')
+          .eq('teacher_id', currentTeacher.id).order('created_at', { ascending: false });
+        const el = document.getElementById('msgList');
+        if (!data || !data.length) { el.innerHTML = emptyState('📭', 'No messages yet.'); return; }
+        el.innerHTML = data.map(m => `
+    <div class="list-item">
+      <div class="item-icon blue">✉️</div>
+      <div class="item-body">
+        <div class="item-title">To: ${esc(m.student_name || 'Student')}</div>
+        <div class="item-desc">${esc(m.content)}</div>
+        <div class="item-meta">${m.subject ? '📌 ' + esc(m.subject) + ' · ' : ''}${fmtDate(m.created_at)}</div>
+      </div>
+      <div class="item-actions"><button class="btn btn-danger btn-sm" onclick="delRow('teacher_messages','${m.id}',loadMessages)">🗑</button></div>
+    </div>`).join('');
+      }
+// ══ PUSH TO STUDENT RECORDS ══
+      async function pushStudentAttendance() {
+  const roll = document.getElementById('attPushRoll').value.trim();
+  const subject = document.getElementById('attPushSubject').value.trim();
+  const total = parseInt(document.getElementById('attPushTotal').value);
+  const present = parseInt(document.getElementById('attPushPresent').value);
+
+  if (!roll || !subject || isNaN(total) || isNaN(present)) {
+    toast('Fill all fields', 'error'); return;
+  }
+  if (present > total) { toast('Present cannot exceed total classes', 'error'); return; }
+
+  const { data: stu } = await sb.from('students').select('id').eq('roll_number', roll).maybeSingle();
+
+  const { error } = await sb.from('attendance_summary').upsert([{
+    student_id:      stu?.id || null,
+    roll_number:     roll,
+    subject,
+    teacher_id:      currentTeacher.id,
+    total_classes:   total,
+    classes_present: present,
+    last_updated:    new Date().toISOString()
+  }], { onConflict: 'roll_number,subject,teacher_id' });
+
+  if (error) { toast('Failed: ' + error.message, 'error'); return; }
+  toast('Attendance pushed for roll no ' + roll + '! ✅', 'success');
+  clearFields('attPushRoll', 'attPushSubject', 'attPushTotal', 'attPushPresent');
+}
+      // ══ HELPERS ══
+      async function delRow(table, id, reloadFn) {
+        if (!confirm('Delete this item?')) return;
+        const { error } = await sb.from(table).delete().eq('id', id);
+        if (error) { toast('Error deleting', 'error'); return; }
+        toast('Deleted'); reloadFn(); loadDashboard();
+      }
+
+      function clearFields(...ids) { ids.forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; }); }
+      function emptyState(icon, msg) { return `<div class="empty"><div class="icon">${icon}</div><p>${msg}</p></div>`; }
+      function fmtDate(d) { if (!d) return '—'; return new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }); }
+      function esc(str) { return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+
+      let toastTimer;
+      function toast(msg, type = 'success') {
+        const t = document.getElementById('toast');
+        t.textContent = msg; t.className = 'show ' + type;
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => t.className = '', 3000);
+      }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EIEM – Elitte Institute of Engineering & Management</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:wght@700;800;900&display=swap"
+    rel="stylesheet" />
+
+  <!-- Supabase JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <link rel="stylesheet" href="home.css" />
+</head>
+
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="tb-g">
+      <span>✉ <a href="mailto:info@elitte.edu.in">info@elitte.edu.in</a></span>
+      <span class="tb-sep">|</span>
+      <span>🕐 Mon–Sat: 9:00 AM – 5:00 PM</span>
+    </div>
+    <div class="tb-g">
+      <a href="#" class="tb-chip">AISHE</a>
+      <a href="#" class="tb-chip">IIC</a>
+      <a href="#" class="tb-chip">AICTE</a>
+      <a href="#" class="tb-chip">WBSCTVESD</a>
+      <a href="#" class="tb-chip">ARIIA</a>
+      <span class="tb-sep">|</span>
+      <span>📞 <a href="tel:9163316560">9163316560</a> / <a href="tel:9831500840">9831500840</a></span>
+    </div>
+  </div>
+
+  <!-- MAIN HEADER -->
+  <header class="main-header">
+    <div class="hdr-left">
+      <div class="logo-box">
+        <span class="lt">EIEM</span>
+        <span class="ls">Est. 2001</span>
+      </div>
+      <div class="brand">
+        <h1>Elitte Institute of Engineering &amp; Management</h1>
+        <div class="tag">Beyond Degrees, Into Innovation</div>
+        <div class="aff">Approved by AICTE &amp; Affiliated to WBSCT &amp; VE &amp; SD · Kolkata – 700113</div>
+      </div>
+    </div>
+    <div class="hdr-actions">
+      <a href="#"><button class="hbtn solid">📄 E-Prospectus</button></a>
+      <a href="#"><button class="hbtn ghost">📋 Grievance</button></a>
+      <a href="#"><button class="hbtn hot">💳 Fee Payment</button></a>
+      <a href="#"><button class="hbtn hot">🎓 Admissions</button></a>
+      <a href="admin.html"><button class="hbtn admin">🔐 Admin Login</button></a>
+    </div>
+  </header>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <button class="hamburger" id="ham" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-menu" id="navMenu">
+
+        <li>
+          <a href="#">Overview <span class="caret">▾</span></a>
+          <ul class="drop1">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Vision</a></li>
+            <li><a href="#">Mission</a></li>
+            <li><a href="#">Quality Policy</a></li>
+            <li><a href="#">Mandatory Disclosure</a></li>
+            <li><a href="#">Achievements</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="#">Administration <span class="caret">▾</span></a>
+          <ul class="drop1">
+            <li><a href="#">Director (HR)</a></li>
+            <li><a href="#">Director (Operation)</a></li>
+            <li><a href="#">Principal</a></li>
+            <li><a href="#">Rules &amp; Regulations</a></li>
+            <li><a href="#">Anti-Ragging Policy</a></li>
+            <li><a href="#">Anti-Ragging Committee</a></li>
+            <li><a href="#">Anti-Ragging Squad</a></li>
+            <li><a href="#">Disciplinary Committee</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="#">Infrastructure <span class="caret">▾</span></a>
+          <ul class="drop1">
+            <li><a href="#">Overall</a></li>
+            <li><a href="#">Laboratories</a></li>
+            <li><a href="#">Workshop</a></li>
+            <li><a href="#">Cafeteria</a></li>
+            <li><a href="#">Transport</a></li>
+            <li><a href="#">Drinking Water</a></li>
+            <li><a href="#">Internet Facility</a></li>
+            <li><a href="#">Library</a></li>
+            <li><a href="#">Best Practices</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="#">Academics <span class="caret">▾</span></a>
+          <ul class="drop1">
+            <li><a href="#">Courses</a></li>
+            <li><a href="#">Institutional Plan</a></li>
+            <li><a href="#">Academic Policy</a></li>
+            <li><a href="#">Administrative Policy</a></li>
+            <li><a href="#">Reservation Policy</a></li>
+            <li><a href="#">Green Campus Policy</a></li>
+            <li><a href="#">R&amp;D</a></li>
+            <li><a href="#">Institutional Distinctiveness</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="#">Admission <span class="caret">▾</span></a>
+          <ul class="drop1">
+            <li><a href="#">Policy</a></li>
+            <li><a href="#">Fee Structure</a></li>
+            <li><a href="#">E-Prospectus</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="#">Courses <span class="caret">▾</span></a>
+          <ul class="drop1">
+            <li class="has-sub2">
+              <a href="#">PG</a>
+              <ul class="drop2">
+                <li><a href="#">MCA – Computer Applications</a></li>
+                <li><a href="#">MBA – Business Administration</a></li>
+              </ul>
+            </li>
+            <li class="has-sub2">
+              <a href="#">UG</a>
+              <ul class="drop2">
+                <li><a href="#">Civil Engineering</a></li>
+                <li><a href="#">Electrical Engineering</a></li>
+                <li><a href="#">Computer Science &amp; Engg.</a></li>
+                <li><a href="#">Electronics &amp; Communication</a></li>
+                <li><a href="#">Automobile Engineering</a></li>
+                <li><a href="#">Mechanical Engineering</a></li>
+              </ul>
+            </li>
+            <li class="has-sub2">
+              <a href="#">Diploma</a>
+              <ul class="drop2">
+                <li><a href="#">Civil</a></li>
+                <li><a href="#">Electrical</a></li>
+                <li><a href="#">Mechanical</a></li>
+                <li><a href="#">Automobile</a></li>
+                <li><a href="#">CST</a></li>
+                <li><a href="#">ECE</a></li>
+                <li><a href="#">EE</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="#">Training &amp; Placement <span class="caret">▾</span></a>
+          <ul class="drop1">
+            <li><a href="#">Overview</a></li>
+            <li><a href="#">Placement Details</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="#">Events <span class="caret">▾</span></a>
+          <ul class="drop1">
+            <li><a href="#">Upcoming Events</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">News &amp; Updates</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="#">LOGIN<span class="caret">▾</span></a>
+          <ul class="drop1">
+            <li><a href="admin.html">Admin</a></li>
+            <li><a href="teacher.html">Teacher</a></li>
+            <li><a href="student.html">Student</a></li>
+          </ul>
+        </li>
+
+
+        <!-- Apply Now — opens modal -->
+        <li class="nav-apply">
+          <a href="#" id="navApplyNow">🎓 Apply Now</a>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+
+  <!-- MARQUEE -->
+  <div class="announce-bar">
+    <marquee behavior="scroll" direction="left" scrollamount="6">
+      <span>🎓 Admissions Open for 2026–27 — Apply Now!</span>
+      <span>📢 Semester End Exam Schedule Released — Check Notice Board</span>
+      <span>🏆 EIEM Ranked Among Top Engineering Colleges of West Bengal</span>
+      <span>💼 Campus Placement Drive 2026 — 200+ Companies Participating</span>
+      <span>📚 New Course: B.Tech CSE (AI &amp; ML) Now Available</span>
+      <span>🎓 Merit Scholarship Applications Open — Last Date 30 April 2026</span>
+    </marquee>
+  </div>
+
+  <!-- HERO VIDEO + NOTICE -->
+  <div class="hero-wrap">
+    <div class="video-hero" id="videoHero">
+      <video autoplay muted loop playsinline>
+        <source src="WhatsApp Video 2026-05-12 at 5.08.40 PM.mp4" type="video/mp4" />
+      </video>
+      <div class="slide-content">
+        <div class="slide-badge">🎓 Admissions Open 2026–27</div>
+        <h2>Welcome to <span>EIEM</span></h2>
+        <p>Empowering Future Engineers &amp; Innovators Since 2001</p>
+        <a href="#" class="btn-hero" id="heroApplyBtn">Apply Now →</a>
+      </div>
+    </div>
+
+    <div class="notice-panel">
+      <div class="notice-hdr">
+        <div class="nh-icon">📋</div>
+        <div>
+          <h3>Latest Notices</h3><span>Hover to pause</span>
+        </div>
+      </div>
+      <div class="notice-list" id="noticeContainer">
+        <div style="padding: 2rem; text-align: center; color: #64748b; font-size: 0.9rem;">
+          Loading notices...
+        </div>
+      </div>
+      <div class="notice-foot"><a href="#">View All Notices →</a></div>
+    </div>
+  </div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar" id="statsBar">
+    <div class="stat-item">
+      <div class="stat-num" id="stat0" data-target="25" data-suffix="+">0+</div>
+      <div class="stat-lbl">Years of Excellence</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" id="stat1" data-target="5000" data-suffix="+">0+</div>
+      <div class="stat-lbl">Alumni Network</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" id="stat2" data-target="95" data-suffix="%">0%</div>
+      <div class="stat-lbl">Placement Rate</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" id="stat3" data-target="200" data-suffix="+">0+</div>
+      <div class="stat-lbl">Recruiting Partners</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" id="stat4" data-target="15" data-suffix="+">0+</div>
+      <div class="stat-lbl">Active Labs</div>
+    </div>
+  </div>
+
+  <!-- ══ ABOUT OUR COLLEGE SECTION — directly under stats bar ══ -->
+  <section class="about-college-section" id="about">
+    <div class="about-college-inner">
+
+      <!-- Main two-column block -->
+      <div class="about-top">
+        <div class="about-text-block">
+          <span class="sec-badge">About Our College</span>
+          <h2>Elitte Institute of <span>Engineering &amp; Management</span></h2>
+          <p>Established in 2001, Elitte Institute of Engineering &amp; Management (EIEM) is one of West Bengal's most
+            respected technical institutions, approved by AICTE and affiliated to WBSCT &amp; VE &amp; SD. Nestled on a
+            sprawling campus in Sodepur, Kolkata, EIEM has nurtured thousands of engineers, managers and technology
+            leaders who are today contributing to organisations across India and the world.</p>
+          <p>Our philosophy is simple: go beyond the textbook. Through cutting-edge laboratories, industry-linked
+            research, active mentorship and a thriving placement ecosystem, we ensure every student graduates not just
+            with a degree, but with the skills, confidence and network to succeed in a rapidly evolving world.</p>
+          <p>EIEM is more than an institution — it is a launchpad for careers, a breeding ground for innovation, and a
+            community that values integrity, curiosity and excellence above all else.</p>
+
+        </div>
+
+        <!-- Image mosaic — hidden on mobile -->
+        <div class="about-img-mosaic">
+          <div class="mosaic-wrap mosaic-tall">
+            <img class="mosaic-img" src="https://images.unsplash.com/photo-1562774053-701939374585?w=600&q=80"
+              alt="EIEM Campus" />
+            <div class="mosaic-popup">
+              <span class="mosaic-popup-icon">🏛️</span>
+              <span class="mosaic-popup-title">EIEM Campus</span>
+              <span class="mosaic-popup-sub">Sodepur, Kolkata</span>
+            </div>
+          </div>
+          <div class="mosaic-wrap">
+            <img class="mosaic-img" src="https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0?w=400&q=80"
+              alt="Lab" />
+            <div class="mosaic-popup">
+              <span class="mosaic-popup-icon">🔬</span>
+              <span class="mosaic-popup-title">Modern Laboratories</span>
+              <span class="mosaic-popup-sub">15+ State-of-the-Art Labs</span>
+            </div>
+          </div>
+          <div class="mosaic-wrap">
+            <img class="mosaic-img" src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400&q=80"
+              alt="Students" />
+            <div class="mosaic-popup">
+              <span class="mosaic-popup-icon">🎓</span>
+              <span class="mosaic-popup-title">Student Life</span>
+              <span class="mosaic-popup-sub">3,000+ Enrolled Students</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- Built for Excellence (moved here, under About description) -->
+      <div style="margin-top:3rem">
+        <div class="sec-center" style="margin-bottom:2rem">
+          <span class="sec-badge">Why Choose EIEM</span>
+          <h2 class="sec-title">Built for Excellence</h2>
+          <p class="sec-sub">A thriving campus ecosystem designed to nurture innovation, leadership and lifelong
+            learning.</p>
+        </div>
+        <div class="hi-grid" style="--hi-bg:rgba(7,26,62,.06)">
+          <div class="ap-card">
+            <div class="ap-icon">👨‍🏫</div>
+            <h4>Experienced Faculty</h4>
+            <p>Learn from PhD-qualified professors and industry veterans with decades of teaching and research
+              experience.</p>
+          </div>
+          <div class="ap-card">
+            <div class="ap-icon">🔬</div>
+            <h4>Modern Laboratories</h4>
+            <p>State-of-the-art labs for Computer Science, Electronics, Mechanical and Civil disciplines with latest
+              equipment.</p>
+          </div>
+          <div class="ap-card">
+            <div class="ap-icon">💼</div>
+            <h4>Placement Support</h4>
+            <p>Dedicated T&amp;P cell, mock interviews, resume workshops and 200+ recruiters including TCS, Infosys
+              &amp; Wipro.</p>
+          </div>
+          <div class="ap-card">
+            <div class="ap-icon">🏆</div>
+            <h4>Scholarship Programs</h4>
+            <p>Merit-based, government-funded and need-based financial aid ensuring education is accessible for all
+              students.</p>
+          </div>
+          <div class="ap-card">
+            <div class="ap-icon">🌐</div>
+            <h4>Industry Connections</h4>
+            <p>MoUs with leading companies for internships, live projects, guest lectures and industry-sponsored
+              research.</p>
+          </div>
+          <div class="ap-card">
+            <div class="ap-icon">📚</div>
+            <h4>Digital Library (NDLI)</h4>
+            <p>Access to millions of e-books, journals and research papers via the National Digital Library of India.
+            </p>
+          </div>
+          <div class="ap-card">
+            <div class="ap-icon">🚀</div>
+            <h4>Entrepreneurship Cell</h4>
+            <p>Incubation support, startup mentoring, seed funding guidance and IIC-backed innovation challenges for
+              aspiring founders.</p>
+          </div>
+          <div class="ap-card">
+            <div class="ap-icon">🏅</div>
+            <h4>Sports &amp; Wellness</h4>
+            <p>World-class sports grounds, indoor games facilities, fitness centre and dedicated sports coaching for
+              holistic development.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- STUDENTS SECTION -->
+  <section class="students-section" id="students">
+    <div class="students-inner">
+      <div class="students-text">
+        <span class="sec-badge-light">Our Community</span>
+        <h2>Students in Our <span>Institute</span></h2>
+        <p>EIEM is home to a vibrant, diverse and rapidly growing community of learners. From first-year students
+          discovering their passion to final-year engineers landing their dream placements — our campus pulses with
+          ambition, creativity and relentless curiosity. Every student here is part of a legacy of excellence that has
+          shaped professionals across India and beyond.</p>
+        <div class="students-pills">
+          <div class="s-pill"><strong>6+</strong><span>Departments</span></div>
+          <div class="s-pill"><strong>25+</strong><span>Years Strong</span></div>
+          <div class="s-pill"><strong>95%</strong><span>Placement Rate</span></div>
+          <div class="s-pill"><strong>5000+</strong><span>Alumni</span></div>
+        </div>
+      </div>
+      <div class="students-counter-wrap" id="studentsCounterWrap">
+        <span class="students-icon-big">🎓</span>
+        <div class="students-big-num" id="studentsNum">0</div>
+        <div class="students-big-label">Students Enrolled</div>
+        <div class="students-big-sub">and growing every year</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUILT FOR EXCELLENCE (old standalone removed, now inside About section) -->
+
+  <!-- ENQUIRY SECTION -->
+  <section class="enq-section" id="enquiry">
+    <div class="sec-inner enq-grid">
+      <div>
+        <div class="enq-left-text">
+          <span class="sec-badge">Get in Touch</span>
+          <h2 class="sec-title">We're Here to Guide Your Future</h2>
+          <p class="sec-sub">Our dedicated counsellors are ready to answer all your questions about admissions,
+            programmes, campus life and scholarships. Reach out — we'll get back to you within 24 hours.</p>
+        </div>
+        <div class="enq-info-cards">
+          <div class="eic">
+            <div class="eic-icon">🎓</div>
+            <h4>Admissions Guidance</h4>
+            <p>Step-by-step support through the entire admission process, from application to enrollment.</p>
+          </div>
+          <div class="eic">
+            <div class="eic-icon">📘</div>
+            <h4>Programme Counselling</h4>
+            <p>Expert advice on choosing the right B.Tech, MBA, MCA or Diploma programme for your goals.</p>
+          </div>
+          <div class="eic">
+            <div class="eic-icon">💰</div>
+            <h4>Scholarship Assistance</h4>
+            <p>Learn about merit scholarships, government aid and fee waiver programmes available to students.</p>
+          </div>
+          <div class="eic">
+            <div class="eic-icon">🏢</div>
+            <h4>Campus Life &amp; Facilities</h4>
+            <p>Know more about labs, library, transport, hostel arrangements and extracurricular activities.</p>
+          </div>
+          <div class="eic wide">
+            <div class="eic-icon">💼</div>
+            <h4>Placement &amp; Career Support</h4>
+            <p>Discover how our dedicated Training &amp; Placement cell prepares students for top companies and helps
+              them secure their dream roles — from day one to final placement.</p>
+          </div>
+        </div>
+      </div>
+      <div class="enq-card" id="enquiryForm">
+        <h3>Student Enquiry Form</h3>
+        <p>Fill in your details and we'll reach out to you shortly.</p>
+        <div class="fg-row">
+          <div class="fg"><label>Full Name *</label><input type="text" placeholder="Your full name" /></div>
+          <div class="fg"><label>Email Address *</label><input type="email" placeholder="you@email.com" /></div>
+        </div>
+        <div class="fg-row">
+          <div class="fg"><label>Phone Number *</label><input type="tel" placeholder="+91 XXXXXXXXXX" /></div>
+          <div class="fg"><label>Course Interested In</label>
+            <select>
+              <option value="">Select course</option>
+              <option>B.Tech – Computer Science</option>
+              <option>B.Tech – CSE (AI &amp; ML)</option>
+              <option>B.Tech – Electronics &amp; Comm.</option>
+              <option>B.Tech – Mechanical</option>
+              <option>B.Tech – Civil</option>
+              <option>MBA</option>
+              <option>MCA</option>
+              <option>Diploma Engineering</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg"><label>Your Message</label><textarea placeholder="Type your query here…"></textarea></div>
+        <button class="btn-sub">Submit Enquiry →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS CAROUSEL -->
+  <section class="events-section" id="events">
+    <div class="sec-inner">
+      <div class="events-header">
+        <div>
+          <span class="sec-badge">Campus Life</span>
+          <h2 class="sec-title" style="margin-bottom:0">Latest Events</h2>
+        </div>
+        <a href="#" class="view-all-btn">View All Events →</a>
+      </div>
+      <div style="position:relative">
+        <div class="ev-viewport">
+          <div class="ev-track" id="evTrack">
+            <div style="padding:2rem;text-align:center;color:#64748b;font-size:0.9rem;">Loading events...</div>
+          </div>
+        </div>
+        <button class="ev-arrow prev" id="evPrev">&#8592;</button>
+        <button class="ev-arrow next" id="evNext">&#8594;</button>
+      </div>
+      <div class="ev-dots" id="evDots"></div>
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section class="courses-section" id="courses">
+    <div class="sec-inner">
+      <div style="margin-bottom:2.5rem">
+        <span class="sec-badge">Academic Programmes</span>
+        <h2 class="sec-title">Our Courses</h2>
+        <p class="sec-sub">Industry-aligned undergraduate, postgraduate and diploma programmes for tomorrow's workforce.
+        </p>
+      </div>
+      <div class="courses-grid">
+        <div class="cc">
+          <div class="cc-dot"></div>
+          <div><span>B.Tech – Computer Science &amp; Engg.</span><small>4 Years · Full Time</small></div>
+        </div>
+        <div class="cc">
+          <div class="cc-dot"></div>
+          <div><span>B.Tech – CSE (AI &amp; Machine Learning)</span><small>4 Years · Full Time</small></div>
+        </div>
+        <div class="cc">
+          <div class="cc-dot"></div>
+          <div><span>B.Tech – Electronics &amp; Comm. Engg.</span><small>4 Years · Full Time</small></div>
+        </div>
+        <div class="cc">
+          <div class="cc-dot"></div>
+          <div><span>B.Tech – Mechanical Engineering</span><small>4 Years · Full Time</small></div>
+        </div>
+        <div class="cc">
+          <div class="cc-dot"></div>
+          <div><span>B.Tech – Civil Engineering</span><small>4 Years · Full Time</small></div>
+        </div>
+        <div class="cc">
+          <div class="cc-dot"></div>
+          <div><span>MBA – Business Administration</span><small>2 Years · Full Time</small></div>
+        </div>
+        <div class="cc">
+          <div class="cc-dot"></div>
+          <div><span>MCA – Computer Applications</span><small>2 Years · Full Time</small></div>
+        </div>
+        <div class="cc">
+          <div class="cc-dot"></div>
+          <div><span>Diploma – Engineering Programmes</span><small>3 Years · Full Time</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLY NOW MODAL -->
+  <div class="modal-overlay" id="applyModal">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose">✕</button>
+      <h3>Student Enquiry Form</h3>
+      <p>Fill in your details and our counsellor will reach out within 24 hours.</p>
+      <div class="fg-row">
+        <div class="fg"><label>Full Name *</label><input type="text" placeholder="Your full name" /></div>
+        <div class="fg"><label>Email Address *</label><input type="email" placeholder="you@email.com" /></div>
+      </div>
+      <div class="fg-row">
+        <div class="fg"><label>Phone Number *</label><input type="tel" placeholder="+91 XXXXXXXXXX" /></div>
+        <div class="fg"><label>Course Interested In</label>
+          <select>
+            <option value="">Select course</option>
+            <option>B.Tech – Computer Science</option>
+            <option>B.Tech – CSE (AI &amp; ML)</option>
+            <option>B.Tech – Electronics &amp; Comm.</option>
+            <option>B.Tech – Mechanical</option>
+            <option>B.Tech – Civil</option>
+            <option>MBA</option>
+            <option>MCA</option>
+            <option>Diploma Engineering</option>
+          </select>
+        </div>
+      </div>
+      <div class="fg"><label>Your Message</label><textarea placeholder="Type your query here…"></textarea></div>
+      <button class="btn-sub">Submit Enquiry →</button>
+    </div>
+  </div>
+
+  <!-- COMPANY RECRUITERS -->
+  <section class="recruiters-section" id="recruiters">
+    <div class="sec-inner">
+      <div class="sec-center" style="margin-bottom:0">
+        <span class="sec-badge">Placement Partners</span>
+        <h2 class="sec-title">Our Top Recruiters</h2>
+        <p class="sec-sub">200+ companies trust EIEM graduates — hover to pause the scroll.</p>
+      </div>
+      <div class="rec-track-wrap">
+        <div class="rec-track" id="recTrack">
+          <!-- set 1 -->
+          <div class="rec-card">
+            <div class="rec-logo"><img src="https://www.google.com/s2/favicons?domain=tcs.com&sz=128" alt="TCS"
+                style="height:48px; width:48px; object-fit:contain; border-radius:8px;"></div>
+            <div class="rec-name">TCS</div>
+            <div class="rec-pkg">Up to ₹7 LPA</div>
+          </div>
+          <div class="rec-card">
+            <div class="rec-logo"><img src="https://www.google.com/s2/favicons?domain=infosys.com&sz=128" alt="Infosys"
+                style="height:48px; width:48px; object-fit:contain; border-radius:8px;"></div>
+            <div class="rec-name">Infosys</div>
+            <div class="rec-pkg">Up to ₹6.5 LPA</div>
+          </div>
+          <div class="rec-card">
+            <div class="rec-logo"><img src="https://www.google.com/s2/favicons?domain=wipro.com&sz=128" alt="Wipro"
+                style="height:48px; width:48px; object-fit:contain; border-radius:8px;"></div>
+            <div class="rec-name">Wipro</div>
+            <div class="rec-pkg">Up to ₹6 LPA</div>
+          </div>
+          <div class="rec-card">
+            <div class="rec-logo"><img src="https://www.google.com/s2/favicons?domain=cognizant.com&sz=128"
+                alt="Cognizant" style="height:48px; width:48px; object-fit:contain; border-radius:8px;"></div>
+            <div class="rec-name">Cognizant</div>
+            <div class="rec-pkg">Up to ₹7.5 LPA</div>
+          </div>
+          <div class="rec-card">
+            <div class="rec-logo"><img src="https://www.google.com/s2/favicons?domain=accenture.com&sz=128"
+                alt="Accenture" style="height:48px; width:48px; object-fit:contain; border-radius:8px;"></div>
+            <div class="rec-name">Accenture</div>
+            <div class="rec-pkg">Up to ₹8 LPA</div>
+          </div>
+          <div class="rec-card">
+            <div class="rec-logo"><img src="https://www.google.com/s2/favicons?domain=hcltech.com&sz=128" alt="HCL Tech"
+                style="height:48px; width:48px; object-fit:contain; border-radius:8px;"></div>
+            <div class="rec-name">HCL Tech</div>
+            <div class="rec-pkg">Up to ₹6 LPA</div>
+          </div>
+          <div class="rec-card">
+            <div class="rec-logo"><img src="https://www.google.com/s2/favicons?domain=capgemini.com&sz=128"
+                alt="Capgemini" style="height:48px; width:48px; object-fit:contain; border-radius:8px;"></div>
+            <div class="rec-name">Capgemini</div>
+            <div class="rec-pkg">Up to ₹7 LPA</div>
+          </div>
+          <div class="rec-card">
+            <div class="rec-logo"><img src="https://www.google.com/s2/favicons?domain=techmahindra.com&sz=128"
+                alt="Tech Mahindra" style="height:48px; width:48px; object-fit:contain; border-radius:8px;"></div>
+            <div class="rec-name">Tech Mahindra</div>
+            <div class="rec-pkg">Up to ₹6.5 LPA</div>
+          </div>
+          <div class="rec-card">
+            <div class="rec-logo"><img src="https://www.google.com/s2/favicons?domain=ibm.com&sz=128" alt="IBM"
+                style="height:48px; width:48px; object-fit:contain; border-radius:8px;"></div>
+            <div class="rec-name">IBM</div>
+            <div class="rec-pkg">Up to ₹9 LPA</div>
+          </div>
+          <div class="rec-card">
+            <div class="rec-logo"><img src="https://www.google.com/s2/favicons?domain=ltimindtree.com&sz=128"
+                alt="L&T Infotech" style="height:48px; width:48px; object-fit:contain; border-radius:8px;"></div>
+            <div class="rec-name">L&amp;T Infotech</div>
+            <div class="rec-pkg">Up to ₹7 LPA</div>
+          </div>
+          <!-- set 2 (duplicate for seamless loop) -->
+          <div class="rec-card">
+            <div class="rec-logo"><img src="https://www.google.com/s2/favicons?domain=tcs.com&sz=128" alt="TCS"
+                style="height:48px; width:48px; object-fit:contain; border-radius:8px;"></div>
+            <div class="rec-name">TCS</div>
+            <div class="rec-pkg">Up to ₹7 LPA</div>
+          </div>
+          <div class="rec-card">
+            <div class="rec-logo"><img src="https://www.google.com/s2/favicons?domain=infosys.com&sz=128" alt="Infosys"
+                style="height:48px; width:48px; object-fit:contain; border-radius:8px;"></div>
+            <div class="rec-name">Infosys</div>
+            <div class="rec-pkg">Up to ₹6.5 LPA</div>
+          </div>
+          <div class="rec-card">
+            <div class="rec-logo"><img src="https://www.google.com/s2/favicons?domain=wipro.com&sz=128" alt="Wipro"
+                style="height:48px; width:48px; object-fit:contain; border-radius:8px;"></div>
+            <div class="rec-name">Wipro</div>
+            <div class="rec-pkg">Up to ₹6 LPA</div>
+          </div>
+          <div class="rec-card">
+            <div class="rec-logo"><img src="https://www.google.com/s2/favicons?domain=cognizant.com&sz=128"
+                alt="Cognizant" style="height:48px; width:48px; object-fit:contain; border-radius:8px;"></div>
+            <div class="rec-name">Cognizant</div>
+            <div class="rec-pkg">Up to ₹7.5 LPA</div>
+          </div>
+          <div class="rec-card">
+            <div class="rec-logo"><img src="https://www.google.com/s2/favicons?domain=accenture.com&sz=128"
+                alt="Accenture" style="height:48px; width:48px; object-fit:contain; border-radius:8px;"></div>
+            <div class="rec-name">Accenture</div>
+            <div class="rec-pkg">Up to ₹8 LPA</div>
+          </div>
+          <div class="rec-card">
+            <div class="rec-logo"><img src="https://www.google.com/s2/favicons?domain=hcltech.com&sz=128" alt="HCL Tech"
+                style="height:48px; width:48px; object-fit:contain; border-radius:8px;"></div>
+            <div class="rec-name">HCL Tech</div>
+            <div class="rec-pkg">Up to ₹6 LPA</div>
+          </div>
+          <div class="rec-card">
+            <div class="rec-logo"><img src="https://www.google.com/s2/favicons?domain=capgemini.com&sz=128"
+                alt="Capgemini" style="height:48px; width:48px; object-fit:contain; border-radius:8px;"></div>
+            <div class="rec-name">Capgemini</div>
+            <div class="rec-pkg">Up to ₹7 LPA</div>
+          </div>
+          <div class="rec-card">
+            <div class="rec-logo"><img src="https://www.google.com/s2/favicons?domain=techmahindra.com&sz=128"
+                alt="Tech Mahindra" style="height:48px; width:48px; object-fit:contain; border-radius:8px;"></div>
+            <div class="rec-name">Tech Mahindra</div>
+            <div class="rec-pkg">Up to ₹6.5 LPA</div>
+          </div>
+          <div class="rec-card">
+            <div class="rec-logo"><img src="https://www.google.com/s2/favicons?domain=ibm.com&sz=128" alt="IBM"
+                style="height:48px; width:48px; object-fit:contain; border-radius:8px;"></div>
+            <div class="rec-name">IBM</div>
+            <div class="rec-pkg">Up to ₹9 LPA</div>
+          </div>
+          <div class="rec-card">
+            <div class="rec-logo"><img src="https://www.google.com/s2/favicons?domain=ltimindtree.com&sz=128"
+                alt="L&T Infotech" style="height:48px; width:48px; object-fit:contain; border-radius:8px;"></div>
+            <div class="rec-name">L&amp;T Infotech</div>
+            <div class="rec-pkg">Up to ₹7 LPA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER — compact -->
+  <footer>
+    <div class="foot-inner">
+      <div class="foot-top">
+        <div class="foot-brand">
+          <div class="foot-logo"><span class="flt">EIEM</span><span class="fls">Est. 2001</span></div>
+          <p>Elitte Institute of Engineering &amp; Management is committed to producing world-class engineers and
+            managers who lead innovation across industries.</p>
+          <div class="socials">
+            <a href="#" title="Facebook">f</a>
+            <a href="#" title="Twitter">𝕏</a>
+            <a href="#" title="Instagram">📸</a>
+            <a href="#" title="LinkedIn">in</a>
+            <a href="#" title="YouTube">▶</a>
+          </div>
+        </div>
+
+        <div class="foot-col">
+          <h4>Quick Links</h4>
+          <a href="#">Home</a>
+          <a href="#">About EIEM</a>
+          <a href="#">Admissions</a>
+          <a href="#">Academics</a>
+          <a href="#">Departments</a>
+          <a href="#">Events</a>
+          <a href="#">Notice Board</a>
+        </div>
+
+        <div class="foot-col">
+          <h4>Resources</h4>
+          <a href="#">E-Prospectus 2026–27</a>
+          <a href="#">NDLI Library</a>
+          <a href="#">Online Fee Payment</a>
+          <a href="#">Grievance Cell</a>
+          <a href="#">Student Login</a>
+          <a href="#">Result Portal</a>
+          <a href="#">Alumni Network</a>
+        </div>
+
+        <div class="foot-col">
+          <h4>Contact Us</h4>
+          <div class="fci"><span class="fci-i">📍</span><span>PO: Karnamadhabpur, PS: Ghola, Sodepur, Kolkata –
+              700113</span></div>
+          <div class="fci"><span class="fci-i">📞</span><span>+91 9163316560 / +91 9831500840</span></div>
+          <div class="fci"><span class="fci-i">✉</span><span>info@elitte.edu.in</span></div>
+          <div class="fci"><span class="fci-i">🕐</span><span>Mon–Sat: 9:00 AM – 5:00 PM</span></div>
+        </div>
+      </div>
+
+      <!-- Compact bottom: small map + copyright -->
+      <div class="foot-bottom-row">
+        <div class="foot-map-compact">
+          <h4>Find Us</h4>
+          <div class="map-frame-compact">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3681.8456241799534!2d88.37476427508398!3d22.65820197941985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f89d0b6e7cde4d%3A0x8b5b2a3e9f1a2c4f!2sKarnamadhabpur%2C%20Ghola%2C%20Sodepur%2C%20Kolkata%2C%20West%20Bengal%20700113!5e0!3m2!1sen!2sin!4v1715426400000!5m2!1sen!2sin"
+              allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              title="EIEM Location Map – PO: Karnamadhabpur, PS: Ghola, Sodepur, Kolkata – 700113">
+            </iframe>
+          </div>
+        </div>
+        <div class="foot-copy">
+          <span>© 2026 Elitte Institute of Engineering &amp; Management. All rights reserved.</span>
+          <span>Approved by AICTE · Affiliated to WBSCT &amp; VE &amp; SD</span>
+          <span style="margin-top:.3rem;opacity:.6">Designed with ❤️ for EIEM</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="home.js"></script>
+</body>
+
+</html>
