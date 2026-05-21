@@ -69,45 +69,81 @@
       modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
     })();
-
+    
     /* ── NAVBAR DROPDOWNS ── */
-    (function () {
-      var ham = document.getElementById('ham');
-      var menu = document.getElementById('navMenu');
-      var isMobile = function () { return window.innerWidth <= 900; };
-      ham.addEventListener('click', function () { ham.classList.toggle('open'); menu.classList.toggle('open'); });
-      var topLis = Array.from(menu.querySelectorAll(':scope > li'));
-      function closeAllTop(except) { topLis.forEach(function (li) { if (li === except) return; li.classList.remove('open'); closeAllSub(li); }); }
-      function closeAllSub(parentLi) { Array.from(parentLi.querySelectorAll('.drop1 > li')).forEach(function (li) { li.classList.remove('open'); }); }
-      topLis.forEach(function (li) {
-        var drop1 = li.querySelector(':scope > .drop1');
-        if (!drop1) return;
-        var link = li.querySelector(':scope > a');
-        var closeTimer;
-        function openLi() { clearTimeout(closeTimer); closeAllTop(li); li.classList.add('open'); }
-        function scheduleLiClose() { closeTimer = setTimeout(function () { li.classList.remove('open'); closeAllSub(li); }, 150); }
-        li.addEventListener('mouseenter', function () { if (!isMobile()) openLi(); });
-        li.addEventListener('mouseleave', function () { if (!isMobile()) scheduleLiClose(); });
-        drop1.addEventListener('mouseenter', function () { if (!isMobile()) clearTimeout(closeTimer); });
-        drop1.addEventListener('mouseleave', function () { if (!isMobile()) scheduleLiClose(); });
-        link.addEventListener('click', function (e) { if (isMobile()) { e.preventDefault(); var wasOpen = li.classList.contains('open'); closeAllTop(null); if (!wasOpen) li.classList.add('open'); } });
-        var subLis = Array.from(drop1.querySelectorAll(':scope > li.has-sub2'));
-        subLis.forEach(function (subLi) {
-          var drop2 = subLi.querySelector(':scope > .drop2');
-          if (!drop2) return;
-          var subLink = subLi.querySelector(':scope > a');
-          var subTimer;
-          subLi.addEventListener('mouseenter', function () { if (isMobile()) return; clearTimeout(subTimer); subLis.forEach(function (x) { if (x !== subLi) x.classList.remove('open'); }); subLi.classList.add('open'); });
-          subLi.addEventListener('mouseleave', function () { if (isMobile()) return; subTimer = setTimeout(function () { subLi.classList.remove('open'); }, 150); });
-          drop2.addEventListener('mouseenter', function () { if (!isMobile()) clearTimeout(subTimer); });
-          drop2.addEventListener('mouseleave', function () { if (!isMobile()) subTimer = setTimeout(function () { subLi.classList.remove('open'); }, 150); });
-          subLink.addEventListener('click', function (e) { if (isMobile()) { e.preventDefault(); subLi.classList.toggle('open'); } });
-        });
-      });
-      document.addEventListener('click', function (e) { if (!menu.contains(e.target) && !ham.contains(e.target)) { closeAllTop(null); menu.classList.remove('open'); ham.classList.remove('open'); } });
-      window.addEventListener('resize', function () { closeAllTop(null); menu.classList.remove('open'); ham.classList.remove('open'); });
-    })();
+(function () {
+  var ham = document.getElementById('ham');
+  var menu = document.getElementById('navMenu');
+  var isMobile = function () { return window.innerWidth <= 900; };
+  ham.addEventListener('click', function () { ham.classList.toggle('open'); menu.classList.toggle('open'); });
+  var topLis = Array.from(menu.querySelectorAll(':scope > li'));
 
+  function closeAllTop(except) { topLis.forEach(function (li) { if (li === except) return; li.classList.remove('open'); closeAllSub(li); }); }
+  function closeAllSub(parentLi) { Array.from(parentLi.querySelectorAll('.drop1 > li')).forEach(function (li) { li.classList.remove('open'); }); }
+
+  topLis.forEach(function (li) {
+    var drop1 = li.querySelector(':scope > .drop1');
+    if (!drop1) return;
+    var link = li.querySelector(':scope > a');
+    var closeTimer;
+
+    function openLi() { clearTimeout(closeTimer); closeAllTop(li); li.classList.add('open'); }
+    function scheduleLiClose() { closeTimer = setTimeout(function () { li.classList.remove('open'); closeAllSub(li); }, 600); }
+
+    li.addEventListener('mouseenter', function () { if (!isMobile()) openLi(); });
+    li.addEventListener('mouseleave', function () { if (!isMobile()) scheduleLiClose(); });
+    drop1.addEventListener('mouseenter', function () { if (!isMobile()) clearTimeout(closeTimer); });
+    drop1.addEventListener('mouseleave', function () { if (!isMobile()) scheduleLiClose(); });
+
+    link.addEventListener('click', function (e) {
+      if (isMobile()) {
+        e.preventDefault();
+        var wasOpen = li.classList.contains('open');
+        closeAllTop(null);
+        if (!wasOpen) li.classList.add('open');
+      }
+    });
+
+    var subLis = Array.from(drop1.querySelectorAll(':scope > li.has-sub2'));
+    subLis.forEach(function (subLi) {
+      var drop2 = subLi.querySelector(':scope > .drop2');
+      if (!drop2) return;
+      var subLink = subLi.querySelector(':scope > a');
+      var subTimer;
+
+      subLi.addEventListener('mouseenter', function () {
+        if (isMobile()) return;
+        clearTimeout(subTimer);
+        subLis.forEach(function (x) { if (x !== subLi) x.classList.remove('open'); });
+        subLi.classList.add('open');
+      });
+
+      subLi.addEventListener('mouseleave', function () {
+        if (isMobile()) return;
+        subTimer = setTimeout(function () { subLi.classList.remove('open'); }, 600);
+      });
+
+      drop2.addEventListener('mouseenter', function () { if (!isMobile()) clearTimeout(subTimer); });
+      drop2.addEventListener('mouseleave', function () {
+        if (!isMobile()) subTimer = setTimeout(function () { subLi.classList.remove('open'); }, 600);
+      });
+
+      subLink.addEventListener('click', function (e) {
+        if (isMobile()) { e.preventDefault(); subLi.classList.toggle('open'); }
+      });
+    });
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!menu.contains(e.target) && !ham.contains(e.target)) {
+      closeAllTop(null); menu.classList.remove('open'); ham.classList.remove('open');
+    }
+  });
+
+  window.addEventListener('resize', function () {
+    closeAllTop(null); menu.classList.remove('open'); ham.classList.remove('open');
+  });
+})();
     
 
     /* ── SUPABASE DYNAMIC CONTENT ── */
