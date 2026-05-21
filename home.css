@@ -340,8 +340,15 @@ img {
 .drop1 {
   display: none;
   position: absolute;
-  top: 100%;
+  top: calc(100% - 2px);
   left: 0;
+  background: #fff;
+  min-width: 210px;
+  border-top: 3px solid var(--blue);
+  border-radius: 0 0 12px 12px;
+  box-shadow: var(--shadow-xl);
+  z-index: 9999;
+  list-style: none;
   background: #fff;
   min-width: 210px;
   border-top: 3px solid var(--blue);
@@ -350,7 +357,9 @@ img {
   z-index: 2000;
   list-style: none;
 }
-
+.nav-menu > li{
+   padding-bottom: 3px;
+}
 .nav-menu>li.open>.drop1 {
   display: block;
   animation: fadeDown .18s ease;
@@ -404,8 +413,8 @@ img {
 .drop2 {
   display: none;
   position: absolute;
-  top: 0;
-  left: 100%;
+  top: -2px;
+  left: calc(100% - 2px);
   background: #fff;
   min-width: 210px;
   border-top: 3px solid var(--sky);
@@ -2503,4 +2512,38 @@ footer {
   .aff-divider {
     display: none
   }
+}
+/* ── DROPDOWN FIX — no gap flicker ── */
+.drop1 {
+  display: block !important;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-6px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+}
+
+.nav-menu > li.open > .drop1 {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+  animation: none !important;
+}
+
+.drop2 {
+  display: block !important;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(-6px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+}
+
+.drop1 > li.open > .drop2 {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(0);
+  animation: none !important;
 }
